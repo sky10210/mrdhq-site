@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Tools | Mr. D Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FFF8E7;
+      --text: #3E2723;
+      --accent: #BF6900;
+      --accent-dark: #8f4d00;
+      --card: #fffdf6;
+      --muted: #6f5149;
+      --line: rgba(62,39,35,.16);
+      --soft: rgba(191,105,0,.12);
+      --soft-strong: rgba(191,105,0,.20);
+      --shadow: 0 16px 40px rgba(62, 39, 35, .10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top left, rgba(191,105,0,.16), transparent 38%), var(--bg);
+      color: var(--text);
+      font-family: 'Lora', Georgia, serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 18px;
+      border-right: 1px solid var(--line);
+      background: rgba(255, 248, 231, .92);
+      backdrop-filter: blur(16px);
+      overflow-y: auto;
+    }
+
+    .brand {
+      padding: 16px 16px 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.65), rgba(191,105,0,.10));
+      box-shadow: 0 10px 28px rgba(62,39,35,.06);
+      margin-bottom: 18px;
+    }
+
+    .brand small {
+      display: inline-flex;
+      color: #fff;
+      background: var(--accent);
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      line-height: 1.08;
+      letter-spacing: -.03em;
+    }
+
+    .brand p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .home-link, .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      text-decoration: none;
+      border-radius: 15px;
+      padding: 11px 12px;
+      margin: 6px 0;
+      font-weight: 700;
+      color: var(--text);
+      border: 1px solid transparent;
+    }
+
+    .home-link {
+      border-color: var(--line);
+      background: var(--card);
+    }
+
+    .nav-link:hover, .home-link:hover {
+      background: var(--soft);
+      border-color: var(--soft-strong);
+    }
+
+    .nav-count {
+      color: var(--accent-dark);
+      font-size: .78rem;
+      border: 1px solid var(--soft-strong);
+      border-radius: 999px;
+      padding: 2px 8px;
+      background: rgba(255,255,255,.60);
+      white-space: nowrap;
+    }
+
+    main {
+      padding: 34px clamp(20px, 4vw, 56px) 60px;
+      max-width: 1380px;
+      width: 100%;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: clamp(24px, 5vw, 54px);
+      background: linear-gradient(135deg, rgba(255,255,255,.74), rgba(191,105,0,.13));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 240px;
+      height: 240px;
+      border-radius: 999px;
+      background: rgba(191,105,0,.16);
+      z-index: 0;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .eyebrow {
+      display: inline-flex;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 14px;
+      font-weight: 700;
+      font-size: .86rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero h2 {
+      margin: 0;
+      max-width: 850px;
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      line-height: .95;
+      letter-spacing: -.06em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 820px;
+      font-size: clamp(1rem, 1.5vw, 1.18rem);
+      margin: 20px 0 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      background: var(--card);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .toolbelt {
+      margin: 20px 0 26px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .search-wrap {
+      position: relative;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: 16px 18px 16px 48px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.72);
+      color: var(--text);
+      font: inherit;
+      font-weight: 700;
+      outline: none;
+      box-shadow: 0 10px 28px rgba(62,39,35,.05);
+    }
+
+    .search-wrap span {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    .status-pill {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 18px;
+      padding: 14px 16px;
+      font-weight: 700;
+      white-space: nowrap;
+      color: var(--muted);
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0 34px;
+    }
+
+    .category-card {
+      min-height: 132px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      background: rgba(255,255,255,.62);
+      box-shadow: 0 10px 28px rgba(62,39,35,.05);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      background: rgba(255,255,255,.86);
+    }
+
+    .category-card strong {
+      font-size: 1.08rem;
+      letter-spacing: -.02em;
+    }
+
+    .category-card span {
+      color: var(--muted);
+      font-size: .92rem;
+      margin-top: 8px;
+    }
+
+    .category-card b {
+      color: var(--accent-dark);
+      font-size: .86rem;
+      margin-top: 15px;
+    }
+
+    .notice {
+      border-left: 6px solid var(--accent);
+      border-radius: 18px;
+      padding: 16px 18px;
+      background: rgba(255,255,255,.68);
+      color: var(--muted);
+      margin-bottom: 28px;
+      box-shadow: 0 10px 26px rgba(62,39,35,.05);
+    }
+
+    .notice strong { color: var(--text); }
+
+    section.category {
+      scroll-margin-top: 22px;
+      margin: 36px 0 48px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .section-heading h3 {
+      margin: 0;
+      font-size: clamp(1.55rem, 3vw, 2.3rem);
+      letter-spacing: -.04em;
+    }
+
+    .section-heading p {
+      margin: 6px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: .98rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .tool-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 216px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--card);
+      box-shadow: 0 10px 28px rgba(62,39,35,.05);
+    }
+
+    .tool-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .tool-card h4 {
+      margin: 0;
+      font-size: 1.18rem;
+      letter-spacing: -.03em;
+      line-height: 1.15;
+    }
+
+    .tag {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: #fff;
+      background: var(--accent);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .tool-card p {
+      color: var(--muted);
+      margin: 12px 0 14px;
+      font-size: .94rem;
+      flex: 1;
+    }
+
+    .best-for {
+      font-size: .88rem;
+      color: var(--text);
+      background: var(--soft);
+      border: 1px solid var(--soft-strong);
+      border-radius: 14px;
+      padding: 10px 12px;
+      margin-bottom: 14px;
+    }
+
+    .tool-card a.visit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 14px;
+      border: 1px solid var(--accent);
+      color: var(--accent-dark);
+      padding: 10px 12px;
+      font-weight: 700;
+      background: #fffaf0;
+    }
+
+    .tool-card a.visit:hover {
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      margin-top: 40px;
+      padding-top: 22px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 1100px) {
+      .page { grid-template-columns: 1fr; }
+      aside {
+        position: relative;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4px 10px;
+      }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      main { padding: 22px 14px 46px; }
+      aside { padding: 18px 14px; }
+      .toolbelt { grid-template-columns: 1fr; }
+      .cards, .category-grid, .nav-list { grid-template-columns: 1fr; }
+      .hero { border-radius: 24px; }
+      .tool-card { min-height: auto; }
+      .section-heading { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <aside>
+      <div class="brand">
+        <small>Mr. D Hub</small>
+        <h1>Student Tools</h1>
+        <p>A clean launch page for useful, school-safe web tools.</p>
+      </div>
+      <a class="home-link" href="/index.html">← Class Portal Home</a>
+      <nav class="nav-list" aria-label="Tool categories">
+        <a class="nav-link" href="#pdf-docs">PDF & Docs <span class="nav-count">8</span></a>
+        <a class="nav-link" href="#research-citations">Research & Citations <span class="nav-count">8</span></a>
+        <a class="nav-link" href="#ai-study">AI Study Helpers <span class="nav-count">10</span></a>
+        <a class="nav-link" href="#present-design">Presentations & Design <span class="nav-count">8</span></a>
+        <a class="nav-link" href="#math-science">Math & Science <span class="nav-count">8</span></a>
+        <a class="nav-link" href="#maps-live">Live Maps & Tracking <span class="nav-count">9</span></a>
+        <a class="nav-link" href="#business-finance">Business & Finance <span class="nav-count">8</span></a>
+        <a class="nav-link" href="#news-media">News & Media Literacy <span class="nav-count">8</span></a>
+        <a class="nav-link" href="#career-college">Career & College <span class="nav-count">7</span></a>
+        <a class="nav-link" href="#media-creation">Media Creation <span class="nav-count">8</span></a>
+      </nav>
+    </aside>
+
+    <main>
+      <header class="hero" id="top">
+        <span class="eyebrow">Warm Sand · Low Fatigue</span>
+        <h2>One page for the tools students actually use.</h2>
+        <p>Use this page to jump quickly into PDF converters, citation help, AI study tools, live maps, business data, design tools, calculators, career resources, and credible news. Always follow class rules for AI use and cite your sources when a tool helps you.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#categories">Browse categories</a>
+          <a class="button" href="#ai-study">AI tools</a>
+          <a class="button" href="#pdf-docs">PDF tools</a>
+        </div>
+      </header>
+
+      <div class="toolbelt" aria-label="Search tools">
+        <label class="search-wrap">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Search tools: PDF, citation, flight, stocks, design, AI, resume..." autocomplete="off" />
+        </label>
+        <div class="status-pill"><span id="resultCount">82</span> tools listed</div>
+      </div>
+
+      <div class="notice">
+        <strong>Student reminder:</strong> AI tools can help you brainstorm, study, summarize, organize, and check your own work. They should not replace your thinking, your voice, your citations, or your teacher’s directions.
+      </div>
+
+      <div id="categories" class="category-grid">
+        <a class="category-card" href="#pdf-docs"><strong>PDF & Docs</strong><span>Merge, split, compress, scan, convert, and organize files.</span><b>Start here →</b></a>
+        <a class="category-card" href="#research-citations"><strong>Research & Citations</strong><span>Find credible sources, build citations, and organize research.</span><b>Start here →</b></a>
+        <a class="category-card" href="#ai-study"><strong>AI Study Helpers</strong><span>Summaries, flashcards, practice quizzes, explanations, and tutoring support.</span><b>Start here →</b></a>
+        <a class="category-card" href="#present-design"><strong>Presentations & Design</strong><span>Make slides, posters, visuals, infographics, and class projects.</span><b>Start here →</b></a>
+        <a class="category-card" href="#math-science"><strong>Math & Science</strong><span>Graphing, computation, formulas, simulations, and science learning.</span><b>Start here →</b></a>
+        <a class="category-card" href="#maps-live"><strong>Live Maps & Tracking</strong><span>Flights, ships, weather, satellites, earthquakes, space, and global maps.</span><b>Start here →</b></a>
+        <a class="category-card" href="#business-finance"><strong>Business & Finance</strong><span>Stocks, economics, labor data, prices, brands, ads, and market research.</span><b>Start here →</b></a>
+        <a class="category-card" href="#news-media"><strong>News & Media Literacy</strong><span>Balanced news, fact-checking, bias checks, archives, and primary sources.</span><b>Start here →</b></a>
+      </div>
+
+      <section class="category" id="pdf-docs" data-category="PDF & Docs">
+        <div class="section-heading"><div><h3>PDF & Document Tools</h3><p>Fast tools for handling files without needing special software. Avoid uploading private personal documents unless your teacher says it is okay.</p></div></div>
+        <div class="cards">
+          <article class="tool-card" data-name="iLovePDF" data-tags="pdf merge split compress convert document"><div class="tool-top"><h4>iLovePDF</h4><span class="tag">PDF</span></div><p>All-in-one PDF toolkit for merging, splitting, compressing, converting, rotating, watermarking, and organizing PDFs.</p><div class="best-for"><strong>Best for:</strong> turning messy class files into one clean PDF.</div><a class="visit" href="https://www.ilovepdf.com/" target="_blank" rel="noopener">Open iLovePDF</a></article>
+          <article class="tool-card" data-name="Smallpdf" data-tags="pdf edit sign compress convert"><div class="tool-top"><h4>Smallpdf</h4><span class="tag">PDF</span></div><p>Polished PDF tools for converting, compressing, editing, signing, merging, splitting, and organizing documents online.</p><div class="best-for"><strong>Best for:</strong> quick PDF fixes on a Chromebook.</div><a class="visit" href="https://smallpdf.com/" target="_blank" rel="noopener">Open Smallpdf</a></article>
+          <article class="tool-card" data-name="PDF24 Tools" data-tags="pdf tools free offline document"><div class="tool-top"><h4>PDF24 Tools</h4><span class="tag">PDF</span></div><p>Large free PDF toolkit with merge, split, compress, OCR, page extraction, image-to-PDF, and document conversion tools.</p><div class="best-for"><strong>Best for:</strong> a free backup when another PDF site is blocked.</div><a class="visit" href="https://tools.pdf24.org/en/" target="_blank" rel="noopener">Open PDF24</a></article>
+          <article class="tool-card" data-name="Adobe Acrobat Online" data-tags="pdf adobe convert sign edit"><div class="tool-top"><h4>Adobe Acrobat Online</h4><span class="tag">PDF</span></div><p>Official Adobe web tools for PDF conversion, compression, signing, combining, organizing, and basic editing.</p><div class="best-for"><strong>Best for:</strong> reliable PDF conversion from the company behind PDF.</div><a class="visit" href="https://www.adobe.com/acrobat/online.html" target="_blank" rel="noopener">Open Adobe Tools</a></article>
+          <article class="tool-card" data-name="Google Docs" data-tags="docs writing collaboration documents"><div class="tool-top"><h4>Google Docs</h4><span class="tag">Docs</span></div><p>Cloud-based writing and collaboration tool for essays, project notes, shared outlines, peer feedback, and export to PDF.</p><div class="best-for"><strong>Best for:</strong> writing projects with comments and revision history.</div><a class="visit" href="https://docs.google.com/" target="_blank" rel="noopener">Open Google Docs</a></article>
+          <article class="tool-card" data-name="Google Drive" data-tags="drive storage files folders sharing"><div class="tool-top"><h4>Google Drive</h4><span class="tag">Files</span></div><p>Store, organize, share, and submit class files from one place. Use folders to keep each course organized.</p><div class="best-for"><strong>Best for:</strong> keeping projects from getting lost.</div><a class="visit" href="https://drive.google.com/" target="_blank" rel="noopener">Open Drive</a></article>
+          <article class="tool-card" data-name="Microsoft OneDrive" data-tags="onedrive files office word powerpoint excel"><div class="tool-top"><h4>Microsoft OneDrive</h4><span class="tag">Files</span></div><p>Online file storage that connects with Word, PowerPoint, Excel, Teams, and Microsoft 365 school accounts.</p><div class="best-for"><strong>Best for:</strong> Office files and school cloud storage.</div><a class="visit" href="https://onedrive.live.com/" target="_blank" rel="noopener">Open OneDrive</a></article>
+          <article class="tool-card" data-name="TinyWow" data-tags="pdf image video writing tools"><div class="tool-top"><h4>TinyWow</h4><span class="tag">Utility</span></div><p>Collection of quick file tools for PDFs, images, videos, text, and simple conversions.</p><div class="best-for"><strong>Best for:</strong> one-off file conversions and small fixes.</div><a class="visit" href="https://tinywow.com/" target="_blank" rel="noopener">Open TinyWow</a></article>
+        </div>
+      </section>
+
+      <section class="category" id="research-citations" data-category="Research & Citations">
+        <div class="section-heading"><div><h3>Research & Citations</h3><p>Use these to find stronger sources, understand what you read, and build correct citations. Citation generators are helpful, but always check them.</p></div></div>
+        <div class="cards">
+          <article class="tool-card" data-name="Purdue OWL" data-tags="citation mla apa writing research"><div class="tool-top"><h4>Purdue OWL</h4><span class="tag">Citation</span></div><p>Trusted writing and citation guide for MLA, APA, research writing, grammar, and formatting help.</p><div class="best-for"><strong>Best for:</strong> checking citation rules your generator might miss.</div><a class="visit" href="https://owl.purdue.edu/owl/research_and_citation/resources.html" target="_blank" rel="noopener">Open Purdue OWL</a></article>
+          <article class="tool-card" data-name="Zotero" data-tags="citation bibliography research sources"><div class="tool-top"><h4>Zotero</h4><span class="tag">Research</span></div><p>Free research manager that helps collect, organize, annotate, cite, and share sources.</p><div class="best-for"><strong>Best for:</strong> longer research projects with many sources.</div><a class="visit" href="https://www.zotero.org/" target="_blank" rel="noopener">Open Zotero</a></article>
+          <article class="tool-card" data-name="ZoteroBib" data-tags="bibliography citation quick mla apa"><div class="tool-top"><h4>ZoteroBib</h4><span class="tag">Citation</span></div><p>Fast bibliography builder from Zotero for quick MLA, APA, Chicago, and other citation styles.</p><div class="best-for"><strong>Best for:</strong> a quick Works Cited page.</div><a class="visit" href="https://zbib.org/" target="_blank" rel="noopener">Open ZoteroBib</a></article>
+          <article class="tool-card" data-name="Google Scholar" data-tags="research academic scholarly articles"><div class="tool-top"><h4>Google Scholar</h4><span class="tag">Research</span></div><p>Search scholarly articles, books, court opinions, and academic sources. Great for finding higher-quality evidence.</p><div class="best-for"><strong>Best for:</strong> moving beyond regular Google results.</div><a class="visit" href="https://scholar.google.com/" target="_blank" rel="noopener">Open Scholar</a></article>
+          <article class="tool-card" data-name="Semantic Scholar" data-tags="research papers ai academic science"><div class="tool-top"><h4>Semantic Scholar</h4><span class="tag">Research</span></div><p>AI-supported academic search for papers, summaries, citations, related papers, and research discovery.</p><div class="best-for"><strong>Best for:</strong> finding academic papers connected to your topic.</div><a class="visit" href="https://www.semanticscholar.org/" target="_blank" rel="noopener">Open Semantic Scholar</a></article>
+          <article class="tool-card" data-name="Internet Archive" data-tags="books archive history primary sources"><div class="tool-top"><h4>Internet Archive</h4><span class="tag">Archive</span></div><p>Massive digital library of books, webpages, audio, video, software, and historical materials.</p><div class="best-for"><strong>Best for:</strong> older books, archives, and primary source digging.</div><a class="visit" href="https://archive.org/" target="_blank" rel="noopener">Open Internet Archive</a></article>
+          <article class="tool-card" data-name="Library of Congress" data-tags="primary sources history library government"><div class="tool-top"><h4>Library of Congress</h4><span class="tag">Primary</span></div><p>Official U.S. library collections with primary sources, images, maps, newspapers, audio, and classroom-ready materials.</p><div class="best-for"><strong>Best for:</strong> credible primary sources.</div><a class="visit" href="https://www.loc.gov/" target="_blank" rel="noopener">Open LOC</a></article>
+          <article class="tool-card" data-name="Perplexity" data-tags="ai search citations research answers"><div class="tool-top"><h4>Perplexity</h4><span class="tag">AI Search</span></div><p>AI-powered search assistant that answers with linked sources. Still verify facts and read the original source.</p><div class="best-for"><strong>Best for:</strong> finding source trails and starting research.</div><a class="visit" href="https://www.perplexity.ai/" target="_blank" rel="noopener">Open Perplexity</a></article>
+        </div>
+      </section>
+
+      <section class="category" id="ai-study" data-category="AI Study Helpers">
+        <div class="section-heading"><div><h3>AI Study Helpers</h3><p>Use AI to learn, practice, organize, and review. Do not paste private information, and do not turn in AI-generated work as your own.</p></div></div>
+        <div class="cards">
+          <article class="tool-card" data-name="ChatGPT" data-tags="ai tutor explanations brainstorming study"><div class="tool-top"><h4>ChatGPT</h4><span class="tag">AI</span></div><p>General AI assistant for explanations, practice questions, brainstorming, study plans, examples, and feedback.</p><div class="best-for"><strong>Best for:</strong> asking “teach this like I’m new.”</div><a class="visit" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT</a></article>
+          <article class="tool-card" data-name="NotebookLM" data-tags="ai notes sources summaries quizzes flashcards"><div class="tool-top"><h4>NotebookLM</h4><span class="tag">AI Study</span></div><p>Google AI research notebook that works from your uploaded sources to create explanations, summaries, audio overviews, quizzes, and flashcards.</p><div class="best-for"><strong>Best for:</strong> studying from teacher PDFs and class notes.</div><a class="visit" href="https://notebooklm.google/" target="_blank" rel="noopener">Open NotebookLM</a></article>
+          <article class="tool-card" data-name="Google Gemini" data-tags="ai google study tutor explain"><div class="tool-top"><h4>Google Gemini</h4><span class="tag">AI</span></div><p>Google’s AI assistant for explanations, document help, brainstorming, planning, and study support.</p><div class="best-for"><strong>Best for:</strong> students already working in Google tools.</div><a class="visit" href="https://gemini.google.com/" target="_blank" rel="noopener">Open Gemini</a></article>
+          <article class="tool-card" data-name="Claude" data-tags="ai long documents writing study"><div class="tool-top"><h4>Claude</h4><span class="tag">AI</span></div><p>AI assistant known for handling long text, explaining documents, outlining ideas, and helping revise writing.</p><div class="best-for"><strong>Best for:</strong> long readings and structured feedback.</div><a class="visit" href="https://claude.ai/" target="_blank" rel="noopener">Open Claude</a></article>
+          <article class="tool-card" data-name="Khanmigo" data-tags="ai tutor khan academy learning"><div class="tool-top"><h4>Khanmigo</h4><span class="tag">AI Tutor</span></div><p>Khan Academy’s AI tutor experience designed to guide students with questions rather than simply give answers.</p><div class="best-for"><strong>Best for:</strong> guided practice and tutoring-style help.</div><a class="visit" href="https://www.khanacademy.org/khan-labs" target="_blank" rel="noopener">Open Khanmigo</a></article>
+          <article class="tool-card" data-name="Quizlet" data-tags="flashcards study practice test"><div class="tool-top"><h4>Quizlet</h4><span class="tag">Study</span></div><p>Flashcards, practice tests, matching, and study modes for vocabulary, concepts, and review.</p><div class="best-for"><strong>Best for:</strong> memorizing vocab before quizzes.</div><a class="visit" href="https://quizlet.com/" target="_blank" rel="noopener">Open Quizlet</a></article>
+          <article class="tool-card" data-name="Knowt" data-tags="flashcards notes quizzes study"><div class="tool-top"><h4>Knowt</h4><span class="tag">Study</span></div><p>Study platform for notes, flashcards, practice quizzes, and review tools, with options to import or create sets.</p><div class="best-for"><strong>Best for:</strong> turning notes into practice.</div><a class="visit" href="https://knowt.com/" target="_blank" rel="noopener">Open Knowt</a></article>
+          <article class="tool-card" data-name="Goblin Tools" data-tags="ai productivity task breakdown executive function"><div class="tool-top"><h4>Goblin Tools</h4><span class="tag">Focus</span></div><p>Simple AI tools that break big tasks into smaller steps, estimate time, rewrite tone, and organize messy ideas.</p><div class="best-for"><strong>Best for:</strong> getting unstuck when an assignment feels too big.</div><a class="visit" href="https://goblin.tools/" target="_blank" rel="noopener">Open Goblin Tools</a></article>
+          <article class="tool-card" data-name="Elicit" data-tags="ai research papers evidence literature"><div class="tool-top"><h4>Elicit</h4><span class="tag">AI Research</span></div><p>AI research assistant for finding papers, extracting evidence, and comparing research findings.</p><div class="best-for"><strong>Best for:</strong> advanced research and evidence tables.</div><a class="visit" href="https://elicit.com/" target="_blank" rel="noopener">Open Elicit</a></article>
+          <article class="tool-card" data-name="QuillBot" data-tags="ai writing paraphrase grammar summarize"><div class="tool-top"><h4>QuillBot</h4><span class="tag">Writing</span></div><p>Writing assistant with paraphrasing, grammar checking, summarizing, tone, fluency, and citation tools.</p><div class="best-for"><strong>Best for:</strong> revising your own sentences for clarity.</div><a class="visit" href="https://quillbot.com/" target="_blank" rel="noopener">Open QuillBot</a></article>
+        </div>
+      </section>
+
+      <section class="category" id="present-design" data-category="Presentations & Design">
+        <div class="section-heading"><div><h3>Presentations & Design</h3><p>Useful for class projects, posters, slides, flyers, infographics, thumbnails, resumes, and business/marketing visuals.</p></div></div>
+        <div class="cards">
+          <article class="tool-card" data-name="Canva" data-tags="design presentations posters infographics"><div class="tool-top"><h4>Canva</h4><span class="tag">Design</span></div><p>Design platform for presentations, posters, resumes, infographics, videos, social posts, and class visuals.</p><div class="best-for"><strong>Best for:</strong> polished projects without design experience.</div><a class="visit" href="https://www.canva.com/education/students/" target="_blank" rel="noopener">Open Canva</a></article>
+          <article class="tool-card" data-name="Google Slides" data-tags="slides presentation collaboration"><div class="tool-top"><h4>Google Slides</h4><span class="tag">Slides</span></div><p>Collaborative slide tool for group presentations, simple visual decks, and class project slides.</p><div class="best-for"><strong>Best for:</strong> group slide projects.</div><a class="visit" href="https://slides.google.com/" target="_blank" rel="noopener">Open Slides</a></article>
+          <article class="tool-card" data-name="Microsoft PowerPoint Online" data-tags="powerpoint slides presentation"><div class="tool-top"><h4>PowerPoint Online</h4><span class="tag">Slides</span></div><p>Browser version of PowerPoint for building slide decks, presenting, collaborating, and exporting files.</p><div class="best-for"><strong>Best for:</strong> formal presentations and Office users.</div><a class="visit" href="https://www.office.com/launch/powerpoint" target="_blank" rel="noopener">Open PowerPoint</a></article>
+          <article class="tool-card" data-name="Gamma" data-tags="ai slides presentations website doc"><div class="tool-top"><h4>Gamma</h4><span class="tag">AI Slides</span></div><p>AI-assisted tool for turning outlines into clean presentations, webpages, and documents.</p><div class="best-for"><strong>Best for:</strong> first-draft slide structure.</div><a class="visit" href="https://gamma.app/" target="_blank" rel="noopener">Open Gamma</a></article>
+          <article class="tool-card" data-name="Napkin AI" data-tags="ai visual diagrams infographics"><div class="tool-top"><h4>Napkin AI</h4><span class="tag">Visuals</span></div><p>Turns text into simple diagrams, flowcharts, and visuals that can help explain ideas quickly.</p><div class="best-for"><strong>Best for:</strong> making ideas easier to see.</div><a class="visit" href="https://www.napkin.ai/" target="_blank" rel="noopener">Open Napkin</a></article>
+          <article class="tool-card" data-name="Photopea" data-tags="photoshop image editor graphics"><div class="tool-top"><h4>Photopea</h4><span class="tag">Image</span></div><p>Browser-based advanced image editor similar to Photoshop for layers, text, graphics, and photo edits.</p><div class="best-for"><strong>Best for:</strong> more advanced image edits for free.</div><a class="visit" href="https://www.photopea.com/" target="_blank" rel="noopener">Open Photopea</a></article>
+          <article class="tool-card" data-name="Coolors" data-tags="colors palette design"><div class="tool-top"><h4>Coolors</h4><span class="tag">Color</span></div><p>Color palette generator for choosing strong, professional color combinations for projects.</p><div class="best-for"><strong>Best for:</strong> making slides look intentional.</div><a class="visit" href="https://coolors.co/" target="_blank" rel="noopener">Open Coolors</a></article>
+          <article class="tool-card" data-name="Remove.bg" data-tags="background remover image design"><div class="tool-top"><h4>Remove.bg</h4><span class="tag">Image</span></div><p>Quickly removes image backgrounds for clean presentation visuals, posters, and product mockups.</p><div class="best-for"><strong>Best for:</strong> making cutout images for slides.</div><a class="visit" href="https://www.remove.bg/" target="_blank" rel="noopener">Open Remove.bg</a></article>
+        </div>
+      </section>
+
+      <section class="category" id="math-science" data-category="Math & Science">
+        <div class="section-heading"><div><h3>Math & Science Tools</h3><p>Calculators, graphing tools, simulations, and learning platforms for solving, visualizing, and practicing concepts.</p></div></div>
+        <div class="cards">
+          <article class="tool-card" data-name="Desmos" data-tags="math graphing calculator algebra"><div class="tool-top"><h4>Desmos</h4><span class="tag">Math</span></div><p>Free graphing, scientific, 3D, and geometry calculators for visualizing math and exploring equations.</p><div class="best-for"><strong>Best for:</strong> graphing equations and checking functions.</div><a class="visit" href="https://www.desmos.com/calculator" target="_blank" rel="noopener">Open Desmos</a></article>
+          <article class="tool-card" data-name="WolframAlpha" data-tags="math science calculator computation"><div class="tool-top"><h4>WolframAlpha</h4><span class="tag">Compute</span></div><p>Computational knowledge engine for math, science, statistics, finance, units, data, and factual calculations.</p><div class="best-for"><strong>Best for:</strong> checking calculations and exploring “why.”</div><a class="visit" href="https://www.wolframalpha.com/" target="_blank" rel="noopener">Open WolframAlpha</a></article>
+          <article class="tool-card" data-name="Khan Academy" data-tags="math science practice sat ap learning"><div class="tool-top"><h4>Khan Academy</h4><span class="tag">Learn</span></div><p>Free lessons, practice, videos, and exercises for math, science, grammar, history, AP, SAT, and more.</p><div class="best-for"><strong>Best for:</strong> relearning a skill step-by-step.</div><a class="visit" href="https://www.khanacademy.org/" target="_blank" rel="noopener">Open Khan Academy</a></article>
+          <article class="tool-card" data-name="PhET Simulations" data-tags="science simulations physics chemistry math"><div class="tool-top"><h4>PhET Simulations</h4><span class="tag">Science</span></div><p>Interactive science and math simulations from the University of Colorado Boulder.</p><div class="best-for"><strong>Best for:</strong> seeing science concepts in action.</div><a class="visit" href="https://phet.colorado.edu/" target="_blank" rel="noopener">Open PhET</a></article>
+          <article class="tool-card" data-name="GeoGebra" data-tags="math geometry graphing algebra"><div class="tool-top"><h4>GeoGebra</h4><span class="tag">Math</span></div><p>Math app suite for graphing, geometry, 3D, algebra, statistics, and classroom visualizations.</p><div class="best-for"><strong>Best for:</strong> geometry and interactive math models.</div><a class="visit" href="https://www.geogebra.org/" target="_blank" rel="noopener">Open GeoGebra</a></article>
+          <article class="tool-card" data-name="Symbolab" data-tags="math solver steps algebra calculus"><div class="tool-top"><h4>Symbolab</h4><span class="tag">Math</span></div><p>Math solver with step-by-step support for algebra, calculus, equations, graphing, and practice.</p><div class="best-for"><strong>Best for:</strong> studying solution steps, not copying answers.</div><a class="visit" href="https://www.symbolab.com/" target="_blank" rel="noopener">Open Symbolab</a></article>
+          <article class="tool-card" data-name="NASA Eyes" data-tags="space nasa science solar system"><div class="tool-top"><h4>NASA Eyes</h4><span class="tag">Space</span></div><p>Interactive real-time 3D NASA visualizations of Earth, the solar system, spacecraft, asteroids, and the universe.</p><div class="best-for"><strong>Best for:</strong> space exploration visuals.</div><a class="visit" href="https://science.nasa.gov/eyes/" target="_blank" rel="noopener">Open NASA Eyes</a></article>
+          <article class="tool-card" data-name="Periodic Videos" data-tags="chemistry periodic table science videos"><div class="tool-top"><h4>Periodic Videos</h4><span class="tag">Chem</span></div><p>Video explanations and demonstrations connected to elements on the periodic table.</p><div class="best-for"><strong>Best for:</strong> quick chemistry curiosity and demos.</div><a class="visit" href="https://www.periodicvideos.com/" target="_blank" rel="noopener">Open Periodic Videos</a></article>
+        </div>
+      </section>
+
+      <section class="category" id="maps-live" data-category="Live Maps & Tracking">
+        <div class="section-heading"><div><h3>Live Maps & Tracking</h3><p>High-interest tools for aviation, shipping, weather, earthquakes, space, satellite imagery, and global awareness.</p></div></div>
+        <div class="cards">
+          <article class="tool-card" data-name="Flightradar24" data-tags="flight radar aircraft aviation map live"><div class="tool-top"><h4>Flightradar24</h4><span class="tag">Flights</span></div><p>Live flight tracker showing aircraft around the world, routes, airports, aircraft types, altitude, speed, and flight status.</p><div class="best-for"><strong>Best for:</strong> aviation, travel, logistics, and geography hooks.</div><a class="visit" href="https://www.flightradar24.com/" target="_blank" rel="noopener">Open Flightradar24</a></article>
+          <article class="tool-card" data-name="FlightAware" data-tags="flight tracker aviation airport delays"><div class="tool-top"><h4>FlightAware</h4><span class="tag">Flights</span></div><p>Flight tracking, airport delays, route information, and aviation data for commercial and private flights.</p><div class="best-for"><strong>Best for:</strong> checking a specific flight or airport.</div><a class="visit" href="https://www.flightaware.com/" target="_blank" rel="noopener">Open FlightAware</a></article>
+          <article class="tool-card" data-name="MarineTraffic" data-tags="ships boats vessel ais marine map live"><div class="tool-top"><h4>MarineTraffic</h4><span class="tag">Ships</span></div><p>Live vessel map with AIS ship positions, vessel type, destination, speed, route history, and maritime traffic.</p><div class="best-for"><strong>Best for:</strong> global trade, supply chain, and ports.</div><a class="visit" href="https://www.marinetraffic.com/" target="_blank" rel="noopener">Open MarineTraffic</a></article>
+          <article class="tool-card" data-name="VesselFinder" data-tags="ships vessels marine traffic ais"><div class="tool-top"><h4>VesselFinder</h4><span class="tag">Ships</span></div><p>Alternative live ship tracking map with vessel search, fleet info, photos, and maritime data.</p><div class="best-for"><strong>Best for:</strong> comparing ship tracking views.</div><a class="visit" href="https://www.vesselfinder.com/" target="_blank" rel="noopener">Open VesselFinder</a></article>
+          <article class="tool-card" data-name="Windy" data-tags="weather radar wind storm map forecast"><div class="tool-top"><h4>Windy</h4><span class="tag">Weather</span></div><p>Animated global weather maps with wind, radar, satellite, rain, temperature, waves, air quality, and forecast layers.</p><div class="best-for"><strong>Best for:</strong> visual weather analysis.</div><a class="visit" href="https://www.windy.com/" target="_blank" rel="noopener">Open Windy</a></article>
+          <article class="tool-card" data-name="National Weather Service Radar" data-tags="weather radar alerts forecast noaa"><div class="tool-top"><h4>NWS Radar</h4><span class="tag">Weather</span></div><p>Official U.S. weather radar with current conditions, warnings, alerts, and forecast layers.</p><div class="best-for"><strong>Best for:</strong> official U.S. weather checks.</div><a class="visit" href="https://radar.weather.gov/" target="_blank" rel="noopener">Open NWS Radar</a></article>
+          <article class="tool-card" data-name="USGS Earthquake Map" data-tags="earthquake map geology live usgs"><div class="tool-top"><h4>USGS Earthquakes</h4><span class="tag">Earth</span></div><p>Official live earthquake map with magnitude, time, depth, location, and global seismic activity.</p><div class="best-for"><strong>Best for:</strong> earth science and current events.</div><a class="visit" href="https://earthquake.usgs.gov/earthquakes/map/" target="_blank" rel="noopener">Open USGS Map</a></article>
+          <article class="tool-card" data-name="Zoom Earth" data-tags="satellite weather storm live map"><div class="tool-top"><h4>Zoom Earth</h4><span class="tag">Satellite</span></div><p>Live satellite weather map with storms, radar, wind, precipitation, and global cloud views.</p><div class="best-for"><strong>Best for:</strong> dramatic satellite visuals.</div><a class="visit" href="https://zoom.earth/" target="_blank" rel="noopener">Open Zoom Earth</a></article>
+          <article class="tool-card" data-name="ISS Live Now" data-tags="space iss live earth camera"><div class="tool-top"><h4>ISS Live Now</h4><span class="tag">Space</span></div><p>Track the International Space Station and view live Earth video when available.</p><div class="best-for"><strong>Best for:</strong> a quick space/current-events hook.</div><a class="visit" href="https://www.isstracker.com/" target="_blank" rel="noopener">Open ISS Tracker</a></article>
+        </div>
+      </section>
+
+      <section class="category" id="business-finance" data-category="Business & Finance">
+        <div class="section-heading"><div><h3>Business, Finance & Data</h3><p>Great for AP Business, Marketing, Personal Finance, current events, economics, investing basics, brands, labor markets, and consumer trends.</p></div></div>
+        <div class="cards">
+          <article class="tool-card" data-name="Yahoo Finance" data-tags="stocks finance market charts business"><div class="tool-top"><h4>Yahoo Finance</h4><span class="tag">Markets</span></div><p>Stock quotes, charts, business news, company profiles, market movers, and basic finance data.</p><div class="best-for"><strong>Best for:</strong> quick stock and company checks.</div><a class="visit" href="https://finance.yahoo.com/" target="_blank" rel="noopener">Open Yahoo Finance</a></article>
+          <article class="tool-card" data-name="Google Finance" data-tags="stocks finance charts market"><div class="tool-top"><h4>Google Finance</h4><span class="tag">Markets</span></div><p>Clean market summaries, watchlists, stock charts, financial news, and company snapshots.</p><div class="best-for"><strong>Best for:</strong> a simple market overview.</div><a class="visit" href="https://www.google.com/finance/" target="_blank" rel="noopener">Open Google Finance</a></article>
+          <article class="tool-card" data-name="TradingView" data-tags="stocks charts crypto markets technical"><div class="tool-top"><h4>TradingView</h4><span class="tag">Charts</span></div><p>Advanced interactive charts for stocks, indexes, crypto, forex, commodities, and market analysis.</p><div class="best-for"><strong>Best for:</strong> clean price charts and market visuals.</div><a class="visit" href="https://www.tradingview.com/" target="_blank" rel="noopener">Open TradingView</a></article>
+          <article class="tool-card" data-name="FRED" data-tags="economics data federal reserve inflation employment"><div class="tool-top"><h4>FRED</h4><span class="tag">Econ</span></div><p>Federal Reserve economic data for inflation, unemployment, GDP, interest rates, wages, housing, and more.</p><div class="best-for"><strong>Best for:</strong> real economic graphs and indicators.</div><a class="visit" href="https://fred.stlouisfed.org/" target="_blank" rel="noopener">Open FRED</a></article>
+          <article class="tool-card" data-name="Bureau of Labor Statistics" data-tags="jobs wages inflation cpi employment"><div class="tool-top"><h4>BLS</h4><span class="tag">Labor</span></div><p>Official U.S. data on jobs, wages, inflation, occupations, employment, industries, and prices.</p><div class="best-for"><strong>Best for:</strong> career wage and inflation research.</div><a class="visit" href="https://www.bls.gov/" target="_blank" rel="noopener">Open BLS</a></article>
+          <article class="tool-card" data-name="Occupational Outlook Handbook" data-tags="career wages jobs education outlook"><div class="tool-top"><h4>OOH Career Data</h4><span class="tag">Careers</span></div><p>BLS career profiles with pay, education requirements, job outlook, work environment, and similar occupations.</p><div class="best-for"><strong>Best for:</strong> career research with real wage data.</div><a class="visit" href="https://www.bls.gov/ooh/" target="_blank" rel="noopener">Open OOH</a></article>
+          <article class="tool-card" data-name="Statista" data-tags="statistics marketing charts business data"><div class="tool-top"><h4>Statista</h4><span class="tag">Stats</span></div><p>Charts and statistics on industries, brands, consumers, sports, media, and business trends. Some data may require access.</p><div class="best-for"><strong>Best for:</strong> marketing and industry snapshots.</div><a class="visit" href="https://www.statista.com/" target="_blank" rel="noopener">Open Statista</a></article>
+          <article class="tool-card" data-name="Our World in Data" data-tags="data charts global issues economics health environment"><div class="tool-top"><h4>Our World in Data</h4><span class="tag">Data</span></div><p>Research and interactive charts on global issues, economics, health, energy, education, population, and more.</p><div class="best-for"><strong>Best for:</strong> credible charts for presentations.</div><a class="visit" href="https://ourworldindata.org/" target="_blank" rel="noopener">Open OWID</a></article>
+        </div>
+      </section>
+
+      <section class="category" id="news-media" data-category="News & Media Literacy">
+        <div class="section-heading"><div><h3>News & Media Literacy</h3><p>Use multiple sources. Separate straight reporting, opinion, sponsored content, social media claims, and primary documents.</p></div></div>
+        <div class="cards">
+          <article class="tool-card" data-name="AP News" data-tags="news wire current events usa world"><div class="tool-top"><h4>AP News</h4><span class="tag">News</span></div><p>Major nonprofit news wire with broad U.S. and international reporting used by many newsrooms.</p><div class="best-for"><strong>Best for:</strong> straight news starting point.</div><a class="visit" href="https://apnews.com/" target="_blank" rel="noopener">Open AP News</a></article>
+          <article class="tool-card" data-name="Reuters" data-tags="news business world wire"><div class="tool-top"><h4>Reuters</h4><span class="tag">News</span></div><p>Global news organization with strong business, markets, international, politics, and current events coverage.</p><div class="best-for"><strong>Best for:</strong> global and business news.</div><a class="visit" href="https://www.reuters.com/" target="_blank" rel="noopener">Open Reuters</a></article>
+          <article class="tool-card" data-name="BBC News" data-tags="news world international current events"><div class="tool-top"><h4>BBC News</h4><span class="tag">World</span></div><p>International news coverage with strong world, explainers, video, and global context.</p><div class="best-for"><strong>Best for:</strong> international perspective.</div><a class="visit" href="https://www.bbc.com/news" target="_blank" rel="noopener">Open BBC</a></article>
+          <article class="tool-card" data-name="NPR" data-tags="news audio radio explainers usa"><div class="tool-top"><h4>NPR</h4><span class="tag">News</span></div><p>U.S. public media source for news, audio stories, explainers, culture, science, business, and education.</p><div class="best-for"><strong>Best for:</strong> audio-friendly explainers.</div><a class="visit" href="https://www.npr.org/" target="_blank" rel="noopener">Open NPR</a></article>
+          <article class="tool-card" data-name="PBS NewsHour" data-tags="news video politics current events"><div class="tool-top"><h4>PBS NewsHour</h4><span class="tag">Video</span></div><p>Public media news program with video reports, interviews, explainers, and current-events coverage.</p><div class="best-for"><strong>Best for:</strong> class-friendly video segments.</div><a class="visit" href="https://www.pbs.org/newshour/" target="_blank" rel="noopener">Open PBS NewsHour</a></article>
+          <article class="tool-card" data-name="AllSides" data-tags="bias media literacy news comparison"><div class="tool-top"><h4>AllSides</h4><span class="tag">Bias</span></div><p>Media bias ratings and side-by-side news perspectives from left, center, and right sources.</p><div class="best-for"><strong>Best for:</strong> comparing how outlets frame the same issue.</div><a class="visit" href="https://www.allsides.com/unbiased-balanced-news" target="_blank" rel="noopener">Open AllSides</a></article>
+          <article class="tool-card" data-name="Ad Fontes Media Bias Chart" data-tags="bias reliability media literacy"><div class="tool-top"><h4>Ad Fontes</h4><span class="tag">Bias</span></div><p>Media bias and reliability ratings that help students discuss news quality and source positioning.</p><div class="best-for"><strong>Best for:</strong> checking reliability vs. bias.</div><a class="visit" href="https://adfontesmedia.com/interactive-media-bias-chart/" target="_blank" rel="noopener">Open Ad Fontes</a></article>
+          <article class="tool-card" data-name="Snopes" data-tags="fact check misinformation hoaxes"><div class="tool-top"><h4>Snopes</h4><span class="tag">Fact Check</span></div><p>Fact-checking site for rumors, viral claims, misinformation, images, social posts, and internet hoaxes.</p><div class="best-for"><strong>Best for:</strong> checking suspicious viral claims.</div><a class="visit" href="https://www.snopes.com/" target="_blank" rel="noopener">Open Snopes</a></article>
+        </div>
+      </section>
+
+      <section class="category" id="career-college" data-category="Career & College">
+        <div class="section-heading"><div><h3>Career, College & Life Planning</h3><p>Helpful for resumes, interviews, career exploration, college searches, financial aid, and real-world planning.</p></div></div>
+        <div class="cards">
+          <article class="tool-card" data-name="CareerOneStop" data-tags="career resume interview jobs training"><div class="tool-top"><h4>CareerOneStop</h4><span class="tag">Career</span></div><p>U.S. Department of Labor career site with resume help, career exploration, salary data, training, and job search tools.</p><div class="best-for"><strong>Best for:</strong> practical career planning.</div><a class="visit" href="https://www.careeronestop.org/" target="_blank" rel="noopener">Open CareerOneStop</a></article>
+          <article class="tool-card" data-name="My Next Move" data-tags="career quiz jobs interests"><div class="tool-top"><h4>My Next Move</h4><span class="tag">Career</span></div><p>Career exploration tool connected to O*NET with interest profiler, career descriptions, skills, and job outlook information.</p><div class="best-for"><strong>Best for:</strong> figuring out career directions.</div><a class="visit" href="https://www.mynextmove.org/" target="_blank" rel="noopener">Open My Next Move</a></article>
+          <article class="tool-card" data-name="O*NET Online" data-tags="career skills occupations jobs"><div class="tool-top"><h4>O*NET Online</h4><span class="tag">Career</span></div><p>Detailed occupation database with skills, abilities, knowledge areas, tasks, technology, and work activities.</p><div class="best-for"><strong>Best for:</strong> deeper career research.</div><a class="visit" href="https://www.onetonline.org/" target="_blank" rel="noopener">Open O*NET</a></article>
+          <article class="tool-card" data-name="College Scorecard" data-tags="college cost salary outcomes federal"><div class="tool-top"><h4>College Scorecard</h4><span class="tag">College</span></div><p>Official U.S. Department of Education college comparison data for costs, graduation, earnings, and fields of study.</p><div class="best-for"><strong>Best for:</strong> comparing college value.</div><a class="visit" href="https://collegescorecard.ed.gov/" target="_blank" rel="noopener">Open Scorecard</a></article>
+          <article class="tool-card" data-name="FAFSA" data-tags="college aid financial aid federal"><div class="tool-top"><h4>FAFSA</h4><span class="tag">Aid</span></div><p>Official federal application site for student financial aid. Use only the official .gov website.</p><div class="best-for"><strong>Best for:</strong> college financial aid applications.</div><a class="visit" href="https://studentaid.gov/h/apply-for-aid/fafsa" target="_blank" rel="noopener">Open FAFSA</a></article>
+          <article class="tool-card" data-name="Common App" data-tags="college application admissions"><div class="tool-top"><h4>Common App</h4><span class="tag">College</span></div><p>College application platform used by many colleges and universities for admissions applications.</p><div class="best-for"><strong>Best for:</strong> applying to multiple colleges.</div><a class="visit" href="https://www.commonapp.org/" target="_blank" rel="noopener">Open Common App</a></article>
+          <article class="tool-card" data-name="Indeed Career Guide" data-tags="resume interview cover letter jobs"><div class="tool-top"><h4>Indeed Career Guide</h4><span class="tag">Jobs</span></div><p>Resume examples, interview tips, cover letter guidance, job search advice, and workplace explainers.</p><div class="best-for"><strong>Best for:</strong> resume and interview prep.</div><a class="visit" href="https://www.indeed.com/career-advice" target="_blank" rel="noopener">Open Career Guide</a></article>
+        </div>
+      </section>
+
+      <section class="category" id="media-creation" data-category="Media Creation">
+        <div class="section-heading"><div><h3>Media Creation & Creative Tools</h3><p>Use these for class videos, audio, visuals, images, thumbnails, mockups, and creative marketing projects.</p></div></div>
+        <div class="cards">
+          <article class="tool-card" data-name="CapCut" data-tags="video editing social media clips"><div class="tool-top"><h4>CapCut</h4><span class="tag">Video</span></div><p>Simple video editor for trimming, captions, effects, short-form videos, class project clips, and social-style edits.</p><div class="best-for"><strong>Best for:</strong> quick polished videos.</div><a class="visit" href="https://www.capcut.com/" target="_blank" rel="noopener">Open CapCut</a></article>
+          <article class="tool-card" data-name="Clipchamp" data-tags="video editor microsoft captions"><div class="tool-top"><h4>Clipchamp</h4><span class="tag">Video</span></div><p>Browser video editor from Microsoft with templates, trimming, captions, screen recording, and exports.</p><div class="best-for"><strong>Best for:</strong> Chromebook-friendly video edits.</div><a class="visit" href="https://clipchamp.com/" target="_blank" rel="noopener">Open Clipchamp</a></article>
+          <article class="tool-card" data-name="Adobe Express" data-tags="design video image social posts"><div class="tool-top"><h4>Adobe Express</h4><span class="tag">Design</span></div><p>Quick design and media creation tool for videos, flyers, logos, social graphics, posters, and classroom projects.</p><div class="best-for"><strong>Best for:</strong> fast design templates and media edits.</div><a class="visit" href="https://www.adobe.com/express/" target="_blank" rel="noopener">Open Adobe Express</a></article>
+          <article class="tool-card" data-name="Pixabay" data-tags="free images video music stock"><div class="tool-top"><h4>Pixabay</h4><span class="tag">Media</span></div><p>Free stock photos, videos, illustrations, vectors, music, and sound effects for creative projects.</p><div class="best-for"><strong>Best for:</strong> project-safe visuals and background media.</div><a class="visit" href="https://pixabay.com/" target="_blank" rel="noopener">Open Pixabay</a></article>
+          <article class="tool-card" data-name="Pexels" data-tags="free photos video stock"><div class="tool-top"><h4>Pexels</h4><span class="tag">Media</span></div><p>Free stock photos and videos with strong search and modern visuals for presentations and projects.</p><div class="best-for"><strong>Best for:</strong> high-quality project images.</div><a class="visit" href="https://www.pexels.com/" target="_blank" rel="noopener">Open Pexels</a></article>
+          <article class="tool-card" data-name="Unsplash" data-tags="free photos stock images"><div class="tool-top"><h4>Unsplash</h4><span class="tag">Photos</span></div><p>Large library of free, high-quality photography for presentations, covers, backgrounds, and visual storytelling.</p><div class="best-for"><strong>Best for:</strong> clean professional background images.</div><a class="visit" href="https://unsplash.com/" target="_blank" rel="noopener">Open Unsplash</a></article>
+          <article class="tool-card" data-name="Audacity" data-tags="audio editing podcast recording"><div class="tool-top"><h4>Audacity</h4><span class="tag">Audio</span></div><p>Free audio recording and editing software for podcasts, interviews, voiceovers, and sound projects.</p><div class="best-for"><strong>Best for:</strong> audio projects when you can install software.</div><a class="visit" href="https://www.audacityteam.org/" target="_blank" rel="noopener">Open Audacity</a></article>
+          <article class="tool-card" data-name="Vocaroo" data-tags="audio recording voice online"><div class="tool-top"><h4>Vocaroo</h4><span class="tag">Audio</span></div><p>Simple browser voice recorder that makes quick shareable audio clips.</p><div class="best-for"><strong>Best for:</strong> fast voice recording without editing software.</div><a class="visit" href="https://vocaroo.com/" target="_blank" rel="noopener">Open Vocaroo</a></article>
+        </div>
+      </section>
+
+      <div class="footer">
+        <p><strong>Teacher note:</strong> This page is designed as a static HTML page for your class site. You can paste this file into GitHub/Netlify as <code>student-tools.html</code> and link to it from your main class portal.</p>
+        <p>Last updated: May 2026. Tool availability, pricing, and school filtering can change, so review links periodically.</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const input = document.getElementById('searchInput');
+    const cards = [...document.querySelectorAll('.tool-card')];
+    const sections = [...document.querySelectorAll('section.category')];
+    const count = document.getElementById('resultCount');
+
+    function runSearch() {
+      const q = input.value.trim().toLowerCase();
+      let visible = 0;
+      cards.forEach(card => {
+        const haystack = `${card.dataset.name || ''} ${card.dataset.tags || ''} ${card.innerText}`.toLowerCase();
+        const match = !q || haystack.includes(q);
+        card.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+      sections.forEach(section => {
+        const hasVisible = [...section.querySelectorAll('.tool-card')].some(card => !card.classList.contains('hidden'));
+        section.classList.toggle('hidden', !hasVisible);
+      });
+      count.textContent = visible;
+    }
+
+    input.addEventListener('input', runSearch);
+    count.textContent = cards.length;
+  </script>
+</body>
+</html>
