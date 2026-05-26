@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mr. D's Student Portal | Mr. D's Hub</title>
+  <title>Mr. D's Student Portal | Mr. D's HQ</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -212,7 +212,7 @@
 
     .quick-strip {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       max-width: 980px;
       margin: 28px auto 18px;
       overflow: hidden;
@@ -522,16 +522,16 @@
 <body>
   <header class="topbar">
     <nav class="shell nav">
-      <a href="/" class="brand" aria-label="Mr. D's Hub home">
+      <a href="/" class="brand" aria-label="Mr. D's HQ home">
         <div class="brand-mark">D</div>
-        <div class="brand-text">Mr. D's Hub <span>mrdhub.com</span></div>
+        <div class="brand-text">Mr. D's HQ <span>mrdhq.com</span></div>
       </a>
 
       <div class="navlinks">
         <a href="#courses">Classes</a>
         <a href="/opening-bell.html">Opening Bell</a>
         <a href="/business-dashboard.html">Business Dashboard</a>
-        <a href="#student-tools">Student Tools</a>
+        <a href="/student-tools.html">Student Tools</a>
         <a href="/about-contact.html">About Me / Contact</a>
       </div>
     </nav>
@@ -546,6 +546,8 @@
         <a class="btn btn-primary" href="#courses">Choose Your Class →</a>
         <a class="btn btn-bell" href="/opening-bell.html">Opening Bell →</a>
         <a class="btn btn-secondary" href="/business-dashboard.html">Business Dashboard →</a>
+        <a class="btn btn-secondary" href="/student-tools.html">Student Tools →</a>
+        <a class="btn btn-secondary" href="https://www.mentimeter.com/" target="_blank" rel="noopener">Mentimeter →</a>
       </div>
 
       <div class="quick-strip">
@@ -561,6 +563,10 @@
           <strong>Business Dashboard</strong>
           <span>Current events, markets, weather, and sports data</span>
         </div>
+        <a class="quick-item" href="/student-tools.html">
+          <strong>Student Tools</strong>
+          <span>PDF, AI, research, maps, design, math, and study links</span>
+        </a>
       </div>
 
       <div class="district-line">Chambersburg Area School District</div>
@@ -623,26 +629,29 @@
       </div>
     </section>
 
-    <section class="shell" id="student-tools">
+    <section class="shell" id="student-tools-preview">
       <div class="section-heading">
-        <div><h2>Directions for Using Mr. D's Student Portal</h2></div>
-        <p>Use this site as your starting point for class modules, review activities, current-event connections, and assignment links.</p>
+        <div><h2>Student Tools</h2></div>
+        <p>Open the master student tools page for PDF helpers, AI study tools, research links, live maps, design tools, math support, and business/current-event resources.</p>
       </div>
 
       <div class="spotlight">
         <article class="spotlight-card">
-          <h3>Choose your class</h3>
-          <p>Start by selecting the course card that matches your schedule. Your class page will include modules, activities, review materials, and important links.</p>
+          <h3>Student Tools Page</h3>
+          <p>Use this when you need class-approved tools for research, PDFs, citations, AI help, maps, charts, visuals, studying, and project work.</p>
+          <a class="btn btn-primary" href="/student-tools.html">Open Student Tools →</a>
         </article>
 
         <article class="spotlight-card">
-          <h3>Use the class password</h3>
-          <p>Some pages are locked so materials stay organized by class. Enter the password provided by Mr. D when prompted.</p>
+          <h3>Opening Bell / Bell Ringer</h3>
+          <p>Use this at the start of class for bell ringers, daily prompts, current-event starters, and warm-up activities.</p>
+          <a class="btn btn-bell" href="/opening-bell.html">Open Opening Bell →</a>
         </article>
 
         <article class="spotlight-card">
-          <h3>Use daily tools</h3>
-          <p>Use Opening Bell for class starters and the Business Dashboard for live current-event and market connections.</p>
+          <h3>Business Dashboard</h3>
+          <p>Use this for current events, markets, weather, sports, economic indicators, and real-world business connections.</p>
+          <a class="btn btn-secondary" href="/business-dashboard.html">Open Dashboard →</a>
         </article>
       </div>
     </section>
@@ -650,8 +659,8 @@
 
   <footer>
     <div class="shell footer-grid">
-      <div>© <span id="year"></span> Mr. D's Hub • Chambersburg Area School District</div>
-      <div>skyler.dipasquale@casdonline.org • mrdhub.com</div>
+      <div>© <span id="year"></span> Mr. D's HQ • Chambersburg Area School District</div>
+      <div>skyler.dipasquale@casdonline.org • mrdhq.com</div>
     </div>
   </footer>
 
