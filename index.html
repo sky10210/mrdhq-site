@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #1C1917;
@@ -27,7 +28,9 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     html { scroll-behavior: smooth; }
+
     body {
       min-height: 100vh;
       font-family: Poppins, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -53,7 +56,11 @@
     }
 
     a { color: inherit; text-decoration: none; }
-    .shell { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
+
+    .shell {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
 
     .topbar {
       position: sticky;
@@ -90,12 +97,16 @@
       background: radial-gradient(circle at 35% 22%, #FDE68A, var(--accent) 58%, #1D4ED8 100%);
       color: #0F0E0D;
       box-shadow: 0 14px 34px rgba(96,165,250,.24);
-      font-family: "Old English Text MT", "UnifrakturCook", Georgia, serif;
+      font-family: Georgia, serif;
       font-size: 1.7rem;
       font-weight: 900;
     }
 
-    .brand-text { font-size: .98rem; line-height: 1; }
+    .brand-text {
+      font-size: .98rem;
+      line-height: 1;
+    }
+
     .brand-text span {
       display: block;
       margin-top: 4px;
@@ -192,6 +203,7 @@
       background: rgba(250,247,242,.075);
       border: 1px solid var(--line);
     }
+
     .quick-strip {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -223,7 +235,8 @@
       pointer-events: none;
     }
 
-    .quick-item strong, .quick-item span {
+    .quick-item strong,
+    .quick-item span {
       position: relative;
       display: block;
     }
@@ -303,7 +316,8 @@
       gap: 16px;
     }
 
-    .course-card, .spotlight-card {
+    .course-card,
+    .spotlight-card {
       position: relative;
       overflow: hidden;
       border: 1px solid var(--line);
@@ -360,7 +374,8 @@
       font-weight: 780;
     }
 
-    .course-card p, .spotlight-card p {
+    .course-card p,
+    .spotlight-card p {
       position: relative;
       color: var(--muted);
       line-height: 1.55;
@@ -368,7 +383,14 @@
       margin-bottom: 18px;
     }
 
-    .tag-list { position: relative; display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 19px; }
+    .tag-list {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 19px;
+    }
+
     .tag {
       font-size: .70rem;
       font-weight: 700;
@@ -394,6 +416,7 @@
     }
 
     .spotlight-card { padding: 24px; }
+
     .spotlight-card h3 {
       font-size: 1.15rem;
       letter-spacing: -.04em;
@@ -454,7 +477,11 @@
       font-weight: 800;
     }
 
-    .caption { color: var(--soft); font-size: .84rem; font-weight: 600; }
+    .caption {
+      color: var(--soft);
+      font-size: .84rem;
+      font-weight: 600;
+    }
 
     .x {
       width: 38px;
@@ -467,7 +494,11 @@
       font-size: 1.2rem;
     }
 
-    .portal-login { display: grid; gap: 10px; margin-top: 12px; }
+    .portal-login {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
 
     input {
       width: 100%;
@@ -508,7 +539,9 @@
       .courses { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .spotlight { grid-template-columns: 1fr; }
       .section-heading { align-items: start; flex-direction: column; }
-      .quick-strip { grid-template-columns: 1fr; } .quick-item { border-right: 0; border-bottom: 1px solid var(--line); } .quick-item:last-child { border-bottom: 0; }
+      .quick-strip { grid-template-columns: 1fr; }
+      .quick-item { border-right: 0; border-bottom: 1px solid var(--line); }
+      .quick-item:last-child { border-bottom: 0; }
     }
 
     @media (max-width: 650px) {
@@ -523,13 +556,15 @@
     }
   </style>
 </head>
+
 <body>
   <header class="topbar">
     <nav class="shell nav">
-      <a href="#top" class="brand" aria-label="Mr. D's Hub home">
+      <a href="index.html" class="brand" aria-label="Mr. D's Hub home">
         <div class="brand-mark">D</div>
         <div class="brand-text">Mr. D's Hub <span>mrdhub.com</span></div>
       </a>
+
       <div class="navlinks">
         <a href="#courses">Classes</a>
         <a href="business-dashboard.html">Business Dashboard</a>
@@ -543,15 +578,25 @@
     <section class="hero shell">
       <h1><span class="gradient-text">Mr. D's Student Portal</span></h1>
       <p>Select your class below to access course modules, student work links, current-event activities, and real-world business data used in class.</p>
+
       <div class="hero-actions">
         <a class="btn btn-primary" href="#courses">Choose Your Class →</a>
         <a class="btn btn-secondary" href="business-dashboard.html">Business Dashboard</a>
       </div>
 
       <div class="quick-strip">
-        <div class="quick-item"><strong>4 Class Portals</strong><span>Access class modules and resources</span></div>
-        <div class="quick-item"><strong>Business Info</strong><span>Current events, markets, and data</span></div>
-        <div class="quick-item"><strong>Mentimeter</strong><span>Join live class questions and activities</span></div>
+        <div class="quick-item">
+          <strong>4 Class Portals</strong>
+          <span>Access class modules and resources</span>
+        </div>
+        <div class="quick-item">
+          <strong>Business Info</strong>
+          <span>Current events, markets, and data</span>
+        </div>
+        <div class="quick-item">
+          <strong>Mentimeter</strong>
+          <span>Join live class questions and activities</span>
+        </div>
       </div>
 
       <div class="district-line">Chambersburg Area School District</div>
@@ -572,7 +617,11 @@
           <div class="course-icon">💼</div>
           <h3>AP Business with Personal Finance</h3>
           <p>College-style business thinking with personal finance, decision-making, market forces, and real-world case studies.</p>
-          <div class="tag-list"><span class="tag">AP Skills</span><span class="tag">Finance</span><span class="tag">Case Studies</span></div>
+          <div class="tag-list">
+            <span class="tag">AP Skills</span>
+            <span class="tag">Finance</span>
+            <span class="tag">Case Studies</span>
+          </div>
           <button class="btn locked" onclick="openGate('AP Business with Personal Finance')">Enter Class <span>→</span></button>
         </article>
 
@@ -580,7 +629,11 @@
           <div class="course-icon">📣</div>
           <h3>Marketing Fundamentals</h3>
           <p>Branding, target markets, advertising, consumer behavior, sports marketing, entertainment, and event strategy.</p>
-          <div class="tag-list"><span class="tag">Branding</span><span class="tag">Sports MKT</span><span class="tag">Ads</span></div>
+          <div class="tag-list">
+            <span class="tag">Branding</span>
+            <span class="tag">Sports MKT</span>
+            <span class="tag">Ads</span>
+          </div>
           <button class="btn locked" onclick="openGate('Marketing Fundamentals')">Enter Class <span>→</span></button>
         </article>
 
@@ -588,7 +641,11 @@
           <div class="course-icon">💳</div>
           <h3>Personal Financial Management</h3>
           <p>Practical money skills for high schoolers: banking, credit, taxes, insurance, investing, and smart consumer choices.</p>
-          <div class="tag-list"><span class="tag">PFM</span><span class="tag">Credit</span><span class="tag">Insurance</span></div>
+          <div class="tag-list">
+            <span class="tag">PFM</span>
+            <span class="tag">Credit</span>
+            <span class="tag">Insurance</span>
+          </div>
           <button class="btn locked" onclick="openGate('Personal Financial Management')">Enter Class <span>→</span></button>
         </article>
 
@@ -596,7 +653,11 @@
           <div class="course-icon">🚀</div>
           <h3>Business 101</h3>
           <p>An approachable entry point into business, careers, entrepreneurship, economics, leadership, and workplace readiness.</p>
-          <div class="tag-list"><span class="tag">Careers</span><span class="tag">Econ</span><span class="tag">Startups</span></div>
+          <div class="tag-list">
+            <span class="tag">Careers</span>
+            <span class="tag">Econ</span>
+            <span class="tag">Startups</span>
+          </div>
           <button class="btn locked" onclick="openGate('Business 101')">Enter Class <span>→</span></button>
         </article>
       </div>
@@ -613,10 +674,12 @@
           <h3>Choose your class</h3>
           <p>Start by selecting the course card that matches your schedule. Your class page will include modules, activities, review materials, and important links.</p>
         </article>
+
         <article class="spotlight-card">
           <h3>Use the class password</h3>
           <p>Some pages are locked so materials stay organized by class. Enter the password provided by Mr. D when prompted.</p>
         </article>
+
         <article class="spotlight-card">
           <h3>Complete and submit</h3>
           <p>When a module asks for your name, class period, score, or reflection, make sure everything is entered accurately before submitting.</p>
@@ -641,81 +704,85 @@
         </div>
         <button class="x" onclick="closeGate()" aria-label="Close">×</button>
       </div>
-      <div class="portal-login"><input id="coursePassword" type="password" placeholder="Enter Class Password" />
+
+      <div class="portal-login">
+        <input id="coursePassword" type="password" placeholder="Enter Class Password" />
         <button class="btn btn-primary" onclick="demoUnlock()">Continue</button>
       </div>
+
       <p class="tiny-note">Use the password given in class. See Mr. D if you are having trouble accessing your course page.</p>
-      <div class="success-box" id="successBox">Access granted. Redirecting to your class portal...</div>
+      <div class="success-box" id="successBox">Access granted. Opening your class portal...</div>
     </div>
   </div>
 
- <script>
-  const modal = document.getElementById('gateModal');
-  const modalTitle = document.getElementById('modalTitle');
-  const successBox = document.getElementById('successBox');
-  const passwordInput = document.getElementById('coursePassword');
+  <script>
+    const modal = document.getElementById('gateModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const successBox = document.getElementById('successBox');
+    const passwordInput = document.getElementById('coursePassword');
 
-  let selectedCourse = '';
+    let selectedCourse = '';
 
-  const courseLinks = {
-    'AP Business with Personal Finance': 'ap-business/',
-    'Marketing Fundamentals': 'marketing/',
-    'Personal Financial Management': 'pfm/',
-    'Business 101': 'business-101/'
-  };
+    const courseLinks = {
+      'AP Business with Personal Finance': 'ap-business/',
+      'Marketing Fundamentals': 'marketing/',
+      'Personal Financial Management': 'pfm/',
+      'Business 101': 'business-101/'
+    };
 
-  document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  function openGate(courseName) {
-    selectedCourse = courseName;
-    modalTitle.textContent = courseName + ' Access';
-    successBox.style.display = 'none';
-    passwordInput.value = '';
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
-    setTimeout(() => passwordInput.focus(), 100);
-  }
-
-  function closeGate() {
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
-  }
-
-  function demoUnlock() {
-    const password = passwordInput.value.trim().toLowerCase();
-
-    if (password === 'cashs') {
-      successBox.style.display = 'block';
+    function openGate(courseName) {
+      selectedCourse = courseName;
+      modalTitle.textContent = courseName + ' Access';
+      successBox.style.display = 'none';
       successBox.textContent = 'Access granted. Opening your class portal...';
+      passwordInput.value = '';
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      setTimeout(() => passwordInput.focus(), 100);
+    }
 
-      const targetPage = courseLinks[selectedCourse];
+    function closeGate() {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+    }
 
-      setTimeout(() => {
-        if (targetPage) {
-          window.location.href = targetPage;
-        } else {
-          alert('Class page link is missing. Check the courseLinks list in the code.');
+    function demoUnlock() {
+      const password = passwordInput.value.trim().toLowerCase();
+
+      if (password === 'cashs') {
+        const targetPage = courseLinks[selectedCourse];
+
+        if (!targetPage) {
+          alert('Class page link is missing.');
+          return;
         }
-      }, 700);
 
-    } else {
-      alert('Incorrect class password.');
+        successBox.style.display = 'block';
+
+        setTimeout(() => {
+          window.location.href = targetPage;
+        }, 650);
+
+      } else {
+        alert('Incorrect class password.');
+      }
     }
-  }
 
-  passwordInput.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-      demoUnlock();
-    }
-  });
+    passwordInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        demoUnlock();
+      }
+    });
 
-  modal.addEventListener('click', event => {
-    if (event.target === modal) closeGate();
-  });
+    modal.addEventListener('click', event => {
+      if (event.target === modal) closeGate();
+    });
 
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeGate();
-  });
-</script>
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeGate();
+    });
+  </script>
 </body>
 </html>
