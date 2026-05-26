@@ -250,7 +250,18 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:13px 3
   nav,.brief,.code-bar,.list-wrap,#session-view,#review-view{padding-left:16px;padding-right:16px}
   .t-dig{font-size:64px}.cd-code{font-size:18px}.sv-head{flex-direction:column}
 }
+
+/* QR CODE */
+.brief-inner{display:flex;gap:28px;align-items:flex-start}
+.brief-content{flex:1;min-width:0}
+.qr-panel{flex-shrink:0;width:148px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px 12px;text-align:center}
+.qr-panel-lbl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
+.qr-panel-url{font-size:8px;color:var(--t4);margin-top:8px;word-break:break-all;line-height:1.4}
+#qr-code img,#qr-code canvas{width:120px!important;height:120px!important;border-radius:4px}
+@media(max-width:580px){.brief-inner{flex-direction:column}.qr-panel{width:100%;max-width:180px}}
+
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -448,42 +459,340 @@ const CFG={
     { id:40, label:"Opening Bell 40", status:"upcoming", question:"", hint:"" }]
 };
 document.getElementById('tmin').textContent=Math.round(CFG.TIMER_SEC/60);
+// ── Storage ───────────────────────────────────────
 const SK='ob_'+CFG.CLASS.replace(/\s+/g,'_');
 const getDone=()=>{try{return JSON.parse(localStorage.getItem(SK+'_done')||'[]');}catch(e){return[];}};
 const addDone=id=>{const c=getDone();if(!c.includes(id)){c.push(id);localStorage.setItem(SK+'_done',JSON.stringify(c));}};
 const getSess=()=>{try{return JSON.parse(localStorage.getItem(SK+'_sess')||'null');}catch(e){return null;}};
 const setSess=s=>localStorage.setItem(SK+'_sess',JSON.stringify(s));
 const clearSess=()=>localStorage.removeItem(SK+'_sess');
-function bStatus(b){if(getDone().includes(b.id))return'done';const s=getSess();if(s&&s.id===b.id){if((Math.floor(Date.now()/1000)-s.start)<s.dur)return'live';}if(b.status==='today')return'today';return'upcoming';}
-function buildList(){['completed-list','today-list','upcoming-list'].forEach(id=>document.getElementById(id).innerHTML='');let hd=false,ht=false;CFG.BELLS.forEach(b=>{const st=bStatus(b);const card=makeCard(b,st);if(st==='done'){document.getElementById('completed-list').appendChild(card);hd=true;}else if(st==='today'||st==='live'){document.getElementById('today-list').appendChild(card);ht=true;}else document.getElementById('upcoming-list').appendChild(card);});document.getElementById('completed-section').style.display=hd?'block':'none';document.getElementById('today-section').style.display=ht?'block':'none';}
-function makeCard(b,st){const el=document.createElement('div');const cm={done:'done',today:'is-today',live:'is-live',upcoming:'upcoming'};el.className='ob-card '+(cm[st]||'upcoming');const lk={done:'&#128275;',today:'&#128274;',live:'&#128276;',upcoming:'&#128274;'};const mt={done:`<span class="s-done">Completed</span>`,today:`<span class="s-today">Today &mdash; enter code to begin</span>`,live:`<span class="s-live"><span class="ldot"></span>Live Now</span>`,upcoming:'Not yet available'};const badge=st==='today'?`<br><span class="ob-badge bd-today">Opening Bell &mdash; code on board</span>`:st==='live'?`<br><span class="ob-badge bd-live">Session Active &mdash; enter code now</span>`:'';el.innerHTML=`<div class="ob-num">#${b.id}</div><div class="ob-info"><div class="ob-lbl">${b.label}</div><div class="ob-meta">${CFG.CLASS}&nbsp;&bull;&nbsp;${mt[st]||''}${badge}</div></div><div class="ob-lock">${lk[st]||'&#128274;'}</div>`;if(st==='done')el.onclick=()=>openReview(b.id);else if(st==='live'||st==='today')el.onclick=()=>document.getElementById('code-input').focus();return el;}
-function genCode(id,dur){return btoa(`${id}:${Math.floor(Date.now()/1000)}:${dur}`).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');}
-function parseCode(c){try{const p=c.replace(/-/g,'+').replace(/_/g,'/');const pad=(4-p.length%4)%4;const dec=atob(p+'='.repeat(pad));const[id,start,dur]=dec.split(':').map(Number);if(!id||!start||!dur)return null;return{id,start,dur};}catch(e){return null;}}
-function studentJoin(){const code=document.getElementById('code-input').value.trim();if(!code){alert('Enter the session code from the board.');return;}const s=parseCode(code);if(!s){alert('Invalid code. Check the board and try again.');return;}if(Math.floor(Date.now()/1000)-s.start<-60){alert('Code not active yet.');return;}setSess(s);openSession(s.id,s.start,s.dur);}
+const getLastBell=()=>{try{return JSON.parse(localStorage.getItem(SK+'_last')||'null');}catch(e){return null;}};
+const setLastBell=(id,t)=>localStorage.setItem(SK+'_last',JSON.stringify({id,t}));
+
+// ── 5-character session codes ─────────────────────
+const EPOCH=1735689600;
+const CHARS='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+const BASE=32,TMOD=20000;
+function _enc(n,len){let s='';while(s.length<len){s=CHARS[n%BASE]+s;n=Math.floor(n/BASE);}return s;}
+function _dec(s){let n=0;for(const c of s.toUpperCase()){const i=CHARS.indexOf(c);if(i<0)return NaN;n=n*BASE+i;}return n;}
+function genCode(bellId,dur){
+  const mins=Math.floor((Math.floor(Date.now()/1000)-EPOCH)/60)%TMOD;
+  return _enc(bellId*TMOD+mins,5);
+}
+function parseCode(raw){
+  const code=raw.trim().toUpperCase();
+  if(code.length!==5)return null;
+  const val=_dec(code);if(isNaN(val))return null;
+  const bellId=Math.floor(val/TMOD),mins=val%TMOD;
+  if(bellId<1||bellId>40)return null;
+  const now=Math.floor(Date.now()/1000);
+  const curMins=Math.floor((now-EPOCH)/60);
+  const curMod=curMins%TMOD;
+  let offset=curMod-mins;if(offset<0)offset+=TMOD;
+  if(offset>10)return null; // code valid for 10 min — enough for all students to join
+  const start=EPOCH+(curMins-offset)*60;
+  return{id:bellId,start,dur:420};
+}
+
+// ── Bell status ───────────────────────────────────
+function bStatus(b){
+  if(getDone().includes(b.id))return'done';
+  const s=getSess();
+  if(s&&s.id===b.id){
+    if((Math.floor(Date.now()/1000)-s.start)<s.dur)return'live';
+  }
+  if(b.status==='today'){
+    const lb=getLastBell();
+    // If teacher rang this bell within last 8 hours → late-open (no code needed)
+    if(lb&&lb.id===b.id&&(Date.now()-lb.t)<8*3600*1000)return'late-open';
+    return'today';
+  }
+  return'upcoming';
+}
+
+// ── Build list ────────────────────────────────────
+function buildList(){
+  ['completed-list','today-list','upcoming-list'].forEach(id=>document.getElementById(id).innerHTML='');
+  let hd=false,ht=false;
+  CFG.BELLS.forEach(b=>{
+    const st=bStatus(b);
+    const card=makeCard(b,st);
+    if(st==='done'){document.getElementById('completed-list').appendChild(card);hd=true;}
+    else if(st==='today'||st==='live'||st==='late-open'){document.getElementById('today-list').appendChild(card);ht=true;}
+    else document.getElementById('upcoming-list').appendChild(card);
+  });
+  document.getElementById('completed-section').style.display=hd?'block':'none';
+  document.getElementById('today-section').style.display=ht?'block':'none';
+}
+
+function makeCard(b,st){
+  const el=document.createElement('div');
+  const cm={done:'done',today:'is-today',live:'is-live','late-open':'is-today',upcoming:'upcoming'};
+  el.className='ob-card '+(cm[st]||'upcoming');
+  const lk={done:'&#128275;',today:'&#128274;',live:'&#128276;','late-open':'&#128275;',upcoming:'&#128274;'};
+  const mt={
+    done:`<span class="s-done">Completed</span>`,
+    today:`<span class="s-today">Today &mdash; enter code to begin</span>`,
+    live:`<span class="s-live"><span class="ldot"></span>Live Now</span>`,
+    'late-open':`<span style="color:var(--red);font-weight:600">Open &mdash; Late Submission</span>`,
+    upcoming:'Not yet available'
+  };
+  const badge=st==='today'?`<br><span class="ob-badge bd-today">Opening Bell &mdash; code on board</span>`
+    :st==='live'?`<br><span class="ob-badge bd-live">Session Active &mdash; enter code now</span>`
+    :st==='late-open'?`<br><span class="ob-badge" style="background:rgba(178,34,34,.1);border:1px solid rgba(178,34,34,.25);color:var(--red)">No code needed &mdash; tap to submit late</span>`:'';
+  el.innerHTML=`<div class="ob-num">#${b.id}</div><div class="ob-info"><div class="ob-lbl">${b.label}</div><div class="ob-meta">${CFG.CLASS}&nbsp;&bull;&nbsp;${mt[st]||''}${badge}</div></div><div class="ob-lock">${lk[st]||'&#128274;'}</div>`;
+  if(st==='done')el.onclick=()=>openReview(b.id);
+  else if(st==='live'||st==='today')el.onclick=()=>document.getElementById('code-input').focus();
+  else if(st==='late-open')el.onclick=()=>openLate(b.id);
+  return el;
+}
+
+// ── Session code join ─────────────────────────────
+function studentJoin(){
+  const code=document.getElementById('code-input').value.trim();
+  if(!code){alert('Enter the session code from the board.');return;}
+  const s=parseCode(code);
+  if(!s){alert('Invalid or expired code. Check the board and try again.');return;}
+  setSess(s);
+  openSession(s.id,s.start,s.dur,false);
+}
+
+// ── Open live session ─────────────────────────────
 let timerInt=null,curSess=null;
-function openSession(bellId,start,dur){const b=CFG.BELLS.find(x=>x.id===bellId);if(!b)return;curSess={id:bellId,start,dur};document.getElementById('sv-topic').textContent=b.label;document.getElementById('sv-meta').textContent=CFG.CLASS+' \u2022 '+CFG.PERIOD;document.getElementById('sv-question').textContent=b.question||'Question not yet set.';const hEl=document.getElementById('sv-hint');if(b.hint){hEl.style.display='block';hEl.textContent='Hint: '+b.hint;}else hEl.style.display='none';resetForm();showView('session');runTimer(start,dur);}
-function runTimer(start,dur){clearInterval(timerInt);const sMs=start*1000,tMs=dur*1000;function tick(){const now=Date.now(),rem=Math.max(0,tMs-(now-sMs)),secs=Math.ceil(rem/1000);const m=Math.floor(secs/60),s=String(secs%60).padStart(2,'0');const dig=document.getElementById('t-dig'),bar=document.getElementById('t-bar');const isLate=rem<=0,isUrgent=secs<=30&&!isLate;dig.textContent=isLate?'0:00':`${m}:${s}`;dig.className='t-dig'+(isLate?' done':isUrgent?' urgent':'');bar.style.width=((rem/tMs)*100)+'%';bar.className='t-bar'+(isUrgent?' urgent':'');if(isLate){document.getElementById('late-banner').style.display='block';document.getElementById('af-tag').textContent='Late Window';document.getElementById('af-tag').style.color='var(--red)';document.getElementById('t-top').textContent='Window Closed \u2014 Late Submissions Accepted';const btn=document.getElementById('btn-submit');if(btn&&!btn.disabled){btn.className='btn-submit late-btn';btn.textContent='Submit Late Response';}if(curSess)addDone(curSess.id);clearInterval(timerInt);}}tick();timerInt=setInterval(tick,500);}
-async function sendToSheets(bellId,label,name,answer,isLate){if(!CFG.SHEETS_URL)return;const el=document.getElementById('sh-status');try{const p=new URLSearchParams({bellId,label,name,answer,late:isLate?'1':'0',timestamp:new Date().toISOString(),cls:CFG.CLASS,period:CFG.PERIOD});await fetch(`${CFG.SHEETS_URL}?${p}`,{method:'GET',mode:'no-cors'});if(el){el.textContent='Saved to Google Sheets';el.className='sheets-status ok';}}catch(e){if(el){el.textContent='Sheet sync failed \u2014 recorded locally';el.className='sheets-status err';}}}
-function submitAnswer(){const name=document.getElementById('ans-name').value.trim();const text=document.getElementById('ans-text').value.trim();if(!name){alert('Please enter your full name.');return;}if(text.length<8){alert('Please write a more complete answer.');return;}const isLate=document.getElementById('late-banner').style.display!=='none';document.getElementById('ans-name').disabled=true;document.getElementById('ans-text').disabled=true;document.getElementById('btn-submit').disabled=true;document.getElementById('recap-txt').textContent=text;document.getElementById('sub-note').textContent=isLate?'Recorded as Late \u2014 see Mr. D about credit.':'Your response has been recorded. Wait for Mr. D.';document.getElementById('form-state').style.display='none';document.getElementById('submitted-state').style.display='block';if(curSess){addDone(curSess.id);const b=CFG.BELLS.find(x=>x.id===curSess.id);sendToSheets(curSess.id,b?b.label:'Opening Bell '+curSess.id,name,text,isLate);}}
-function resetForm(){document.getElementById('form-state').style.display='block';document.getElementById('submitted-state').style.display='none';document.getElementById('late-banner').style.display='none';document.getElementById('t-top').textContent='Time Remaining';document.getElementById('af-tag').textContent='Live Window';document.getElementById('af-tag').style.color='';document.getElementById('sh-status').textContent='';document.getElementById('sh-status').className='sheets-status';const btn=document.getElementById('btn-submit');if(btn){btn.disabled=false;btn.className='btn-submit';btn.textContent='Submit Response';}['ans-name','ans-text'].forEach(id=>{const e=document.getElementById(id);if(e){e.disabled=false;e.value='';}});}
+function openSession(bellId,start,dur,isLateOpen){
+  const b=CFG.BELLS.find(x=>x.id===bellId);if(!b)return;
+  curSess={id:bellId,start,dur};
+  document.getElementById('sv-topic').textContent=b.label;
+  document.getElementById('sv-meta').textContent=CFG.CLASS+' \u2022 '+CFG.PERIOD;
+  document.getElementById('sv-question').textContent=b.question||'Question not yet set.';
+  const hEl=document.getElementById('sv-hint');
+  if(b.hint){hEl.style.display='block';hEl.textContent='Hint: '+b.hint;}else hEl.style.display='none';
+  resetForm();
+  showView('session');
+  if(isLateOpen){
+    // Skip timer, open directly in late mode
+    document.getElementById('t-dig').textContent='0:00';
+    document.getElementById('t-dig').className='t-dig done';
+    document.getElementById('t-bar').style.width='0%';
+    setLateMode();
+  }else{
+    runTimer(start,dur);
+  }
+}
+
+// ── Open late (no code needed) ────────────────────
+function openLate(bellId){openSession(bellId,0,420,true);}
+
+// ── Set late mode UI ──────────────────────────────
+function setLateMode(){
+  document.getElementById('late-banner').style.display='block';
+  document.getElementById('t-top').textContent='Window Closed \u2014 Late Submission';
+  document.getElementById('af-tag').textContent='Late Submission';
+  document.getElementById('af-tag').style.color='var(--red)';
+  const btn=document.getElementById('btn-submit');
+  if(btn&&!btn.disabled){btn.className='btn-submit late-btn';btn.textContent='Submit Late Response';}
+}
+
+// ── Timer ─────────────────────────────────────────
+function runTimer(start,dur){
+  clearInterval(timerInt);
+  const sMs=start*1000,tMs=dur*1000;
+  function tick(){
+    const now=Date.now(),rem=Math.max(0,tMs-(now-sMs)),secs=Math.ceil(rem/1000);
+    const m=Math.floor(secs/60),s=String(secs%60).padStart(2,'0');
+    const dig=document.getElementById('t-dig'),bar=document.getElementById('t-bar');
+    const isZero=rem<=0,isUrgent=secs<=30&&!isZero;
+    dig.textContent=isZero?'0:00':`${m}:${s}`;
+    dig.className='t-dig'+(isZero?' done':isUrgent?' urgent':'');
+    bar.style.width=((rem/tMs)*100)+'%';
+    bar.className='t-bar'+(isUrgent?' urgent':'');
+    if(isZero){clearInterval(timerInt);setLateMode();if(curSess)buildList();}
+  }
+  tick();timerInt=setInterval(tick,500);
+}
+
+// ── Submit answer ─────────────────────────────────
+async function submitAnswer(){
+  const name=document.getElementById('ans-name').value.trim();
+  const text=document.getElementById('ans-text').value.trim();
+  if(!name){alert('Please enter your full name.');return;}
+  if(text.length<8){alert('Please write a more complete answer.');return;}
+  const isLate=document.getElementById('late-banner').style.display!=='none';
+  document.getElementById('ans-name').disabled=true;
+  document.getElementById('ans-text').disabled=true;
+  document.getElementById('btn-submit').disabled=true;
+  document.getElementById('recap-txt').textContent=text;
+  document.getElementById('sub-note').textContent=isLate
+    ?'Recorded as Late \u2014 see Mr. D about credit.'
+    :'Response recorded. Wait for Mr. D.';
+  document.getElementById('form-state').style.display='none';
+  document.getElementById('submitted-state').style.display='block';
+  if(curSess){
+    addDone(curSess.id);
+    const b=CFG.BELLS.find(x=>x.id===curSess.id);
+    await sendToSheets(curSess.id,b?b.label:'Opening Bell '+curSess.id,name,text,isLate);
+  }
+}
+
+function resetForm(){
+  document.getElementById('form-state').style.display='block';
+  document.getElementById('submitted-state').style.display='none';
+  document.getElementById('late-banner').style.display='none';
+  document.getElementById('t-top').textContent='Time Remaining';
+  document.getElementById('af-tag').textContent='Live Window';
+  document.getElementById('af-tag').style.color='';
+  document.getElementById('sh-status').textContent='';
+  document.getElementById('sh-status').className='sheets-status';
+  const btn=document.getElementById('btn-submit');
+  if(btn){btn.disabled=false;btn.className='btn-submit';btn.textContent='Submit Response';}
+  ['ans-name','ans-text'].forEach(id=>{const e=document.getElementById(id);if(e){e.disabled=false;e.value='';}});
+  document.getElementById('t-dig').className='t-dig';
+  document.getElementById('t-bar').style.width='100%';
+  document.getElementById('t-bar').className='t-bar';
+}
+
 function exitSession(){clearInterval(timerInt);curSess=null;showView('list');buildList();}
-function openReview(id){const b=CFG.BELLS.find(x=>x.id===id);if(!b)return;document.getElementById('rv-topic').textContent=b.label;document.getElementById('rv-meta').textContent=CFG.CLASS+' \u2022 '+CFG.PERIOD;document.getElementById('rv-question').textContent=b.question||'(Not available)';const rh=document.getElementById('rv-hint');if(b.hint){rh.style.display='block';rh.textContent='Hint: '+b.hint;}else rh.style.display='none';document.getElementById('rv-ok').style.display='none';document.getElementById('rv-btn').disabled=false;document.getElementById('rv-name').value='';document.getElementById('rv-text').value='';showView('review');}
-function submitReview(){const name=document.getElementById('rv-name').value.trim();const text=document.getElementById('rv-text').value.trim();if(!name||text.length<8){alert('Fill out your name and a complete answer.');return;}document.getElementById('rv-btn').disabled=true;document.getElementById('rv-ok').style.display='block';sendToSheets(0,'MAKEUP',name,text,true);}
-function showView(v){document.getElementById('list-view').style.display=v==='list'?'block':'none';document.getElementById('session-view').style.display=v==='session'?'block':'none';document.getElementById('review-view').style.display=v==='review'?'block':'none';}
+
+// ── Google Sheets ─────────────────────────────────
+async function sendToSheets(bellId,label,name,answer,isLate){
+  if(!CFG.SHEETS_URL)return;
+  const el=document.getElementById('sh-status');
+  try{
+    const p=new URLSearchParams({bellId,label,name,answer,
+      late:isLate?'1':'0',
+      status:isLate?'Late':'On Time',
+      timestamp:new Date().toISOString(),
+      cls:CFG.CLASS,period:CFG.PERIOD});
+    await fetch(`${CFG.SHEETS_URL}?${p}`,{method:'GET',mode:'no-cors'});
+    if(el){el.textContent='Saved to Google Sheets';el.className='sheets-status ok';}
+  }catch(e){
+    if(el){el.textContent='Sheet sync failed \u2014 recorded locally';el.className='sheets-status err';}
+  }
+}
+
+// ── Review / makeup ───────────────────────────────
+function openReview(id){
+  const b=CFG.BELLS.find(x=>x.id===id);if(!b)return;
+  document.getElementById('rv-topic').textContent=b.label;
+  document.getElementById('rv-meta').textContent=CFG.CLASS+' \u2022 '+CFG.PERIOD;
+  document.getElementById('rv-question').textContent=b.question||'(Not available)';
+  const rh=document.getElementById('rv-hint');
+  if(b.hint){rh.style.display='block';rh.textContent='Hint: '+b.hint;}else rh.style.display='none';
+  document.getElementById('rv-ok').style.display='none';
+  document.getElementById('rv-btn').disabled=false;
+  document.getElementById('rv-name').value='';document.getElementById('rv-text').value='';
+  showView('review');
+}
+function submitReview(){
+  const name=document.getElementById('rv-name').value.trim();
+  const text=document.getElementById('rv-text').value.trim();
+  if(!name||text.length<8){alert('Fill out your name and a complete answer.');return;}
+  document.getElementById('rv-btn').disabled=true;
+  document.getElementById('rv-ok').style.display='block';
+  sendToSheets(0,'MAKEUP',name,text,true);
+}
+
+// ── Views ─────────────────────────────────────────
+function showView(v){
+  document.getElementById('list-view').style.display=v==='list'?'block':'none';
+  document.getElementById('session-view').style.display=v==='session'?'block':'none';
+  document.getElementById('review-view').style.display=v==='review'?'block':'none';
+}
+
+// ── Teacher modal ─────────────────────────────────
 let tInt=null,aC='';
 function openT(){document.getElementById('t-modal').classList.add('open');setTimeout(()=>document.getElementById('t-pw').focus(),100);populateSel();}
 function closeT(){document.getElementById('t-modal').classList.remove('open');}
 document.getElementById('t-modal').addEventListener('click',function(e){if(e.target===this)closeT();});
-function doAuth(){if(document.getElementById('t-pw').value===CFG.TEACHER_PW){document.getElementById('auth-panel').style.display='none';document.getElementById('t-panel').style.display='block';document.getElementById('auth-err').style.display='none';checkActive();}else{document.getElementById('auth-err').style.display='block';document.getElementById('t-pw').value='';document.getElementById('t-pw').focus();}}
-function populateSel(){const sel=document.getElementById('tp-sel');sel.innerHTML='';CFG.BELLS.forEach(b=>{const o=document.createElement('option');o.value=b.id;const st=bStatus(b);const tag=st==='done'?' (Done)':st==='today'?' \u2190 Today':'';o.textContent=`#${b.id} \u2014 ${b.label}${tag}`;if(st==='today')o.selected=true;sel.appendChild(o);});}
-function ringBell(){const id=parseInt(document.getElementById('tp-sel').value);aC=genCode(id,CFG.TIMER_SEC);const s=parseCode(aC);setSess(s);document.getElementById('cd-code').textContent=aC;document.getElementById('tp-setup').style.display='none';document.getElementById('tp-active').style.display='block';runTTimer(s.start,CFG.TIMER_SEC);buildList();}
-function runTTimer(start,dur){clearInterval(tInt);function tick(){const rem=Math.max(0,dur-(Math.floor(Date.now()/1000)-start));const m=Math.floor(rem/60),s=String(rem%60).padStart(2,'0');const el=document.getElementById('tp-timer');el.textContent=`${m}:${s}`;el.className='tp-timer'+(rem<=30?' urgent':'');document.getElementById('tp-status').textContent=rem>0?'Students can submit':'Window closed \u2014 late submissions open';if(rem<=0){clearInterval(tInt);if(aC){const p=parseCode(aC);if(p)addDone(p.id);}}}tick();tInt=setInterval(tick,500);}
-function checkActive(){const s=getSess();if(!s)return;const rem=s.dur-(Math.floor(Date.now()/1000)-s.start);if(rem>-60){aC=btoa(`${s.id}:${s.start}:${s.dur}`).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');document.getElementById('cd-code').textContent=aC;document.getElementById('tp-setup').style.display='none';document.getElementById('tp-active').style.display='block';runTTimer(s.start,s.dur);}}
-function endSession(){clearInterval(tInt);if(aC){const p=parseCode(aC);if(p)addDone(p.id);}clearSess();aC='';document.getElementById('tp-active').style.display='none';document.getElementById('tp-setup').style.display='block';closeT();buildList();}
-function copyCode(){navigator.clipboard.writeText(aC).then(()=>{const b=document.querySelector('.btn-copy');const o=b.textContent;b.textContent='Copied';setTimeout(()=>b.textContent=o,2000);});}
-function updateMkt(){const et=new Date(new Date().toLocaleString('en-US',{timeZone:'America/New_York'}));const d=et.getDay(),t=et.getHours()*60+et.getMinutes();const open=d>=1&&d<=5&&t>=570&&t<960;document.getElementById('mkt-s').innerHTML=open?'<span style="color:var(--green);font-size:11px;font-weight:600">NYSE Open</span>':'<span style="color:var(--t4);font-size:11px;font-weight:500">NYSE Closed</span>';}
+function doAuth(){
+  if(document.getElementById('t-pw').value===CFG.TEACHER_PW){
+    document.getElementById('auth-panel').style.display='none';
+    document.getElementById('t-panel').style.display='block';
+    document.getElementById('auth-err').style.display='none';
+    checkActive();
+  }else{document.getElementById('auth-err').style.display='block';document.getElementById('t-pw').value='';document.getElementById('t-pw').focus();}
+}
+function populateSel(){
+  const sel=document.getElementById('tp-sel');sel.innerHTML='';
+  CFG.BELLS.forEach(b=>{
+    const o=document.createElement('option');o.value=b.id;
+    const st=bStatus(b);
+    const tag=st==='done'?' (Done)':st==='today'||st==='late-open'?' \u2190 Today':'';
+    o.textContent=`#${b.id} \u2014 ${b.label}${tag}`;
+    if(st==='today'||st==='late-open')o.selected=true;
+    sel.appendChild(o);
+  });
+}
+function ringBell(){
+  const id=parseInt(document.getElementById('tp-sel').value);
+  aC=genCode(id,CFG.TIMER_SEC);
+  const s=parseCode(aC);setSess(s);
+  setLastBell(id, Date.now()); // store for late-open mode
+  document.getElementById('cd-code').textContent=aC;
+  document.getElementById('tp-setup').style.display='none';
+  document.getElementById('tp-active').style.display='block';
+  runTTimer(s.start,CFG.TIMER_SEC);buildList();
+}
+function runTTimer(start,dur){
+  clearInterval(tInt);
+  function tick(){
+    const rem=Math.max(0,dur-(Math.floor(Date.now()/1000)-start));
+    const m=Math.floor(rem/60),s=String(rem%60).padStart(2,'0');
+    const el=document.getElementById('tp-timer');
+    el.textContent=`${m}:${s}`;
+    el.className='tp-timer'+(rem<=30?' urgent':'');
+    document.getElementById('tp-status').textContent=rem>0
+      ?'Students can submit \u2014 On Time'
+      :'Timer done \u2014 Late submissions open (no code needed)';
+    if(rem<=0){clearInterval(tInt);buildList();}
+  }
+  tick();tInt=setInterval(tick,500);
+}
+function checkActive(){
+  const s=getSess();if(!s)return;
+  const rem=s.dur-(Math.floor(Date.now()/1000)-s.start);
+  if(rem>0){
+    aC=btoa(`${s.id}:${s.start}:${s.dur}`).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+    document.getElementById('cd-code').textContent=document.getElementById('cd-code').textContent||aC;
+    document.getElementById('tp-setup').style.display='none';
+    document.getElementById('tp-active').style.display='block';
+    runTTimer(s.start,s.dur);
+  }
+}
+function endSession(){
+  clearInterval(tInt);clearSess();aC='';
+  document.getElementById('tp-active').style.display='none';
+  document.getElementById('tp-setup').style.display='block';
+  closeT();buildList();
+}
+function copyCode(){
+  navigator.clipboard.writeText(aC).then(()=>{
+    const b=document.querySelector('.btn-copy');const o=b.textContent;
+    b.textContent='Copied';setTimeout(()=>b.textContent=o,2000);
+  });
+}
+
+// ── Market status ─────────────────────────────────
+function updateMkt(){
+  const et=new Date(new Date().toLocaleString('en-US',{timeZone:'America/New_York'}));
+  const d=et.getDay(),t=et.getHours()*60+et.getMinutes();
+  const open=d>=1&&d<=5&&t>=570&&t<960;
+  document.getElementById('mkt-s').innerHTML=open
+    ?'<span style="color:var(--green);font-size:11px;font-weight:600">NYSE Open</span>'
+    :'<span style="color:var(--t4);font-size:11px;font-weight:500">NYSE Closed</span>';
+}
 updateMkt();setInterval(updateMkt,30000);
 buildList();showView('list');
+// QR Code
+(function(){
+  const url='https://mrdhub.com/opening-bell/business-101.html';
+  new QRCode(document.getElementById('qr-code'),{
+    text:url,width:120,height:120,
+    colorDark:'#1A1A1A',colorLight:'#E3E3E3',
+    correctLevel:QRCode.CorrectLevel.M
+  });
+  document.getElementById('qr-url').textContent=url.replace('https://','');
+})();
 </script>
 </body>
 </html>
