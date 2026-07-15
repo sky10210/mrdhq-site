@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AP Business with Personal Finance | Mr. D's Hub</title>
+  <title>AP Business with Personal Finance | Mr. D's HQ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -540,20 +540,124 @@
     .module-card p { color: var(--muted); line-height: 1.55; margin-bottom: 16px; }
     .back-link { margin-top: 18px; }
     @media (max-width: 760px) { .module-list { grid-template-columns: 1fr; } }
+
+    .module-card {
+      min-height: 275px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease,
+        background .22s ease;
+    }
+
+    .module-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 12% 0%, rgba(96,165,250,.15), transparent 48%);
+      opacity: .7;
+      pointer-events: none;
+    }
+
+    .module-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .module-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(96,165,250,.52);
+      box-shadow:
+        0 0 30px rgba(96,165,250,.10),
+        0 28px 65px rgba(0,0,0,.32);
+    }
+
+    .module-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .module-link .btn {
+      margin-top: auto;
+      align-self: flex-start;
+      pointer-events: none;
+    }
+
+    .module-card .tag-list {
+      margin-top: auto;
+      margin-bottom: 16px;
+    }
+
+    .module-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      margin-bottom: 17px;
+      color: #DBEAFE;
+      background: linear-gradient(145deg, rgba(96,165,250,.24), rgba(15,118,110,.17));
+      border: 1px solid rgba(147,197,253,.28);
+      box-shadow: inset 0 0 26px rgba(96,165,250,.10);
+      font-size: 1.45rem;
+      font-weight: 800;
+    }
+
+    .featured-label {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(45,212,191,.14);
+      border: 1px solid rgba(45,212,191,.34);
+      color: var(--teal-bright);
+      font-size: .66rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .module-card h3 {
+      font-size: 1.22rem;
+      line-height: 1.2;
+    }
+
+    .module-card p {
+      font-size: .90rem;
+    }
+
+    .module-card--featured {
+      background:
+        radial-gradient(circle at 90% 0%, rgba(45,212,191,.12), transparent 44%),
+        linear-gradient(180deg, rgba(33,52,67,.90), rgba(15,14,13,.68));
+      border-color: rgba(96,165,250,.34);
+    }
+
+    @media (max-width: 650px) {
+      .module-card { min-height: auto; }
+      .module-link .btn { width: 100%; }
+      .featured-label { position: static; align-self: flex-start; margin-bottom: 12px; }
+    }
+
   </style>
 </head>
 <body>
   <header class="topbar">
     <nav class="shell nav">
-      <a href="index.html" class="brand" aria-label="Mr. D's Hub home">
+      <a href="/" class="brand" aria-label="MRDHQ home">
         <div class="brand-mark">D</div>
-        <div class="brand-text">Mr. D's Hub <span>mrdhub.com</span></div>
+        <div class="brand-text">Mr. D's HQ <span>MRDHQ.COM</span></div>
       </a>
       <div class="navlinks">
-        <a href="index.html#courses">Classes</a>
-        <a href="business-dashboard.html">Business Dashboard</a>
-        <a href="index.html#student-tools">Student Tools</a>
-        <a href="about-contact.html">About Me / Contact</a>
+        <a href="/#courses">Classes</a>
+        <a href="/business-dashboard.html">Business Dashboard</a>
+        <a href="/#student-tools">Student Tools</a>
+        <a href="/about-contact.html">About Me / Contact</a>
       </div>
     </nav>
   </header>
@@ -561,39 +665,75 @@
   <main>
     <section class="hero shell">
       <h1><span class="gradient-text">AP Business with Personal Finance</span></h1>
-      <p>AP Business thinking, personal finance decisions, case studies, market forces, and real-world business strategy.</p>
+      <p>Your central launch point for the yearlong Business Canvas Project, case studies, vocabulary practice, and AP Business course tools.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#modules">View Modules →</a>
-        <a class="btn btn-secondary" href="index.html">Back to Home</a>
+        <a class="btn btn-secondary" href="/">Back to MRDHQ</a>
       </div>
     </section>
 
     <section class="shell" id="modules">
       <div class="section-heading">
-        <div><h2>Course Landing Page</h2></div>
-        <p>Add module links, Netlify/Pages activities, Google Forms, vocab tools, project directions, and review resources here.</p>
+        <div><h2>AP Business Student Hub</h2></div>
+        <p>Open the yearlong Business Canvas Studio, practice AP vocabulary, and access the tools used throughout the course.</p>
       </div>
+
       <div class="module-list">
-        <article class="module-card">
-          <h3>Module Links</h3>
-          <p>Replace this card with links to your hosted class modules. Example: Unit 1 vocabulary, paycheck module, sports marketing case, or AP Business topic page.</p>
-          <a class="btn btn-secondary" href="#">Add Link</a>
-        </article>
-        <article class="module-card">
-          <h3>Current Assignment</h3>
-          <p>Use this spot for the activity students should open first when they arrive in class.</p>
-          <a class="btn btn-secondary" href="#">Add Assignment</a>
-        </article>
-        <article class="module-card">
-          <h3>Review / Study</h3>
-          <p>Add vocabulary practice, quiz review, Mentimeter links, or study guides.</p>
-          <a class="btn btn-secondary" href="#">Add Review</a>
-        </article>
-        <article class="module-card">
-          <h3>Project Resources</h3>
-          <p>Add rubrics, examples, templates, and project directions.</p>
-          <a class="btn btn-secondary" href="#">Add Resource</a>
-        </article>
+        <a class="module-card module-link module-card--featured"
+           href="business-canvas/"
+           aria-label="Open Business Canvas Studio">
+          <span class="featured-label">Featured</span>
+          <div class="module-icon" aria-hidden="true">▦</div>
+          <h3>Business Canvas Studio</h3>
+          <p>Build and revise your yearlong Canvas, complete assigned cases, connect claims to evidence, and prepare to explain your decisions on the AP Exam.</p>
+          <div class="tag-list">
+            <span class="tag">Master Canvas</span>
+            <span class="tag">Case Library</span>
+            <span class="tag">Exam Practice</span>
+          </div>
+          <span class="btn btn-primary">Open Canvas Studio →</span>
+        </a>
+
+        <a class="module-card module-link"
+           href="https://apbusinessvocab.com"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Open AP Business Vocabulary">
+          <div class="module-icon" aria-hidden="true">Aa</div>
+          <h3>AP Business Vocabulary</h3>
+          <p>Review key terms by unit, practice recall, and strengthen the language needed for case analysis and written responses.</p>
+          <div class="tag-list">
+            <span class="tag">Unit Review</span>
+            <span class="tag">Vocabulary</span>
+          </div>
+          <span class="btn btn-secondary">Open Vocabulary Site ↗</span>
+        </a>
+
+        <a class="module-card module-link"
+           href="/business-dashboard.html"
+           aria-label="Open Business Dashboard">
+          <div class="module-icon" aria-hidden="true">⌂</div>
+          <h3>Business Dashboard</h3>
+          <p>Return to the main business-course dashboard for class links, current activities, and shared resources.</p>
+          <div class="tag-list">
+            <span class="tag">Class Hub</span>
+            <span class="tag">Assignments</span>
+          </div>
+          <span class="btn btn-secondary">Open Dashboard →</span>
+        </a>
+
+        <a class="module-card module-link"
+           href="/student-tools.html"
+           aria-label="Open Student Tools">
+          <div class="module-icon" aria-hidden="true">✓</div>
+          <h3>Student Tools</h3>
+          <p>Access general student resources, planning tools, and supporting materials used across MRDHQ.</p>
+          <div class="tag-list">
+            <span class="tag">Resources</span>
+            <span class="tag">Support</span>
+          </div>
+          <span class="btn btn-secondary">Open Student Tools →</span>
+        </a>
       </div>
     </section>
 
@@ -601,28 +741,28 @@
       <div class="spotlight">
         
         <article class="spotlight-card">
-          <h3>Start with the newest topic</h3>
-          <p>Post the current AP Business module at the top so students know exactly where to begin.</p>
+          <h3>Build throughout the year</h3>
+          <p>Your Business Canvas is a living record. Add evidence, revise assumptions, and improve decisions as the course progresses.</p>
         </article>
 
         <article class="spotlight-card">
-          <h3>Build by unit</h3>
-          <p>Keep Unit 1, Unit 2, and later AP topics separated so review stays organized.</p>
+          <h3>Practice with real cases</h3>
+          <p>Use the Case Library to recognize business problems, evaluate evidence, and defend recommendations using course concepts.</p>
         </article>
 
         <article class="spotlight-card">
-          <h3>Connect to finance</h3>
-          <p>Use short real-life financial decisions to tie business concepts back to student life.</p>
+          <h3>Prepare for the AP Exam</h3>
+          <p>Be ready to explain how research, hypothesis testing, and revision shaped your own business and apply that thinking to unfamiliar situations.</p>
         </article>
       </div>
-      <div class="back-link"><a class="btn btn-primary" href="index.html">← Back to Mr. D's Hub</a></div>
+      <div class="back-link"><a class="btn btn-primary" href="/">← Back to MRDHQ Home</a></div>
     </section>
   </main>
 
   <footer>
     <div class="shell footer-grid">
-      <div>© <span id="year"></span> Mr. D's Hub • Chambersburg Area School District</div>
-      <div>skyler.dipasquale@casdonline.org • mrdhub.com</div>
+      <div>© <span id="year"></span> Mr. D's HQ • Chambersburg Area School District</div>
+      <div>skyler.dipasquale@casdonline.org • mrdhq.com</div>
     </div>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
