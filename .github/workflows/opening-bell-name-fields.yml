@@ -1,0 +1,55 @@
+name: Opening Bell name fields patch
+on:
+  push:
+    paths:
+      - '.github/workflows/opening-bell-name-fields.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Opening Bell forms
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          files = [
+              Path('opening-bell/ap-business.html'),
+              Path('opening-bell/marketing.html'),
+              Path('opening-bell/business-101.html'),
+              Path('opening-bell/pfm.html'),
+          ]
+
+          live_old = '<div class="field"><label>Full Name</label><input type="text" id="ans-name" placeholder="First Last" autocomplete="name"></div>'
+          live_new = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="field"><label>First Name</label><input type="text" id="ans-first" placeholder="First" autocomplete="given-name"></div><div class="field"><label>Last Name</label><input type="text" id="ans-last" placeholder="Last" autocomplete="family-name"></div></div>'
+          review_old = '<div class="field"><label>Full Name</label><input type="text" id="rv-name" placeholder="First Last"></div>'
+          review_new = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="field"><label>First Name</label><input type="text" id="rv-first" placeholder="First" autocomplete="given-name"></div><div class="field"><label>Last Name</label><input type="text" id="rv-last" placeholder="Last" autocomplete="family-name"></div></div>'
+
+          for path in files:
+              s = path.read_text(encoding='utf-8')
+              s = s.replace(live_old, live_new)
+              s = s.replace(review_old, review_new)
+              s = s.replace("const name=document.getElementById('ans-name').value.trim();", "const firstName=document.getElementById('ans-first').value.trim();\n  const lastName=document.getElementById('ans-last').value.trim();\n  const name=(firstName+' '+lastName).trim();")
+              s = s.replace("if(!name){\n    alert('Please enter your full name.');", "if(!firstName||!lastName){\n    alert('Please enter your first and last name.');")
+              s = s.replace("document.getElementById('ans-name').disabled=true;", "document.getElementById('ans-first').disabled=true;\n  document.getElementById('ans-last').disabled=true;")
+              s = s.replace("await sendToSheets(curSess.id,b?b.label:'Opening Bell '+curSess.id,name,text,isLate,Math.round(dur/60));", "await sendToSheets(curSess.id,b?b.label:'Opening Bell '+curSess.id,firstName,lastName,text,isLate,Math.round(dur/60));")
+              s = s.replace("['ans-name','ans-text'].forEach", "['ans-first','ans-last','ans-text'].forEach")
+              s = s.replace("async function sendToSheets(bellId,label,name,answer,isLate,durMin){", "async function sendToSheets(bellId,label,firstName,lastName,answer,isLate,durMin){")
+              s = s.replace("      name,\n      answer,", "      firstName,\n      lastName,\n      name:(firstName+' '+lastName).trim(),\n      answer,")
+              s = s.replace("document.getElementById('rv-name').value='';", "document.getElementById('rv-first').value='';\n  document.getElementById('rv-last').value='';")
+              s = s.replace("const name=document.getElementById('rv-name').value.trim();", "const firstName=document.getElementById('rv-first').value.trim();\n  const lastName=document.getElementById('rv-last').value.trim();")
+              s = s.replace("if(!name||text.length<8){\n    alert('Fill in your name and a complete answer.');", "if(!firstName||!lastName||text.length<8){\n    alert('Fill in your first name, last name, and a complete answer.');")
+              s = s.replace("sendToSheets(0,'MAKEUP',name,text,true,0);", "sendToSheets(0,'MAKEUP',firstName,lastName,text,true,0);")
+              if path.name == 'pfm.html':
+                  s = s.replace('You receive an unexpected $500. What should you do with it first, and why?', 'You unexpectedly get $1,000 today. You MUST spend $200 on something fun, but you control the other $800. What do you buy with the $200, and what do you do with the $800? Explain why.')
+              path.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit patch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add opening-bell/*.html
+          git diff --cached --quiet || git commit -m "Split Opening Bell first and last name fields"
+          git push
