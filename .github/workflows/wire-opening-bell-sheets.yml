@@ -1,0 +1,49 @@
+name: Wire Opening Bell Sheets URL
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/wire-opening-bell-sheets.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set Apps Script endpoint
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          url = 'https://script.google.com/macros/s/AKfycbw4kLfppzaPH0LJnYnijygKpqSN11gme9JHpgOt4_R-ReiA-cHFi53kde4hK3kl0y4/exec'
+          files = [
+              'opening-bell/ap-business.html',
+              'opening-bell/marketing.html',
+              'opening-bell/business-101.html',
+              'opening-bell/pfm.html',
+          ]
+          for f in files:
+              p = Path(f)
+              s = p.read_text()
+              old = 'SHEETS_URL:""'
+              new = f'SHEETS_URL:"{url}"'
+              if old in s:
+                  s = s.replace(old, new, 1)
+              elif new not in s:
+                  raise SystemExit(f'Could not find SHEETS_URL placeholder in {f}')
+              p.write_text(s)
+          PY
+      - name: Commit connection
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add opening-bell/ap-business.html opening-bell/marketing.html opening-bell/business-101.html opening-bell/pfm.html
+          if git diff --cached --quiet; then
+            echo 'Already wired.'
+          else
+            git commit -m 'Connect Opening Bell pages to response sheet'
+            git push
+          fi
