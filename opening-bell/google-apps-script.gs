@@ -1,30 +1,99 @@
 // MRDHQ Opening Bell — Google Apps Script collector
-// Attach this script to the Google Sheet: MRDHQ Opening Bell Responses 2026-27
+// Attach this script to: MRDHQ Opening Bell Responses 2026-27
+// Deploy as Web App: Execute as Me | Who has access: Anyone
 
 function doGet(e) {
   try {
-    var p = e.parameter;
+    var p = e && e.parameter ? e.parameter : {};
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var sh = ss.getSheetByName('Responses');
-    if (!sh) {
-      sh = ss.insertSheet('Responses');
-      sh.appendRow(['Timestamp','Date','Class','Block','Student Name','Question ID','Question','Response','Status','Duration']);
-      sh.setFrozenRows(1);
-    }
-    sh.appendRow([
-      p.timestamp || new Date().toISOString(),
-      p.date || '',
-      p.cls || '',
-      p.block || '',
-      p.name || '',
-      p.qid || '',
-      p.question || '',
-      p.answer || '',
-      p.status || 'On Time',
-      (p.duration || '') + (p.duration ? ' min' : '')
-    ]);
-    return ContentService.createTextOutput(JSON.stringify({success:true})).setMimeType(ContentService.MimeType.JSON);
+    var master = getOrCreateResponseSheet_(ss, 'Responses');
+
+    var ts = parseTimestamp_(p.timestamp);
+    var className = clean_(p.cls || p.className || '');
+    var block = clean_(p.block || p.period || '');
+    var student = clean_(p.name || p.student || '');
+    var bellId = clean_(p.qid || (p.bellId ? 'BELL-' + p.bellId : ''));
+    var question = clean_(p.question || p.label || '');
+    var answer = clean_(p.answer || p.response || '');
+    var duration = clean_(p.duration || '');
+    var status = normalizeStatus_(p);
+    var dateText = formatDate_(ts);
+
+    var row = [
+      ts,
+      dateText,
+      className,
+      block,
+      student,
+      bellId,
+      question,
+      answer,
+      status,
+      duration ? duration + (String(duration).toLowerCase().indexOf('min') >= 0 ? '' : ' min') : ''
+    ];
+
+    master.appendRow(row);
+
+    // Also mirror the row into a physical class tab when one exists.
+    // If the workbook uses FILTER formulas on class tabs, we do not append
+    // there because the master tab already feeds those views automatically.
+    ensureClassView_(ss, className);
+
+    return json_({success:true,status:status});
   } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({success:false,error:String(err)})).setMimeType(ContentService.MimeType.JSON);
+    return json_({success:false,error:String(err)});
   }
+}
+
+function normalizeStatus_(p) {
+  var raw = String(p.status || '').trim().toLowerCase();
+  var label = String(p.label || '').trim().toLowerCase();
+  var makeup = String(p.makeup || '') === '1' || raw.indexOf('makeup') >= 0 || label === 'makeup';
+  var late = String(p.late || '') === '1' || raw.indexOf('late') >= 0;
+
+  if (makeup) return 'Makeup — After Class/Absent';
+  if (late) return 'Late — Same Day';
+  return 'On Time';
+}
+
+function getOrCreateResponseSheet_(ss, name) {
+  var sh = ss.getSheetByName(name);
+  if (!sh) {
+    sh = ss.insertSheet(name);
+    sh.appendRow(['Timestamp','Date','Class','Block','Student Name','Question ID','Question','Response','Status','Duration']);
+    sh.setFrozenRows(1);
+  }
+  return sh;
+}
+
+function ensureClassView_(ss, className) {
+  if (!className) return;
+  var allowed = ['AP Business','Marketing','Business 101','Personal Finance'];
+  if (allowed.indexOf(className) === -1) return;
+
+  var sh = ss.getSheetByName(className);
+  if (!sh) return;
+
+  // Class tabs in the current workbook are FILTER views of Responses.
+  // Leave those formulas intact; no duplicate physical append is needed.
+}
+
+function parseTimestamp_(value) {
+  if (!value) return new Date();
+  var d = new Date(value);
+  return isNaN(d.getTime()) ? new Date() : d;
+}
+
+function formatDate_(d) {
+  return Utilities.formatDate(d, Session.getScriptTimeZone() || 'America/New_York', 'M/d/yyyy');
+}
+
+function clean_(v) {
+  return v == null ? '' : String(v).trim();
+}
+
+function json_(obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
 }
