@@ -478,6 +478,10 @@ td{background:rgba(255,253,248,.72)!important;color:#394150!important}
           <p class="tp-lbl">Start Opening Bell Session</p>
           <div class="m-field"><label>Select Opening Bell</label><select id="tp-sel"></select></div>
           <div class="m-field">
+            <label>Question Preview</label>
+            <div id="tp-q-preview" style="background:var(--bg4);border:1px solid var(--border2);border-left:3px solid var(--red);border-radius:6px;padding:11px 13px;font-size:12px;font-weight:500;line-height:1.55;color:var(--text);min-height:54px">Select an Opening Bell to preview its question.</div>
+          </div>
+          <div class="m-field">
             <label>Timer Duration</label>
             <select id="tp-dur">
               <option value="180">3 minutes</option>
@@ -843,7 +847,19 @@ function populateSel(){
     if(['today','late-open'].includes(st))o.selected=true;
     sel.appendChild(o);
   });
+
+  sel.onchange=updateTeacherQuestionPreview;
+  updateTeacherQuestionPreview();
 }
+function updateTeacherQuestionPreview(){
+  const sel=document.getElementById('tp-sel');
+  const box=document.getElementById('tp-q-preview');
+  if(!sel||!box)return;
+  const id=parseInt(sel.value);
+  const b=CFG.BELLS.find(x=>x.id===id);
+  box.textContent=b&&b.question?b.question:'Question not yet set.';
+}
+
 function ringBell(){
   const id=parseInt(document.getElementById('tp-sel').value);
   const dur=parseInt(document.getElementById('tp-dur').value);
