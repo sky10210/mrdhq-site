@@ -1,0 +1,91 @@
+name: Populate Opening Bell Questions
+
+on:
+  push:
+    paths:
+      - '.github/workflows/populate-opening-bell-questions.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore prior Opening Bell hub and populate questions
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+
+          # Restore the original Opening Bell hub from before the simplified replacement.
+          old = subprocess.check_output([
+              'git','show','8bb7c9d9c557220c87a43c2d7ffd4e1fc178aea5:opening-bell/index.html'
+          ], text=True)
+          Path('opening-bell/index.html').write_text(old)
+
+          general = [
+            'A company can legally raise a price during a shortage. Should it? Why or why not?',
+            'You own a restaurant and discover your most popular item barely makes money. What do you do?',
+            'A competitor accidentally emails you its pricing strategy. Do you use it?',
+            'Would you rather launch a great product with weak marketing or an average product with great marketing? Defend your choice.',
+            'An employee is your best salesperson but is consistently rude to coworkers. Keep them, warn them, or fire them? Why?',
+            'A business can save 25% by moving production overseas, but local jobs will be lost. What should it do?',
+            'Should companies be allowed to use customer data to personalize prices? Why or why not?',
+            'A small business gets one viral video and demand triples overnight. What should the owner do first?',
+            'Would you buy from a company you knew treated employees poorly if its product was much cheaper? Why?',
+            'A new business has $5,000 left. Spend it on advertising, product improvement, or cash reserves? Defend one.',
+            'Is it ethical for an influencer to promote a product they do not personally use if they disclose the sponsorship?',
+            'Your business made a mistake that customers have not noticed. Do you tell them? Explain.',
+            'What matters more for a new business: being first or being better?',
+            'A company can replace several jobs with AI and lower prices. Should it? What should management consider?',
+            'Should a business refuse a profitable customer if that customer conflicts with the company’s values?'
+          ]
+
+          pf = [
+            'You receive an unexpected $500. What should you do with it first, and why?',
+            'Would you rather earn $70,000 in a job you love or $100,000 in a job you dislike? What changes your answer?',
+            'Is buying a new car ever a smart financial decision? Defend your answer.',
+            'If a friend asks to borrow $300 and promises to repay you next month, what would you consider before saying yes?',
+            'Would you rather have $10,000 in savings or no debt? Explain what information you would need.',
+            'Should parents tell teenagers exactly how much money the household earns? Why or why not?',
+            'If your credit card limit is $2,000, does that mean you can afford a $2,000 purchase? Explain.',
+            'What is one thing worth paying MORE for instead of choosing the cheapest option? Why?',
+            'Would you take a lower-paying job if it offered much better health insurance and retirement benefits?',
+            'Is it smarter to save for the future or enjoy more of your money now? Where should the balance be?',
+            'Should schools require a personal finance course to graduate? What should every student learn?',
+            'If you could know only one number about your finances each month, what would it be?',
+            'Would you lend money to a family member if you suspected they could not repay it? Why or why not?',
+            'Is a college degree worth going into debt for? What factors determine the answer?',
+            'Which is more dangerous: having no savings or having high-interest debt? Defend your answer.'
+          ]
+
+          def jsq(s):
+              return s.replace('\\','\\\\').replace('"','\\"').replace('\n',' ')
+
+          def populate(path, questions):
+              p=Path(path)
+              text=p.read_text()
+              for i,q in enumerate(questions,1):
+                  pattern = rf'(\{{id:{i},label:"Opening Bell {i}",status:"[^"]+",question:)"[^"]*"(,hint:"[^"]*"\}})'
+                  repl = rf'\1"{jsq(q)}"\2'
+                  text,n = re.subn(pattern,repl,text,count=1)
+                  if n != 1:
+                      raise SystemExit(f'Could not update {path} bell {i}')
+              p.write_text(text)
+
+          for f in ['opening-bell/ap-business.html','opening-bell/marketing.html','opening-bell/business-101.html']:
+              populate(f,general)
+          populate('opening-bell/pfm.html',pf)
+          PY
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add opening-bell/index.html opening-bell/ap-business.html opening-bell/marketing.html opening-bell/business-101.html opening-bell/pfm.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Restore Opening Bell hub and add question banks'
+            git push
+          fi
