@@ -9,9 +9,17 @@ function doGet(e) {
     var master = getOrCreateResponseSheet_(ss, 'Responses');
 
     var ts = parseTimestamp_(p.timestamp);
-    var className = clean_(p.cls || p.className || '');
+    var className = normalizeClass_(clean_(p.cls || p.className || ''));
     var block = clean_(p.block || p.period || '');
-    var student = clean_(p.name || p.student || '');
+
+    var firstName = clean_(p.firstName || p.first || '');
+    var lastName = clean_(p.lastName || p.last || '');
+    if ((!firstName || !lastName) && (p.name || p.student)) {
+      var legacy = clean_(p.name || p.student).split(/\s+/);
+      if (!firstName) firstName = legacy.shift() || '';
+      if (!lastName) lastName = legacy.join(' ');
+    }
+
     var bellId = clean_(p.qid || (p.bellId ? 'BELL-' + p.bellId : ''));
     var question = clean_(p.question || p.label || '');
     var answer = clean_(p.answer || p.response || '');
@@ -24,7 +32,8 @@ function doGet(e) {
       dateText,
       className,
       block,
-      student,
+      firstName,
+      lastName,
       bellId,
       question,
       answer,
@@ -33,16 +42,17 @@ function doGet(e) {
     ];
 
     master.appendRow(row);
-
-    // Also mirror the row into a physical class tab when one exists.
-    // If the workbook uses FILTER formulas on class tabs, we do not append
-    // there because the master tab already feeds those views automatically.
     ensureClassView_(ss, className);
 
     return json_({success:true,status:status});
   } catch (err) {
     return json_({success:false,error:String(err)});
   }
+}
+
+function normalizeClass_(value) {
+  if (value === 'Personal Financial Management') return 'Personal Finance';
+  return value;
 }
 
 function normalizeStatus_(p) {
@@ -60,7 +70,7 @@ function getOrCreateResponseSheet_(ss, name) {
   var sh = ss.getSheetByName(name);
   if (!sh) {
     sh = ss.insertSheet(name);
-    sh.appendRow(['Timestamp','Date','Class','Block','Student Name','Question ID','Question','Response','Status','Duration']);
+    sh.appendRow(['Timestamp','Date','Class','Block','First Name','Last Name','Question ID','Question','Response','Status','Duration']);
     sh.setFrozenRows(1);
   }
   return sh;
@@ -70,12 +80,9 @@ function ensureClassView_(ss, className) {
   if (!className) return;
   var allowed = ['AP Business','Marketing','Business 101','Personal Finance'];
   if (allowed.indexOf(className) === -1) return;
-
   var sh = ss.getSheetByName(className);
   if (!sh) return;
-
-  // Class tabs in the current workbook are FILTER views of Responses.
-  // Leave those formulas intact; no duplicate physical append is needed.
+  // Class tabs are FILTER views of the master Responses tab.
 }
 
 function parseTimestamp_(value) {
