@@ -1395,7 +1395,7 @@ td{background:rgba(255,253,248,.72)!important;color:#394150!important}
     <div id="form-state">
       <div class="af-head"><span class="af-title">Your Response</span><span class="af-tag" id="af-tag">Live Window</span></div>
       <div class="af-body">
-        <div class="field"><label>Full Name</label><input type="text" id="ans-name" placeholder="First Last" autocomplete="name"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="field"><label>First Name</label><input type="text" id="ans-first" placeholder="First" autocomplete="given-name"></div><div class="field"><label>Last Name</label><input type="text" id="ans-last" placeholder="Last" autocomplete="family-name"></div></div>
         <div class="field"><label>Your Answer</label><textarea id="ans-text" placeholder="Write your response here..."></textarea></div>
         <div class="sheets-status" id="sh-status"></div>
         <button class="btn-submit" id="btn-submit" onclick="submitAnswer()">Submit Response</button>
@@ -1434,7 +1434,7 @@ td{background:rgba(255,253,248,.72)!important;color:#394150!important}
   <div class="ans-form">
     <div class="af-head"><span class="af-title">Makeup Submission</span><span class="af-tag">Review / Makeup</span></div>
     <div class="af-body">
-      <div class="field"><label>Full Name</label><input type="text" id="rv-name" placeholder="First Last"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="field"><label>First Name</label><input type="text" id="rv-first" placeholder="First" autocomplete="given-name"></div><div class="field"><label>Last Name</label><input type="text" id="rv-last" placeholder="Last" autocomplete="family-name"></div></div>
       <div class="field"><label>Your Answer</label><textarea id="rv-text" placeholder="Write your response..."></textarea></div>
       <div id="rv-ok" style="display:none;background:rgba(46,125,50,.08);border:1px solid rgba(46,125,50,.2);border-radius:6px;padding:11px 14px;font-size:11px;font-weight:600;color:var(--green);margin-bottom:10px">Makeup submitted. See Mr. D to finalize credit.</div>
       <button class="btn-submit" id="rv-btn" onclick="submitReview()">Submit Makeup</button>
@@ -1516,7 +1516,7 @@ const CFG={
   TEACHER_PW:"maverick",
   SHEETS_URL:"",   // ← paste Google Apps Script Web App URL here later
   BELLS:[
-    {id:1,label:"Opening Bell 1",status:"upcoming",question:"You receive an unexpected $500. What should you do with it first, and why?",hint:""},
+    {id:1,label:"Opening Bell 1",status:"upcoming",question:"You unexpectedly get $1,000 today. You MUST spend $200 on something fun, but you control the other $800. What do you buy with the $200, and what do you do with the $800? Explain why.",hint:""},
     {id:2,label:"Opening Bell 2",status:"upcoming",question:"Would you rather earn $70,000 in a job you love or $100,000 in a job you dislike? What changes your answer?",hint:""},
     {id:3,label:"Opening Bell 3",status:"upcoming",question:"Is buying a new car ever a smart financial decision? Defend your answer.",hint:""},
     {id:4,label:"Opening Bell 4",status:"upcoming",question:"If a friend asks to borrow $300 and promises to repay you next month, what would you consider before saying yes?",hint:""},
@@ -1843,11 +1843,13 @@ function runTimer(start,dur){
 }
 
 async function submitAnswer(){
-  const name=document.getElementById('ans-name').value.trim();
+  const firstName=document.getElementById('ans-first').value.trim();
+  const lastName=document.getElementById('ans-last').value.trim();
+  const name=(firstName+' '+lastName).trim();
   const text=document.getElementById('ans-text').value.trim();
 
-  if(!name){
-    alert('Please enter your full name.');
+  if(!firstName||!lastName){
+    alert('Please enter your first and last name.');
     return;
   }
 
@@ -1858,7 +1860,8 @@ async function submitAnswer(){
 
   const isLate=document.getElementById('late-banner').style.display!=='none';
 
-  document.getElementById('ans-name').disabled=true;
+  document.getElementById('ans-first').disabled=true;
+  document.getElementById('ans-last').disabled=true;
   document.getElementById('ans-text').disabled=true;
   document.getElementById('btn-submit').disabled=true;
 
@@ -1874,7 +1877,7 @@ async function submitAnswer(){
     addDone(curSess.id);
     const b=CFG.BELLS.find(x=>x.id===curSess.id);
     const dur=curSess.dur||420;
-    await sendToSheets(curSess.id,b?b.label:'Opening Bell '+curSess.id,name,text,isLate,Math.round(dur/60));
+    await sendToSheets(curSess.id,b?b.label:'Opening Bell '+curSess.id,firstName,lastName,text,isLate,Math.round(dur/60));
   }
 }
 
@@ -1895,7 +1898,7 @@ function resetForm(){
     btn.textContent='Submit Response';
   }
 
-  ['ans-name','ans-text'].forEach(id=>{
+  ['ans-first','ans-last','ans-text'].forEach(id=>{
     const e=document.getElementById(id);
     if(e){
       e.disabled=false;
@@ -1917,7 +1920,7 @@ function exitSession(){
 }
 
 // ── Google Sheets ─────────────────────────────────
-async function sendToSheets(bellId,label,name,answer,isLate,durMin){
+async function sendToSheets(bellId,label,firstName,lastName,answer,isLate,durMin){
   if(!CFG.SHEETS_URL)return;
 
   const el=document.getElementById('sh-status');
@@ -1926,7 +1929,9 @@ async function sendToSheets(bellId,label,name,answer,isLate,durMin){
     const p=new URLSearchParams({
       bellId,
       label,
-      name,
+      firstName,
+      lastName,
+      name:(firstName+' '+lastName).trim(),
       answer,
       late:isLate?'1':'0',
       status:isLate?'Late':'On Time',
@@ -1969,25 +1974,27 @@ function openReview(id){
 
   document.getElementById('rv-ok').style.display='none';
   document.getElementById('rv-btn').disabled=false;
-  document.getElementById('rv-name').value='';
+  document.getElementById('rv-first').value='';
+  document.getElementById('rv-last').value='';
   document.getElementById('rv-text').value='';
 
   showView('review');
 }
 
 function submitReview(){
-  const name=document.getElementById('rv-name').value.trim();
+  const firstName=document.getElementById('rv-first').value.trim();
+  const lastName=document.getElementById('rv-last').value.trim();
   const text=document.getElementById('rv-text').value.trim();
 
-  if(!name||text.length<8){
-    alert('Fill in your name and a complete answer.');
+  if(!firstName||!lastName||text.length<8){
+    alert('Fill in your first name, last name, and a complete answer.');
     return;
   }
 
   document.getElementById('rv-btn').disabled=true;
   document.getElementById('rv-ok').style.display='block';
 
-  sendToSheets(0,'MAKEUP',name,text,true,0);
+  sendToSheets(0,'MAKEUP',firstName,lastName,text,true,0);
 }
 
 function showView(v){
