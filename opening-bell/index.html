@@ -1,1 +1,437 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Opening Bell | Mr. D HQ</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>:root{--c:#f6f1e8;--n:#172033;--b:#2f6fb5;--m:#5e6470;--w:#fffdf8;--l:rgba(23,32,51,.14);--g:#18776f;--r:#a63b32}*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#fbf8f2,#f6f1e8 55%,#efe6d8);color:var(--n);font-family:Poppins,sans-serif;min-height:100vh}.wrap{max-width:820px;margin:auto;padding:28px 20px 70px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--l);padding-bottom:14px;margin-bottom:28px}.brand{font-weight:800}.room,.sub,.tiny{color:var(--m)}.room,.tiny{font-size:11px}.eye{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--b);font-weight:700}h1{font-size:clamp(30px,5vw,46px);line-height:1.05;margin:8px 0 10px}.sub{font-size:14px;line-height:1.65}.card{background:rgba(255,253,248,.96);border:1px solid var(--l);border-radius:14px;padding:24px;margin:16px 0;box-shadow:0 18px 45px rgba(63,48,33,.08)}h2{font-size:19px;margin:0 0 15px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.full{grid-column:1/-1}label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--m);display:block;margin-bottom:6px}input,select,textarea{width:100%;border:1px solid var(--l);border-radius:9px;padding:12px;font:inherit;background:#fff;color:var(--n)}textarea{min-height:155px;resize:vertical}button{border:0;border-radius:9px;background:linear-gradient(135deg,#2f6fb5,#4e86c5);color:#fff;font:inherit;font-weight:700;padding:12px 18px;cursor:pointer}button:disabled{opacity:.5}.question{font-size:22px;font-weight:700;line-height:1.45;margin:8px 0 22px}.qid{font-size:11px;color:var(--m)}.hidden{display:none}.status{font-size:13px;font-weight:600;margin-top:12px}.ok{color:var(--g)}.err{color:var(--r)}.teacher{margin-top:34px;border-top:1px solid var(--l);padding-top:18px}@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}</style></head><body><div class="wrap"><div class="top"><div class="brand">MR. D HQ</div><div class="room">Business Education • Room A112</div></div><div class="eye">Daily Opening Bell</div><h1>Start thinking before we start class.</h1><p class="sub">Choose your class and respond thoughtfully. Personal Finance gets a finance-specific question. AP Business, Marketing, and Business 101 share the daily general business / ethics question.</p><div class="card" id="loginCard"><h2>Join today's Opening Bell</h2><div class="grid"><div><label>Class</label><select id="cls"><option>AP Business</option><option>Marketing</option><option>Business 101</option><option>Personal Finance</option></select></div><div><label>Block / Period</label><input id="block" placeholder="Example: 2"></div><div><label>Student Name</label><input id="name" placeholder="First and last name"></div><div><label>Class Password</label><input id="pw" type="password" placeholder="Password"></div><div class="full"><button onclick="launchBell()">Open Today's Question</button><div id="loginStatus" class="status"></div></div></div></div><div class="card hidden" id="bellCard"><div class="eye" id="trackLabel"></div><div class="qid" id="qid"></div><div class="question" id="question"></div><label>Your response</label><textarea id="answer" placeholder="Make a decision and explain why."></textarea><button id="submitBtn" onclick="submitBell()">Submit Response</button><div id="submitStatus" class="status"></div></div><div class="teacher"><div class="tiny">Teacher preview: add <b>?teacher=1</b> to this page URL.</div><div id="teacherBox" class="card hidden"><h2>Teacher Preview</h2><div class="grid"><div><label>Teacher Password</label><input id="tpw" type="password"></div><div style="align-self:end"><button onclick="teacherPreview()">Preview Today</button></div><div class="full" id="preview"></div></div></div></div></div><script>const CFG={STUDENT_PW:'cashs',TEACHER_PW:'maverick',SHEETS_URL:'',SHEET_ID:'1SFtvrGktaYEqqjbiCOji2wzWCL150xUMu5nnjetvTt4'};const GENERAL=[['G01','A company can legally raise a price during a shortage. Should it? Why or why not?'],['G02','You own a restaurant and discover your most popular item barely makes money. What do you do?'],['G03','A competitor accidentally emails you its pricing strategy. Do you use it?'],['G04','Would you rather launch a great product with weak marketing or an average product with great marketing? Defend your choice.'],['G05','An employee is your best salesperson but is consistently rude to coworkers. Keep them, warn them, or fire them? Why?'],['G06','A business can save 25% by moving production overseas, but local jobs will be lost. What should it do?'],['G07','Should companies be allowed to use customer data to personalize prices? Why or why not?'],['G08','A small business gets one viral video and demand triples overnight. What should the owner do first?'],['G09','Would you buy from a company you knew treated employees poorly if its product was much cheaper? Why?'],['G10','A new business has $5,000 left. Spend it on advertising, product improvement, or cash reserves? Defend one.'],['G11','Is it ethical for an influencer to promote a product they do not personally use if they disclose the sponsorship?'],['G12','Your business made a mistake that customers have not noticed. Do you tell them? Explain.'],['G13','What matters more for a new business: being first or being better?'],['G14','A company can replace several jobs with AI and lower prices. Should it? What should management consider?'],['G15','Should a business refuse a profitable customer if that customer conflicts with the company’s values?']];const PF=[['PF01','You receive an unexpected $500. What should you do with it first, and why?'],['PF02','Would you rather earn $70,000 in a job you love or $100,000 in a job you dislike? What changes your answer?'],['PF03','Is buying a new car ever a smart financial decision? Defend your answer.'],['PF04','If a friend asks to borrow $300 and promises to repay you next month, what would you consider before saying yes?'],['PF05','Would you rather have $10,000 in savings or no debt? Explain what information you would need.'],['PF06','Should parents tell teenagers exactly how much money the household earns? Why or why not?'],['PF07','If your credit card limit is $2,000, does that mean you can afford a $2,000 purchase? Explain.'],['PF08','What is one thing worth paying MORE for instead of choosing the cheapest option? Why?'],['PF09','Would you take a lower-paying job if it offered much better health insurance and retirement benefits?'],['PF10','Is it smarter to save for the future or enjoy more of your money now? Where should the balance be?'],['PF11','Should schools require a personal finance course to graduate? What should every student learn?'],['PF12','If you could know only one number about your finances each month, what would it be?'],['PF13','Would you lend money to a family member if you suspected they could not repay it? Why or why not?'],['PF14','Is a college degree worth going into debt for? What factors determine the answer?'],['PF15','Which is more dangerous: having no savings or having high-interest debt? Defend your answer.']];function dayIndex(){const s=new Date('2026-08-24T00:00:00'),n=new Date();let w=0,d=new Date(s);while(d<n){if(d.getDay()!=0&&d.getDay()!=6)w++;d.setDate(d.getDate()+1)}return w}function pick(t){const b=t==='PF'?PF:GENERAL;return b[dayIndex()%b.length]}let active=null,startTime=null;function launchBell(){const P=pw.value.trim(),N=name.value.trim(),B=block.value.trim(),C=cls.value;if(P!==CFG.STUDENT_PW){loginStatus.textContent='Incorrect class password.';loginStatus.className='status err';return}if(!N||!B){loginStatus.textContent='Enter your name and block / period.';loginStatus.className='status err';return}active=pick(C==='Personal Finance'?'PF':'GENERAL');qid.textContent=active[0];question.textContent=active[1];trackLabel.textContent=C==='Personal Finance'?'Personal Finance Opening Bell':'Business + Ethics Opening Bell';loginCard.classList.add('hidden');bellCard.classList.remove('hidden');startTime=Date.now()}function submitBell(){const a=answer.value.trim();if(a.length<8){submitStatus.textContent='Add a little more explanation before submitting.';submitStatus.className='status err';return}if(!CFG.SHEETS_URL){submitStatus.textContent='Response collection is waiting for the Google Apps Script Web App URL. Tell Mr. D.';submitStatus.className='status err';return}submitBtn.disabled=true;const mins=Math.max(1,Math.round((Date.now()-startTime)/60000)),p=new URLSearchParams({timestamp:new Date().toISOString(),date:new Date().toLocaleDateString(),cls:cls.value,block:block.value,name:name.value,qid:active[0],question:active[1],answer:a,status:'On Time',duration:String(mins)});fetch(CFG.SHEETS_URL+'?'+p.toString(),{mode:'no-cors'}).then(()=>{submitStatus.textContent='Submitted. You are ready for class.';submitStatus.className='status ok';answer.disabled=true}).catch(()=>{submitStatus.textContent='Submission failed. Tell Mr. D.';submitStatus.className='status err';submitBtn.disabled=false})}if(new URLSearchParams(location.search).get('teacher')==='1')teacherBox.classList.remove('hidden');function teacherPreview(){if(tpw.value!==CFG.TEACHER_PW){preview.textContent='Incorrect teacher password.';return}const g=pick('GENERAL'),p=pick('PF');preview.innerHTML='<p><b>General Business / Ethics:</b> '+g[0]+' — '+g[1]+'</p><p><b>Personal Finance:</b> '+p[0]+' — '+p[1]+'</p>'}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opening Bell | Mr. D HQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#D9D9D9;
+  --bg2:#EBEBEB;
+  --bg3:#E3E3E3;
+  --bg4:#D0D0D0;
+  --bg5:#C8C8C8;
+  --blue:#B22222;
+  --blue-l:#CC3333;
+  --blue-d:rgba(178,34,34,.10);
+  --blue-b:rgba(178,34,34,.20);
+  --text:#1A1A1A;
+  --t2:#333333;
+  --t3:#666666;
+  --t4:#999999;
+  --green:#2E7D32;
+  --red:#B22222;
+  --gold:#8B1A1A;
+  --border:rgba(178,34,34,.20);
+  --border2:rgba(0,0,0,.10);
+  --r:10px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;border-bottom:1px solid var(--border);background:var(--bg2)}
+.nav-logo{font-size:16px;font-weight:700;color:var(--blue-l);text-decoration:none}
+.nav-logo em{font-style:normal;font-size:11px;color:var(--t3);margin-left:7px;font-weight:400}
+.nav-back{font-size:11px;font-weight:500;color:var(--t3);text-decoration:none;border:1px solid var(--border2);padding:6px 14px;border-radius:5px;transition:.2s}
+.nav-back:hover{border-color:var(--blue);color:var(--blue-l)}
+
+/* HERO */
+.hero{padding:56px 40px 44px;border-bottom:1px solid var(--border);background:var(--bg2);position:relative;overflow:hidden;text-align:center}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 0%,rgba(178,34,34,.07),transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent)}
+.hero-eye{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-l);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.hero-dot{width:7px;height:7px;border-radius:50%;background:var(--blue-l);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-title{font-size:clamp(40px,7vw,72px);font-weight:800;line-height:1;letter-spacing:-.03em;margin-bottom:12px}
+.hero-title span{color:var(--blue-l)}
+.hero-sub{font-size:15px;font-weight:400;color:var(--t2);max-width:500px;margin:0 auto 28px;line-height:1.6}
+
+/* CLOCK ROW */
+.clock-row{display:inline-flex;align-items:center;gap:24px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 28px;margin-bottom:6px}
+.clock-item{text-align:center}
+.clock-lbl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+.clock-val{font-size:20px;font-weight:700;color:var(--blue-l);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.clock-val.live{color:var(--green)}
+.clock-div{color:var(--border);font-size:20px;padding-top:10px}
+.mkt-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:4px 13px;border-radius:20px;margin-top:10px}
+.mkt-open{background:rgba(46,125,50,.10);border:1px solid rgba(46,125,50,.25);color:var(--green)}
+.mkt-closed{background:rgba(58,90,110,.15);border:1px solid var(--border2);color:var(--t3)}
+.mkt-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 1.4s ease-in-out infinite}
+
+/* GLOBAL MARKETS */
+.global-markets{
+  max-width:900px;
+  margin:18px auto 0;
+  display:grid;
+  grid-template-columns:repeat(6, minmax(0, 1fr));
+  gap:8px;
+}
+.market-chip{
+  background:var(--bg3);
+  border:1px solid var(--border2);
+  border-radius:9px;
+  padding:10px 8px;
+  text-align:center;
+}
+.market-name{
+  font-size:10px;
+  font-weight:800;
+  color:var(--text);
+  letter-spacing:.04em;
+  margin-bottom:4px;
+}
+.market-time{
+  font-size:10px;
+  font-weight:600;
+  color:var(--t3);
+  margin-bottom:5px;
+  font-variant-numeric:tabular-nums;
+}
+.market-status{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:999px;
+}
+.market-status.open{
+  color:var(--green);
+  background:rgba(46,125,50,.10);
+  border:1px solid rgba(46,125,50,.24);
+}
+.market-status.closed{
+  color:var(--t3);
+  background:rgba(0,0,0,.04);
+  border:1px solid var(--border2);
+}
+.status-dot{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:currentColor;
+}
+
+/* BRIEF */
+.brief-section{max-width:660px;margin:0 auto;padding:36px 40px 28px}
+.brief-quote{font-size:14px;font-weight:400;color:var(--t2);line-height:1.7;border-left:3px solid var(--blue);padding-left:16px;margin-bottom:20px}
+.brief-quote strong{color:var(--text);font-weight:600}
+.dir-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:18px 22px}
+.dir-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-l);margin-bottom:12px}
+.dir-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+.dir-list li{display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--t2);line-height:1.5}
+.dir-list li::before{content:attr(data-n);font-size:10px;font-weight:700;color:var(--blue-l);background:var(--blue-d);border:1px solid var(--border);border-radius:4px;padding:2px 7px;flex-shrink:0;margin-top:1px;letter-spacing:.04em}
+.dir-list li strong{color:var(--text);font-weight:600}
+
+/* CLASS GRID */
+.grid-section{max-width:820px;margin:0 auto;padding:0 40px 80px}
+.grid-title{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.grid-title::after{content:'';flex:1;height:1px;background:var(--border2)}
+.class-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.class-card{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:24px 22px;text-decoration:none;color:inherit;transition:border-color .25s,background .25s,transform .2s;display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden;cursor:pointer}
+.class-card:hover{border-color:var(--blue);background:var(--bg3);transform:translateY(-3px);box-shadow:0 12px 40px rgba(178,34,34,.12)}
+.class-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--blue);opacity:0;transition:opacity .25s}
+.class-card:hover::before{opacity:1}
+.cc-num{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--blue);background:var(--blue-d);border:1px solid var(--border);border-radius:6px;padding:3px 10px;display:inline-block;margin-bottom:14px;width:fit-content}
+.cc-name{font-size:17px;font-weight:700;color:var(--text);letter-spacing:-.02em;line-height:1.2;margin-bottom:8px}
+.cc-desc{font-size:12px;font-weight:400;color:var(--t3);line-height:1.55;flex:1;margin-bottom:18px}
+.cc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.cc-period{font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--t4)}
+.cc-enter{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--blue-l);letter-spacing:.02em}
+.cc-enter svg{transition:transform .2s}
+.class-card:hover .cc-enter svg{transform:translateX(3px)}
+
+@media(max-width:900px){
+  .global-markets{grid-template-columns:repeat(3, minmax(0,1fr))}
+}
+@media(max-width:640px){
+  nav{padding:13px 20px}.hero{padding:40px 20px 32px}
+  .brief-section,.grid-section{padding-left:20px;padding-right:20px}
+  .class-grid{grid-template-columns:1fr}.clock-row{gap:16px;padding:10px 18px}
+  .clock-val{font-size:16px}
+  .global-markets{grid-template-columns:repeat(2, minmax(0,1fr))}
+}
+
+/* MRDHQ LIGHT BEIGE THEME — shared visual override */
+:root {
+  --bg:#F6F1E8!important; --bg-deep:#EFE6D8!important;
+  --card:rgba(255,253,248,.90)!important; --card-strong:#FFFDF8!important;
+  --surface:rgba(255,253,248,.90)!important; --surface-strong:#FFFDF8!important;
+  --text:#172033!important; --muted:#5E6470!important; --soft:#7A7F88!important;
+  --accent:#2F6FB5!important; --accent-hover:#4E86C5!important;
+  --teal:#18776F!important; --teal-bright:#248D82!important;
+  --line:rgba(23,32,51,.12)!important; --line-gold:rgba(179,132,72,.28)!important;
+  --shadow:0 18px 50px rgba(63,48,33,.10)!important;
+}
+html{background:#F6F1E8!important}
+body{color:#172033!important;background:radial-gradient(circle at 50% -10%,rgba(75,134,197,.12),transparent 34rem),radial-gradient(circle at 88% 8%,rgba(36,141,130,.09),transparent 30rem),linear-gradient(145deg,#FBF8F2 0%,#F6F1E8 52%,#EFE6D8 100%)!important}
+body::before{background-image:linear-gradient(rgba(23,32,51,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(23,32,51,.025) 1px,transparent 1px)!important;opacity:.7}
+.topbar,header.topbar,nav.topbar{background:rgba(250,247,240,.90)!important;border-color:rgba(23,32,51,.12)!important;box-shadow:0 10px 30px rgba(63,48,33,.06)!important}
+.navlinks a,.nav a,.brand,.brand-text,h1,h2,h3,h4,h5,h6{color:#172033}
+.navlinks a:hover{color:#172033!important;background:rgba(47,111,181,.08)!important}
+.brand-text span,.district-line{color:#248D82!important}
+.gradient-text{background:linear-gradient(135deg,#172033 12%,#2F6FB5 62%,#4E86C5)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
+.quick-strip,.course-card,.spotlight-card,.card,.panel,.tool-card,.resource-card,.dashboard-card,.news-card,.market-card,.widget,.module-card,.bell-card,.prompt-card,.section-card,.info-card,.content-card,.modal-card{background:linear-gradient(180deg,rgba(255,253,248,.96),rgba(248,243,234,.94))!important;border-color:rgba(23,32,51,.12)!important;color:#172033!important;box-shadow:0 18px 45px rgba(63,48,33,.08)!important}
+p,li,.caption,.tiny-note,.subtitle,.description,.meta,.small,.muted,.quick-item span,.course-card p,.spotlight-card p,.section-heading p{color:#5E6470!important}
+.tag,.pill,.chip,.badge{color:#172033!important;background:rgba(36,141,130,.09)!important;border-color:rgba(24,119,111,.22)!important}
+.btn-secondary,.locked,button.secondary,.secondary-btn{color:#172033!important;background:rgba(255,253,248,.86)!important;border-color:rgba(23,32,51,.14)!important}
+.btn-primary,button.primary,.primary-btn{color:#fff!important;background:linear-gradient(135deg,#2F6FB5,#4E86C5)!important;box-shadow:0 12px 30px rgba(47,111,181,.18)!important}
+.btn-bell{color:#3A2A12!important;background:linear-gradient(135deg,#F7D889,#EDB94D)!important}
+input,select,textarea{color:#172033!important;background:#FFFDF8!important;border-color:rgba(23,32,51,.16)!important}
+input::placeholder,textarea::placeholder{color:#8A8F98!important}
+.modal{background:rgba(40,35,29,.36)!important;backdrop-filter:blur(12px)!important}
+.x,.close,.close-btn{color:#172033!important;background:rgba(255,253,248,.9)!important;border-color:rgba(23,32,51,.14)!important}
+footer{color:#7A7F88!important;border-color:rgba(23,32,51,.12)!important}
+table,th,td{border-color:rgba(23,32,51,.12)!important}
+th{background:rgba(239,230,216,.72)!important;color:#172033!important}
+td{background:rgba(255,253,248,.72)!important;color:#394150!important}
+
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Mr. D HQ <em>mrdhq.com</em></a>
+  <a href="/" class="nav-back">Back to HQ</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eye"><span class="hero-dot"></span>Mr. D HQ &nbsp;&bull;&nbsp; mrdhq.com &nbsp;&bull;&nbsp; Daily Warm-Up</p>
+  <h1 class="hero-title">Opening <span>Bell</span></h1>
+  <p class="hero-sub">Select your class below to access today's Opening Bell warm-up.</p>
+
+  <div class="clock-row">
+    <div class="clock-item"><div class="clock-lbl">Current Time</div><div class="clock-val live" id="clock">--:--:--</div></div>
+    <div class="clock-div">|</div>
+    <div class="clock-item"><div class="clock-lbl">Bell Window</div><div class="clock-val">7 MIN</div></div>
+    <div class="clock-div">|</div>
+    <div class="clock-item"><div class="clock-lbl">NYSE Hours</div><div class="clock-val">9:30–4:00</div></div>
+  </div>
+  <br>
+  <div class="mkt-badge" id="mkt-badge"><span class="mkt-dot"></span><span id="mkt-text">Checking...</span></div>
+
+  <div class="global-markets" id="globalMarkets"></div>
+</div>
+
+<!-- BRIEF -->
+<div class="brief-section">
+  <p class="brief-quote">
+    The Market is Open. In business, timing is everything. A single second determines profit or loss.
+    Missing the opening bell means missing the market. <strong>Lock in immediately.</strong>
+  </p>
+  <div class="dir-card">
+    <div class="dir-title">Directions</div>
+    <ul class="dir-list">
+      <li data-n="01"><div><strong>Time Window</strong> &mdash; You have exactly 7 minutes after the bell ringer starts to be marked on time.</div></li>
+      <li data-n="02"><div><strong>Submission</strong> &mdash; Submit your response as soon as you finish.</div></li>
+      <li data-n="03"><div><strong>Late Status</strong> &mdash; The page will stay open, but Google Sheets can record whether it was submitted on time or late.</div></li>
+    </ul>
+  </div>
+</div>
+
+<!-- CLASS GRID -->
+<div class="grid-section">
+  <p class="grid-title">Select Your Class</p>
+  <div class="class-grid">
+
+    <!-- TOP LEFT: AP Business -->
+    <a href="ap-business.html" class="class-card" data-class="AP Business with Personal Finance">
+      <span class="cc-num">AP</span>
+      <div class="cc-name">AP Business with Personal Finance</div>
+      <div class="cc-desc">Advanced business concepts, economics, and personal financial management</div>
+      <div class="cc-footer">
+        <span class="cc-enter">Enter <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- TOP RIGHT: Marketing Fundamentals -->
+    <a href="marketing.html" class="class-card" data-class="Marketing Fundamentals">
+      <span class="cc-num">MKT</span>
+      <div class="cc-name">Marketing Fundamentals</div>
+      <div class="cc-desc">Consumer behavior, brand strategy, and market analysis</div>
+      <div class="cc-footer">
+        <span class="cc-enter">Enter <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- BOTTOM LEFT: Personal Financial Management -->
+    <a href="pfm.html" class="class-card" data-class="Personal Financial Management">
+      <span class="cc-num">PFM</span>
+      <div class="cc-name">Personal Financial Management</div>
+      <div class="cc-desc">Budgeting, investing, credit, and managing your financial future</div>
+      <div class="cc-footer">
+        <span class="cc-enter">Enter <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- BOTTOM RIGHT: Business 101 -->
+    <a href="business-101.html" class="class-card" data-class="Business 101">
+      <span class="cc-num">101</span>
+      <div class="cc-name">Business 101</div>
+      <div class="cc-desc">Foundations of business, economics, and financial literacy</div>
+      <div class="cc-footer">
+        <span class="cc-enter">Enter <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<script>
+const BELL_WINDOW_MINUTES = 7;
+const bellStart = new Date();
+const bellDue = new Date(bellStart.getTime() + BELL_WINDOW_MINUTES * 60 * 1000);
+
+/*
+  Later, each class bell-ringer page can read these URL parameters:
+  bellStart = when the student clicked into the bell ringer
+  bellDue = 7 minutes after that click
+  bellClass = selected class
+
+  When the student submits, your Google Apps Script can compare:
+  submittedAt <= bellDue ? "On Time" : "Late"
+
+  Suggested Google Sheet columns later:
+  Timestamp | First Name | Last Name | Class | Bell Ringer | Bell Start | Due Time | Submitted At | Status | Response
+*/
+
+function updateClassLinks(){
+  document.querySelectorAll('.class-card').forEach(card=>{
+    const baseHref = card.getAttribute('href');
+    const className = card.getAttribute('data-class') || '';
+    const url = new URL(baseHref, window.location.href);
+
+    url.searchParams.set('bellStart', bellStart.toISOString());
+    url.searchParams.set('bellDue', bellDue.toISOString());
+    url.searchParams.set('bellWindow', String(BELL_WINDOW_MINUTES));
+    url.searchParams.set('bellClass', className);
+
+    card.setAttribute('href', url.pathname + url.search);
+  });
+}
+
+function getTimeInZone(timeZone){
+  const now = new Date();
+  const parts = new Intl.DateTimeFormat('en-US',{
+    timeZone,
+    hour12:false,
+    weekday:'short',
+    hour:'2-digit',
+    minute:'2-digit',
+    second:'2-digit'
+  }).formatToParts(now);
+
+  const get = type => parts.find(p=>p.type===type)?.value;
+  const weekday = get('weekday');
+  const hour = Number(get('hour'));
+  const minute = Number(get('minute'));
+  const second = Number(get('second'));
+
+  return {
+    weekday,
+    hour,
+    minute,
+    second,
+    minutes: hour * 60 + minute,
+    display: `${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}`
+  };
+}
+
+function isWeekday(weekday){
+  return !['Sat','Sun'].includes(weekday);
+}
+
+function isMarketOpen(market){
+  const z = getTimeInZone(market.timeZone);
+  if(!isWeekday(z.weekday)) return false;
+
+  return market.sessions.some(session=>{
+    return z.minutes >= session.start && z.minutes < session.end;
+  });
+}
+
+const markets = [
+  {
+    name:'NYSE / NASDAQ',
+    timeZone:'America/New_York',
+    sessions:[{start:570,end:960}]
+  },
+  {
+    name:'London LSE',
+    timeZone:'Europe/London',
+    sessions:[{start:480,end:990}]
+  },
+  {
+    name:'Tokyo JPX',
+    timeZone:'Asia/Tokyo',
+    sessions:[{start:540,end:690},{start:750,end:930}]
+  },
+  {
+    name:'Hong Kong HKEX',
+    timeZone:'Asia/Hong_Kong',
+    sessions:[{start:570,end:720},{start:780,end:960}]
+  },
+  {
+    name:'India NSE',
+    timeZone:'Asia/Kolkata',
+    sessions:[{start:555,end:930}]
+  },
+  {
+    name:'Australia ASX',
+    timeZone:'Australia/Sydney',
+    sessions:[{start:600,end:960}]
+  }
+];
+
+function updateGlobalMarkets(){
+  const container = document.getElementById('globalMarkets');
+  container.innerHTML = '';
+
+  markets.forEach(market=>{
+    const z = getTimeInZone(market.timeZone);
+    const open = isMarketOpen(market);
+
+    const chip = document.createElement('div');
+    chip.className = 'market-chip';
+    chip.innerHTML = `
+      <div class="market-name">${market.name}</div>
+      <div class="market-time">${z.display}</div>
+      <div class="market-status ${open ? 'open' : 'closed'}">
+        <span class="status-dot"></span>${open ? 'Open' : 'Closed'}
+      </div>
+    `;
+    container.appendChild(chip);
+  });
+}
+
+function updateClock(){
+  const now = new Date();
+  const h=String(now.getHours()).padStart(2,'0');
+  const m=String(now.getMinutes()).padStart(2,'0');
+  const s=String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent=`${h}:${m}:${s}`;
+
+  const et = getTimeInZone('America/New_York');
+  const nyseOpen = isWeekday(et.weekday) && et.minutes >= 570 && et.minutes < 960;
+
+  const badge=document.getElementById('mkt-badge');
+  const text=document.getElementById('mkt-text');
+  badge.className='mkt-badge '+(nyseOpen?'mkt-open':'mkt-closed');
+  text.textContent=nyseOpen?'NYSE Market Open':'NYSE Market Closed';
+
+  updateGlobalMarkets();
+}
+
+updateClassLinks();
+setInterval(updateClock,1000);
+updateClock();
+</script>
+</body>
+</html>
