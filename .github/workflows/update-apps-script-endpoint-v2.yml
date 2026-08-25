@@ -1,0 +1,43 @@
+name: Update Apps Script Endpoint v2
+on:
+  push:
+    paths:
+      - '.github/workflows/update-apps-script-endpoint-v2.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace Apps Script endpoint across live pages
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          old='https://script.google.com/macros/s/AKfycbw4kLfppzaPH0LJnYnijygKpqSN11gme9JHpgOt4_R-ReiA-cHFi53kde4hK3kl0y4/exec'
+          new='https://script.google.com/macros/s/AKfycbyucfQcDDR9S_4i8_EiI2LAm0k49NNGT0IBiRnXTjZQKgtfuOwM73Wtxxt5fzojGFY/exec'
+          paths=[
+            Path('discussion-board.html'),
+            Path('opening-bell/ap-business.html'),
+            Path('opening-bell/marketing.html'),
+            Path('opening-bell/business-101.html'),
+            Path('opening-bell/pfm.html'),
+          ]
+          changed=[]
+          for p in paths:
+            s=p.read_text(encoding='utf-8')
+            if old in s:
+              p.write_text(s.replace(old,new),encoding='utf-8')
+              changed.append(str(p))
+            elif new not in s:
+              raise SystemExit(f'No known Apps Script endpoint found in {p}')
+          print('Updated:', ', '.join(changed) if changed else 'already current')
+          PY
+      - name: Commit endpoint update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add discussion-board.html opening-bell/ap-business.html opening-bell/marketing.html opening-bell/business-101.html opening-bell/pfm.html
+          git diff --cached --quiet || git commit -m "Point discussion and Opening Bell to new Apps Script deployment"
+          git push
