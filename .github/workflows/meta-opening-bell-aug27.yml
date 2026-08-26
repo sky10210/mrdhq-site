@@ -1,0 +1,53 @@
+name: Add Meta Case Opening Bells Aug 27
+
+on:
+  push:
+    paths:
+      - '.github/workflows/meta-opening-bell-aug27.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Meta case to next Opening Bell for each class
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          question = "Meta has faced lawsuits and criticism alleging that features on Instagram and Facebook can encourage compulsive use and negatively affect young users. Think about your own experience: do you feel like you have been a victim of this kind of social-media design? Has it negatively affected your time, attention, sleep, spending, self-image, relationships, or mood—or do you think the responsibility mostly belongs to the user? Explain your position and give at least one example."
+          hint = "Be specific. You do not have to share anything deeply personal—focus on behaviors or effects you are comfortable discussing. Consider both the company's responsibility and the user's responsibility."
+
+          targets = {
+            'opening-bell/marketing.html': 3,
+            'opening-bell/ap-business.html': 2,
+            'opening-bell/business-101.html': 2,
+            'opening-bell/pfm.html': 2,
+          }
+
+          def esc(s):
+              return s.replace('\\','\\\\').replace('"','\\"').replace('\n',' ')
+
+          for path, bell in targets.items():
+              p = Path(path)
+              text = p.read_text()
+              pattern = rf'(\{{id:{bell},label:"Opening Bell {bell}",status:"[^"]+",question:)"[^"]*"(,hint:)"[^"]*"(\}})'
+              repl = rf'\1"{esc(question)}"\2"{esc(hint)}"\3'
+              text, n = re.subn(pattern, repl, text, count=1)
+              if n != 1:
+                  raise SystemExit(f'Could not update {path} Opening Bell {bell}')
+              p.write_text(text)
+              print(f'Updated {path}: Opening Bell {bell}')
+          PY
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add opening-bell/marketing.html opening-bell/ap-business.html opening-bell/business-101.html opening-bell/pfm.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Add Meta social media case bell ringer for Aug 27'
+            git push
+          fi
