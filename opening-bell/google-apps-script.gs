@@ -36,7 +36,7 @@ function handleDiscussion_(ss,p,action){
   var sh=getOrCreateDiscussionSheet_(ss);
   var cls=normalizeClass_(clean_(p.className||p.cls||''));
   if(['AP Business','Marketing','Business 101','Personal Finance'].indexOf(cls)===-1) return json_({success:false,error:'Invalid class'});
-  if(action==='discussionList') return discussionList_(sh,cls,clean_(p.block||''));
+  if(action==='discussionList') return discussionList_(sh,cls,clean_(p.block||''),clean_(p.discussionId||''),clean_(p.prompt||''));
   if(action==='discussionPost') return discussionPost_(sh,cls,p);
   if(action==='discussionReply') return discussionReply_(sh,cls,p);
   if(action==='discussionAgree') return discussionAgree_(sh,cls,clean_(p.id||''));
@@ -47,9 +47,10 @@ function getOrCreateDiscussionSheet_(ss){
   var sh=ss.getSheetByName('Discussion');
   if(!sh){
     sh=ss.insertSheet('Discussion');
-    sh.appendRow(['Timestamp','ID','Parent ID','Class','Block','First Name','Last Name','Public Name','Stance','Prompt','Response','Agrees','Hidden']);
+    sh.appendRow(['Timestamp','ID','Parent ID','Class','Block','First Name','Last Name','Public Name','Stance','Prompt','Response','Agrees','Hidden','Discussion ID']);
     sh.setFrozenRows(1);
   }
+  if(clean_(sh.getRange(1,14).getValue())!=='Discussion ID') sh.getRange(1,14).setValue('Discussion ID');
   return sh;
 }
 
@@ -58,7 +59,7 @@ function discussionPost_(sh,cls,p){
   if(!first||!last||!block||!response) return json_({success:false,error:'Missing required fields'});
   if(response.length>1500) response=response.substring(0,1500);
   var id=Utilities.getUuid(),display=first+' '+last.charAt(0).toUpperCase()+'.';
-  sh.appendRow([new Date(),id,'',cls,block,first,last,display,clean_(p.stance||''),clean_(p.prompt||''),response,0,false]);
+  sh.appendRow([new Date(),id,'',cls,block,first,last,display,clean_(p.stance||''),clean_(p.prompt||''),response,0,false,clean_(p.discussionId||'default')]);
   return json_({success:true,id:id});
 }
 
@@ -83,13 +84,16 @@ function discussionAgree_(sh,cls,id){
   }finally{lock.releaseLock();}
 }
 
-function discussionList_(sh,cls,block){
+function discussionList_(sh,cls,block,discussionId,prompt){
   var vals=sh.getDataRange().getValues(),parents=[],replies={};
   for(var i=1;i<vals.length;i++){
     var r=vals[i]; if(r[3]!==cls || String(r[12]).toLowerCase()==='true') continue;
-    var obj={id:String(r[1]),parentId:String(r[2]||''),block:String(r[4]),displayName:String(r[7]),stance:String(r[8]||''),response:String(r[10]||''),agrees:Number(r[11]||0),time:Utilities.formatDate(new Date(r[0]),Session.getScriptTimeZone()||'America/New_York','MMM d, h:mm a')};
+    var obj={id:String(r[1]),parentId:String(r[2]||''),block:String(r[4]),displayName:String(r[7]),stance:String(r[8]||''),prompt:String(r[9]||''),response:String(r[10]||''),agrees:Number(r[11]||0),discussionId:String(r[13]||''),time:Utilities.formatDate(new Date(r[0]),Session.getScriptTimeZone()||'America/New_York','MMM d, h:mm a')};
     if(obj.parentId){if(!replies[obj.parentId])replies[obj.parentId]=[];replies[obj.parentId].push(obj)}
-    else if(!block||obj.block===block) parents.push(obj);
+    else {
+      var discussionMatch=!discussionId || obj.discussionId===discussionId || (!obj.discussionId && prompt && obj.prompt===prompt);
+      if(discussionMatch && (!block||obj.block===block)) parents.push(obj);
+    }
   }
   parents.reverse();
   parents.forEach(function(x){x.replies=(replies[x.id]||[]).slice(-20)});
