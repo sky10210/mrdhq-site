@@ -1,0 +1,49 @@
+name: Short Meta Opening Bells Aug 27
+
+on:
+  push:
+    paths:
+      - '.github/workflows/short-meta-opening-bell-aug27.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Shorten Meta bell and highlight changes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          summary = ('THE META CASE — QUICK VERSION: States accused Meta, the company behind Instagram and Facebook, of designing parts of its platforms to keep young people scrolling and coming back while not being honest enough about possible risks. Meta denies wrongdoing. The proposed settlement would require major protections for users under 18 and payments worth up to about $17 billion.')
+          changes = ('WHAT’S CHANGING FOR TEENS? • 2-HOUR DAILY LIMIT across Instagram + Facebook • MIDNIGHT–6 AM BLOCK on feeds, Stories, Explore and Reels • SCHOOL MODE: most push notifications muted 8 AM–3 PM • PROMPTS after 15 minutes of continuous use and again at 60 and 90 minutes • HIDDEN LIKE COUNTS by default • OPTION FOR A NON-ALGORITHMIC FEED • STRONGER AGE CHECKS + PARENT CONTROLS')
+          question = ('YOUR TAKE: Do you feel like YOU have been negatively affected by the way social media is designed? Think about lost time, sleep, attention, constant checking, spending, self-image, mood, or relationships. Do you consider yourself a victim of how these apps were designed, or is controlling your social-media use ultimately your responsibility? Who should be held most responsible — Meta, the user, parents, all of them, or somewhere in between? Explain why.')
+          full = summary + '\n\n' + changes + '\n\n' + question
+          hint = 'Source: Reuters, Aug. 26, 2026. Settlement requires court approval. You do not need to share anything deeply personal.'
+
+          targets={'opening-bell/marketing.html':3,'opening-bell/ap-business.html':2,'opening-bell/business-101.html':2,'opening-bell/pfm.html':2}
+          def esc(s): return s.replace('\\','\\\\').replace('"','\\"').replace('\n','\\n')
+          for path,bell in targets.items():
+              p=Path(path); text=p.read_text()
+              pattern=rf'(\{{id:{bell},label:"Opening Bell {bell}",status:"[^"]+",question:)"(?:\\.|[^"\\])*"(,hint:)"(?:\\.|[^"\\])*"(\}})'
+              repl=rf'\1"{esc(full)}"\2"{esc(hint)}"\3'
+              text,n=re.subn(pattern,repl,text,count=1)
+              if n!=1: raise SystemExit(f'Could not update {path} bell {bell}')
+              # Make intentional section breaks and the changes block visually prominent in the question renderer.
+              if '.q-text{white-space:pre-line' not in text:
+                  text=text.replace('.q-text{', '.q-text{white-space:pre-line;',1)
+              p.write_text(text)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add opening-bell/marketing.html opening-bell/ap-business.html opening-bell/business-101.html opening-bell/pfm.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Shorten Meta case bell and highlight teen changes'
+            git push
+          fi
