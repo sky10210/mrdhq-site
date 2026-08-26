@@ -1,0 +1,71 @@
+name: Fix discussion response scoping
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-discussion-response-scoping.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch discussion frontend and Apps Script source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          # Frontend: send/stick to an explicit discussion ID, with prompt fallback for old rows.
+          p = Path('discussion-board.html')
+          s = p.read_text()
+          old = "await api({action:'discussionPost',className:CLS,firstName:first,lastName:last,block,stance,response,prompt:cfg.prompt+(cfg.followup?' | '+cfg.followup:'')});"
+          new = "await api({action:'discussionPost',className:CLS,discussionId:DISCUSSION,firstName:first,lastName:last,block,stance,response,prompt:cfg.prompt+(cfg.followup?' | '+cfg.followup:'')});"
+          if old not in s:
+              raise SystemExit('discussionPost frontend pattern not found')
+          s = s.replace(old, new, 1)
+
+          old = "async function loadPosts(){const feed=document.getElementById('feed'),block=document.getElementById('blockFilter').value;try{const d=await api({action:'discussionList',className:CLS,block});const key=cfg.prompt+(cfg.followup?' | '+cfg.followup:'');const posts=(d.posts||[]).filter(p=>!p.prompt||p.prompt===key);"
+          new = "async function loadPosts(){const feed=document.getElementById('feed'),block=document.getElementById('blockFilter').value;try{const key=cfg.prompt+(cfg.followup?' | '+cfg.followup:'');const d=await api({action:'discussionList',className:CLS,block,discussionId:DISCUSSION,prompt:key});const posts=(d.posts||[]).filter(p=>p.discussionId?p.discussionId===DISCUSSION:p.prompt===key);"
+          if old not in s:
+              raise SystemExit('loadPosts frontend pattern not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+
+          # Apps Script source: preserve prompt in list results and add durable Discussion ID column.
+          p = Path('opening-bell/google-apps-script.gs')
+          s = p.read_text()
+          old = "if(action==='discussionList') return discussionList_(sh,cls,clean_(p.block||''));"
+          new = "if(action==='discussionList') return discussionList_(sh,cls,clean_(p.block||''),clean_(p.discussionId||''),clean_(p.prompt||''));"
+          if old not in s:
+              raise SystemExit('discussionList dispatcher pattern not found')
+          s = s.replace(old, new, 1)
+
+          old = "function getOrCreateDiscussionSheet_(ss){\n  var sh=ss.getSheetByName('Discussion');\n  if(!sh){\n    sh=ss.insertSheet('Discussion');\n    sh.appendRow(['Timestamp','ID','Parent ID','Class','Block','First Name','Last Name','Public Name','Stance','Prompt','Response','Agrees','Hidden']);\n    sh.setFrozenRows(1);\n  }\n  return sh;\n}"
+          new = "function getOrCreateDiscussionSheet_(ss){\n  var sh=ss.getSheetByName('Discussion');\n  if(!sh){\n    sh=ss.insertSheet('Discussion');\n    sh.appendRow(['Timestamp','ID','Parent ID','Class','Block','First Name','Last Name','Public Name','Stance','Prompt','Response','Agrees','Hidden','Discussion ID']);\n    sh.setFrozenRows(1);\n  }\n  if(clean_(sh.getRange(1,14).getValue())!=='Discussion ID') sh.getRange(1,14).setValue('Discussion ID');\n  return sh;\n}"
+          if old not in s:
+              raise SystemExit('discussion sheet pattern not found')
+          s = s.replace(old, new, 1)
+
+          old = "sh.appendRow([new Date(),id,'',cls,block,first,last,display,clean_(p.stance||''),clean_(p.prompt||''),response,0,false]);"
+          new = "sh.appendRow([new Date(),id,'',cls,block,first,last,display,clean_(p.stance||''),clean_(p.prompt||''),response,0,false,clean_(p.discussionId||'default')]);"
+          if old not in s:
+              raise SystemExit('discussionPost row pattern not found')
+          s = s.replace(old, new, 1)
+
+          old = "function discussionList_(sh,cls,block){\n  var vals=sh.getDataRange().getValues(),parents=[],replies={};\n  for(var i=1;i<vals.length;i++){\n    var r=vals[i]; if(r[3]!==cls || String(r[12]).toLowerCase()==='true') continue;\n    var obj={id:String(r[1]),parentId:String(r[2]||''),block:String(r[4]),displayName:String(r[7]),stance:String(r[8]||''),response:String(r[10]||''),agrees:Number(r[11]||0),time:Utilities.formatDate(new Date(r[0]),Session.getScriptTimeZone()||'America/New_York','MMM d, h:mm a')};\n    if(obj.parentId){if(!replies[obj.parentId])replies[obj.parentId]=[];replies[obj.parentId].push(obj)}\n    else if(!block||obj.block===block) parents.push(obj);\n  }\n  parents.reverse();\n  parents.forEach(function(x){x.replies=(replies[x.id]||[]).slice(-20)});\n  return json_({success:true,posts:parents.slice(0,100)});\n}"
+          new = "function discussionList_(sh,cls,block,discussionId,prompt){\n  var vals=sh.getDataRange().getValues(),parents=[],replies={};\n  for(var i=1;i<vals.length;i++){\n    var r=vals[i]; if(r[3]!==cls || String(r[12]).toLowerCase()==='true') continue;\n    var obj={id:String(r[1]),parentId:String(r[2]||''),block:String(r[4]),displayName:String(r[7]),stance:String(r[8]||''),prompt:String(r[9]||''),response:String(r[10]||''),agrees:Number(r[11]||0),discussionId:String(r[13]||''),time:Utilities.formatDate(new Date(r[0]),Session.getScriptTimeZone()||'America/New_York','MMM d, h:mm a')};\n    if(obj.parentId){if(!replies[obj.parentId])replies[obj.parentId]=[];replies[obj.parentId].push(obj)}\n    else {\n      var discussionMatch=!discussionId || obj.discussionId===discussionId || (!obj.discussionId && prompt && obj.prompt===prompt);\n      if(discussionMatch && (!block||obj.block===block)) parents.push(obj);\n    }\n  }\n  parents.reverse();\n  parents.forEach(function(x){x.replies=(replies[x.id]||[]).slice(-20)});\n  return json_({success:true,posts:parents.slice(0,100)});\n}"
+          if old not in s:
+              raise SystemExit('discussionList function pattern not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add discussion-board.html opening-bell/google-apps-script.gs
+          git commit -m "Scope discussion responses to their own discussion" || exit 0
+          git push
