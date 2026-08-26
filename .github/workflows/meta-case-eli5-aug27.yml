@@ -1,0 +1,63 @@
+name: Meta Case ELI5 Opening Bells
+
+on:
+  push:
+    paths:
+      - '.github/workflows/meta-case-eli5-aug27.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Add Meta case ELI5 brief to next Opening Bell
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          source = 'Reuters, Aug. 26, 2026 — Meta reaches multibillion-dollar settlement over alleged social-media harms to children.'
+
+          common = (
+            'META CASE — READ THIS FIRST. '
+            'ELI5 #1 — WHAT HAPPENED? A bipartisan group of state attorneys general sued Meta, the company that owns Instagram and Facebook. They argued that Meta built parts of its apps to keep young people scrolling and coming back, while not being honest enough about possible risks. '
+            'ELI5 #2 — WHAT ARE THEY ACCUSING META OF? The states say features such as endless feeds, recommendations, notifications, likes, and other engagement tools can encourage compulsive use. They also raised concerns about children under 13, data collection, and whether Meta did enough to protect young users. These are allegations; Meta has denied wrongdoing. '
+            'ELI5 #3 — WHY WOULD META WANT PEOPLE TO STAY ON THE APP? Social-media companies generally make more money when people spend more time on their platforms because more attention can mean more opportunities to show advertising. That does not automatically mean every engagement feature is harmful, but it explains why time and attention matter to the business model. '
+            'ELI5 #4 — WHAT DID META AGREE TO? The proposed settlement is worth roughly $17–18 billion over time and would require major teen-safety changes, including a default two-hour daily limit across Facebook and Instagram, nighttime restrictions, fewer school-hour notifications, stronger age assurance, more parental controls, and options that reduce algorithmic or autoplay features. The settlement still requires court approval. '
+            'ELI5 #5 — META’S SIDE. Meta says it has spent years building Teen Accounts and other protections, says teen safety is a major priority, and argues that the problem cannot be solved by Meta alone because teens use many different apps. It is calling on TikTok and YouTube to adopt similar protections. '
+            'NOW MAKE IT PERSONAL: Do you feel like YOU have been negatively affected by social-media design — for example through lost time, constant checking, sleep, attention, spending, self-image, mood, relationships, or feeling unable to stop scrolling? Do you feel like a victim of the way these apps were designed, or do you think the user is mostly responsible for controlling their own behavior? Explain where you would place the responsibility: mostly Meta, mostly the user, parents, all of them, or somewhere in between — and WHY.'
+          )
+
+          def esc(s):
+              return s.replace('\\','\\\\').replace('"','\\"').replace('\n',' ')
+
+          def replace_bell(path, bell_id):
+              p = Path(path)
+              text = p.read_text()
+              q = esc(common)
+              h = esc(source + ' You do not need to share anything deeply personal. Focus on your own observations and reasoning.')
+              pattern = rf'(\{{id:{bell_id},label:"Opening Bell {bell_id}",status:"[^"]+",question:)"[^"]*"(,hint:)"[^"]*"(\}})'
+              repl = rf'\1"{q}"\2"{h}"\3'
+              text, n = re.subn(pattern, repl, text, count=1)
+              if n != 1:
+                  raise SystemExit(f'Could not replace bell {bell_id} in {path}')
+              p.write_text(text)
+
+          replace_bell('opening-bell/marketing.html', 3)
+          replace_bell('opening-bell/ap-business.html', 2)
+          replace_bell('opening-bell/business-101.html', 2)
+          replace_bell('opening-bell/pfm.html', 2)
+          PY
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add opening-bell/marketing.html opening-bell/ap-business.html opening-bell/business-101.html opening-bell/pfm.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Use Meta settlement ELI5 brief for Aug 27 Opening Bells'
+            git push
+          fi
