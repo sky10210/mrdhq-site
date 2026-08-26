@@ -1,0 +1,40 @@
+name: Build Business 101 Unit 1 Module
+on:
+  push:
+    paths:
+      - '.github/workflows/build-business101-unit1.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Business 101 version from current Vivid module
+        run: |
+          mkdir -p business-101/unit-1
+          curl -fsSL https://raw.githubusercontent.com/sky10210/vividlessons/main/modules/ap-business-unit-1-mrd.html -o business-101/unit-1/index.html
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('business-101/unit-1/index.html')
+          s=p.read_text()
+          s=s.replace('<title>AP Business Unit 1 | Vivid Lessons</title>','<title>Business 101 Unit 1 | Vivid Lessons</title>')
+          s=s.replace('Vivid Lessons • AP Business','Vivid Lessons • Business 101')
+          s=s.replace('AP Business Unit 1 Interactive Lesson','Business 101 Unit 1 Interactive Lesson')
+          s=s.replace("id:'ap-business-unit-1'","id:'business-101-unit-1'")
+          s=s.replace("category:'AP Business'","category:'Business 101'")
+          s=s.replace("version:'1.1'","version:'1.1-b101'")
+          s=s.replace('MR. D • AP Business • Unit 1 • Vivid Lessons','MR. D • Business 101 • Unit 1 • Vivid Lessons')
+          s=s.replace("bellId:'AP-BUSINESS-UNIT-1'","bellId:'BUSINESS-101-UNIT-1'")
+          s=s.replace("label:'AP Business Unit 1'","label:'Business 101 Unit 1'")
+          s=s.replace("cls:'AP Business - '+el('period').value.trim()","cls:'Business 101',block:el('period').value.trim()")
+          p.write_text(s)
+          PY
+      - name: Commit generated Business 101 module
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add business-101/unit-1/index.html
+          git diff --cached --quiet || git commit -m 'Build Business 101 Unit 1 interactive module'
+          git push
