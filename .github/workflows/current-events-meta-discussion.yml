@@ -1,0 +1,49 @@
+name: Wire Current Events Meta Discussion
+on:
+  push:
+    paths:
+      - '.github/workflows/current-events-meta-discussion.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Meta discussion and simplify tomorrow bells
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          # Add Current Events Meta config to shared discussion board.
+          p=Path('discussion-board.html'); text=p.read_text()
+          marker="'Personal Finance:default':"
+          config="'Current Events:meta':{eyebrow:'Current Event • The Meta Case',prompt:'THE META CASE — WHO IS RESPONSIBLE?\\n\\nMeta, the company behind Instagram and Facebook, reached settlements with U.S. states after allegations that its platforms were designed to keep young users engaged and that the company misled the public about risks. Meta denies wrongdoing. The agreement includes a two-hour daily limit for teens, an overnight block from midnight to 6 a.m., fewer school-hour notifications, stronger age checks, hidden likes/reactions by default, and an option for a non-personalized feed.\\n\\nYOUR TAKE: Who should be MOST responsible for how much time teens spend on social media?',choices:[['Apps','The apps / platforms'],['User','The user'],['Parents','Parents'],['All three','All three share responsibility']],followup:'Pick the strongest argument for your choice. Then explain one realistic rule or design change you think would actually help.'},\n"
+          if "'Current Events:meta'" not in text:
+              text=text.replace(marker,config+marker,1)
+          text=text.replace("const slugs={'Marketing':'/marketing/','AP Business':'/ap-business/','Business 101':'/business-101/','Personal Finance':'/pfm/'};","const slugs={'Marketing':'/marketing/','AP Business':'/ap-business/','Business 101':'/business-101/','Personal Finance':'/pfm/','Current Events':'/current-events/'};")
+          p.write_text(text)
+
+          # Tomorrow's shared bell: short enough to answer in ~5 minutes, then link students to the full case/discussion.
+          summary=('META + TEENS: Meta, the company behind Instagram and Facebook, agreed to new teen protections after states accused it of designing its apps to keep young people hooked. Meta denies wrongdoing. New rules include a 2-hour daily limit, an overnight block, and fewer notifications during school.')
+          question=('YOUR TAKE: Who should be MOST responsible for how much time teens spend on social media — the apps, the user, parents, or all three? Explain why.')
+          full=summary+'\\n\\n'+question
+          hint='Keep it short: choose a side and give one strong reason. Full Meta Case is under Current Events.'
+          targets={'opening-bell/marketing.html':3,'opening-bell/ap-business.html':2,'opening-bell/business-101.html':2,'opening-bell/pfm.html':2}
+          def esc(s): return s.replace('\\','\\\\').replace('"','\\"').replace('\\n','\\n')
+          for path,bell in targets.items():
+              fp=Path(path); t=fp.read_text()
+              pattern=rf'(\{{id:{bell},label:"Opening Bell {bell}",status:"[^"]+",question:)"(?:\\.|[^"\\])*"(,hint:)"(?:\\.|[^"\\])*"(\}})'
+              repl=rf'\1"{esc(full)}"\2"{esc(hint)}"\3'
+              t,n=re.subn(pattern,repl,t,count=1)
+              if n!=1: raise SystemExit(f'Could not update {path} bell {bell}')
+              fp.write_text(t)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add discussion-board.html opening-bell/marketing.html opening-bell/ap-business.html opening-bell/business-101.html opening-bell/pfm.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Add Meta current event discussion and simplify tomorrow bells'
+            git push
+          fi
