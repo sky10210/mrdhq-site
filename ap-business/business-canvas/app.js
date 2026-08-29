@@ -1296,7 +1296,7 @@ window.addEventListener("beforeunload", () => {
 
 applyProfile(profile);
 refreshAll();
-const guideParams=new URLSearchParams(location.search),guideSection=guideParams.get("section");
-if(guideParams.get("view")==="canvas101"||guideSection){switchView("canvas101");if(guideSection&&sectionData[guideSection])setTimeout(()=>document.getElementById("guide-"+guideSection)?.scrollIntoView({behavior:"smooth",block:"start"}),250)}
+const guideParams=new URLSearchParams(location.search),guideSection=guideParams.get("section"),guideView=guideParams.get("view");
+if(["canvas101","caseguide"].includes(guideView)||guideSection){switchView(guideView==="caseguide"?"caseguide":"canvas101");if(guideSection&&sectionData[guideSection])setTimeout(()=>document.getElementById("guide-"+guideSection)?.scrollIntoView({behavior:"smooth",block:"start"}),250)}
 if (!profile) openAuth();
 initializeFirebase();
