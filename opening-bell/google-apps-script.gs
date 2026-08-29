@@ -11,6 +11,7 @@ function handleRequest_(e) {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var action = clean_(p.action || '');
     if (action.indexOf('openingBell') === 0) return handleOpeningBell_(ss, p, action);
+    if (action === 'moduleSubmit') return handleModuleSubmit_(ss, p);
 
     if (action.indexOf('discussion') === 0) return handleDiscussion_(ss, p, action);
 
@@ -113,6 +114,29 @@ function formatDate_(d){return Utilities.formatDate(d,Session.getScriptTimeZone(
 function clean_(v){return v==null?'':String(v).trim()}
 function json_(obj){return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON)}
 
+/* Google-authenticated Vivid Lessons module submissions */
+function handleModuleSubmit_(ss,p){
+  var identity=verifyFirebaseUser_(clean_(p.idToken||''));
+  if(!identity) return json_({success:false,error:'Sign in with your school Google account first.'});
+  if(identity.email.slice(-16)!=='@casdonline.org') return json_({success:false,error:'Use your casdonline.org school account.'});
+  var raw=clean_(p.answer||''),record={};
+  try{record=JSON.parse(raw)}catch(err){return json_({success:false,error:'Invalid module submission.'})}
+  if(String(record.completed||'')!=='Yes') return json_({success:false,error:'Complete the module before submitting.'});
+  var moduleNumber=clean_(p.moduleNumber||''),className=normalizeClass_(clean_(p.cls||record.category||'Business 101')),block=clean_(p.block||'');
+  if(['1','2','3','4'].indexOf(block)===-1) return json_({success:false,error:'Choose Block 1, 2, 3, or 4.'});
+  var names=rosterIdentity_(ss,identity),ts=parseTimestamp_(p.timestamp),sessionId=clean_(record.sessionId||p.sessionId||'');
+  var shortName=moduleNumber==='1'?'Business Basics':moduleNumber==='2'?'The Lemonade Stand':clean_(record.moduleTitle||'Business Module').replace(/^Business 101\s*/i,'');
+  var tabName=('Module '+moduleNumber+' - '+shortName+' - '+className).replace(/[\\\/?*\[\]:]/g,'-').replace(/\s+/g,' ').trim().substring(0,99);
+  var headers=['Timestamp','Date','Class','Block','First Name','Last Name','Google Name','School Email','Module','Score','Total','Percent','Duration','Reflection','Session ID','Full Record'];
+  var sh=ss.getSheetByName(tabName);
+  if(!sh){sh=ss.insertSheet(tabName);sh.appendRow(headers);sh.setFrozenRows(1)}
+  var vals=sh.getDataRange().getValues();
+  for(var i=vals.length-1;i>0;i--) if(String(vals[i][7]||'').toLowerCase()===identity.email&&sessionId&&String(vals[i][14]||'')===sessionId) return json_({success:false,error:'This completion was already submitted.'});
+  sh.appendRow([ts,formatDate_(ts),className,block,names.first,names.last,identity.name,identity.email,clean_(record.moduleTitle||p.label||''),Number(record.score||0),Number(record.totalQuestions||0),clean_(record.percent||''),clean_(record.totalTime||p.duration||''),clean_(record.reflection||''),sessionId,raw]);
+  var master=getOrCreateResponseSheet_(ss,'Responses');
+  master.appendRow([ts,formatDate_(ts),className,block,names.first,names.last,'MODULE-'+moduleNumber,clean_(record.moduleTitle||p.label||''),raw,'On Time',clean_(record.totalTime||p.duration||'')]);
+  return json_({success:true,tab:tabName});
+}
 
 /* Universal authenticated Opening Bell */
 var FIREBASE_WEB_API_KEY_ = 'AIzaSyA_R--xQW8CdgbI1HGx5oxbqljHBGCujhY';
