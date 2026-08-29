@@ -574,7 +574,7 @@ function renderCanvasGuide() {
   grid.innerHTML = sectionOrder.map(key => {
     const definition = sectionData[key];
     return `
-      <article class="guide-card ${definition.className}">
+      <article class="guide-card ${definition.className}" id="guide-${key}">
         <div class="guide-card-header"><h3>${definition.title}</h3><span>${definition.icon}</span></div>
         <p>${definition.overview}</p>
         <details><summary>Required elements</summary><ul>${definition.checklist.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul></details>
@@ -1296,5 +1296,7 @@ window.addEventListener("beforeunload", () => {
 
 applyProfile(profile);
 refreshAll();
+const guideParams=new URLSearchParams(location.search),guideSection=guideParams.get("section");
+if(guideParams.get("view")==="canvas101"||guideSection){switchView("canvas101");if(guideSection&&sectionData[guideSection])setTimeout(()=>document.getElementById("guide-"+guideSection)?.scrollIntoView({behavior:"smooth",block:"start"}),250)}
 if (!profile) openAuth();
 initializeFirebase();
