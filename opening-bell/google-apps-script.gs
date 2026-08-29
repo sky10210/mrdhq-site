@@ -126,7 +126,7 @@ function handleModuleSubmit_(ss,p){
   var moduleNumber=clean_(p.moduleNumber||''),className=normalizeClass_(clean_(p.cls||record.category||'Business 101')),block=clean_(p.block||'');
   if(['1','2','3','4'].indexOf(block)===-1) return json_({success:false,error:'Choose Block 1, 2, 3, or 4.'});
   var names=manual?{first:clean_(p.firstName||''),last:clean_(p.lastName||'')}:rosterIdentity_(ss,identity),ts=parseTimestamp_(p.timestamp),sessionId=clean_(record.sessionId||p.sessionId||'');
-  var shortName=moduleNumber==='1'?'Business Basics':moduleNumber==='2'?'The Lemonade Stand':clean_(record.moduleTitle||'Business Module').replace(/^Business 101\s*/i,'');
+  var shortName;if(className==='AP Business'){shortName=clean_(record.moduleTitle||'Canvas Areas and Case Evidence').replace(/^AP Business\s+Module\s+\d+\s*[—-]?\s*/i,'')||'Canvas Areas and Case Evidence'}else{shortName=moduleNumber==='1'?'Business Basics':moduleNumber==='2'?'The Lemonade Stand':clean_(record.moduleTitle||'Business Module').replace(/^Business 101\s*/i,'')}
   var tabName=('Module '+moduleNumber+' - '+shortName+' - '+className).replace(/[\\\/?*\[\]:]/g,'-').replace(/\s+/g,' ').trim().substring(0,99);
   var headers=['Timestamp','Date','Class','Block','First Name','Last Name','Google Name','School Email','Module','Score','Total','Percent','Duration','Reflection','Session ID','Full Record'];
   var sh=ss.getSheetByName(tabName);
