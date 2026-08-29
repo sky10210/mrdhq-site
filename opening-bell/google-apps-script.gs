@@ -123,6 +123,7 @@ function handleOpeningBell_(ss,p,action){
   if(!identity) return json_({success:false,error:'Sign in with your school Google account first.'});
   if(action==='openingBellStart') return openingBellStart_(ss,p,identity);
   if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));
+  if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));
   if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);
   return json_({success:false,error:'Unknown Opening Bell action.'});
 }
@@ -133,98 +134,118 @@ function verifyFirebaseUser_(idToken){
     var url='https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(FIREBASE_WEB_API_KEY_);
     var response=UrlFetchApp.fetch(url,{method:'post',contentType:'application/json',payload:JSON.stringify({idToken:idToken}),muteHttpExceptions:true});
     if(response.getResponseCode()!==200) return null;
-    var data=JSON.parse(response.getContentText()||'{}');
-    var u=data.users&&data.users[0];
+    var data=JSON.parse(response.getContentText()||'{}'),u=data.users&&data.users[0];
     if(!u||!u.email) return null;
     return {uid:String(u.localId||''),email:String(u.email||'').toLowerCase(),name:String(u.displayName||'Student')};
   }catch(err){return null}
 }
 
 function openingBellSessions_(ss){
+  var headers=['Created At','Code','Title','Class','Block','Question','Duration Seconds','Starts At','Ends At','Teacher Email','Resources JSON','Submission Tab','Active'];
   var sh=ss.getSheetByName('Opening Bell Sessions');
-  if(!sh){
-    sh=ss.insertSheet('Opening Bell Sessions');
-    sh.appendRow(['Created At','Code','Opening Bell','Title','Class','Block','Question','Duration Seconds','Starts At','Ends At','Teacher Email','Active']);
-    sh.setFrozenRows(1);
-  }
+  if(!sh){sh=ss.insertSheet('Opening Bell Sessions');sh.appendRow(headers);sh.setFrozenRows(1)}
+  else sh.getRange(1,1,1,headers.length).setValues([headers]);
   return sh;
 }
 
 function openingBellSubmissions_(ss){
+  var headers=['Timestamp','Date','Title','Class','Block','Question','Gradebook First Name','Gradebook Last Name','Google Name','School Email','Firebase UID','Response','Status','Session Code','Submission Tab'];
   var sh=ss.getSheetByName('Opening Bell Submissions');
-  if(!sh){
-    sh=ss.insertSheet('Opening Bell Submissions');
-    sh.appendRow(['Timestamp','Date','Opening Bell','Title','Class','Block','Question','Gradebook First Name','Gradebook Last Name','Google Name','School Email','Firebase UID','Response','Status','Session Code']);
-    sh.setFrozenRows(1);
-  }
+  if(!sh){sh=ss.insertSheet('Opening Bell Submissions');sh.appendRow(headers);sh.setFrozenRows(1)}
+  else sh.getRange(1,1,1,headers.length).setValues([headers]);
   return sh;
+}
+
+function parseResources_(raw){
+  if(!raw) return [];
+  return String(raw).split(/\r?\n/).map(function(line,index){
+    line=clean_(line);if(!line)return null;
+    var split=line.indexOf('|'),label=split>=0?clean_(line.substring(0,split)):'Attachment '+(index+1),url=clean_(split>=0?line.substring(split+1):line);
+    if(!/^https?:\/\//i.test(url))return null;
+    return {label:label||'Attachment '+(index+1),url:url};
+  }).filter(function(x){return x}).slice(0,6);
+}
+
+function uniqueSessionSheet_(ss,title,className,block){
+  var base=('Opening Bell - '+title+' - '+className+' - B'+block).replace(/[\\\/?*\[\]:]/g,'-').replace(/\s+/g,' ').trim().substring(0,95);
+  var name=base,n=2;
+  while(ss.getSheetByName(name)){name=(base.substring(0,91)+' '+n).substring(0,99);n++}
+  var sh=ss.insertSheet(name);
+  sh.appendRow(['Timestamp','Date','Title','Class','Block','Question','Gradebook First Name','Gradebook Last Name','Google Name','School Email','Firebase UID','Response','Status','Session Code']);
+  sh.setFrozenRows(1);
+  return name;
 }
 
 function openingBellStart_(ss,p,identity){
   if(identity.email!==OPENING_BELL_TEACHER_) return json_({success:false,error:'Teacher account required.'});
-  var bellNumber=clean_(p.bellNumber||''),title=clean_(p.title||''),className=normalizeClass_(clean_(p.className||'')),block=clean_(p.block||''),question=clean_(p.question||'');
-  var duration=Math.max(60,Math.min(3600,Number(p.duration||420)));
-  var allowed=['AP Business','Marketing','Business 101','Personal Finance'];
-  if(!bellNumber||!title||!question||!block||allowed.indexOf(className)===-1) return json_({success:false,error:'Complete every Opening Bell field.'});
+  var title=clean_(p.title||''),className=normalizeClass_(clean_(p.className||'')),block=clean_(p.block||''),question=clean_(p.question||'');
+  var duration=Math.max(60,Math.min(3600,Number(p.duration||420))),allowed=['AP Business','Marketing','Business 101','Personal Finance'];
+  if(!title||!question||!block||allowed.indexOf(className)===-1) return json_({success:false,error:'Complete every Opening Bell field.'});
+  var resources=parseResources_(p.resources||''),sheetName=uniqueSessionSheet_(ss,title,className,block);
   var code=createOpeningBellCode_(),now=new Date(),ends=new Date(now.getTime()+duration*1000);
-  openingBellSessions_(ss).appendRow([now,code,bellNumber,title,className,block,question,duration,now,ends,identity.email,true]);
-  return json_({success:true,session:{code:code,bellNumber:bellNumber,title:title,className:className,block:block,question:question,duration:duration,startsAt:now.getTime(),endsAt:ends.getTime()}});
+  openingBellSessions_(ss).appendRow([now,code,title,className,block,question,duration,now,ends,identity.email,JSON.stringify(resources),sheetName,true]);
+  return json_({success:true,session:{code:code,title:title,className:className,block:block,question:question,resources:resources,duration:duration,startsAt:now.getTime(),endsAt:ends.getTime()}});
 }
 
 function createOpeningBellCode_(){
   var chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',out='';
-  for(var i=0;i<5;i++) out+=chars.charAt(Math.floor(Math.random()*chars.length));
+  for(var i=0;i<5;i++)out+=chars.charAt(Math.floor(Math.random()*chars.length));
   return out;
 }
 
+function sessionFromRow_(r,rowNumber){
+  var resources=[];try{resources=JSON.parse(String(r[10]||'[]'))}catch(e){}
+  return {row:rowNumber,code:String(r[1]),title:String(r[2]),className:String(r[3]),block:String(r[4]),question:String(r[5]),duration:Number(r[6]),startsAt:new Date(r[7]).getTime(),endsAt:new Date(r[8]).getTime(),resources:resources,sheetName:String(r[11]||'')};
+}
+
 function findOpeningBell_(ss,code){
-  if(!code) return null;
-  var sh=openingBellSessions_(ss),values=sh.getDataRange().getValues();
-  for(var i=values.length-1;i>0;i--){
-    var r=values[i];
-    if(String(r[1]).toUpperCase()===String(code).toUpperCase() && String(r[11]).toLowerCase()!=='false'){
-      return {row:i+1,code:String(r[1]),bellNumber:String(r[2]),title:String(r[3]),className:String(r[4]),block:String(r[5]),question:String(r[6]),duration:Number(r[7]),startsAt:new Date(r[8]).getTime(),endsAt:new Date(r[9]).getTime()};
-    }
-  }
+  if(!code)return null;
+  var values=openingBellSessions_(ss).getDataRange().getValues();
+  for(var i=values.length-1;i>0;i--)if(String(values[i][1]).toUpperCase()===String(code).toUpperCase()&&String(values[i][12]).toLowerCase()!=='false')return sessionFromRow_(values[i],i+1);
   return null;
+}
+
+function publicSession_(session){
+  return {code:session.code,title:session.title,className:session.className,block:session.block,question:session.question,duration:session.duration,startsAt:session.startsAt,endsAt:session.endsAt,resources:session.resources,isLive:Date.now()<=session.endsAt,dateLabel:Utilities.formatDate(new Date(session.startsAt),Session.getScriptTimeZone()||'America/New_York','MMM d, yyyy')};
 }
 
 function openingBellGet_(ss,code){
   var session=findOpeningBell_(ss,code);
-  if(!session) return json_({success:false,error:'That session code was not found.'});
-  if(Date.now()>session.endsAt+24*60*60*1000) return json_({success:false,error:'That Opening Bell session has expired.'});
-  delete session.row;
-  return json_({success:true,session:session});
+  if(!session)return json_({success:false,error:'That session code was not found.'});
+  return json_({success:true,session:publicSession_(session)});
 }
 
-function rosterIdentity_(ss,identity,className,block){
+function openingBellList_(ss,className){
+  className=normalizeClass_(className);
+  var values=openingBellSessions_(ss).getDataRange().getValues(),sessions=[];
+  for(var i=values.length-1;i>0&&sessions.length<50;i--){
+    if(String(values[i][3])!==className||String(values[i][12]).toLowerCase()==='false')continue;
+    sessions.push(publicSession_(sessionFromRow_(values[i],i+1)));
+  }
+  return json_({success:true,sessions:sessions});
+}
+
+function rosterIdentity_(ss,identity){
   var first='',last='',sh=ss.getSheetByName('Roster');
   if(sh){
     var values=sh.getDataRange().getValues();
-    for(var i=1;i<values.length;i++){
-      if(String(values[i][0]||'').trim().toLowerCase()===identity.email){
-        first=clean_(values[i][1]||'');last=clean_(values[i][2]||'');break;
-      }
-    }
+    for(var i=1;i<values.length;i++)if(String(values[i][0]||'').trim().toLowerCase()===identity.email){first=clean_(values[i][1]||'');last=clean_(values[i][2]||'');break}
   }
-  if(!first&&!last){
-    var parts=String(identity.name||'Student').trim().split(/\s+/);
-    first=parts.shift()||'Student';last=parts.join(' ');
-  }
+  if(!first&&!last){var parts=String(identity.name||'Student').trim().split(/\s+/);first=parts.shift()||'Student';last=parts.join(' ')}
   return {first:first,last:last};
 }
 
 function openingBellSubmit_(ss,p,identity){
   var session=findOpeningBell_(ss,clean_(p.code||''));
-  if(!session) return json_({success:false,error:'Opening Bell session not found.'});
+  if(!session)return json_({success:false,error:'Opening Bell session not found.'});
   var answer=clean_(p.answer||'');
-  if(answer.length<8) return json_({success:false,error:'Write a more complete response.'});
-  var sh=openingBellSubmissions_(ss),values=sh.getDataRange().getValues();
-  for(var i=values.length-1;i>0;i--){
-    if(String(values[i][10]||'').toLowerCase()===identity.email && String(values[i][14]||'').toUpperCase()===session.code) return json_({success:false,error:'You already submitted this Opening Bell.'});
-  }
-  var official=rosterIdentity_(ss,identity,session.className,session.block);
-  var now=new Date(),status=Date.now()>session.endsAt?'Late':'On Time';
-  sh.appendRow([now,formatDate_(now),session.bellNumber,session.title,session.className,session.block,session.question,official.first,official.last,identity.name,identity.email,identity.uid,answer,status,session.code]);
+  if(answer.length<8)return json_({success:false,error:'Write a more complete response.'});
+  var master=openingBellSubmissions_(ss),values=master.getDataRange().getValues();
+  for(var i=values.length-1;i>0;i--)if(String(values[i][9]||'').toLowerCase()===identity.email&&String(values[i][13]||'').toUpperCase()===session.code)return json_({success:false,error:'You already submitted this Opening Bell.'});
+  var official=rosterIdentity_(ss,identity),now=new Date(),status=Date.now()>session.endsAt?'Late':'On Time';
+  var masterRow=[now,formatDate_(now),session.title,session.className,session.block,session.question,official.first,official.last,identity.name,identity.email,identity.uid,answer,status,session.code,session.sheetName];
+  master.appendRow(masterRow);
+  var sessionSheet=ss.getSheetByName(session.sheetName);
+  if(sessionSheet)sessionSheet.appendRow(masterRow.slice(0,14));
   return json_({success:true,status:status});
 }
