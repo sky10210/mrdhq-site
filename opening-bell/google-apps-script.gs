@@ -42,8 +42,8 @@ function handleDiscussion_(ss,p,action){
   var cls=normalizeClass_(clean_(p.className||p.cls||''));
   if(['AP Business','Marketing','Business 101','Personal Finance'].indexOf(cls)===-1) return json_({success:false,error:'Invalid class'});
   if(action==='discussionList') return discussionList_(sh,cls,clean_(p.block||''),clean_(p.discussionId||''),clean_(p.prompt||''));
-  if(action==='discussionPost') return discussionPost_(sh,cls,p);
-  if(action==='discussionReply') return discussionReply_(sh,cls,p);
+  if(action==='discussionPost') return discussionPost_(ss,sh,cls,p);
+  if(action==='discussionReply') return discussionReply_(ss,sh,cls,p);
   if(action==='discussionAgree') return discussionAgree_(sh,cls,clean_(p.id||''));
   return json_({success:false,error:'Unknown discussion action'});
 }
@@ -59,22 +59,80 @@ function getOrCreateDiscussionSheet_(ss){
   return sh;
 }
 
-function discussionPost_(sh,cls,p){
+function discussionArchiveHeaders_(){
+  return ['Timestamp','ID','Parent ID','Class','Block','First Name','Last Name','Public Name','Stance','Prompt','Response','Agrees','Hidden','Discussion ID','Activity Type','Activity Tab'];
+}
+
+function getOrCreateDiscussionArchive_(ss,name){
+  var headers=discussionArchiveHeaders_(),sh=ss.getSheetByName(name);
+  if(!sh){sh=ss.insertSheet(name);sh.appendRow(headers);sh.setFrozenRows(1)}
+  else sh.getRange(1,1,1,headers.length).setValues([headers]);
+  return sh;
+}
+
+function discussionType_(discussionId){
+  var id=clean_(discussionId).toLowerCase();
+  return id.indexOf('current-')===0||id.indexOf('ce-')===0?'Current Event':'Discussion';
+}
+
+function titleCaseWords_(value){
+  return clean_(value).split(/\s+/).map(function(w){return w?String(w).charAt(0).toUpperCase()+String(w).slice(1):''}).join(' ');
+}
+
+function discussionActivityName_(cls,discussionId,type){
+  var id=clean_(discussionId||'default');
+  var label=id.replace(/^current-/i,'').replace(/^ce-/i,'').replace(/^discussion-/i,'').replace(/-20\d\d-\d\d-\d\d$/,'').replace(/[-_]+/g,' ').trim();
+  if(!label||label.toLowerCase()==='default') label='Default';
+  label=titleCaseWords_(label);
+  var prefix=type==='Current Event'?'CE':'Discussion';
+  return (prefix+' - '+label+' - '+cls).replace(/[\\\/?*\[\]:]/g,'-').replace(/\s+/g,' ').trim().substring(0,99);
+}
+
+function getOrCreateDiscussionActivitySheet_(ss,cls,discussionId,type){
+  var name=discussionActivityName_(cls,discussionId,type),headers=discussionArchiveHeaders_(),sh=ss.getSheetByName(name);
+  if(!sh){sh=ss.insertSheet(name);sh.appendRow(headers);sh.setFrozenRows(1)}
+  else sh.getRange(1,1,1,headers.length).setValues([headers]);
+  return sh;
+}
+
+function archiveDiscussionRow_(ss,row,cls,discussionId){
+  var type=discussionType_(discussionId),activity=getOrCreateDiscussionActivitySheet_(ss,cls,discussionId,type),master=getOrCreateDiscussionArchive_(ss,type==='Current Event'?'Current Event Submissions':'Discussion Submissions');
+  var archiveRow=row.slice(0,14).concat([type,activity.getName()]);
+  master.appendRow(archiveRow);
+  activity.appendRow(archiveRow);
+  return {type:type,tab:activity.getName()};
+}
+
+function findDiscussionParent_(sh,id,cls){
+  var vals=sh.getDataRange().getValues();
+  for(var i=vals.length-1;i>0;i--){
+    if(String(vals[i][1])===id&&String(vals[i][3])===cls&&!vals[i][2]) return vals[i];
+  }
+  return null;
+}
+
+function discussionPost_(ss,sh,cls,p){
   var first=clean_(p.firstName||''),last=clean_(p.lastName||''),block=clean_(p.block||''),response=clean_(p.response||'');
   if(!first||!last||!block||!response) return json_({success:false,error:'Missing required fields'});
   if(response.length>1500) response=response.substring(0,1500);
-  var id=Utilities.getUuid(),display=first+' '+last.charAt(0).toUpperCase()+'.';
-  sh.appendRow([new Date(),id,'',cls,block,first,last,display,clean_(p.stance||''),clean_(p.prompt||''),response,0,false,clean_(p.discussionId||'default')]);
-  return json_({success:true,id:id});
+  var id=Utilities.getUuid(),display=first+' '+last.charAt(0).toUpperCase()+'.',discussionId=clean_(p.discussionId||'default'),now=new Date();
+  var row=[now,id,'',cls,block,first,last,display,clean_(p.stance||''),clean_(p.prompt||''),response,0,false,discussionId];
+  sh.appendRow(row);
+  var archived=archiveDiscussionRow_(ss,row,cls,discussionId);
+  return json_({success:true,id:id,activityType:archived.type,tab:archived.tab});
 }
 
-function discussionReply_(sh,cls,p){
+function discussionReply_(ss,sh,cls,p){
   var first=clean_(p.firstName||''),last=clean_(p.lastName||''),block=clean_(p.block||''),response=clean_(p.response||''),parent=clean_(p.parentId||'');
   if(!first||!last||!block||!response||!parent) return json_({success:false,error:'Missing required fields'});
   if(response.length>1000) response=response.substring(0,1000);
-  var id=Utilities.getUuid(),display=first+' '+last.charAt(0).toUpperCase()+'.';
-  sh.appendRow([new Date(),id,parent,cls,block,first,last,display,'','',response,0,false]);
-  return json_({success:true,id:id});
+  var parentRow=findDiscussionParent_(sh,parent,cls);
+  if(!parentRow) return json_({success:false,error:'Parent post not found'});
+  var discussionId=clean_(parentRow[13]||'default'),prompt=clean_(parentRow[9]||''),id=Utilities.getUuid(),display=first+' '+last.charAt(0).toUpperCase()+'.',now=new Date();
+  var row=[now,id,parent,cls,block,first,last,display,'',prompt,response,0,false,discussionId];
+  sh.appendRow(row);
+  var archived=archiveDiscussionRow_(ss,row,cls,discussionId);
+  return json_({success:true,id:id,activityType:archived.type,tab:archived.tab});
 }
 
 function discussionAgree_(sh,cls,id){
