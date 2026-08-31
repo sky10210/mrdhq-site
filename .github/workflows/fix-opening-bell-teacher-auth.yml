@@ -1,0 +1,34 @@
+name: Fix Opening Bell teacher auth
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-opening-bell-teacher-auth.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Separate teacher requests from Google auth
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('opening-bell/index.html')
+          text = p.read_text()
+          old = "async function api(action,data={}){const token=user?await user.getIdToken():'';const body=new URLSearchParams({action,idToken:token,...data});const response=await fetch(API,{method:'POST',body});const text=await response.text();let out;try{out=JSON.parse(text)}catch(e){throw new Error('The Opening Bell service needs to be redeployed.')}if(!out.success)throw new Error(out.error||'Request failed');return out}"
+          new = "async function api(action,data={}){const teacherAction=action==='openingBellTeacherAuth'||action==='openingBellStart';const token=!teacherAction&&user?await user.getIdToken():'';const body=new URLSearchParams({action,idToken:token,...data});const response=await fetch(API,{method:'POST',body});const text=await response.text();let out;try{out=JSON.parse(text)}catch(e){throw new Error('The Opening Bell service needs to be redeployed.')}if(!out.success)throw new Error(out.error||'Request failed');return out}"
+          if old not in text:
+              raise SystemExit('Expected API helper not found; refusing unsafe patch')
+          p.write_text(text.replace(old, new, 1))
+          PY
+      - name: Commit patch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add opening-bell/index.html
+          git commit -m 'Keep teacher Opening Bell controls off Google auth'
+          git push
