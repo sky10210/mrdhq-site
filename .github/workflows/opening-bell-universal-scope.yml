@@ -1,0 +1,60 @@
+name: Opening Bell universal class scope
+
+on:
+  push:
+    paths:
+      - '.github/workflows/opening-bell-universal-scope.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch universal Opening Bell behavior
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('opening-bell/index.html')
+          s = p.read_text()
+
+          old = "$('archiveClass').onchange=loadArchive;const initialClass=new URLSearchParams(location.search).get('class');if(initialClass&&[...$('archiveClass').options].some(o=>o.value===initialClass)){$('archiveClass').value=initialClass;auth.onAuthStateChanged(u=>{if(u)loadArchive()})}\nupdateBlocks();"
+          new = "$('archiveClass').onchange=loadArchive;const initialClass=new URLSearchParams(location.search).get('class');if(initialClass&&[...$('archiveClass').options].some(o=>o.value===initialClass)){$('archiveClass').value=initialClass;$('tClass').value=initialClass;$('archiveClass').disabled=true;$('tClass').disabled=true;$('archiveCard').querySelector('.lead').textContent='Previously launched Opening Bells for '+initialClass+'. Past bells stay open for absent or late submissions.';auth.onAuthStateChanged(u=>{if(u)loadArchive()})}\nupdateBlocks();"
+          if old not in s:
+              raise SystemExit('index initialClass pattern not found')
+          s = s.replace(old, new, 1)
+
+          old2 = "$('newBellBtn').onclick=()=>{$('teacherLive').classList.add('hidden');$('teacherSetup').classList.remove('hidden');$('teacherStatus').textContent='';$('tTitle').value='';$('tQuestion').value='';$('tResources').value=''};"
+          new2 = "$('newBellBtn').onclick=()=>{$('teacherLive').classList.add('hidden');$('teacherSetup').classList.remove('hidden');$('teacherStatus').textContent='';$('tTitle').value='';$('tQuestion').value='';$('tResources').value='';if(initialClass){$('tClass').value=initialClass;$('tClass').disabled=true}updateBlocks()};"
+          if old2 not in s:
+              raise SystemExit('newBell pattern not found')
+          s = s.replace(old2, new2, 1)
+
+          p.write_text(s)
+
+          g = Path('opening-bell/google-apps-script.gs')
+          gs = g.read_text()
+          old3 = "for(var i=values.length-1;i>0&&sessions.length<50;i--){"
+          new3 = "for(var i=values.length-1;i>0&&sessions.length<250;i--){"
+          if old3 not in gs:
+              raise SystemExit('history limit pattern not found')
+          gs = gs.replace(old3, new3, 1)
+          g.write_text(gs)
+          PY
+
+      - name: Commit universal Opening Bell patch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add opening-bell/index.html opening-bell/google-apps-script.gs
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Make Opening Bell universal across all classes"
+          git push
