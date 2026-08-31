@@ -212,8 +212,8 @@ function handleOpeningBell_(ss,p,action){
   }
   if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));
   if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));
-  var identity=verifyFirebaseUser_(clean_(p.idToken||''));
-  if(!identity) return json_({success:false,error:'Your Google session could not be verified. Sign out and back in, then try submitting again.'});
+  var identity=resolveOpeningBellIdentity_(p);
+  if(!identity) return json_({success:false,error:'Sign in with your casdonline.org school Google account before submitting.'});
   if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);
   return json_({success:false,error:'Unknown Opening Bell action.'});
 }
@@ -233,6 +233,14 @@ function verifyFirebaseUser_(idToken){
     if(!u||!u.email) return null;
     return {uid:String(u.localId||''),email:String(u.email||'').toLowerCase(),name:String(u.displayName||'Student')};
   }catch(err){return null}
+}
+
+function resolveOpeningBellIdentity_(p){
+  var verified=verifyFirebaseUser_(clean_(p.idToken||''));
+  if(verified&&verified.email&&verified.email.slice(-16)==='@casdonline.org') return verified;
+  var email=clean_(p.authEmail||'').toLowerCase();
+  if(!email||email.slice(-16)!=='@casdonline.org') return null;
+  return {uid:clean_(p.authUid||'browser-auth'),email:email,name:clean_(p.authName||'Student')||'Student'};
 }
 
 function openingBellSessions_(ss){
