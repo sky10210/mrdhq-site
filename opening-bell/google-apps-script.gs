@@ -202,13 +202,25 @@ var FIREBASE_WEB_API_KEY_ = 'AIzaSyA_R--xQW8CdgbI1HGx5oxbqljHBGCujhY';
 var OPENING_BELL_TEACHER_ = 'skyler.dipasquale@casdonline.org';
 
 function handleOpeningBell_(ss,p,action){
+  if(action==='openingBellTeacherAuth'){
+    if(!validOpeningBellTeacherPasscode_(clean_(p.teacherPasscode||''))) return json_({success:false,error:'Incorrect teacher passcode.'});
+    return json_({success:true});
+  }
+  if(action==='openingBellStart'){
+    if(!validOpeningBellTeacherPasscode_(clean_(p.teacherPasscode||''))) return json_({success:false,error:'Teacher passcode required.'});
+    return openingBellStart_(ss,p,{email:OPENING_BELL_TEACHER_,name:'Teacher',uid:'teacher-passcode'});
+  }
   var identity=verifyFirebaseUser_(clean_(p.idToken||''));
   if(!identity) return json_({success:false,error:'Sign in with your school Google account first.'});
-  if(action==='openingBellStart') return openingBellStart_(ss,p,identity);
   if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));
   if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));
   if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);
   return json_({success:false,error:'Unknown Opening Bell action.'});
+}
+
+function validOpeningBellTeacherPasscode_(value){
+  var expected=PropertiesService.getScriptProperties().getProperty('OPENING_BELL_TEACHER_PASSCODE');
+  return !!expected && clean_(value)===clean_(expected);
 }
 
 function verifyFirebaseUser_(idToken){
