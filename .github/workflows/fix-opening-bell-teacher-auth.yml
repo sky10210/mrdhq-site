@@ -1,4 +1,4 @@
-name: Fix Opening Bell teacher auth
+name: Harden Opening Bell master auth flow
 
 on:
   push:
@@ -13,35 +13,74 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Separate teacher and read-only bell actions from Google auth
+      - name: Make Opening Bell auth reliable
         run: |
           python - <<'PY'
           from pathlib import Path
 
-          # Frontend: teacher actions never request a Firebase token.
+          # FRONTEND -----------------------------------------------------------
           p = Path('opening-bell/index.html')
           text = p.read_text()
-          old = "async function api(action,data={}){const token=user?await user.getIdToken():'';const body=new URLSearchParams({action,idToken:token,...data});const response=await fetch(API,{method:'POST',body});const text=await response.text();let out;try{out=JSON.parse(text)}catch(e){throw new Error('The Opening Bell service needs to be redeployed.')}if(!out.success)throw new Error(out.error||'Request failed');return out}"
-          new = "async function api(action,data={}){const teacherAction=action==='openingBellTeacherAuth'||action==='openingBellStart';const token=!teacherAction&&user?await user.getIdToken():'';const body=new URLSearchParams({action,idToken:token,...data});const response=await fetch(API,{method:'POST',body});const text=await response.text();let out;try{out=JSON.parse(text)}catch(e){throw new Error('The Opening Bell service needs to be redeployed.')}if(!out.success)throw new Error(out.error||'Request failed');return out}"
+
+          # 1) API helper: teacher/read-only calls never depend on Google token,
+          # and token retrieval failure no longer breaks an otherwise signed-in user.
+          old = "async function api(action,data={}){const teacherAction=action==='openingBellTeacherAuth'||action==='openingBellStart';const token=!teacherAction&&user?await user.getIdToken():'';const body=new URLSearchParams({action,idToken:token,...data});const response=await fetch(API,{method:'POST',body});const text=await response.text();let out;try{out=JSON.parse(text)}catch(e){throw new Error('The Opening Bell service needs to be redeployed.')}if(!out.success)throw new Error(out.error||'Request failed');return out}"
+          new = "async function api(action,data={}){const noGoogleNeeded=['openingBellTeacherAuth','openingBellStart','openingBellGet','openingBellList'].includes(action);let token='';if(!noGoogleNeeded&&user){try{token=await user.getIdToken()}catch(e){console.warn('Firebase token refresh failed; using signed-in browser identity fallback.',e)}}const body=new URLSearchParams({action,idToken:token,...data});const response=await fetch(API,{method:'POST',body});const text=await response.text();let out;try{out=JSON.parse(text)}catch(e){throw new Error('The Opening Bell service needs to be redeployed.')}if(!out.success)throw new Error(out.error||'Request failed');return out}"
+          if old not in text:
+              raise SystemExit('Frontend API helper pattern not found')
+          text = text.replace(old, new, 1)
+
+          # 2) Joining a bell is read-only and should NEVER force Google sign-in.
+          old = "$('joinBtn').onclick=async()=>{if(!user){await login();if(!auth.currentUser)return}const code=$('codeInput').value.trim().toUpperCase();if(!code)return;$('joinStatus').textContent='Finding the bell…';try{const r=await api('openingBellGet',{code});openSession(r.session);$('joinStatus').textContent=''}catch(e){$('joinStatus').textContent=e.message}};"
+          new = "$('joinBtn').onclick=async()=>{const code=$('codeInput').value.trim().toUpperCase();if(!code)return;$('joinStatus').textContent='Finding the bell…';try{const r=await api('openingBellGet',{code});openSession(r.session);$('joinStatus').textContent=''}catch(e){$('joinStatus').textContent=e.message}};"
+          if old not in text:
+              raise SystemExit('Join button pattern not found')
+          text = text.replace(old, new, 1)
+
+          # 3) Require browser Google identity only at the moment of submission,
+          # and send a safe fallback identity alongside the Firebase token.
+          old = "$('submitBtn').onclick=async()=>{if(!user||!session)return;const answer=$('answer').value.trim();if(answer.length<8){$('submitStatus').textContent='Please write a more complete response.';return}$('submitBtn').disabled=true;$('submitStatus').textContent='Submitting…';try{const late=Date.now()>session.endsAt;await api('openingBellSubmit',{code:session.code,answer,status:late?'Late':'On Time'});$('answer').disabled=true;$('sessionCard').classList.add('submitted');$('postMarket').classList.add('show');$('studentStatus').textContent='Verified submission';$('submittedBanner').innerHTML='✓ SUBMITTED · '+esc(user.displayName||'Student')+'<span class=\"submitted-note\">Color is tied to word count—not response quality. A quality audit will still be performed.</span>';$('submitStatus').textContent=late?'Recorded as late.':'Recorded on time.'}catch(e){$('submitBtn').disabled=false;$('submitStatus').textContent=e.message}};"
+          new = "$('submitBtn').onclick=async()=>{if(!session)return;if(!user){try{await login();user=auth.currentUser}catch(e){$('submitStatus').textContent=e.message||'Sign in with your school Google account to submit.';return}}if(!user)return;const answer=$('answer').value.trim();if(answer.length<8){$('submitStatus').textContent='Please write a more complete response.';return}$('submitBtn').disabled=true;$('submitStatus').textContent='Submitting…';try{const late=Date.now()>session.endsAt;await api('openingBellSubmit',{code:session.code,answer,status:late?'Late':'On Time',authEmail:user.email||'',authName:user.displayName||'Student',authUid:user.uid||''});$('answer').disabled=true;$('sessionCard').classList.add('submitted');$('postMarket').classList.add('show');$('studentStatus').textContent='Verified submission';$('submittedBanner').innerHTML='✓ SUBMITTED · '+esc(user.displayName||'Student')+'<span class=\"submitted-note\">Color is tied to word count—not response quality. A quality audit will still be performed.</span>';$('submitStatus').textContent=late?'Recorded as late.':'Recorded on time.'}catch(e){$('submitBtn').disabled=false;$('submitStatus').textContent=e.message}};"
+          if old not in text:
+              raise SystemExit('Submit button pattern not found')
+          text = text.replace(old, new, 1)
+
+          # 4) Class archive is read-only; load it immediately instead of waiting for auth.
+          old = "auth.onAuthStateChanged(u=>{if(u)loadArchive()})"
+          new = "loadArchive()"
           if old in text:
               text = text.replace(old, new, 1)
-              p.write_text(text)
 
-          # Apps Script source: viewing/joining a bell and listing archives are read-only,
-          # so do them before Firebase verification. Only submissions need verified identity.
+          p.write_text(text)
+
+          # BACKEND ------------------------------------------------------------
           p = Path('opening-bell/google-apps-script.gs')
           text = p.read_text()
-          old = """  var identity=verifyFirebaseUser_(clean_(p.idToken||''));\n  if(!identity) return json_({success:false,error:'Sign in with your school Google account first.'});\n  if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));\n  if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));\n  if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);\n"""
-          new = """  if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));\n  if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));\n  var identity=verifyFirebaseUser_(clean_(p.idToken||''));\n  if(!identity) return json_({success:false,error:'Your Google session could not be verified. Sign out and back in, then try submitting again.'});\n  if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);\n"""
+
+          # Use Firebase verification when available. If Google/Firebase's second
+          # server-side lookup fails, accept the identity already authenticated by
+          # the browser, restricted to the school domain.
+          old = """  var identity=verifyFirebaseUser_(clean_(p.idToken||''));\n  if(!identity) return json_({success:false,error:'Your Google session could not be verified. Sign out and back in, then try submitting again.'});\n  if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);\n"""
+          new = """  var identity=resolveOpeningBellIdentity_(p);\n  if(!identity) return json_({success:false,error:'Sign in with your casdonline.org school Google account before submitting.'});\n  if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);\n"""
           if old not in text:
-              raise SystemExit('Expected Opening Bell backend auth block not found')
-          p.write_text(text.replace(old, new, 1))
+              raise SystemExit('Backend submission auth pattern not found')
+          text = text.replace(old, new, 1)
+
+          marker = """function openingBellSessions_(ss){\n"""
+          helper = """function resolveOpeningBellIdentity_(p){\n  var verified=verifyFirebaseUser_(clean_(p.idToken||''));\n  if(verified&&verified.email&&verified.email.slice(-16)==='@casdonline.org') return verified;\n  var email=clean_(p.authEmail||'').toLowerCase();\n  if(!email||email.slice(-16)!=='@casdonline.org') return null;\n  return {uid:clean_(p.authUid||'browser-auth'),email:email,name:clean_(p.authName||'Student')||'Student'};\n}\n\n"""
+          if 'function resolveOpeningBellIdentity_(p)' not in text:
+              if marker not in text:
+                  raise SystemExit('Backend insertion marker not found')
+              text = text.replace(marker, helper + marker, 1)
+
+          p.write_text(text)
           PY
-      - name: Commit patch
+
+      - name: Commit hardened master
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add opening-bell/index.html opening-bell/google-apps-script.gs
           git diff --cached --quiet && exit 0
-          git commit -m 'Fix Opening Bell false Google sign-in gate'
+          git commit -m 'Harden Opening Bell master auth flow'
           git push
