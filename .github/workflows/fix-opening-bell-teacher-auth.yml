@@ -13,22 +13,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Separate teacher requests from Google auth
+      - name: Separate teacher and read-only bell actions from Google auth
         run: |
           python - <<'PY'
           from pathlib import Path
+
+          # Frontend: teacher actions never request a Firebase token.
           p = Path('opening-bell/index.html')
           text = p.read_text()
           old = "async function api(action,data={}){const token=user?await user.getIdToken():'';const body=new URLSearchParams({action,idToken:token,...data});const response=await fetch(API,{method:'POST',body});const text=await response.text();let out;try{out=JSON.parse(text)}catch(e){throw new Error('The Opening Bell service needs to be redeployed.')}if(!out.success)throw new Error(out.error||'Request failed');return out}"
           new = "async function api(action,data={}){const teacherAction=action==='openingBellTeacherAuth'||action==='openingBellStart';const token=!teacherAction&&user?await user.getIdToken():'';const body=new URLSearchParams({action,idToken:token,...data});const response=await fetch(API,{method:'POST',body});const text=await response.text();let out;try{out=JSON.parse(text)}catch(e){throw new Error('The Opening Bell service needs to be redeployed.')}if(!out.success)throw new Error(out.error||'Request failed');return out}"
+          if old in text:
+              text = text.replace(old, new, 1)
+              p.write_text(text)
+
+          # Apps Script source: viewing/joining a bell and listing archives are read-only,
+          # so do them before Firebase verification. Only submissions need verified identity.
+          p = Path('opening-bell/google-apps-script.gs')
+          text = p.read_text()
+          old = """  var identity=verifyFirebaseUser_(clean_(p.idToken||''));\n  if(!identity) return json_({success:false,error:'Sign in with your school Google account first.'});\n  if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));\n  if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));\n  if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);\n"""
+          new = """  if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));\n  if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));\n  var identity=verifyFirebaseUser_(clean_(p.idToken||''));\n  if(!identity) return json_({success:false,error:'Your Google session could not be verified. Sign out and back in, then try submitting again.'});\n  if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);\n"""
           if old not in text:
-              raise SystemExit('Expected API helper not found; refusing unsafe patch')
+              raise SystemExit('Expected Opening Bell backend auth block not found')
           p.write_text(text.replace(old, new, 1))
           PY
       - name: Commit patch
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add opening-bell/index.html
-          git commit -m 'Keep teacher Opening Bell controls off Google auth'
+          git add opening-bell/index.html opening-bell/google-apps-script.gs
+          git diff --cached --quiet && exit 0
+          git commit -m 'Fix Opening Bell false Google sign-in gate'
           git push
