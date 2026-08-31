@@ -15,40 +15,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Patch Opening Bell teacher authorization
-        shell: python
+        shell: bash
         run: |
+          python - <<'PY'
           from pathlib import Path
 
           html_path = Path('opening-bell/index.html')
           html = html_path.read_text()
-
           replacements = [
-            (
-              '<p class="lead">Sign in with your teacher Google account, then publish the exact bell your class should receive.</p>',
-              '<p class="lead">Enter the teacher passcode, then publish the exact bell your class should receive. No teacher Google sign-in is required to launch.</p>'
-            ),
-            (
-              "$('ringBtn').onclick=async()=>{if(!user){await login();if(!auth.currentUser)return}if((user.email||'').toLowerCase()!==TEACHER_EMAIL){$('teacherStatus').textContent='Teacher account required.';return}const data={",
-              "$('ringBtn').onclick=async()=>{if(!teacherPanelUnlocked||!teacherPasscode){$('teacherStatus').textContent='Unlock the teacher panel with the passcode first.';return}const data={"
-            ),
-            (
-              "const r=await api('openingBellStart',data);",
-              "const r=await api('openingBellStart',{...data,teacherPasscode});"
-            ),
-            (
-              "const TEACHER_PANEL_PASSWORD='maverick',teacherAuth=document.createElement('div');",
-              "let teacherPanelUnlocked=false,teacherPasscode='';const teacherAuth=document.createElement('div');"
-            ),
-            (
-              "function unlockTeacherPanel(){if($('teacherPassword').value!==TEACHER_PANEL_PASSWORD){$('teacherAuthStatus').textContent='Incorrect password.';$('teacherPassword').value='';$('teacherPassword').focus();return}teacherAuth.classList.add('hidden');$('teacherSetup').classList.remove('hidden');$('teacherAuthStatus').textContent=''}",
-              "async function unlockTeacherPanel(){const entered=$('teacherPassword').value;if(!entered){$('teacherAuthStatus').textContent='Enter the teacher passcode.';$('teacherPassword').focus();return}$('unlockTeacher').disabled=true;$('teacherAuthStatus').textContent='Checking…';try{await api('openingBellTeacherAuth',{teacherPasscode:entered});teacherPanelUnlocked=true;teacherPasscode=entered;teacherAuth.classList.add('hidden');$('teacherSetup').classList.remove('hidden');$('teacherAuthStatus').textContent=''}catch(e){teacherPanelUnlocked=false;teacherPasscode='';$('teacherAuthStatus').textContent=e.message;$('teacherPassword').select()}finally{$('unlockTeacher').disabled=false}}"
-            ),
-            (
-              "$('teacherBtn').onclick=()=>{teacherAuth.classList.remove('hidden');",
-              "$('teacherBtn').onclick=()=>{teacherPanelUnlocked=false;teacherPasscode='';teacherAuth.classList.remove('hidden');"
-            ),
+            ('<p class="lead">Sign in with your teacher Google account, then publish the exact bell your class should receive.</p>', '<p class="lead">Enter the teacher passcode, then publish the exact bell your class should receive. No teacher Google sign-in is required to launch.</p>'),
+            ("$('ringBtn').onclick=async()=>{if(!user){await login();if(!auth.currentUser)return}if((user.email||'').toLowerCase()!==TEACHER_EMAIL){$('teacherStatus').textContent='Teacher account required.';return}const data={", "$('ringBtn').onclick=async()=>{if(!teacherPanelUnlocked||!teacherPasscode){$('teacherStatus').textContent='Unlock the teacher panel with the passcode first.';return}const data={"),
+            ("const r=await api('openingBellStart',data);", "const r=await api('openingBellStart',{...data,teacherPasscode});"),
+            ("const TEACHER_PANEL_PASSWORD='maverick',teacherAuth=document.createElement('div');", "let teacherPanelUnlocked=false,teacherPasscode='';const teacherAuth=document.createElement('div');"),
+            ("function unlockTeacherPanel(){if($('teacherPassword').value!==TEACHER_PANEL_PASSWORD){$('teacherAuthStatus').textContent='Incorrect password.';$('teacherPassword').value='';$('teacherPassword').focus();return}teacherAuth.classList.add('hidden');$('teacherSetup').classList.remove('hidden');$('teacherAuthStatus').textContent=''}", "async function unlockTeacherPanel(){const entered=$('teacherPassword').value;if(!entered){$('teacherAuthStatus').textContent='Enter the teacher passcode.';$('teacherPassword').focus();return}$('unlockTeacher').disabled=true;$('teacherAuthStatus').textContent='Checking…';try{await api('openingBellTeacherAuth',{teacherPasscode:entered});teacherPanelUnlocked=true;teacherPasscode=entered;teacherAuth.classList.add('hidden');$('teacherSetup').classList.remove('hidden');$('teacherAuthStatus').textContent=''}catch(e){teacherPanelUnlocked=false;teacherPasscode='';$('teacherAuthStatus').textContent=e.message;$('teacherPassword').select()}finally{$('unlockTeacher').disabled=false}}"),
+            ("$('teacherBtn').onclick=()=>{teacherAuth.classList.remove('hidden');", "$('teacherBtn').onclick=()=>{teacherPanelUnlocked=false;teacherPasscode='';teacherAuth.classList.remove('hidden');"),
           ]
-
           for old, new in replacements:
             if old not in html:
               raise SystemExit('Expected Opening Bell HTML pattern not found: ' + old[:100])
@@ -57,40 +38,13 @@ jobs:
 
           gs_path = Path('opening-bell/google-apps-script.gs')
           gs = gs_path.read_text()
-          old = """function handleOpeningBell_(ss,p,action){
-  var identity=verifyFirebaseUser_(clean_(p.idToken||''));
-  if(!identity) return json_({success:false,error:'Sign in with your school Google account first.'});
-  if(action==='openingBellStart') return openingBellStart_(ss,p,identity);
-  if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));
-  if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));
-  if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);
-  return json_({success:false,error:'Unknown Opening Bell action.'});
-}"""
-          new = """function handleOpeningBell_(ss,p,action){
-  if(action==='openingBellTeacherAuth'){
-    if(!validOpeningBellTeacherPasscode_(clean_(p.teacherPasscode||''))) return json_({success:false,error:'Incorrect teacher passcode.'});
-    return json_({success:true});
-  }
-  if(action==='openingBellStart'){
-    if(!validOpeningBellTeacherPasscode_(clean_(p.teacherPasscode||''))) return json_({success:false,error:'Teacher passcode required.'});
-    return openingBellStart_(ss,p,{email:OPENING_BELL_TEACHER_,name:'Teacher',uid:'teacher-passcode'});
-  }
-  var identity=verifyFirebaseUser_(clean_(p.idToken||''));
-  if(!identity) return json_({success:false,error:'Sign in with your school Google account first.'});
-  if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));
-  if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));
-  if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);
-  return json_({success:false,error:'Unknown Opening Bell action.'});
-}
-
-function validOpeningBellTeacherPasscode_(value){
-  var expected=PropertiesService.getScriptProperties().getProperty('OPENING_BELL_TEACHER_PASSCODE');
-  return !!expected && clean_(value)===clean_(expected);
-}"""
+          old = "function handleOpeningBell_(ss,p,action){\n  var identity=verifyFirebaseUser_(clean_(p.idToken||''));\n  if(!identity) return json_({success:false,error:'Sign in with your school Google account first.'});\n  if(action==='openingBellStart') return openingBellStart_(ss,p,identity);\n  if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));\n  if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));\n  if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);\n  return json_({success:false,error:'Unknown Opening Bell action.'});\n}"
+          new = "function handleOpeningBell_(ss,p,action){\n  if(action==='openingBellTeacherAuth'){\n    if(!validOpeningBellTeacherPasscode_(clean_(p.teacherPasscode||''))) return json_({success:false,error:'Incorrect teacher passcode.'});\n    return json_({success:true});\n  }\n  if(action==='openingBellStart'){\n    if(!validOpeningBellTeacherPasscode_(clean_(p.teacherPasscode||''))) return json_({success:false,error:'Teacher passcode required.'});\n    return openingBellStart_(ss,p,{email:OPENING_BELL_TEACHER_,name:'Teacher',uid:'teacher-passcode'});\n  }\n  var identity=verifyFirebaseUser_(clean_(p.idToken||''));\n  if(!identity) return json_({success:false,error:'Sign in with your school Google account first.'});\n  if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));\n  if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));\n  if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);\n  return json_({success:false,error:'Unknown Opening Bell action.'});\n}\n\nfunction validOpeningBellTeacherPasscode_(value){\n  var expected=PropertiesService.getScriptProperties().getProperty('OPENING_BELL_TEACHER_PASSCODE');\n  return !!expected && clean_(value)===clean_(expected);\n}"
           if old not in gs:
             raise SystemExit('Expected Apps Script Opening Bell handler not found')
           gs = gs.replace(old, new, 1)
           gs_path.write_text(gs)
+          PY
 
       - name: Commit hotfix
         run: |
