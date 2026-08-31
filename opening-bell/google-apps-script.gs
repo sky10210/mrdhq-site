@@ -313,7 +313,7 @@ function openingBellGet_(ss,code){
 function openingBellList_(ss,className){
   className=normalizeClass_(className);
   var values=openingBellSessions_(ss).getDataRange().getValues(),sessions=[];
-  for(var i=values.length-1;i>0&&sessions.length<50;i--){
+  for(var i=values.length-1;i>0&&sessions.length<250;i--){
     if(String(values[i][3])!==className||String(values[i][12]).toLowerCase()==='false')continue;
     sessions.push(publicSession_(sessionFromRow_(values[i],i+1)));
   }
