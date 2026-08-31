@@ -210,10 +210,10 @@ function handleOpeningBell_(ss,p,action){
     if(!validOpeningBellTeacherPasscode_(clean_(p.teacherPasscode||''))) return json_({success:false,error:'Teacher passcode required.'});
     return openingBellStart_(ss,p,{email:OPENING_BELL_TEACHER_,name:'Teacher',uid:'teacher-passcode'});
   }
-  var identity=verifyFirebaseUser_(clean_(p.idToken||''));
-  if(!identity) return json_({success:false,error:'Sign in with your school Google account first.'});
   if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));
   if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));
+  var identity=verifyFirebaseUser_(clean_(p.idToken||''));
+  if(!identity) return json_({success:false,error:'Your Google session could not be verified. Sign out and back in, then try submitting again.'});
   if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);
   return json_({success:false,error:'Unknown Opening Bell action.'});
 }
