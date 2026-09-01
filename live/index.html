@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F6F1E8" />
+  <title>Classroom Live | Mr. D's HQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#F6F1E8;--surface:#FFFDF8;--text:#172033;--muted:#68707B;--accent:#2F6FB5;--teal:#18776F;--line:rgba(23,32,51,.14);--live:#C83D3D;--shadow:0 18px 48px rgba(63,48,33,.10)}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Poppins,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:linear-gradient(145deg,#FBF8F2 0%,var(--bg) 55%,#EFE6D8 100%)}
+    body{min-height:100vh;min-height:100dvh}.shell{width:min(1180px,calc(100% - 40px));margin:0 auto}.topbar{border-bottom:1px solid var(--line);background:rgba(250,247,240,.94);backdrop-filter:blur(14px)}
+    .nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none;font-weight:800}.mark{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#E7D6B8,#BFD6EA);font-family:Georgia,serif;font-size:1.6rem}.back{color:var(--muted);text-decoration:none;font-weight:700;font-size:.86rem;padding:10px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,253,248,.75)}
+    main{padding:30px 0 42px}.hero{text-align:center;margin-bottom:20px}.eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}h1{font-size:clamp(2rem,5vw,3.6rem);letter-spacing:-.06em;line-height:1;margin:0 0 10px}.hero p{margin:0 auto;color:var(--muted);max-width:720px;font-size:.98rem;line-height:1.55}
+    .status-row{display:flex;justify-content:center;align-items:center;gap:10px;margin:18px 0 14px}.status{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;border:1px solid var(--line);background:rgba(255,253,248,.85);font-weight:750;font-size:.84rem}.dot{width:9px;height:9px;border-radius:50%;background:#9CA3AF}.status.live .dot{background:var(--live);box-shadow:0 0 0 5px rgba(200,61,61,.12)}
+    .camera-card{width:min(1050px,100%);margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow)}
+    .camera-frame{position:relative;width:100%;aspect-ratio:16/10;max-height:72dvh;border:2px solid rgba(23,32,51,.18);border-radius:20px;overflow:hidden;background:#12151B;display:grid;place-items:center}
+    #remoteVideo{width:100%;height:100%;object-fit:contain;background:#111;display:none}.offline{padding:32px;text-align:center;color:#EEF2F7}.offline strong{display:block;font-size:clamp(1.2rem,3vw,1.8rem);margin-bottom:8px}.offline span{font-size:.92rem;color:#BFC7D1;line-height:1.5}
+    .camera-footer{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 3px 2px;color:var(--muted);font-size:.82rem}.hint{font-weight:600}.fullscreen{appearance:none;border:1px solid var(--line);background:#F7F3EB;color:var(--text);font:inherit;font-weight:750;border-radius:12px;padding:10px 13px;cursor:pointer;min-height:44px}
+    @media (max-width:900px){.shell{width:min(100% - 28px,1180px)}main{padding-top:22px}.camera-card{padding:12px;border-radius:22px}.camera-frame{border-radius:16px;aspect-ratio:4/3;max-height:none}.hero p{font-size:.9rem}.camera-footer{padding-top:10px}.fullscreen{padding:11px 15px}}
+    @media (orientation:landscape) and (max-height:700px){main{padding:14px 0 20px}.hero{margin-bottom:10px}.hero p{display:none}.status-row{margin:10px 0}.camera-frame{aspect-ratio:16/9;max-height:72vh}.camera-card{padding:10px}}
+    @supports(padding:max(0px)){body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}}
+  </style>
+</head>
+<body>
+  <header class="topbar"><nav class="shell nav"><a class="brand" href="/"><span class="mark">D</span><span>Mr. D's HQ</span></a><a class="back" href="/">Back to Student Portal</a></nav></header>
+  <main class="shell">
+    <section class="hero"><div class="eyebrow">Room A112</div><h1>Classroom Live</h1><p>View the live document camera feed from class. Rotate your iPad sideways for the largest view.</p></section>
+    <div class="status-row"><div id="status" class="status"><span class="dot"></span><span id="statusText">Offline</span></div></div>
+    <section class="camera-card" aria-label="Classroom live video">
+      <div id="frame" class="camera-frame">
+        <video id="remoteVideo" autoplay playsinline muted></video>
+        <div id="offline" class="offline"><strong>No live classroom feed right now.</strong><span>Keep this page open. When Mr. D starts the document camera, the live view will appear here.</span></div>
+      </div>
+      <div class="camera-footer"><span class="hint">Tip: landscape mode works best on iPad.</span><button class="fullscreen" id="fullscreenBtn" type="button">Full Screen</button></div>
+    </section>
+  </main>
+  <script>
+    const frame=document.getElementById('frame');
+    document.getElementById('fullscreenBtn').addEventListener('click',async()=>{
+      try{if(!document.fullscreenElement){await frame.requestFullscreen?.();}else{await document.exitFullscreen?.();}}catch(e){}
+    });
+    // Streaming transport hook. The viewer UI is ready; a relay/SFU connection will attach its MediaStream to #remoteVideo.
+    window.MRDHQ_LIVE={
+      showStream(stream){const v=document.getElementById('remoteVideo');v.srcObject=stream;v.style.display='block';document.getElementById('offline').style.display='none';document.getElementById('status').classList.add('live');document.getElementById('statusText').textContent='LIVE';},
+      showOffline(){const v=document.getElementById('remoteVideo');v.srcObject=null;v.style.display='none';document.getElementById('offline').style.display='block';document.getElementById('status').classList.remove('live');document.getElementById('statusText').textContent='Offline';}
+    };
+  </script>
+</body>
+</html>
