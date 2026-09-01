@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coding Basics | Mr. D's HQ</title>
+<link rel="stylesheet" href="lab.css">
+<script src="lab.js" defer></script>
+</head>
+<body>
+<header><nav class="shell"><a class="brand" href="/"><span class="mark">D</span> Mr. D's HQ</a><div class="links"><a href="/">Student Portal</a><a href="/live/">Classroom Live</a><a href="/coding-basics/" aria-current="page">Coding Basics</a></div></nav></header>
+<main class="shell">
+<div class="intro"><div><p class="eyebrow">MR. D · ROOM A112</p><h1>Coding Basics</h1><p>Change the code. Run it. See what you made.</p></div><span class="badge">HTML builds · CSS styles</span></div>
+<section class="toolbar" aria-label="Editor tools"><label for="example">Example <select id="example"><option value="cafe">Café homepage</option><option value="basics">My first webpage</option><option value="style">Colors & style</option><option value="blank">Blank starter</option></select></label><button id="load">Load example</button><button class="primary" id="run">Run Code ▶</button><button id="download">Download HTML</button><button id="reset">Reset example</button></section>
+<div class="workspace"><section class="pane"><div class="pane-title"><label for="code">Your code <span>index.html</span></label></div><textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="editor-help"></textarea></section><section class="pane"><div class="pane-title">Your webpage <span>Preview</span></div><iframe id="preview" title="Your HTML webpage preview" sandbox="" referrerpolicy="no-referrer"></iframe></section></div>
+<div class="under"><p id="editor-help">Edit the text between tags, then click Run Code (Ctrl/⌘ + Enter). HTML and CSS work here; JavaScript is disabled in the preview.</p><p id="status" role="status" aria-live="polite"></p></div>
+<p class="save-note">Progress saves in this browser only, not to your Google account or to Mr. D. On shared devices, download your file before leaving. <strong>index.html</strong> is the usual filename for a website’s home page.</p>
+<div class="learning"><section class="card"><h2>Try it: build your café</h2><ol><li>Replace “Corner Café” with your own brand name.</li><li>Write a tagline for your target customer.</li><li>Add a third menu item with its price.</li><li>Change the background and heading colors.</li><li>Add a paragraph explaining why customers should choose you.</li></ol><p>Predict what will change before clicking Run Code. Then explain which tag or style made it happen.</p></section>
+<section class="card"><h2>How to read the code</h2><p><code>&lt;h1&gt;Your café name&lt;/h1&gt;</code></p><p><strong>&lt;h1&gt;</strong> opens a heading. The text is its content. <strong>&lt;/h1&gt;</strong> closes it. Most elements use a matching pair.</p><p><strong>HTML</strong> describes the content. <strong>CSS</strong> controls its appearance. Put CSS inside <code>&lt;style&gt;</code> in the page’s <code>&lt;head&gt;</code>.</p><p>Example: <code>h1 { color: navy; }</code> makes the main heading navy.</p></section></div>
+<section class="card reference"><h2>Your HTML cheat sheet</h2><div class="table-wrap"><table><thead><tr><th>Code</th><th>What it does</th><th>Try changing</th></tr></thead><tbody>
+<tr><td><code>&lt;h1&gt;Main heading&lt;/h1&gt;</code></td><td>The main page heading</td><td>Your business name</td></tr>
+<tr><td><code>&lt;h2&gt;Our menu&lt;/h2&gt;</code></td><td>A section heading</td><td>A menu or About section</td></tr>
+<tr><td><code>&lt;p&gt;Welcome!&lt;/p&gt;</code></td><td>A paragraph</td><td>Your tagline or description</td></tr>
+<tr><td><code>&lt;a href="https://mrdhq.com"&gt;Visit Mr. D&lt;/a&gt;</code></td><td>A link; href is the destination</td><td>The URL and link text</td></tr>
+<tr><td><code>&lt;img src="photo.jpg" alt="Our café"&gt;</code></td><td>An image; alt describes it</td><td>Use a reachable image URL in this editor. Local files require hosting together.</td></tr>
+<tr><td><code>&lt;ul&gt;&lt;li&gt;Latte&lt;/li&gt;&lt;/ul&gt;</code></td><td>A list with one item</td><td>Add another &lt;li&gt; item inside the list</td></tr>
+<tr><td><code>&lt;button&gt;Order now&lt;/button&gt;</code></td><td>A button</td><td>Its label; a button needs extra code to perform an action</td></tr>
+<tr><td><code>&lt;strong&gt;Fresh daily&lt;/strong&gt;</code></td><td>Important text, usually bold</td><td>Highlight a key selling point</td></tr>
+</tbody></table></div><p>Preview tip: links open inside the preview and some websites block that. External images may be filtered at school. The built-in examples need no external resources.</p></section>
+</main>
+</body></html>
