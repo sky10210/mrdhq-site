@@ -1,0 +1,32 @@
+name: Fix Project Gallery Drive Images
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-project-gallery-drive-images.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Drive image URLs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('marketing/project-gallery/index.html')
+          s=p.read_text()
+          needle="function identity(){return{firstName:$('firstName').value.trim(),lastName:$('lastName').value.trim(),block:$('block').value};}"
+          add=needle+"\nfunction displayImageUrl(url){const s=String(url||'');const m=s.match(/[?&]id=([^&]+)/)||s.match(/\\/d\\/([^/]+)/);return m?'https://drive.google.com/thumbnail?id='+encodeURIComponent(m[1])+'&sz=w1600':s;}"
+          if 'function displayImageUrl' not in s:
+              s=s.replace(needle,add)
+          s=s.replace('src="${esc(e.imageUrl)}" alt="Entry ${e.entryNumber}"','src="${esc(displayImageUrl(e.imageUrl))}" alt="Entry ${e.entryNumber}" loading="lazy"')
+          p.write_text(s)
+          PY
+      - name: Commit fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add marketing/project-gallery/index.html
+          git diff --cached --quiet || git commit -m 'Fix Drive images in Project Gallery'
+          git push
