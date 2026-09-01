@@ -18,6 +18,7 @@
     .gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:22px;background:rgba(23,32,51,.46);backdrop-filter:blur(12px)}.gate.hidden{display:none}.gate-card{width:min(420px,100%);background:#FFFDF8;border:1px solid var(--line);border-radius:24px;box-shadow:0 28px 80px rgba(23,32,51,.22);padding:24px}.gate-card h2{margin:0 0 6px;font-size:1.35rem;letter-spacing:-.04em}.gate-card p{margin:0 0 16px;color:var(--muted);font-size:.86rem;line-height:1.5}.gate-row{display:grid;gap:10px}.gate-error{min-height:20px;margin-top:8px;color:var(--danger);font-size:.8rem;font-weight:700}
     @media(max-width:900px){.grid{grid-template-columns:1fr}.heading{align-items:start;flex-direction:column}.shell{width:min(100% - 28px,1180px)}.frame{aspect-ratio:4/3}.controls{grid-template-columns:1fr 1fr}.controls h2,.viewer,.note{grid-column:1/-1}}
     @media(max-width:620px){.controls{grid-template-columns:1fr}.controls h2,.viewer,.note{grid-column:auto}.toolbar .btn{width:100%}}
+    button:disabled{opacity:.5;cursor:not-allowed}.status,.note,.field label,.viewer a,.viewer strong{font-size:.875rem}
   </style>
 </head>
 <body>
@@ -26,10 +27,12 @@
     <h2>Teacher Controls</h2>
     <p>Enter the Classroom Live passcode to access camera controls.</p>
     <div class="gate-row">
+      <label for="teacherPasscode">Teacher passcode</label>
       <input id="teacherPasscode" type="password" placeholder="Enter passcode" autocomplete="off" />
       <button id="unlockTeacher" class="btn primary" type="button">Unlock Teacher Controls</button>
     </div>
-    <div class="gate-error" id="gateError"></div>
+    <div class="gate-error" id="gateError" role="status" aria-live="polite"></div>
+    <button id="checkSetupBtn" class="btn secondary" type="button">Check Connection Setup</button>
   </div>
 </div>
 <header class="topbar"><nav class="shell nav"><a class="brand" href="/"><span class="mark">D</span><span>Mr. D's HQ</span></a><span class="pill">Teacher View</span></nav></header>
@@ -38,80 +41,21 @@
   <div class="grid">
     <section class="card video-card">
       <div class="frame"><video id="preview" autoplay playsinline muted></video><div id="empty" class="empty"><strong>Camera preview is off.</strong><span>Choose a camera and press Start Camera.</span></div></div>
-      <div class="toolbar"><span id="cameraStatus" class="status">No camera selected.</span><button id="stopBtn" class="btn danger" type="button" disabled>Stop Camera</button></div>
+      <div class="toolbar"><span id="cameraStatus" class="status" role="status" aria-live="polite">No camera selected.</span><button id="stopBtn" class="btn danger" type="button" disabled>Stop Camera</button></div>
     </section>
     <aside class="card controls">
       <h2>Teacher Controls</h2>
       <div class="field"><label for="cameraSelect">Camera source</label><select id="cameraSelect"><option value="">Loading cameras...</option></select></div>
       <button id="startBtn" class="btn primary" type="button">Start Camera</button>
+      <button id="goLiveBtn" class="btn primary" type="button" disabled>Go Live</button>
+      <button id="stopLiveBtn" class="btn danger" type="button" disabled>Stop Broadcast</button>
       <button id="refreshBtn" class="btn secondary" type="button">Refresh Camera List</button>
-      <div class="viewer"><strong>Student viewer</strong><a href="/live/" target="_blank" rel="noopener">mrdhq.com/live/</a></div>
-      <div class="note"><strong>Camera preview:</strong> this page supports browser camera selection and local preview. The live relay to student iPads is the next connection step. Nothing is recorded by this page.</div>
+      <div class="viewer"><strong>Student viewer</strong><a id="viewerLink" href="/live/" target="_blank" rel="noopener">mrdhq.com/live/</a></div>
+      <button id="copyLinkBtn" class="btn secondary" type="button">Copy Student Link</button>
+      <div class="note">Start Camera opens a private preview. Go Live shares it with anyone who has the student link. Video only; no audio or recording. Keep this tab open while teaching.</div>
     </aside>
   </div>
 </main>
-<script>
-  const TEACHER_PASSCODE='maverick';
-  const gate=document.getElementById('teacherGate');
-  const passInput=document.getElementById('teacherPasscode');
-  const unlockBtn=document.getElementById('unlockTeacher');
-  const gateError=document.getElementById('gateError');
-  function unlockTeacher(){
-    if(passInput.value.trim().toLowerCase()===TEACHER_PASSCODE){
-      sessionStorage.setItem('mrdhqLiveTeacherUnlocked','1');
-      gate.classList.add('hidden');
-      gateError.textContent='';
-      listCameras();
-    }else{
-      gateError.textContent='Incorrect passcode.';
-      passInput.select();
-    }
-  }
-  unlockBtn.addEventListener('click',unlockTeacher);
-  passInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlockTeacher()});
-  if(sessionStorage.getItem('mrdhqLiveTeacherUnlocked')==='1'){gate.classList.add('hidden')}
-  else{setTimeout(()=>passInput.focus(),100)}
-
-  const select=document.getElementById('cameraSelect');
-  const preview=document.getElementById('preview');
-  const empty=document.getElementById('empty');
-  const status=document.getElementById('cameraStatus');
-  const startBtn=document.getElementById('startBtn');
-  const stopBtn=document.getElementById('stopBtn');
-  const refreshBtn=document.getElementById('refreshBtn');
-  let stream=null;
-
-  async function listCameras(){
-    try{
-      const devices=await navigator.mediaDevices.enumerateDevices();
-      const cams=devices.filter(d=>d.kind==='videoinput');
-      select.innerHTML='';
-      cams.forEach((cam,i)=>{const o=document.createElement('option');o.value=cam.deviceId;o.textContent=cam.label||`Camera ${i+1}`;select.appendChild(o)});
-      if(!cams.length){select.innerHTML='<option value="">No cameras found</option>'}
-    }catch(e){select.innerHTML='<option value="">Camera access unavailable</option>'}
-  }
-
-  function stopCamera(){
-    if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
-    preview.srcObject=null;preview.style.display='none';empty.style.display='block';status.textContent='Camera stopped.';stopBtn.disabled=true;
-  }
-
-  async function startCamera(){
-    try{
-      stopCamera();
-      const deviceId=select.value;
-      stream=await navigator.mediaDevices.getUserMedia({video:deviceId?{deviceId:{exact:deviceId},width:{ideal:1920},height:{ideal:1080}}:{width:{ideal:1920},height:{ideal:1080}},audio:false});
-      preview.srcObject=stream;preview.style.display='block';empty.style.display='none';stopBtn.disabled=false;
-      const track=stream.getVideoTracks()[0];status.textContent=`Previewing: ${track.label||'Camera'}`;
-      await listCameras();
-      const active=track.getSettings().deviceId;if(active)select.value=active;
-      window.MRDHQ_TEACHER_STREAM=stream;
-    }catch(e){status.textContent='Camera permission was denied or the camera is unavailable.';console.error(e)}
-  }
-
-  startBtn.addEventListener('click',startCamera);stopBtn.addEventListener('click',stopCamera);refreshBtn.addEventListener('click',listCameras);
-  navigator.mediaDevices?.addEventListener?.('devicechange',listCameras);
-  if(sessionStorage.getItem('mrdhqLiveTeacherUnlocked')==='1')listCameras();
-</script>
+<script type="module" src="/live/assets/teacher.js"></script>
 </body>
 </html>

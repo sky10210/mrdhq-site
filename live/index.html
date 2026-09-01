@@ -22,31 +22,22 @@
     @media (max-width:900px){.shell{width:min(100% - 28px,1180px)}main{padding-top:22px}.camera-card{padding:12px;border-radius:22px}.camera-frame{border-radius:16px;aspect-ratio:4/3;max-height:none}.hero p{font-size:.9rem}.camera-footer{padding-top:10px}.fullscreen{padding:11px 15px}}
     @media (orientation:landscape) and (max-height:700px){main{padding:14px 0 20px}.hero{margin-bottom:10px}.hero p{display:none}.status-row{margin:10px 0}.camera-frame{aspect-ratio:16/9;max-height:72vh}.camera-card{padding:10px}}
     @supports(padding:max(0px)){body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}}
+    .play-button{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%)}.play-button[hidden]{display:none}.camera-frame:fullscreen{aspect-ratio:auto;max-height:none;width:100%;height:100%;border-radius:0}.expanded .camera-card{position:fixed;inset:0;z-index:50;width:100%;border-radius:0}.expanded .camera-frame{height:calc(100dvh - 85px);max-height:none;aspect-ratio:auto}
   </style>
 </head>
 <body>
   <header class="topbar"><nav class="shell nav"><a class="brand" href="/"><span class="mark">D</span><span>Mr. D's HQ</span></a><a class="back" href="/">Back to Student Portal</a></nav></header>
   <main class="shell">
     <section class="hero"><div class="eyebrow">Room A112</div><h1>Classroom Live</h1><p>View the live document camera feed from class. Rotate your iPad sideways for the largest view.</p></section>
-    <div class="status-row"><div id="status" class="status"><span class="dot"></span><span id="statusText">Offline</span></div></div>
+    <div class="status-row"><div id="status" class="status" role="status" aria-live="polite"><span class="dot"></span><span id="statusText">Offline</span></div></div>
     <section class="camera-card" aria-label="Classroom live video">
       <div id="frame" class="camera-frame">
-        <video id="remoteVideo" autoplay playsinline muted></video>
-        <div id="offline" class="offline"><strong>No live classroom feed right now.</strong><span>Keep this page open. When Mr. D starts the document camera, the live view will appear here.</span></div>
+        <video id="remoteVideo" autoplay playsinline muted></video><button id="playBtn" class="fullscreen play-button" type="button" hidden>Tap to Watch</button>
+        <div id="offline" class="offline"><strong id="offlineTitle">No live classroom feed right now.</strong><span id="offlineDetail">Keep this page open. When Mr. D starts the document camera, the live view will appear here.</span></div>
       </div>
       <div class="camera-footer"><span class="hint">Tip: landscape mode works best on iPad.</span><button class="fullscreen" id="fullscreenBtn" type="button">Full Screen</button></div>
     </section>
   </main>
-  <script>
-    const frame=document.getElementById('frame');
-    document.getElementById('fullscreenBtn').addEventListener('click',async()=>{
-      try{if(!document.fullscreenElement){await frame.requestFullscreen?.();}else{await document.exitFullscreen?.();}}catch(e){}
-    });
-    // Streaming transport hook. The viewer UI is ready; a relay/SFU connection will attach its MediaStream to #remoteVideo.
-    window.MRDHQ_LIVE={
-      showStream(stream){const v=document.getElementById('remoteVideo');v.srcObject=stream;v.style.display='block';document.getElementById('offline').style.display='none';document.getElementById('status').classList.add('live');document.getElementById('statusText').textContent='LIVE';},
-      showOffline(){const v=document.getElementById('remoteVideo');v.srcObject=null;v.style.display='none';document.getElementById('offline').style.display='block';document.getElementById('status').classList.remove('live');document.getElementById('statusText').textContent='Offline';}
-    };
-  </script>
+  <script type="module" src="/live/assets/viewer.js"></script>
 </body>
 </html>
