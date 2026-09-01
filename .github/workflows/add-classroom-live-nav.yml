@@ -42,3 +42,5 @@ jobs:
           git add index.html
           git diff --cached --quiet || git commit -m "Add Classroom Live to homepage navigation"
           git push
+
+# retrigger 2026-08-31
