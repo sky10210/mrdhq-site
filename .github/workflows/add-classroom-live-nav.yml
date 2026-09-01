@@ -17,15 +17,10 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-
           path = Path('index.html')
           text = path.read_text(encoding='utf-8')
-          old = '''        <a href="/student-tools.html">Student Tools</a>
-        <a href="/about-contact.html">About Me / Contact</a>'''
-          new = '''        <a href="/student-tools.html">Student Tools</a>
-        <a href="/live/">Classroom Live</a>
-        <a href="/about-contact.html">About Me / Contact</a>'''
-
+          old = '        <a href="/student-tools.html">Student Tools</a>\n        <a href="/about-contact.html">About Me / Contact</a>'
+          new = '        <a href="/student-tools.html">Student Tools</a>\n        <a href="/live/">Classroom Live</a>\n        <a href="/about-contact.html">About Me / Contact</a>'
           if '<a href="/live/">Classroom Live</a>' not in text:
               if old not in text:
                   raise SystemExit('Homepage nav marker not found')
