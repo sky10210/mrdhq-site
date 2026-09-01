@@ -1,0 +1,44 @@
+name: Add Classroom Live Nav
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-classroom-live-nav.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Classroom Live to homepage navigation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          old = '''        <a href="/student-tools.html">Student Tools</a>
+        <a href="/about-contact.html">About Me / Contact</a>'''
+
+          new = '''        <a href="/student-tools.html">Student Tools</a>
+        <a href="/live/">Classroom Live</a>
+        <a href="/about-contact.html">About Me / Contact</a>'''
+
+          if '<a href="/live/">Classroom Live</a>' not in text:
+              if old not in text:
+                  raise SystemExit('Homepage nav marker not found')
+              text = text.replace(old, new, 1)
+              path.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit homepage navigation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Add Classroom Live to homepage navigation"
+          git push
