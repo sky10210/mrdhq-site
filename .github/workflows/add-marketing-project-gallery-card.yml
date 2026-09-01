@@ -1,0 +1,21 @@
+name: Add Marketing Project Gallery card
+on:
+  push:
+    paths:
+      - '.github/workflows/add-marketing-project-gallery-card.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add card
+        run: python -c "from pathlib import Path; p=Path('marketing/index.html'); s=p.read_text(); marker='<a class=\"card module-card\" href=\"/marketing/basics-of-marketing/\">'; card='<a class=\"card\" href=\"/marketing/project-gallery/\"><div class=\"tag\">Student Showcase • Submit + Vote</div><div class=\"icon\">🖼️</div><h2>Project Gallery</h2><p>Submit a photo of your project, view class entries, vote when voting is open, and leave constructive comments when enabled.</p><span class=\"button\">Open Project Gallery →</span></a>'; p.write_text(s if '/marketing/project-gallery/' in s else s.replace(marker,card+marker))"
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add marketing/index.html
+          git diff --cached --quiet || git commit -m "Add Project Gallery to Marketing homepage"
+          git push
