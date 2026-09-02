@@ -1,1 +1,3 @@
 window.MRDHQ_PROJECT_GALLERY_API = 'https://script.google.com/macros/s/AKfycbxJqSiq30GSvdmNZvogZJGO32gR2o17WURwmiboKw31yO0P3P4oKXvTx7ePywyDQA/exec';
+window.MRDHQ_PROJECT_GALLERY_R2_PUBLIC = 'https://pub-eb7a043fb8084f9893d5b9130c79e451.r2.dev';
+window.MRDHQ_PROJECT_GALLERY_UPLOAD_API = window.MRDHQ_PROJECT_GALLERY_UPLOAD_API || '';
