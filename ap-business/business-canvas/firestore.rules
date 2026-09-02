@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function schoolAccount() {
+      return signedIn()
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.matches('.*@casdonline\\.org$');
+    }
+
+    function isTeacher() {
+      return schoolAccount()
+        && request.auth.token.email == 'skyler.dipasquale@casdonline.org';
+    }
+
+    function isOwner(userId) {
+      return schoolAccount() && request.auth.uid == userId;
+    }
+
+    match /businessCanvasUsers/{userId} {
+      // Students can read only their own profile. The teacher can list/read all students.
+      allow read: if isOwner(userId) || isTeacher();
+      allow create, update: if isOwner(userId);
+      allow delete: if false;
+
+      match /{document=**} {
+        // Students own their Canvas/case records; the teacher has read-only class access.
+        allow read: if isOwner(userId) || isTeacher();
+        allow create, update: if isOwner(userId);
+        allow delete: if false;
+      }
+    }
+
+    match /classes/{classId}/settings/{document} {
+      allow read: if schoolAccount();
+      allow create, update, delete: if isTeacher();
+    }
+
+    // Deny anything not explicitly covered above.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
