@@ -22,3 +22,4 @@ s = s.replace(needle, needle + "loadPrivateGalleryImages();", 1)
 
 p.write_text(s, encoding='utf-8')
 print('patched', p)
+# trigger 2026-09-01
