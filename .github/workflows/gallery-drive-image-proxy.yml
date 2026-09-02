@@ -72,3 +72,5 @@ jobs:
           git add apps-script/marketing-project-gallery-backend.gs marketing/project-gallery/index.html
           git commit -m "Use Apps Script proxy for private Gallery images" || exit 0
           git push
+
+# trigger: 2026-09-01 image proxy retry
