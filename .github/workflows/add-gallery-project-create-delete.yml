@@ -1,0 +1,67 @@
+name: Add Gallery Project Create and Delete Controls
+on:
+  push:
+    paths:
+      - '.github/workflows/add-gallery-project-create-delete.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Gallery teacher controls
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('marketing/project-gallery/index.html')
+          s=p.read_text(encoding='utf-8')
+
+          old='<div class="teacher-grid"><div class="field"><label>Project status</label>'
+          new='<div class="teacher-grid"><div class="field"><label>Project title</label><input id="tTitle" placeholder="Project title"></div><div class="field" style="grid-column:span 2"><label>Directions</label><textarea id="tDirections" placeholder="Student directions" style="width:100%;min-height:72px"></textarea></div><div class="field"><label>Project status</label>'
+          if old in s and 'id="tTitle"' not in s:
+              s=s.replace(old,new,1)
+
+          old='<div class="teacher-actions"><button id="saveTeacher" class="btn" type="button">Save Project Settings</button><button id="refreshTeacher" class="btn secondary" type="button">Refresh Gallery</button></div>'
+          new='<div class="teacher-actions"><button id="newProject" class="btn secondary" type="button">+ New Project</button><button id="saveTeacher" class="btn" type="button">Save Project</button><button id="refreshTeacher" class="btn secondary" type="button">Refresh Gallery</button></div>'
+          if old in s and 'id="newProject"' not in s:
+              s=s.replace(old,new,1)
+
+          old="let teacherKey='';\nfunction fillTeacherPanel(){if(!state||!state.project)return;const p=state.project;$('tStatus').value=p.status||'submissions';$('tMaxVotes').value=p.maxVotes||1;$('tBlock').value=p.block||'All';$('tComments').checked=!!p.commentsEnabled;$('tAnonymous').checked=!!p.anonymousVoting;$('tLate').checked=!!p.allowLate;$('tLateEligible').checked=!!p.lateEligible;$('tResults').checked=!!p.revealResults;}"
+          new="let teacherKey='',creatingProject=false;\nfunction fillTeacherPanel(){if(!state||!state.project)return;const p=state.project;creatingProject=false;$('tTitle').value=p.title||'';$('tDirections').value=p.directions||'';$('tStatus').value=p.status||'submissions';$('tMaxVotes').value=p.maxVotes||1;$('tBlock').value=p.block||'All';$('tComments').checked=!!p.commentsEnabled;$('tAnonymous').checked=!!p.anonymousVoting;$('tLate').checked=!!p.allowLate;$('tLateEligible').checked=!!p.lateEligible;$('tResults').checked=!!p.revealResults;}"
+          if old in s:
+              s=s.replace(old,new,1)
+
+          old="${p.commentsEnabled?`<button class=\"btn secondary\" onclick=\"openComment('${e.id}')\">Comment</button>`:''}</div>"
+          new="${p.commentsEnabled?`<button class=\"btn secondary\" onclick=\"openComment('${e.id}')\">Comment</button>`:''}${teacherKey?`<button class=\"btn secondary\" style=\"color:#a33;border-color:#d8aaa3\" onclick=\"deleteEntry('${e.id}')\">Delete Entry</button>`:''}</div>"
+          if old in s and 'deleteEntry(' not in s:
+              s=s.replace(old,new,1)
+
+          anchor="function openComment(id){currentSubmissionForComment=id;$('commentText').value='';$('commentModal').classList.add('show');}"
+          helper="""async function deleteEntry(id){if(!teacherKey){alert('Unlock Teacher Controls first.');return;}if(!confirm('Remove this entry from the student gallery?'))return;try{const d=await call({action:'setSubmission',teacherKey,submissionId:id,hidden:true});if(!d.success)throw new Error(d.error||'Unable to remove entry.');await load(state.project.id);$('teacherPanel').classList.add('show');$('teacherMsg').textContent='Entry removed from gallery.';}catch(e){alert(e.message);}}\n"""
+          if anchor in s and 'async function deleteEntry(id)' not in s:
+              s=s.replace(anchor,helper+anchor,1)
+
+          refresh="$('refreshTeacher').onclick=()=>load(state&&state.project?state.project.id:'');"
+          newproj="""$('newProject').onclick=()=>{if(!teacherKey)return;creatingProject=true;$('tTitle').value='';$('tDirections').value='';$('tStatus').value='submissions';$('tMaxVotes').value='3';$('tBlock').value='All';$('tComments').checked=true;$('tAnonymous').checked=true;$('tLate').checked=true;$('tLateEligible').checked=false;$('tResults').checked=false;$('teacherMsg').textContent='New project: enter a title and directions, then Save Project.';};\n"""
+          if refresh in s and "$('newProject').onclick" not in s:
+              s=s.replace(refresh,newproj+refresh,1)
+
+          old="$('saveTeacher').onclick=async()=>{try{if(!teacherKey)throw new Error('Unlock teacher controls first.');const p=state.project;$('teacherMsg').textContent='Saving...';const d=await call({action:'saveProject',teacherKey,projectId:p.id,title:p.title,directions:p.directions,block:$('tBlock').value.trim()||'All',status:$('tStatus').value,maxVotes:$('tMaxVotes').value,commentsEnabled:$('tComments').checked,anonymousVoting:$('tAnonymous').checked,allowLate:$('tLate').checked,lateEligible:$('tLateEligible').checked,revealResults:$('tResults').checked,submissionDeadline:p.submissionDeadline||'',votingDeadline:p.votingDeadline||''});if(!d.success)throw new Error(d.error||'Unable to save settings.');$('teacherMsg').textContent='Saved. Gallery updated.';await load(p.id);fillTeacherPanel();}catch(e){$('teacherMsg').textContent=e.message;}};"
+          new="$('saveTeacher').onclick=async()=>{try{if(!teacherKey)throw new Error('Unlock teacher controls first.');const p=state.project;const title=$('tTitle').value.trim();if(!title)throw new Error('Enter a project title.');$('teacherMsg').textContent='Saving...';const d=await call({action:'saveProject',teacherKey,projectId:creatingProject?'':p.id,title,directions:$('tDirections').value.trim(),block:$('tBlock').value.trim()||'All',status:$('tStatus').value,maxVotes:$('tMaxVotes').value,commentsEnabled:$('tComments').checked,anonymousVoting:$('tAnonymous').checked,allowLate:$('tLate').checked,lateEligible:$('tLateEligible').checked,revealResults:$('tResults').checked,submissionDeadline:creatingProject?'':(p.submissionDeadline||''),votingDeadline:creatingProject?'':(p.votingDeadline||'')});if(!d.success)throw new Error(d.error||'Unable to save project.');creatingProject=false;await load(d.projectId||p.id);$('teacherPanel').classList.add('show');fillTeacherPanel();$('teacherMsg').textContent='Saved. Gallery updated.';}catch(e){$('teacherMsg').textContent=e.message;}};"
+          if old in s:
+              s=s.replace(old,new,1)
+
+          # Re-render cards when teacher controls open/close so delete buttons appear/disappear.
+          s=s.replace("$('teacherPanel').classList.add('show');fillTeacherPanel();return;", "$('teacherPanel').classList.add('show');fillTeacherPanel();renderEntries();return;", 1)
+          s=s.replace("$('teacherPanel').classList.add('show');fillTeacherPanel();$('teacherMsg').textContent='Teacher controls unlocked.';", "$('teacherPanel').classList.add('show');fillTeacherPanel();renderEntries();$('teacherMsg').textContent='Teacher controls unlocked.';", 1)
+          s=s.replace("$('teacherPanel').classList.remove('show');};", "$('teacherPanel').classList.remove('show');if(state)renderEntries();};", 1)
+
+          p.write_text(s,encoding='utf-8')
+          PY
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add marketing/project-gallery/index.html
+          git commit -m "Add Gallery project creation and entry removal controls" || exit 0
+          git push
