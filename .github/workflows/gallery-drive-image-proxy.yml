@@ -1,0 +1,74 @@
+name: Gallery Drive Image Proxy
+on:
+  push:
+    paths:
+      - '.github/workflows/gallery-drive-image-proxy.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Apps Script and gallery
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          # ---- Apps Script backend ----
+          p = Path('apps-script/marketing-project-gallery-backend.gs')
+          s = p.read_text()
+
+          router = "    if (action === 'state') return jsonGallery_(galleryState_(p));"
+          if "action === 'image'" not in s:
+              s = s.replace(router, router + "\n    if (action === 'image') return jsonGallery_(galleryImage_(p));", 1)
+
+          old = "imageUrl:cleanGallery_(s['Image URL'])"
+          new = "imageUrl:cleanGallery_(s['Image URL']),imageFileId:cleanGallery_(s['Image File ID'])"
+          if old in s and 'imageFileId:' not in s:
+              s = s.replace(old, new, 1)
+
+          anchor = "function publicProjectGallery_(r){"
+          if 'function galleryImage_(' not in s:
+              fn = '''function galleryImage_(p){
+  const fileId=cleanGallery_(p.fileId); if(!fileId) throw new Error('Missing image file ID.');
+  const sub=rowsGallery_('Submissions').find(r=>cleanGallery_(r['Image File ID'])===fileId && !boolGallery_(r.Hidden,false));
+  if(!sub) throw new Error('Image not found.');
+  const file=DriveApp.getFileById(fileId); const blob=file.getBlob(); const mime=blob.getContentType()||'image/jpeg';
+  const bytes=blob.getBytes(); if(bytes.length>7*1024*1024) throw new Error('Image is too large.');
+  return {success:true,mimeType:mime,base64:Utilities.base64Encode(bytes)};
+}
+
+'''
+              s = s.replace(anchor, fn + anchor, 1)
+
+          p.write_text(s)
+
+          # ---- Student gallery page ----
+          p = Path('marketing/project-gallery/index.html')
+          s = p.read_text()
+
+          if 'async function hydrateGalleryImages()' not in s:
+              marker = "async function ownerToken()"
+              helper = '''async function hydrateGalleryImages(){const imgs=[...document.querySelectorAll('img[data-file-id]')];await Promise.all(imgs.map(async img=>{try{const fileId=img.dataset.fileId;if(!fileId)return;const q=new URL(API);q.searchParams.set('action','image');q.searchParams.set('fileId',fileId);const d=await fetch(q).then(r=>r.json());if(!d.success)throw new Error(d.error||'Image unavailable');img.src='data:'+(d.mimeType||'image/jpeg')+';base64,'+d.base64;img.removeAttribute('data-file-id');}catch(e){img.alt='Image unavailable';}}));}
+'''
+              s = s.replace(marker, helper + marker, 1)
+
+          old_img = "${e.imageUrl?`<img src=\"${esc(displayImageUrl(e.imageUrl))}\" alt=\"Entry ${e.entryNumber}\" loading=\"lazy\">`:'<span>No image</span>'}"
+          new_img = "${e.imageFileId?`<img data-file-id=\"${esc(e.imageFileId)}\" alt=\"Entry ${e.entryNumber}\" loading=\"lazy\">`:e.imageUrl?`<img src=\"${esc(displayImageUrl(e.imageUrl))}\" alt=\"Entry ${e.entryNumber}\" loading=\"lazy\">`:'<span>No image</span>'}"
+          if old_img in s:
+              s = s.replace(old_img, new_img, 1)
+
+          old_end = "});$('gallery').innerHTML=html;}"
+          new_end = "});$('gallery').innerHTML=html;hydrateGalleryImages();}"
+          if old_end in s:
+              s = s.replace(old_end, new_end, 1)
+
+          p.write_text(s)
+          PY
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add apps-script/marketing-project-gallery-backend.gs marketing/project-gallery/index.html
+          git commit -m "Use Apps Script proxy for private Gallery images" || exit 0
+          git push
