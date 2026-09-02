@@ -112,7 +112,8 @@
 
   function enforceNoMinimumCopy() {
     const help = document.getElementById("case-submit-help");
-    if (help) help.textContent = "Complete every required response to submit. No minimum word count.";
+    const message = "Complete every required response to submit. No minimum word count.";
+    if (help && help.textContent !== message) help.textContent = message;
   }
 
   function maybeLoadExpanded() {
