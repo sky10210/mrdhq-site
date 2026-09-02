@@ -53,7 +53,6 @@ jobs:
           if old in s:
               s=s.replace(old,new,1)
 
-          # Re-render cards when teacher controls open/close so delete buttons appear/disappear.
           s=s.replace("$('teacherPanel').classList.add('show');fillTeacherPanel();return;", "$('teacherPanel').classList.add('show');fillTeacherPanel();renderEntries();return;", 1)
           s=s.replace("$('teacherPanel').classList.add('show');fillTeacherPanel();$('teacherMsg').textContent='Teacher controls unlocked.';", "$('teacherPanel').classList.add('show');fillTeacherPanel();renderEntries();$('teacherMsg').textContent='Teacher controls unlocked.';", 1)
           s=s.replace("$('teacherPanel').classList.remove('show');};", "$('teacherPanel').classList.remove('show');if(state)renderEntries();};", 1)
