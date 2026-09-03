@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    // These static-site domains do not run the Classroom Live backend.
+    if (['mrdhq.com', 'www.mrdhq.com', 'mrdhub.com', 'www.mrdhub.com'].includes(location.hostname)) {
+      location.replace('https://mrdhub-site.pages.dev/live/' + location.search + location.hash);
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#F6F1E8" />
   <title>Classroom Live | Mr. D's HQ</title>

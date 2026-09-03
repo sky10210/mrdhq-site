@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    // Keep saved teacher links on the same origin as the live backend.
+    if (['mrdhq.com', 'www.mrdhq.com', 'mrdhub.com', 'www.mrdhub.com'].includes(location.hostname)) {
+      location.replace('https://mrdhub-site.pages.dev/live/teacher/' + location.search + location.hash);
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#F6F1E8" />
   <title>Classroom Live Teacher | Mr. D's HQ</title>
