@@ -176,7 +176,7 @@ function json_(obj){return ContentService.createTextOutput(JSON.stringify(obj)).
 function handleModuleSubmit_(ss,p){
   var manual=String(p.manualEntry||'')==='1',identity=manual?null:verifyFirebaseUser_(clean_(p.idToken||''));
   if(!manual&&!identity) return json_({success:false,error:'Sign in with your school Google account first.'});
-  if(!manual&&identity.email.slice(-16)!=='@casdonline.org') return json_({success:false,error:'Use your casdonline.org school account.'});
+  if(!manual&&identity.email.slice(-15)!=='@casdonline.org') return json_({success:false,error:'Use your casdonline.org school account.'});
   if(manual){var mf=clean_(p.firstName||''),ml=clean_(p.lastName||'');if(!mf||!ml)return json_({success:false,error:'Enter first and last name.'});identity={email:'',name:'Manual entry'}}
   var raw=clean_(p.answer||''),record={};
   try{record=JSON.parse(raw)}catch(err){return json_({success:false,error:'Invalid module submission.'})}
@@ -213,7 +213,7 @@ function handleOpeningBell_(ss,p,action){
   if(action==='openingBellGet') return openingBellGet_(ss,clean_(p.code||''));
   if(action==='openingBellList') return openingBellList_(ss,clean_(p.className||''));
   var identity=resolveOpeningBellIdentity_(p);
-  if(!identity) return json_({success:false,error:'Sign in with your casdonline.org school Google account before submitting.'});
+  if(!identity) return json_({success:false,error:'Enter your first and last name before submitting.'});
   if(action==='openingBellSubmit') return openingBellSubmit_(ss,p,identity);
   return json_({success:false,error:'Unknown Opening Bell action.'});
 }
@@ -236,10 +236,15 @@ function verifyFirebaseUser_(idToken){
 }
 
 function resolveOpeningBellIdentity_(p){
+  if(String(p.manualEntry||'')==='1'){
+    var first=clean_(p.firstName||''),last=clean_(p.lastName||'');
+    if(!first||!last||first.length>80||last.length>80)return null;
+    return {manual:true,firstName:first,lastName:last,name:first+' '+last,email:'',uid:''};
+  }
   var verified=verifyFirebaseUser_(clean_(p.idToken||''));
-  if(verified&&verified.email&&verified.email.slice(-16)==='@casdonline.org') return verified;
+  if(verified&&verified.email&&verified.email.slice(-15)==='@casdonline.org') return verified;
   var email=clean_(p.authEmail||'').toLowerCase();
-  if(!email||email.slice(-16)!=='@casdonline.org') return null;
+  if(!email||email.slice(-15)!=='@casdonline.org') return null;
   return {uid:clean_(p.authUid||'browser-auth'),email:email,name:clean_(p.authName||'Student')||'Student'};
 }
 
@@ -329,6 +334,7 @@ function openingBellList_(ss,className){
 }
 
 function rosterIdentity_(ss,identity){
+  if(identity.manual)return {first:identity.firstName,last:identity.lastName};
   var first='',last='',sh=ss.getSheetByName('Roster');
   if(sh){
     var values=sh.getDataRange().getValues();
@@ -344,7 +350,13 @@ function openingBellSubmit_(ss,p,identity){
   var answer=clean_(p.answer||'');
   if(answer.length<8)return json_({success:false,error:'Write a more complete response.'});
   var master=openingBellSubmissions_(ss),values=master.getDataRange().getValues();
-  for(var i=values.length-1;i>0;i--)if(String(values[i][9]||'').toLowerCase()===identity.email&&String(values[i][13]||'').toUpperCase()===session.code)return json_({success:false,error:'You already submitted this Opening Bell.'});
+  for(var i=values.length-1;i>0;i--){
+    if(String(values[i][13]||'').toUpperCase()!==session.code)continue;
+    var sameStudent=identity.manual
+      ? clean_(values[i][6]).toLowerCase()===identity.firstName.toLowerCase()&&clean_(values[i][7]).toLowerCase()===identity.lastName.toLowerCase()
+      : !!identity.email&&String(values[i][9]||'').toLowerCase()===identity.email;
+    if(sameStudent)return json_({success:true,alreadySubmitted:true,status:String(values[i][12]||'On Time')});
+  }
   var official=rosterIdentity_(ss,identity),now=new Date(),status=Date.now()>session.endsAt?'Late':'On Time';
   var masterRow=[now,formatDate_(now),session.title,session.className,session.block,session.question,official.first,official.last,identity.name,identity.email,identity.uid,answer,status,session.code,session.sheetName];
   master.appendRow(masterRow);
