@@ -117,7 +117,7 @@ function render(data){
 }
 async function load(){
   $('retryButton').disabled=true;$('errorBox').classList.remove('show');
-  try{const response=await fetch('/api/oil-gas',{cache:'no-store'});const data=await response.json();if(!response.ok)throw new Error(data.error||'Feed unavailable');render(data)}
+  try{const response=await fetch('https://mrdhub-site.pages.dev/api/oil-gas',{cache:'no-store'});const data=await response.json();if(!response.ok)throw new Error(data.error||'Feed unavailable');render(data)}
   catch(error){$('feedBadge').textContent='Sources delayed';$('feedBadge').className='feed-badge';$('updatedText').textContent='Instructional content remains available';$('errorBox').classList.add('show');['brentPrice','paPrice','localPrice'].forEach(id=>$(id).textContent='—')}
   finally{$('retryButton').disabled=false}
 }
