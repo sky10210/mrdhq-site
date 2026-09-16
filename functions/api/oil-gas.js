@@ -1,7 +1,8 @@
 const AAA_URL = 'https://gasprices.aaa.com/?state=PA';
 const DASHBOARD_URL = 'https://script.google.com/macros/s/AKfycbyooLV-6a4MoMv0D-96n2httwe4PwjA3lfTbQqw5jwXtJreLJClEaaeq2VIl46CqXyG/exec';
-const YAHOO_BRENT_URL = 'https://query1.finance.yahoo.com/v8/finance/chart/BZ%3DF?range=1y&interval=1d&includePrePost=false&events=div%2Csplits';
+const YAHOO_BRENT_URL = 'https://query1.finance.yahoo.com/v8/finance/chart/BZ%3DF?range=10y&interval=1d&includePrePost=false&events=div%2Csplits';
 const LABELS = ['Year Ago', 'Month Ago', 'Week Ago', 'Yesterday', 'Current'];
+const BRENT_LABELS = ['6 Years Ago', '4 Years Ago', '2 Years Ago', 'Year Ago', 'Month Ago', 'Week Ago', 'Yesterday', 'Current'];
 
 const json = (body, status = 200, headers = {}) => new Response(JSON.stringify(body), {
   status,
@@ -115,6 +116,12 @@ function nearestTradingValue(rows, targetMs) {
   return best;
 }
 
+function yearsAgoMs(years) {
+  const d = new Date();
+  d.setFullYear(d.getFullYear() - years);
+  return d.getTime();
+}
+
 function parseBrentHistory(data, currentPrice) {
   const result = data?.chart?.result?.[0];
   const timestamps = result?.timestamp || [];
@@ -126,7 +133,10 @@ function parseBrentHistory(data, currentPrice) {
   const now = Date.now();
   const DAY = 86400000;
   const targets = [
-    {label: 'Year Ago', time: now - 365 * DAY},
+    {label: '6 Years Ago', time: yearsAgoMs(6)},
+    {label: '4 Years Ago', time: yearsAgoMs(4)},
+    {label: '2 Years Ago', time: yearsAgoMs(2)},
+    {label: 'Year Ago', time: yearsAgoMs(1)},
     {label: 'Month Ago', time: now - 30 * DAY},
     {label: 'Week Ago', time: now - 7 * DAY},
     {label: 'Yesterday', time: now - 1 * DAY}
@@ -137,7 +147,7 @@ function parseBrentHistory(data, currentPrice) {
   }).filter(Boolean);
   const latest = Number.isFinite(currentPrice) ? currentPrice : rows[rows.length - 1].value;
   if (Number.isFinite(latest)) points.push({label: 'Current', value: latest});
-  return points;
+  return BRENT_LABELS.map(label => points.find(point => point.label === label)).filter(Boolean);
 }
 
 function mergeWithLastGood(fresh, lastGood) {
@@ -157,8 +167,8 @@ function mergeWithLastGood(fresh, lastGood) {
 export async function onRequestGet({request, waitUntil}) {
   const url = new URL(request.url);
   const cache = caches.default;
-  const cacheKey = new Request(`${url.origin}/api/oil-gas?version=4`);
-  const lastGoodKey = new Request(`${url.origin}/api/oil-gas?last-good=4`);
+  const cacheKey = new Request(`${url.origin}/api/oil-gas?version=5`);
+  const lastGoodKey = new Request(`${url.origin}/api/oil-gas?last-good=5`);
   const cached = await cache.match(cacheKey);
   if (cached && url.searchParams.get('refresh') !== '1') return cached;
 
@@ -171,7 +181,6 @@ export async function onRequestGet({request, waitUntil}) {
 
   let points = {pa: [], local: []};
   let dashboard = {brent: null, paCurrent: null, dashboardUpdatedAt: null};
-
   if (aaaResult.status === 'fulfilled') {
     try { points = parseAAA(aaaResult.value); } catch {}
   }
@@ -194,7 +203,7 @@ export async function onRequestGet({request, waitUntil}) {
   const hasFullPA = points.pa.length === 5;
   const hasFullLocal = points.local.length === 5;
   const hasBrent = Boolean(dashboard.brent);
-  const hasBrentHistory = brentHistory.length === 5;
+  const hasBrentHistory = brentHistory.length === 8;
   const complete = hasFullPA && hasFullLocal && hasBrent && hasBrentHistory;
   const partial = points.pa.length > 0 || points.local.length > 0 || hasBrent || brentHistory.length > 0;
 
