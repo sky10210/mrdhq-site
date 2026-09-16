@@ -1,0 +1,44 @@
+{
+  "updatedAt": "2026-09-16T05:50:00Z",
+  "sourceDate": "Sep 15, 2026",
+  "status": "daily-snapshot",
+  "brent": {"price": 102.67, "date": "2026-09-15", "source": "Previous trading close"},
+  "pa": [
+    {"label":"Year Ago","value":3.33},
+    {"label":"Month Ago","value":4.0777},
+    {"label":"Week Ago","value":4.30},
+    {"label":"Yesterday","value":4.4987},
+    {"label":"Current","value":4.4987}
+  ],
+  "local": [
+    {"label":"Year Ago","value":3.19},
+    {"label":"Month Ago","value":3.9596},
+    {"label":"Week Ago","value":4.08},
+    {"label":"Yesterday","value":4.23},
+    {"label":"Current","value":4.2357}
+  ],
+  "brentCheckpoints": [
+    {"label":"6 Years Ago","value":42},
+    {"label":"4 Years Ago","value":91},
+    {"label":"2 Years Ago","value":73},
+    {"label":"Year Ago","value":68},
+    {"label":"Month Ago","value":91},
+    {"label":"Week Ago","value":101},
+    {"label":"Previous Close","value":102.67}
+  ],
+  "heatingOilHistory": [
+    {"date":"2025-12-01","value":3.449},{"date":"2025-12-08","value":3.436},{"date":"2025-12-15","value":3.392},{"date":"2025-12-22","value":3.357},{"date":"2025-12-29","value":3.355},
+    {"date":"2026-01-05","value":3.348},{"date":"2026-01-12","value":3.328},{"date":"2026-01-19","value":3.363},{"date":"2026-01-26","value":3.592},
+    {"date":"2026-02-02","value":3.853},{"date":"2026-02-09","value":3.889},{"date":"2026-02-16","value":3.909},{"date":"2026-02-23","value":3.912},
+    {"date":"2026-03-02","value":4.065},{"date":"2026-03-09","value":4.769},{"date":"2026-03-16","value":4.835},{"date":"2026-03-23","value":5.198},{"date":"2026-03-30","value":5.160}
+  ],
+  "heatingOilLatest": {"date":"2026-03-30","value":5.160,"status":"offseason","nextSeason":"October 2026"},
+  "events": [
+    {"date":"2020-03-11","title":"COVID-19 demand shock","detail":"Travel and economic activity fell sharply, cutting fuel demand and creating extreme oil-market volatility."},
+    {"date":"2022-02-24","title":"Russia invades Ukraine","detail":"The invasion and sanctions disrupted global energy trade and increased uncertainty around supply."},
+    {"date":"2023-04-02","title":"OPEC+ announces additional cuts","detail":"Major producers announced voluntary output cuts, tightening expected supply."},
+    {"date":"2026-02-28","title":"Iran conflict escalates","detail":"Conflict raised risks to Middle East production and shipping through the Strait of Hormuz."},
+    {"date":"2026-09-11","title":"Saudi East-West pipeline attacked","detail":"A major Saudi export route was disrupted, increasing concern about crude supply and shipping capacity."},
+    {"date":"2026-09-15","title":"Yanbu loadings disrupted","detail":"Reduced loadings increased concern about available replacement crude supplies."}
+  ]
+}
