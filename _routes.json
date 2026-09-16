@@ -1,5 +1,8 @@
 {
   "version": 1,
-  "include": ["/api/live/*"],
+  "include": [
+    "/api/live/*",
+    "/api/oil-gas"
+  ],
   "exclude": []
 }
