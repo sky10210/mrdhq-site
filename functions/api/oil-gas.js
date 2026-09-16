@@ -7,6 +7,7 @@ const json = (body, status = 200, headers = {}) => new Response(JSON.stringify(b
   headers: {
     'Content-Type': 'application/json; charset=utf-8',
     'Cache-Control': status === 200 ? 'public, max-age=900, s-maxage=21600, stale-while-revalidate=86400' : 'no-store',
+    'Access-Control-Allow-Origin': '*',
     'X-Content-Type-Options': 'nosniff',
     ...headers
   }
