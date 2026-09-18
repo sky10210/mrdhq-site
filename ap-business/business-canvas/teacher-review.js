@@ -159,3 +159,131 @@
   enforceNoMinimumCopy();
   startAutoRefresh();
 })();
+
+
+/* MRDHQ_CASE_EXPORT_V1 — additive teacher-only case export */
+(() => {
+  function isAuthorizedTeacher() {
+    const email = String(window.cloud?.user?.email || "").toLowerCase();
+    return Boolean(window.cloud?.db && window.cloud?.user && (window.cloud.teacherEmails || []).includes(email));
+  }
+
+  function csvCell(value) {
+    const text = String(value ?? "").replace(/\r?\n/g, " ").trim();
+    return '"' + text.replace(/"/g, '""') + '"';
+  }
+
+  function safeFileName(value) {
+    return String(value || "case").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+
+  function ensureCaseExportControls() {
+    const actions = document.querySelector("#teacher-progress-dashboard .teacher-progress-actions");
+    if (!actions || actions.querySelector("#tp-case-export")) return;
+
+    const select = document.createElement("select");
+    select.id = "tp-case-export";
+    select.setAttribute("aria-label", "Choose case to export");
+    select.innerHTML = (window.CASES || []).map(record =>
+      '<option value="' + escapeHtml(record.id) + '">' + escapeHtml(record.title) + '</option>'
+    ).join("");
+    if ((window.CASES || []).some(record => record.id === "incredible-health")) {
+      select.value = "incredible-health";
+    }
+
+    const button = document.createElement("button");
+    button.className = "button button-secondary";
+    button.id = "tp-export-case";
+    button.type = "button";
+    button.textContent = "Export Case CSV";
+
+    actions.append(select, button);
+    button.addEventListener("click", exportSelectedCase);
+  }
+
+  async function exportSelectedCase() {
+    if (!isAuthorizedTeacher()) {
+      showToast("Sign in with the authorized teacher account first.");
+      return;
+    }
+
+    const select = document.getElementById("tp-case-export");
+    const button = document.getElementById("tp-export-case");
+    const caseId = select?.value;
+    const record = (window.CASES || []).find(item => item.id === caseId);
+    if (!record) return;
+
+    const originalText = button.textContent;
+    button.disabled = true;
+    button.textContent = "Preparing…";
+
+    try {
+      const usersSnap = await window.cloud.db.collection("businessCanvasUsers").get();
+      const teacherSet = new Set((window.cloud.teacherEmails || []).map(email => String(email).toLowerCase()));
+      const studentDocs = usersSnap.docs.filter(doc =>
+        !teacherSet.has(String(doc.data()?.email || "").toLowerCase())
+      );
+
+      const rows = await Promise.all(studentDocs.map(async userDoc => {
+        const profile = userDoc.data() || {};
+        const caseSnap = await userDoc.ref.collection("cases").doc(caseId).get();
+        const state = caseSnap.exists ? (caseSnap.data() || {}) : {};
+        const answers = Array.isArray(state.answers) ? state.answers : [];
+        const filled = answers.filter(answer => String(answer || "").trim()).length;
+        let status = "Not started";
+        if (state.submitted) status = "Submitted";
+        else if (filled) status = "Saved draft";
+
+        const updated = state.updatedAt?.toDate ? state.updatedAt.toDate() : null;
+        const submitted = state.submittedAt?.toDate ? state.submittedAt.toDate() : null;
+
+        return [
+          profile.name || profile.email || "Student",
+          profile.period || "AP Business",
+          profile.email || "",
+          status,
+          filled,
+          record.questions?.length || 0,
+          updated ? updated.toLocaleString() : "",
+          submitted ? submitted.toLocaleString() : "",
+          ...(record.questions || []).map((_, index) => answers[index] || "")
+        ];
+      }));
+
+      rows.sort((a, b) => String(a[0]).localeCompare(String(b[0])));
+      const headers = [
+        "Student",
+        "Period",
+        "Email",
+        "Status",
+        "Answers Completed",
+        "Questions",
+        "Last Updated",
+        "Submitted At",
+        ...(record.questions || []).map((question, index) => "Q" + (index + 1) + ": " + (question.text || "Question"))
+      ];
+      const csv = [headers, ...rows].map(row => row.map(csvCell).join(",")).join("\r\n");
+      const blob = new Blob(["\uFEFF" + csv], {type: "text/csv;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = safeFileName(record.title) + "-student-responses.csv";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast(record.title + " responses exported.");
+    } catch (error) {
+      console.error("Case export failed:", error);
+      showToast("Could not export case responses. Refresh and try again.");
+    } finally {
+      button.disabled = false;
+      button.textContent = originalText;
+    }
+  }
+
+  const exportObserver = new MutationObserver(ensureCaseExportControls);
+  exportObserver.observe(document.documentElement, {childList: true, subtree: true});
+  document.addEventListener("DOMContentLoaded", ensureCaseExportControls);
+  ensureCaseExportControls();
+})();
