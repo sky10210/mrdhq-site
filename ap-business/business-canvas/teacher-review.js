@@ -164,8 +164,8 @@
 /* MRDHQ_CASE_EXPORT_V1 — additive teacher-only case export */
 (() => {
   function isAuthorizedTeacher() {
-    const email = String(window.cloud?.user?.email || "").toLowerCase();
-    return Boolean(window.cloud?.db && window.cloud?.user && (window.cloud.teacherEmails || []).includes(email));
+    const email = String(cloud?.user?.email || "").toLowerCase();
+    return Boolean(cloud?.db && cloud?.user && (cloud.teacherEmails || []).includes(email));
   }
 
   function csvCell(value) {
@@ -184,10 +184,10 @@
     const select = document.createElement("select");
     select.id = "tp-case-export";
     select.setAttribute("aria-label", "Choose case to export");
-    select.innerHTML = (window.CASES || []).map(record =>
+    select.innerHTML = (CASES || []).map(record =>
       '<option value="' + escapeHtml(record.id) + '">' + escapeHtml(record.title) + '</option>'
     ).join("");
-    if ((window.CASES || []).some(record => record.id === "incredible-health")) {
+    if ((CASES || []).some(record => record.id === "incredible-health")) {
       select.value = "incredible-health";
     }
 
@@ -210,7 +210,7 @@
     const select = document.getElementById("tp-case-export");
     const button = document.getElementById("tp-export-case");
     const caseId = select?.value;
-    const record = (window.CASES || []).find(item => item.id === caseId);
+    const record = (CASES || []).find(item => item.id === caseId);
     if (!record) return;
 
     const originalText = button.textContent;
@@ -218,8 +218,8 @@
     button.textContent = "Preparing…";
 
     try {
-      const usersSnap = await window.cloud.db.collection("businessCanvasUsers").get();
-      const teacherSet = new Set((window.cloud.teacherEmails || []).map(email => String(email).toLowerCase()));
+      const usersSnap = await cloud.db.collection("businessCanvasUsers").get();
+      const teacherSet = new Set((cloud.teacherEmails || []).map(email => String(email).toLowerCase()));
       const studentDocs = usersSnap.docs.filter(doc =>
         !teacherSet.has(String(doc.data()?.email || "").toLowerCase())
       );
