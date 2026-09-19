@@ -1,21 +1,21 @@
 {
-  "updatedAt": "2026-09-18T11:15:00Z",
-  "sourceDate": "Sep 17, 2026",
+  "updatedAt": "2026-09-19T11:17:00Z",
+  "sourceDate": "Sep 18, 2026",
   "status": "daily-snapshot",
-  "brent": {"price": 104.82, "date": "2026-09-17", "source": "Previous trading close"},
+  "brent": {"price": 103.87, "date": "2026-09-18", "source": "Previous trading close"},
   "pa": [
-    {"label":"Year Ago","value":3.3149},
-    {"label":"Month Ago","value":4.0730},
-    {"label":"Week Ago","value":4.4802},
-    {"label":"Yesterday","value":4.4984},
-    {"label":"Current","value":4.5232}
+    {"label":"Year Ago","value":3.3267},
+    {"label":"Month Ago","value":4.1085},
+    {"label":"Week Ago","value":4.4932},
+    {"label":"Yesterday","value":4.5232},
+    {"label":"Current","value":4.5580}
   ],
   "local": [
-    {"label":"Year Ago","value":3.1754},
-    {"label":"Month Ago","value":3.9661},
-    {"label":"Week Ago","value":4.1923},
-    {"label":"Yesterday","value":4.2394},
-    {"label":"Current","value":4.2504}
+    {"label":"Year Ago","value":3.2190},
+    {"label":"Month Ago","value":3.9590},
+    {"label":"Week Ago","value":4.2194},
+    {"label":"Yesterday","value":4.2504},
+    {"label":"Current","value":4.2661}
   ],
   "brentCheckpoints": [
     {"label":"6 Years Ago","value":42},
@@ -24,7 +24,7 @@
     {"label":"Year Ago","value":68},
     {"label":"Month Ago","value":91},
     {"label":"Week Ago","value":101},
-    {"label":"Previous Close","value":104.82}
+    {"label":"Previous Close","value":103.87}
   ],
   "heatingOilHistory": [
     {"date":"2025-12-01","value":3.449},{"date":"2025-12-08","value":3.436},{"date":"2025-12-15","value":3.392},{"date":"2025-12-22","value":3.357},{"date":"2025-12-29","value":3.355},
