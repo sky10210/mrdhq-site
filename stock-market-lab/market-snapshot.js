@@ -1,0 +1,1 @@
+window.STOCK_LAB_MARKET_SNAPSHOT=null;\n
