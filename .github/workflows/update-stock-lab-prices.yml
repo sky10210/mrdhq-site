@@ -1,0 +1,32 @@
+name: Update Stock Lab EOD Prices
+on:
+  schedule:
+    - cron: "30 21 * * 1-5"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: stock-lab-eod-prices
+  cancel-in-progress: true
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build latest completed-market snapshot
+        run: python scripts/update_stock_lab_prices.py
+      - name: Commit only when prices changed
+        run: |
+          if git diff --quiet -- stock-market-lab/market-snapshot.js; then
+            echo "No snapshot change."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add stock-market-lab/market-snapshot.js
+          git commit -m "Update Stock Lab EOD market snapshot"
+          git push

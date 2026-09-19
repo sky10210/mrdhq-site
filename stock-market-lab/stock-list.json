@@ -1,0 +1,326 @@
+{
+  "updated": "2026-09-19",
+  "count": 80,
+  "stocks": [
+    {
+      "ticker": "AAPL",
+      "name": "Apple"
+    },
+    {
+      "ticker": "MSFT",
+      "name": "Microsoft"
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA"
+    },
+    {
+      "ticker": "AMD",
+      "name": "AMD"
+    },
+    {
+      "ticker": "DELL",
+      "name": "Dell"
+    },
+    {
+      "ticker": "INTC",
+      "name": "Intel"
+    },
+    {
+      "ticker": "ADBE",
+      "name": "Adobe"
+    },
+    {
+      "ticker": "CRM",
+      "name": "Salesforce"
+    },
+    {
+      "ticker": "AMZN",
+      "name": "Amazon"
+    },
+    {
+      "ticker": "WMT",
+      "name": "Walmart"
+    },
+    {
+      "ticker": "TGT",
+      "name": "Target"
+    },
+    {
+      "ticker": "COST",
+      "name": "Costco"
+    },
+    {
+      "ticker": "HD",
+      "name": "Home Depot"
+    },
+    {
+      "ticker": "LOW",
+      "name": "Lowe's"
+    },
+    {
+      "ticker": "BBY",
+      "name": "Best Buy"
+    },
+    {
+      "ticker": "EBAY",
+      "name": "eBay"
+    },
+    {
+      "ticker": "TSLA",
+      "name": "Tesla"
+    },
+    {
+      "ticker": "F",
+      "name": "Ford"
+    },
+    {
+      "ticker": "GM",
+      "name": "General Motors"
+    },
+    {
+      "ticker": "TM",
+      "name": "Toyota"
+    },
+    {
+      "ticker": "UBER",
+      "name": "Uber"
+    },
+    {
+      "ticker": "LYFT",
+      "name": "Lyft"
+    },
+    {
+      "ticker": "DAL",
+      "name": "Delta Air Lines"
+    },
+    {
+      "ticker": "LUV",
+      "name": "Southwest Airlines"
+    },
+    {
+      "ticker": "KO",
+      "name": "Coca-Cola"
+    },
+    {
+      "ticker": "PEP",
+      "name": "PepsiCo"
+    },
+    {
+      "ticker": "MCD",
+      "name": "McDonald's"
+    },
+    {
+      "ticker": "SBUX",
+      "name": "Starbucks"
+    },
+    {
+      "ticker": "CMG",
+      "name": "Chipotle"
+    },
+    {
+      "ticker": "DPZ",
+      "name": "Domino's"
+    },
+    {
+      "ticker": "YUM",
+      "name": "Yum! Brands"
+    },
+    {
+      "ticker": "MNST",
+      "name": "Monster Beverage"
+    },
+    {
+      "ticker": "DIS",
+      "name": "Disney"
+    },
+    {
+      "ticker": "NFLX",
+      "name": "Netflix"
+    },
+    {
+      "ticker": "SPOT",
+      "name": "Spotify"
+    },
+    {
+      "ticker": "EA",
+      "name": "Electronic Arts"
+    },
+    {
+      "ticker": "TTWO",
+      "name": "Take-Two Interactive"
+    },
+    {
+      "ticker": "CMCSA",
+      "name": "Comcast"
+    },
+    {
+      "ticker": "WBD",
+      "name": "Warner Bros. Discovery"
+    },
+    {
+      "ticker": "RBLX",
+      "name": "Roblox"
+    },
+    {
+      "ticker": "JPM",
+      "name": "JPMorgan Chase"
+    },
+    {
+      "ticker": "BAC",
+      "name": "Bank of America"
+    },
+    {
+      "ticker": "COF",
+      "name": "Capital One"
+    },
+    {
+      "ticker": "V",
+      "name": "Visa"
+    },
+    {
+      "ticker": "MA",
+      "name": "Mastercard"
+    },
+    {
+      "ticker": "AXP",
+      "name": "American Express"
+    },
+    {
+      "ticker": "PYPL",
+      "name": "PayPal"
+    },
+    {
+      "ticker": "HOOD",
+      "name": "Robinhood"
+    },
+    {
+      "ticker": "LLY",
+      "name": "Eli Lilly"
+    },
+    {
+      "ticker": "PFE",
+      "name": "Pfizer"
+    },
+    {
+      "ticker": "JNJ",
+      "name": "Johnson & Johnson"
+    },
+    {
+      "ticker": "CVS",
+      "name": "CVS Health"
+    },
+    {
+      "ticker": "UNH",
+      "name": "UnitedHealth"
+    },
+    {
+      "ticker": "ABT",
+      "name": "Abbott"
+    },
+    {
+      "ticker": "MRK",
+      "name": "Merck"
+    },
+    {
+      "ticker": "HCA",
+      "name": "HCA Healthcare"
+    },
+    {
+      "ticker": "XOM",
+      "name": "ExxonMobil"
+    },
+    {
+      "ticker": "CVX",
+      "name": "Chevron"
+    },
+    {
+      "ticker": "COP",
+      "name": "ConocoPhillips"
+    },
+    {
+      "ticker": "CAT",
+      "name": "Caterpillar"
+    },
+    {
+      "ticker": "DE",
+      "name": "Deere"
+    },
+    {
+      "ticker": "GE",
+      "name": "GE Aerospace"
+    },
+    {
+      "ticker": "NEE",
+      "name": "NextEra Energy"
+    },
+    {
+      "ticker": "DUK",
+      "name": "Duke Energy"
+    },
+    {
+      "ticker": "NKE",
+      "name": "Nike"
+    },
+    {
+      "ticker": "LULU",
+      "name": "Lululemon"
+    },
+    {
+      "ticker": "RL",
+      "name": "Ralph Lauren"
+    },
+    {
+      "ticker": "DECK",
+      "name": "Deckers Outdoor"
+    },
+    {
+      "ticker": "UAA",
+      "name": "Under Armour"
+    },
+    {
+      "ticker": "LEVI",
+      "name": "Levi Strauss"
+    },
+    {
+      "ticker": "CROX",
+      "name": "Crocs"
+    },
+    {
+      "ticker": "COLM",
+      "name": "Columbia Sportswear"
+    },
+    {
+      "ticker": "Z",
+      "name": "Zillow"
+    },
+    {
+      "ticker": "DHI",
+      "name": "D.R. Horton"
+    },
+    {
+      "ticker": "LEN",
+      "name": "Lennar"
+    },
+    {
+      "ticker": "PHM",
+      "name": "PulteGroup"
+    },
+    {
+      "ticker": "O",
+      "name": "Realty Income"
+    },
+    {
+      "ticker": "PLD",
+      "name": "Prologis"
+    },
+    {
+      "ticker": "SHW",
+      "name": "Sherwin-Williams"
+    },
+    {
+      "ticker": "BLDR",
+      "name": "Builders FirstSource"
+    }
+  ]
+}
