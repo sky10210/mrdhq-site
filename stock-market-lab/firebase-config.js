@@ -1,16 +1,14 @@
 /*
-  Stock Market Lab intentionally uses its OWN Firebase project.
-  Do not point this file at mrdhq-business-canvas.
-  Canvas Studio and Stock Market Lab must not share Authentication, Firestore,
-  Storage, Functions, rules, or student records.
+  MRDHQ Stock Market Lab — dedicated Firebase project.
+  Intentionally separate from MRDHQ Business Canvas Studio.
 */
 window.STOCK_LAB_FIREBASE_CONFIG = {
-  apiKey: "REPLACE_WITH_STOCK_LAB_API_KEY",
-  authDomain: "REPLACE_WITH_STOCK_LAB_AUTH_DOMAIN",
-  projectId: "REPLACE_WITH_STOCK_LAB_PROJECT_ID",
-  storageBucket: "REPLACE_WITH_STOCK_LAB_STORAGE_BUCKET",
-  messagingSenderId: "REPLACE_WITH_STOCK_LAB_SENDER_ID",
-  appId: "REPLACE_WITH_STOCK_LAB_APP_ID"
+  apiKey: "AIzaSyBOjeF3tRE3E2Drl8L4SGjHK-RUyzcEmm0",
+  authDomain: "mrdhq-stock-market-lab.firebaseapp.com",
+  projectId: "mrdhq-stock-market-lab",
+  storageBucket: "mrdhq-stock-market-lab.firebasestorage.app",
+  messagingSenderId: "85877738274",
+  appId: "1:85877738274:web:bf0c0b70fe28cfb698737b"
 };
 
 window.STOCK_LAB_SETTINGS = {
