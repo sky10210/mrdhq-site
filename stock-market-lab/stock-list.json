@@ -1,6 +1,6 @@
 {
   "updated": "2026-09-19",
-  "count": 80,
+  "count": 93,
   "stocks": [
     {
       "ticker": "AAPL",
@@ -33,6 +33,38 @@
     {
       "ticker": "CRM",
       "name": "Salesforce"
+    },
+    {
+      "ticker": "GOOGL",
+      "name": "Alphabet"
+    },
+    {
+      "ticker": "META",
+      "name": "Meta Platforms"
+    },
+    {
+      "ticker": "AVGO",
+      "name": "Broadcom"
+    },
+    {
+      "ticker": "ORCL",
+      "name": "Oracle"
+    },
+    {
+      "ticker": "MU",
+      "name": "Micron"
+    },
+    {
+      "ticker": "PLTR",
+      "name": "Palantir"
+    },
+    {
+      "ticker": "SMCI",
+      "name": "Super Micro Computer"
+    },
+    {
+      "ticker": "CSCO",
+      "name": "Cisco"
     },
     {
       "ticker": "AMZN",
@@ -97,6 +129,14 @@
     {
       "ticker": "LUV",
       "name": "Southwest Airlines"
+    },
+    {
+      "ticker": "AAL",
+      "name": "American Airlines"
+    },
+    {
+      "ticker": "UPS",
+      "name": "UPS"
     },
     {
       "ticker": "KO",
@@ -193,6 +233,18 @@
     {
       "ticker": "HOOD",
       "name": "Robinhood"
+    },
+    {
+      "ticker": "SOFI",
+      "name": "SoFi"
+    },
+    {
+      "ticker": "COIN",
+      "name": "Coinbase"
+    },
+    {
+      "ticker": "XYZ",
+      "name": "Block"
     },
     {
       "ticker": "LLY",
