@@ -16,7 +16,7 @@ service cloud.firestore {
       allow delete: if isTeacher();
       match /{document=**} { allow read: if isOwner(uid) || isTeacher(); allow write: if isOwner(uid) || isTeacher(); }
     }
-    match /stockLabMarketPrices/{companyId} { allow read: if signedIn(); allow write: if isTeacher(); }
+    match /stockLabMarket/{snapshotId} { allow read: if signedIn(); allow write: if isTeacher(); }\n    match /stockLabMarketPrices/{companyId} { allow read: if signedIn(); allow write: if isTeacher(); }
     match /stockLabPriceHistory/{document=**} { allow read: if signedIn(); allow write: if isTeacher(); }
     match /stockLabCompanies/{companyId} { allow read: if signedIn(); allow write: if isTeacher(); }
     match /stockLabIndustries/{industryId} { allow read: if signedIn(); allow write: if isTeacher(); }
