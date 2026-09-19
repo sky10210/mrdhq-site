@@ -1,0 +1,2 @@
+window.MRDHQ_FIREBASE_CONFIG={apiKey:"AIzaSyA_R--xQW8CdgbI1HGx5oxbqljHBGCujhY",authDomain:"mrdhq-business-canvas.firebaseapp.com",projectId:"mrdhq-business-canvas",storageBucket:"mrdhq-business-canvas.firebasestorage.app",messagingSenderId:"290503910720",appId:"1:290503910720:web:685022bfcd0a71458346a5"};
+window.STOCK_LAB_SETTINGS={startingCapital:15000,allocationPerIndustry:1500,teacherEmails:["skyler.dipasquale@casdonline.org"],classOptions:["AP Business","Marketing","Business 101","PFM"]};
