@@ -1,0 +1,23 @@
+// Stock Market Lab rules fragment — REVIEW/MERGE with the existing Business Canvas rules before deployment.
+// Do not deploy this as a replacement without preserving existing businessCanvasUsers/classes permissions.
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn(){ return request.auth != null; }
+    function isOwner(uid){ return signedIn() && request.auth.uid == uid; }
+    function isTeacher(){ return signedIn() && request.auth.token.email == "skyler.dipasquale@casdonline.org"; }
+
+    match /stockLabUsers/{uid} {
+      allow read, create, update: if isOwner(uid) || isTeacher();
+      allow delete: if isTeacher();
+    }
+    match /stockLabClasses/{classId}/{document=**} {
+      allow read: if signedIn();
+      allow write: if isTeacher();
+    }
+    match /stockLabMarket/{document=**} {
+      allow read: if signedIn();
+      allow write: if isTeacher();
+    }
+  }
+}
