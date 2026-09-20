@@ -12,7 +12,7 @@ found={}
 with zipfile.ZipFile(io.BytesIO(raw)) as z:
   for name in z.namelist():
     if not name.lower().endswith(".txt"): continue
-    ticker=Path(name).stem.upper()
+    ticker=Path(name).stem.upper().removesuffix(".US")
     if ticker not in WANTED: continue
     rows=[]
     with z.open(name) as fh:

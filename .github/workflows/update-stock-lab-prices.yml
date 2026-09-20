@@ -1,5 +1,10 @@
 name: Update Stock Lab EOD Prices
 on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/update_stock_lab_prices.py"
+      - "stock-market-lab/stock-list.json"
   schedule:
     - cron: "30 21 * * 1-5"
   workflow_dispatch:
