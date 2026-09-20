@@ -1,6 +1,6 @@
 {
   "updated": "2026-09-20",
-  "count": 147,
+  "count": 185,
   "stocks": [
     {
       "ticker": "AAPL",
@@ -81,6 +81,54 @@
     {
       "ticker": "SNOW",
       "name": "Snowflake"
+    },
+    {
+      "ticker": "TSM",
+      "name": "TSMC"
+    },
+    {
+      "ticker": "SNDK",
+      "name": "Sandisk"
+    },
+    {
+      "ticker": "WDC",
+      "name": "Western Digital"
+    },
+    {
+      "ticker": "STX",
+      "name": "Seagate"
+    },
+    {
+      "ticker": "MRVL",
+      "name": "Marvell Technology"
+    },
+    {
+      "ticker": "LRCX",
+      "name": "Lam Research"
+    },
+    {
+      "ticker": "AMAT",
+      "name": "Applied Materials"
+    },
+    {
+      "ticker": "APP",
+      "name": "AppLovin"
+    },
+    {
+      "ticker": "VRT",
+      "name": "Vertiv"
+    },
+    {
+      "ticker": "ANET",
+      "name": "Arista Networks"
+    },
+    {
+      "ticker": "CRWD",
+      "name": "CrowdStrike"
+    },
+    {
+      "ticker": "PANW",
+      "name": "Palo Alto Networks"
     },
     {
       "ticker": "AMZN",
@@ -199,6 +247,10 @@
       "name": "FedEx"
     },
     {
+      "ticker": "CVNA",
+      "name": "Carvana"
+    },
+    {
       "ticker": "KO",
       "name": "Coca-Cola"
     },
@@ -253,6 +305,46 @@
     {
       "ticker": "HSY",
       "name": "Hershey"
+    },
+    {
+      "ticker": "CELH",
+      "name": "Celsius"
+    },
+    {
+      "ticker": "BROS",
+      "name": "Dutch Bros"
+    },
+    {
+      "ticker": "TSN",
+      "name": "Tyson Foods"
+    },
+    {
+      "ticker": "GIS",
+      "name": "General Mills"
+    },
+    {
+      "ticker": "KHC",
+      "name": "Kraft Heinz"
+    },
+    {
+      "ticker": "CPB",
+      "name": "Campbell's"
+    },
+    {
+      "ticker": "CAG",
+      "name": "Conagra Brands"
+    },
+    {
+      "ticker": "WING",
+      "name": "Wingstop"
+    },
+    {
+      "ticker": "TXRH",
+      "name": "Texas Roadhouse"
+    },
+    {
+      "ticker": "QSR",
+      "name": "Restaurant Brands International"
     },
     {
       "ticker": "DIS",
@@ -431,6 +523,10 @@
       "name": "McKesson"
     },
     {
+      "ticker": "MRNA",
+      "name": "Moderna"
+    },
+    {
       "ticker": "XOM",
       "name": "ExxonMobil"
     },
@@ -485,6 +581,22 @@
     {
       "ticker": "HON",
       "name": "Honeywell"
+    },
+    {
+      "ticker": "GEV",
+      "name": "GE Vernova"
+    },
+    {
+      "ticker": "MPC",
+      "name": "Marathon Petroleum"
+    },
+    {
+      "ticker": "VLO",
+      "name": "Valero Energy"
+    },
+    {
+      "ticker": "PWR",
+      "name": "Quanta Services"
     },
     {
       "ticker": "NKE",
@@ -589,6 +701,46 @@
     {
       "ticker": "WY",
       "name": "Weyerhaeuser"
+    },
+    {
+      "ticker": "LMT",
+      "name": "Lockheed Martin"
+    },
+    {
+      "ticker": "RTX",
+      "name": "RTX"
+    },
+    {
+      "ticker": "NOC",
+      "name": "Northrop Grumman"
+    },
+    {
+      "ticker": "GD",
+      "name": "General Dynamics"
+    },
+    {
+      "ticker": "LHX",
+      "name": "L3Harris"
+    },
+    {
+      "ticker": "HII",
+      "name": "Huntington Ingalls"
+    },
+    {
+      "ticker": "BA",
+      "name": "Boeing"
+    },
+    {
+      "ticker": "HWM",
+      "name": "Howmet Aerospace"
+    },
+    {
+      "ticker": "AVAV",
+      "name": "AeroVironment"
+    },
+    {
+      "ticker": "AXON",
+      "name": "Axon Enterprise"
     }
   ]
 }
