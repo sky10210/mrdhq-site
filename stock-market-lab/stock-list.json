@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-19",
-  "count": 93,
+  "updated": "2026-09-20",
+  "count": 147,
   "stocks": [
     {
       "ticker": "AAPL",
@@ -67,6 +67,22 @@
       "name": "Cisco"
     },
     {
+      "ticker": "QCOM",
+      "name": "Qualcomm"
+    },
+    {
+      "ticker": "IBM",
+      "name": "IBM"
+    },
+    {
+      "ticker": "NOW",
+      "name": "ServiceNow"
+    },
+    {
+      "ticker": "SNOW",
+      "name": "Snowflake"
+    },
+    {
       "ticker": "AMZN",
       "name": "Amazon"
     },
@@ -97,6 +113,30 @@
     {
       "ticker": "EBAY",
       "name": "eBay"
+    },
+    {
+      "ticker": "ETSY",
+      "name": "Etsy"
+    },
+    {
+      "ticker": "CHWY",
+      "name": "Chewy"
+    },
+    {
+      "ticker": "BABA",
+      "name": "Alibaba"
+    },
+    {
+      "ticker": "MELI",
+      "name": "MercadoLibre"
+    },
+    {
+      "ticker": "ROST",
+      "name": "Ross Stores"
+    },
+    {
+      "ticker": "TJX",
+      "name": "TJX Companies"
     },
     {
       "ticker": "TSLA",
@@ -139,6 +179,26 @@
       "name": "UPS"
     },
     {
+      "ticker": "RIVN",
+      "name": "Rivian"
+    },
+    {
+      "ticker": "LCID",
+      "name": "Lucid"
+    },
+    {
+      "ticker": "RACE",
+      "name": "Ferrari"
+    },
+    {
+      "ticker": "NIO",
+      "name": "NIO"
+    },
+    {
+      "ticker": "FDX",
+      "name": "FedEx"
+    },
+    {
       "ticker": "KO",
       "name": "Coca-Cola"
     },
@@ -171,6 +231,30 @@
       "name": "Monster Beverage"
     },
     {
+      "ticker": "CAVA",
+      "name": "Cava"
+    },
+    {
+      "ticker": "SHAK",
+      "name": "Shake Shack"
+    },
+    {
+      "ticker": "DASH",
+      "name": "DoorDash"
+    },
+    {
+      "ticker": "KDP",
+      "name": "Keurig Dr Pepper"
+    },
+    {
+      "ticker": "MDLZ",
+      "name": "Mondelez"
+    },
+    {
+      "ticker": "HSY",
+      "name": "Hershey"
+    },
+    {
       "ticker": "DIS",
       "name": "Disney"
     },
@@ -201,6 +285,30 @@
     {
       "ticker": "RBLX",
       "name": "Roblox"
+    },
+    {
+      "ticker": "PARA",
+      "name": "Paramount"
+    },
+    {
+      "ticker": "ROKU",
+      "name": "Roku"
+    },
+    {
+      "ticker": "SNAP",
+      "name": "Snap"
+    },
+    {
+      "ticker": "PINS",
+      "name": "Pinterest"
+    },
+    {
+      "ticker": "RDDT",
+      "name": "Reddit"
+    },
+    {
+      "ticker": "TKO",
+      "name": "TKO Group"
     },
     {
       "ticker": "JPM",
@@ -247,6 +355,26 @@
       "name": "Block"
     },
     {
+      "ticker": "GS",
+      "name": "Goldman Sachs"
+    },
+    {
+      "ticker": "MS",
+      "name": "Morgan Stanley"
+    },
+    {
+      "ticker": "SCHW",
+      "name": "Charles Schwab"
+    },
+    {
+      "ticker": "C",
+      "name": "Citigroup"
+    },
+    {
+      "ticker": "AFRM",
+      "name": "Affirm"
+    },
+    {
       "ticker": "LLY",
       "name": "Eli Lilly"
     },
@@ -277,6 +405,30 @@
     {
       "ticker": "HCA",
       "name": "HCA Healthcare"
+    },
+    {
+      "ticker": "TMO",
+      "name": "Thermo Fisher"
+    },
+    {
+      "ticker": "ISRG",
+      "name": "Intuitive Surgical"
+    },
+    {
+      "ticker": "MDT",
+      "name": "Medtronic"
+    },
+    {
+      "ticker": "GILD",
+      "name": "Gilead Sciences"
+    },
+    {
+      "ticker": "VRTX",
+      "name": "Vertex Pharmaceuticals"
+    },
+    {
+      "ticker": "MCK",
+      "name": "McKesson"
     },
     {
       "ticker": "XOM",
@@ -311,6 +463,30 @@
       "name": "Duke Energy"
     },
     {
+      "ticker": "SLB",
+      "name": "SLB"
+    },
+    {
+      "ticker": "FSLR",
+      "name": "First Solar"
+    },
+    {
+      "ticker": "CEG",
+      "name": "Constellation Energy"
+    },
+    {
+      "ticker": "VST",
+      "name": "Vistra"
+    },
+    {
+      "ticker": "ETN",
+      "name": "Eaton"
+    },
+    {
+      "ticker": "HON",
+      "name": "Honeywell"
+    },
+    {
       "ticker": "NKE",
       "name": "Nike"
     },
@@ -343,6 +519,30 @@
       "name": "Columbia Sportswear"
     },
     {
+      "ticker": "ONON",
+      "name": "On Holding"
+    },
+    {
+      "ticker": "VFC",
+      "name": "VF Corporation"
+    },
+    {
+      "ticker": "PVH",
+      "name": "PVH"
+    },
+    {
+      "ticker": "SKX",
+      "name": "Skechers"
+    },
+    {
+      "ticker": "TPR",
+      "name": "Tapestry"
+    },
+    {
+      "ticker": "VSTO",
+      "name": "Vista Outdoor"
+    },
+    {
       "ticker": "Z",
       "name": "Zillow"
     },
@@ -373,6 +573,22 @@
     {
       "ticker": "BLDR",
       "name": "Builders FirstSource"
+    },
+    {
+      "ticker": "CBRE",
+      "name": "CBRE Group"
+    },
+    {
+      "ticker": "AMT",
+      "name": "American Tower"
+    },
+    {
+      "ticker": "SPG",
+      "name": "Simon Property Group"
+    },
+    {
+      "ticker": "WY",
+      "name": "Weyerhaeuser"
     }
   ]
 }
