@@ -21,5 +21,10 @@ window.STOCK_LAB_SETTINGS = {
     "max.jamelli@casdonline.org",
     "sldipasquale@gmail.com"
   ],
-  classOptions: ["AP Business 1","AP Business 4","Personal Finance","Business 101"]
+  classOptions: ["AP Business 1","AP Business 4","Personal Finance","Business 101"],
+  teachers: [
+    {id:"mr-d",name:"Mr. D",classes:["AP Business 1","AP Business 4","Personal Finance","Business 101"]},
+    {id:"mr-snyder",name:"Mr. Snyder",classes:["Business 101","Accounting"]},
+    {id:"mr-jamelli",name:"Mr. Jamelli",classes:["Business 101","Accounting"]}
+  ]
 };
