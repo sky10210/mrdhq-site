@@ -13,10 +13,11 @@ function onOpen() {
 }
 
 function installEodTrigger() {
+  SpreadsheetApp.getActive().setSpreadsheetTimeZone('America/New_York');
   ScriptApp.getProjectTriggers().filter(t => t.getHandlerFunction() === 'refreshEodPrices')
     .forEach(t => ScriptApp.deleteTrigger(t));
-  ScriptApp.newTrigger('refreshEodPrices').timeBased().everyDays(1).atHour(19).create();
-  SpreadsheetApp.getActive().toast('Installed: EOD refresh runs each evening in the script time zone.');
+  ScriptApp.newTrigger('refreshEodPrices').timeBased().everyDays(1).atHour(20).nearMinute(30).create();
+  SpreadsheetApp.getActive().toast('Installed: EOD refresh runs around 8:30 PM Eastern each evening.');
 }
 
 function refreshEodPrices() {
@@ -43,10 +44,15 @@ function refreshEodPrices() {
     found[ticker]=[close,prev,change,prev?change/prev:0,a[di],'Stooq EOD','OK'];
   });
   if (Object.keys(found).length < Math.ceil(wanted.size*.90)) throw new Error('Safety stop: only '+Object.keys(found).length+' of '+wanted.size+' tickers found.');
+  const missing=tickers.filter(t=>!found[t.toUpperCase()]);
   const out=tickers.map(t=>found[t.toUpperCase()]||['','','','','','','MISSING']);
   sh.getRange(2,4,out.length,7).setValues(out);
   sh.getRange(2,7,out.length,1).setNumberFormat('0.00%');
   sh.getRange('L1').setValue('Last refresh');
   sh.getRange('M1').setValue(new Date());
+  sh.getRange('L2').setValue('Coverage');
+  sh.getRange('M2').setValue(Object.keys(found).length+'/'+wanted.size);
+  sh.getRange('L3').setValue('Missing');
+  sh.getRange('M3').setValue(missing.join(', ')||'None');
   SpreadsheetApp.flush();
 }
