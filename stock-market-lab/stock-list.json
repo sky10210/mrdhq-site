@@ -359,8 +359,8 @@
       "name": "Spotify"
     },
     {
-      "ticker": "EA",
-      "name": "Electronic Arts"
+      "ticker": "SONY",
+      "name": "Sony Group"
     },
     {
       "ticker": "TTWO",
@@ -643,16 +643,16 @@
       "name": "PVH"
     },
     {
-      "ticker": "SKX",
-      "name": "Skechers"
+      "ticker": "BIRK",
+      "name": "Birkenstock"
     },
     {
       "ticker": "TPR",
       "name": "Tapestry"
     },
     {
-      "ticker": "VSTO",
-      "name": "Vista Outdoor"
+      "ticker": "ASO",
+      "name": "Academy Sports + Outdoors"
     },
     {
       "ticker": "Z",
