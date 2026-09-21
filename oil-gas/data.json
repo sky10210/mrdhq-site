@@ -1,21 +1,21 @@
 {
-  "updatedAt": "2026-09-20T11:17:00Z",
-  "sourceDate": "Sep 19, 2026",
+  "updatedAt": "2026-09-21T11:13:00Z",
+  "sourceDate": "Sep 20, 2026",
   "status": "daily-snapshot",
   "brent": {"price": 103.87, "date": "2026-09-18", "source": "Previous trading close"},
   "pa": [
-    {"label":"Year Ago","value":3.3240},
-    {"label":"Month Ago","value":4.1352},
-    {"label":"Week Ago","value":4.4972},
-    {"label":"Yesterday","value":4.5678},
-    {"label":"Current","value":4.5678}
+    {"label":"Year Ago","value":3.3230},
+    {"label":"Month Ago","value":4.1506},
+    {"label":"Week Ago","value":4.4996},
+    {"label":"Yesterday","value":4.5708},
+    {"label":"Current","value":4.5708}
   ],
   "local": [
-    {"label":"Year Ago","value":3.2181},
-    {"label":"Month Ago","value":3.9622},
-    {"label":"Week Ago","value":4.2259},
-    {"label":"Yesterday","value":4.2900},
-    {"label":"Current","value":4.2900}
+    {"label":"Year Ago","value":3.2269},
+    {"label":"Month Ago","value":3.9940},
+    {"label":"Week Ago","value":4.2282},
+    {"label":"Yesterday","value":4.2944},
+    {"label":"Current","value":4.2944}
   ],
   "brentCheckpoints": [
     {"label":"6 Years Ago","value":42},
