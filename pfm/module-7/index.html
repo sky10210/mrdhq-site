@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Car Costs, MPG & Maintenance | Personal Finance Module 7 | MRDHQ</title>
+<meta name="description" content="Learn the most important basics of fuel economy, repair costs, warning signs, tires, oil, brakes, and long-run vehicle ownership costs.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102235;--blue:#2f6fb5;--teal:#18776f;--amber:#d99224;--red:#b63b34;--ink:#172033;--muted:#667085;--line:#d8e0e7;--soft:#f5f8fb;--cream:#f7f1e7;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,sans-serif;background:linear-gradient(180deg,var(--cream),#eef5f8 55%,#f8fafc);color:var(--ink);line-height:1.55}
+.wrap{width:min(1080px,92%);margin:24px auto 70px}.hero{background:linear-gradient(135deg,#102235,#173d58 68%,#1b6e73);color:white;border-radius:30px;padding:30px;box-shadow:0 18px 42px rgba(15,23,42,.13);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-90px;top:-130px;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(65,198,201,.27),transparent 68%)}
+.eyebrow{font-size:.76rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#b9ece7}.hero h1{font-size:clamp(2rem,4.7vw,3.7rem);line-height:1.03;letter-spacing:-.055em;margin:10px 0 14px;position:relative;z-index:1}.hero p{max-width:850px;color:#dce8ef;position:relative;z-index:1}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px;position:relative;z-index:1}.pill{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.15);font-size:.76rem;font-weight:800}
+.progressrow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px;color:#c6f0ec;font-weight:800;font-size:.86rem}.progress{height:11px;background:rgba(255,255,255,.13);border-radius:999px;overflow:hidden;margin-top:7px}.bar{height:100%;width:0;background:linear-gradient(90deg,#47c6c9,#6aa7df,#f5c15e);transition:.3s}
+.card,.question,.cert{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 10px 28px rgba(15,23,42,.06)}.card{padding:22px;margin-top:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px}
+label{font-size:.84rem;font-weight:900;color:#475569;display:block;margin-bottom:5px}input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:#f8fafc;font:inherit;font-weight:600;color:var(--ink)}textarea{min-height:110px;resize:vertical}.btn{border:0;border-radius:14px;padding:11px 15px;font:inherit;font-weight:900;cursor:pointer}.primary{background:var(--blue);color:white}.secondary{background:white;border:1px solid var(--line);color:var(--navy)}
+.note{padding:14px 16px;border-left:4px solid var(--teal);background:#edf8f6;border-radius:11px;margin-top:18px}.formula{padding:12px 14px;border:1px solid #ead6a8;background:#fff7df;border-radius:13px;margin:11px 0;font-weight:800;color:#5d4318}
+#questions{display:grid;gap:16px;margin-top:18px}.question{overflow:hidden}.qhead{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;align-items:center}.qhead h2{font-size:1.08rem;margin:0;color:var(--navy)}
+.qbody{padding:20px}.badge{font-size:.71rem;font-weight:900;padding:6px 9px;border-radius:999px;background:#eff6ff;color:var(--blue);white-space:nowrap}.locked{opacity:.58}.locked .qbody{display:none}
+.lesson{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:14px}.prompt{font-weight:800;margin:0 0 12px}.options{display:grid;gap:9px}.option{padding:12px 13px;text-align:left;border:1px solid var(--line);background:#f8fafc;border-radius:13px;font:inherit;font-weight:700;cursor:pointer;color:#334155}.option:hover{background:#eef6fb;border-color:#bfd7e9}.option.good{background:#dcfce7;border-color:#86efac;color:#166534}.option.bad{background:#fee2e2;border-color:#fca5a5;color:#991b1b}
+.calcrow{display:grid;grid-template-columns:minmax(0,220px) auto;gap:9px;align-items:center}.feedback{display:none;margin-top:11px;padding:11px 13px;border-radius:13px;font-weight:800}.feedback.show{display:block}.feedback.good{background:#dcfce7;color:#166534}.feedback.bad{background:#fee2e2;color:#991b1b}
+.cert{display:none;padding:28px;text-align:center;margin-top:18px;border:2px solid #b8d9d3}.cert.show{display:block}.cert h2{font-size:2rem;color:var(--navy);margin:0}.certname{font-size:1.5rem;font-weight:900;color:var(--teal);margin:8px}.certstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.stat{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:12px}.stat strong{display:block;color:var(--navy)}
+.actions{margin-top:13px}.toast{position:fixed;right:18px;bottom:18px;background:var(--navy);color:white;padding:12px 15px;border-radius:13px;opacity:0;transform:translateY(8px);transition:.2s;font-weight:800;z-index:10}.toast.show{opacity:1;transform:none}.footer{color:#64748b;font-size:.83rem;margin:25px 0;text-align:center}body.done .question button,body.done textarea,body.done input{pointer-events:none}
+@media(max-width:760px){.grid3,.certstats,.calcrow{grid-template-columns:1fr}.qhead{align-items:flex-start}}
+@media print{.hero,#start,#questions,.note,.toast,.cert button{display:none!important}.cert{display:block!important;box-shadow:none}.wrap{width:100%;margin:0}body{background:white}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="hero">
+<div class="eyebrow">Vivid Lessons • Personal Finance</div>
+<h1>Module 7 <span style="color:#8ce2db">Car Costs, MPG & Maintenance.</span></h1>
+<p>A car can drain money slowly through fuel and maintenance—or very quickly when warning signs are ignored. Learn the few basics that save the most money over time.</p>
+<div class="pills"><span class="pill">20 Questions</span><span class="pill">Minimal Prior Knowledge</span><span class="pill">MPG Math</span><span class="pill">Repair Costs</span><span class="pill">Warning Signs</span><span class="pill">Long-Run Ownership Cost</span><span class="pill">Reflection</span></div>
+<div class="progressrow"><span id="prog">Progress: 0%</span><span id="score">Score: 0 / 20</span><span id="clock">Not started</span></div><div class="progress"><div class="bar" id="bar"></div></div>
+</section>
+
+<section class="card" id="start">
+<h2>Student Start</h2>
+<p style="color:var(--muted)">Enter your information. Questions unlock one at a time. Correct on the first attempt = 1 point; correct on the second attempt = 0.5 points. After two attempts, the module explains the answer and moves on.</p>
+<div class="grid3"><div><label for="first">First Name</label><input id="first" autocomplete="given-name"></div><div><label for="last">Last Name</label><input id="last" autocomplete="family-name"></div><div><label for="period">Block</label><select id="period"><option value="">Choose a block...</option><option value="1">Block 1</option><option value="2">Block 2</option><option value="3">Block 3</option><option value="4">Block 4</option></select></div></div>
+<div class="actions"><button class="btn primary" onclick="begin()">Start Module</button></div>
+</section>
+
+<div class="note"><strong>Big idea:</strong> Small maintenance costs are often much cheaper than the repair bill created by ignoring them. Fuel economy matters every week; warning signs matter before they become major failures.</div>
+<div id="questions"></div>
+
+<section class="cert" id="cert">
+<div class="eyebrow" style="color:#18776f">Certificate of Completion</div><h2 id="certHeading">Module Complete!</h2><div class="certname" id="certName"></div><div>completed <strong>Personal Finance Module 7 - Car Costs, MPG & Maintenance</strong></div>
+<div class="certstats"><div class="stat"><strong id="certScore"></strong><span>Score</span></div><div class="stat"><strong id="certPct"></strong><span>Percent</span></div><div class="stat"><strong id="certStart"></strong><span>Started</span></div><div class="stat"><strong id="certEnd"></strong><span>Finished</span></div></div>
+<div class="lesson" style="text-align:left"><strong>Reflection</strong><div id="certRef"></div></div><p id="saveStatus" role="status" aria-live="polite">Saving your score...</p>
+<button id="retrySave" hidden class="btn primary" onclick="submit(document.getElementById('certRef').textContent,Math.round(score/20*100))">Retry saving score</button> <button class="btn secondary" onclick="window.print()">Print / Save Certificate</button>
+</section>
+<div class="footer">MR. D • Personal Financial Management • Module 7 • Vivid Lessons</div>
+</main><div class="toast" id="toast"></div>
+
+<script>
+const META={id:'pfm-module-7-car-costs-mpg-maintenance',title:'Personal Finance Module 7 - Car Costs, MPG & Maintenance',category:'Personal Finance',topic:'Vehicle Maintenance, Repair Costs, and Fuel Economy',productType:'Interactive Module',moduleSize:'standard',version:'1.0-pfm-u7',questionCount:20};
+const ENDPOINT='https://script.google.com/macros/s/AKfycbyucfQcDDR9S_4i8_EiI2LAm0k49NNGT0IBiRnXTjZQKgtfuOwM73Wtxxt5fzojGFY/exec';
+
+const Q=[
+{n:1,t:'What MPG Means',lesson:'MPG means miles per gallon. It tells you about how many miles a vehicle travels using one gallon of fuel.',prompt:'A car gets 30 MPG. What does that mean?',o:['It travels about 30 miles per gallon','It uses 30 gallons each mile','It costs $30 to fill up','It can only drive 30 miles'],a:0,fb:'MPG is a fuel-efficiency measure: miles traveled for each gallon used.'},
+{n:2,t:'Calculate MPG',lesson:'MPG = miles driven ÷ gallons used.',type:'calc',prompt:'You drive 300 miles and use 10 gallons of gas. What is the MPG?',answer:30,tolerance:.01,fb:'300 ÷ 10 = 30 MPG.'},
+{n:3,t:'Fuel Used in a Year',lesson:'To estimate gallons used: annual miles ÷ MPG.',type:'calc',prompt:'You drive 12,000 miles per year in a 30 MPG car. About how many gallons will you use?',answer:400,tolerance:.01,fb:'12,000 ÷ 30 = 400 gallons.'},
+{n:4,t:'Annual Fuel Cost',lesson:'Annual fuel cost ≈ annual miles ÷ MPG × gas price.',type:'calc',prompt:'A 30 MPG car travels 12,000 miles. Gas averages $3.50 per gallon. About how much is the yearly fuel cost?',answer:1400,tolerance:.01,fb:'12,000 ÷ 30 = 400 gallons. 400 × $3.50 = $1,400.'},
+{n:5,t:'Why MPG Matters Long Term',lesson:'A few MPG can create hundreds of dollars of difference over many miles.',prompt:'At the same gas price and mileage, which car usually costs less to fuel?',o:['The 30 MPG car','The heavier car','The 20 MPG car','The car with larger wheels'],a:0,fb:'Higher MPG generally means fewer gallons needed for the same number of miles.'},
+{n:6,t:'Oil Has a Job',lesson:'Engine oil lubricates moving parts, helps control heat, and carries contaminants to the filter. Oil breaks down over time.',prompt:'What is the best source for when your car needs an oil change?',o:['The owner’s manual or maintenance system','A random online comment','The paint color','The gas gauge'],a:0,fb:'Use the manufacturer’s interval or maintenance system because vehicles and oil requirements differ.'},
+{n:7,t:'Ignoring Oil Changes',lesson:'Old or low oil can increase friction, heat, and wear. Severe oil problems can damage an engine.',prompt:'Why can skipping oil changes become expensive?',o:['Engine damage can cost far more than maintenance','It makes the radio quieter','It lowers tire pressure','It changes the VIN'],a:0,fb:'Routine oil service is usually far cheaper than repairing major internal engine damage.'},
+{n:8,t:'Oil Warning Light',lesson:'A red oil-pressure warning can mean the engine is not getting proper oil pressure. Continuing to drive can quickly cause major damage.',prompt:'The red oil-pressure warning comes on while driving. What should you do?',o:['Stop safely and shut the engine off','Drive faster to raise pressure','Wait until the next oil change','Add windshield fluid'],a:0,fb:'A true oil-pressure warning is urgent. Stop safely and shut the engine off rather than risking engine damage.'},
+{n:9,t:'Correct Tire Pressure',lesson:'Proper tire pressure supports handling, tire life, and fuel economy. The recommended pressure is usually on the driver-door placard or in the owner’s manual.',prompt:'Where should you look for the recommended tire pressure?',o:['Driver-door placard','Tire brand advertisement','License plate','Oil cap'],a:0,fb:'The vehicle placard gives the manufacturer’s recommended cold tire pressure.'},
+{n:10,t:'Underinflated Tires',lesson:'Low tire pressure increases rolling resistance and can create extra heat and uneven wear.',prompt:'What can underinflated tires do over time?',o:['Increase wear and fuel use','Improve MPG','Make brakes new again','Reduce vehicle weight'],a:0,fb:'Low pressure can shorten tire life and make the engine work harder.'},
+{n:11,t:'Uneven Tire Wear',lesson:'Wear only on one edge or unusual patterns can point to pressure, alignment, suspension, or rotation problems.',prompt:'One front tire is wearing much faster on one edge. What is the best response?',o:['Have the tire, pressure, and alignment checked','Ignore it until it is bald','Only wash the wheel','Add more engine oil'],a:0,fb:'Uneven wear is a clue. Finding the cause early may save the tire and improve safety.'},
+{n:12,t:'Brake Pads vs. Grinding',lesson:'Brake pads are designed to wear. If worn pads are ignored, metal can contact the rotor and damage more expensive parts.',prompt:'Why is brake grinding a costly warning sign?',o:['More brake parts may already be getting damaged','It means the fuel tank is empty','It improves stopping power','It only affects the radio'],a:0,fb:'Waiting can turn a pad replacement into pads plus rotors or other brake work.'},
+{n:13,t:'The Cheaper Brake Decision',lesson:'Early brake inspections can catch worn pads before they damage rotors.',prompt:'Which choice is usually the smarter long-run money move?',o:['Replace worn pads before they grind','Wait until the car barely stops','Ignore brake noises for months','Replace the battery instead'],a:0,fb:'Fixing normal wear before additional damage usually reduces the repair bill.'},
+{n:14,t:'Coolant and Overheating',lesson:'Coolant helps manage engine temperature. An overheating engine can suffer serious damage.',prompt:'The temperature gauge moves into the hot/red zone. What should you do?',o:['Pull over safely and shut the engine off','Keep driving until home','Open the hot radiator cap immediately','Turn the music down'],a:0,fb:'Continuing to drive an overheating engine can cause major damage. Never open a hot pressurized cooling system.'},
+{n:15,t:'Check-Engine Warning',lesson:'A steady check-engine light should be diagnosed soon. A flashing check-engine light often signals a more urgent problem that can damage the catalytic converter or engine.',prompt:'Which warning deserves the more urgent response?',o:['A flashing check-engine light','A dusty dashboard','A steady clock display','A low radio volume'],a:0,fb:'A flashing check-engine light is generally more urgent than a steady one.'},
+{n:16,t:'Battery Warning Signs',lesson:'Slow cranking, repeated jump-starts, visible corrosion, or an older battery can warn of starting/charging trouble.',prompt:'Your car cranks slowly every morning. What is a sensible next step?',o:['Have the battery and charging system tested','Buy new tires first','Ignore it until it will not start','Use premium gas'],a:0,fb:'Testing can identify a weak battery or charging problem before you are stranded.'},
+{n:17,t:'Buying a Used Car',lesson:'A clean-looking car can still have hidden mechanical problems. Service records and an independent inspection reduce uncertainty.',prompt:'Before buying a used car, what is especially valuable?',o:['An independent pre-purchase inspection','A fresh air freshener','A full gas tank only','A newer license plate frame'],a:0,fb:'An independent inspection can identify problems that are hard to see during a quick test drive.'},
+{n:18,t:'Repair Estimate',lesson:'A written estimate helps you understand the work, parts, labor, and approval process before repairs begin.',prompt:'A shop says a repair will be “around $900.” What should you ask for?',o:['A written estimate','A free sticker','A different paint color','A longer test drive'],a:0,fb:'A written estimate gives you a clearer record of expected work and cost.'},
+{n:19,t:'Deferred Maintenance',lesson:'Deferred maintenance means putting off needed service or repairs. The bill does not always stay the same; related parts can fail too.',prompt:'What is the main financial risk of ignoring a known problem?',o:['A small repair can grow into a larger one','The car becomes worth more','Fuel becomes free','Insurance disappears'],a:0,fb:'Ignoring a developing problem can damage additional components and increase total cost.'},
+{n:20,t:'True One-Year Cost',lesson:'Sticker price is only one cost. Fuel, maintenance, repairs, insurance, registration, and depreciation all affect ownership cost.',prompt:'Car A costs $500 less to buy, but will use $900 more fuel and needs $700 of repairs this year. Compared with Car B, what is Car A’s one-year disadvantage?',type:'calc',answer:1100,tolerance:.01,fb:'$900 extra fuel + $700 repairs − $500 lower purchase price = $1,100 more in the first year.'}
+];
+
+let started=false,locked=false,submitted=false,score=0,done=0,startTime=null,endTime=null;
+const attempts={},answers={},types=['multiple-choice','calculator'];const el=id=>document.getElementById(id);
+const sid='pfm7-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,9);
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function render(){
+  el('questions').innerHTML=Q.map(q=>{
+    const activity=q.type==='calc'
+      ? `<div class="calcrow"><input id="c${q.n}" type="number" step="any" inputmode="decimal" placeholder="Enter number"><button class="btn primary" onclick="checkCalc(${q.n})">Check Answer</button></div>`
+      : `<div class="options" id="a${q.n}">${shuffle(q.o.map((x,i)=>({x,i}))).map(c=>`<button class="option" onclick="pick(this,${q.n},${c.i})">${c.x}</button>`).join('')}</div>`;
+    return `<section class="question locked" id="q${q.n}"><div class="qhead"><h2>${q.n}. ${q.t}</h2><span class="badge" id="b${q.n}">Locked</span></div><div class="qbody"><div class="lesson">${q.lesson}</div>${q.type==='calc'?'<div class="formula">'+(q.n===2?'MPG = miles ÷ gallons':q.n===3?'Gallons used = miles ÷ MPG':q.n===4?'Fuel cost = miles ÷ MPG × price per gallon':'Compare all added costs and savings')+'</div>':''}<p class="prompt">${q.prompt}</p>${activity}<div class="feedback" id="f${q.n}"></div></div></section>`;
+  }).join('')+`<section class="question locked" id="q21"><div class="qhead"><h2>21. Final Reflection</h2><span class="badge" id="b21">Locked</span></div><div class="qbody"><div class="lesson"><strong>Think long term:</strong> maintenance that feels expensive today can prevent a much larger repair later.</div><p class="prompt">Which car warning sign or maintenance item from this module do you think will save you the most money in real life, and why?</p><textarea id="reflection" placeholder="A short response is okay. There is no minimum."></textarea><div class="actions"><button class="btn primary" onclick="finish()">Finish Module</button></div><div class="feedback" id="f21"></div></div></section>`;
+}
+function toast(m){const t=el('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function fmt(d){return d?d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}):''}
+function begin(){if(started)return toast('Module already started.');if(!el('first').value.trim()||!el('last').value.trim()||!el('period').value)return toast('Enter your first name, last name, and block.');started=true;['first','last','period'].forEach(id=>el(id).disabled=true);startTime=new Date();unlock(1);update();toast('Module 7 started.')}
+function unlock(n){el('q'+n).classList.remove('locked');el('b'+n).textContent='Unlocked'}
+function award(n,ok,answerText){
+  const q=Q[n-1],k=(attempts[n]||0)+1;attempts[n]=k;answers['Q'+n]={answer:answerText,correct:ok,pointsAwarded:0,attemptsUsed:k,resolved:ok||k>=2};const f=el('f'+n);
+  if(ok){const pts=k===1?1:.5;score+=pts;answers['Q'+n].pointsAwarded=pts;f.className='feedback show good';f.textContent=k===1?'Correct. '+q.fb:'Correct on the second attempt — half credit earned. '+q.fb;freeze(n);setTimeout(()=>complete(n),450)}
+  else if(k===1){f.className='feedback show bad';f.textContent='Not quite. Read the mini lesson and try once more for half credit.'}
+  else{f.className='feedback show bad';f.textContent='Not quite. '+q.fb;freeze(n);setTimeout(()=>complete(n),650)}
+}
+function pick(btn,n,choice){if(!started||locked||answers['Q'+n]?.resolved)return;const q=Q[n-1],ok=choice===q.a;btn.classList.add(ok?'good':'bad');award(n,ok,btn.textContent.trim())}
+function checkCalc(n){if(!started||locked||answers['Q'+n]?.resolved)return;const q=Q[n-1],input=el('c'+n),v=Number(input.value);if(!Number.isFinite(v))return toast('Enter a number first.');const ok=Math.abs(v-q.answer)<=(q.tolerance||.01);input.disabled=ok||(attempts[n]||0)>=1;award(n,ok,String(v))}
+function freeze(n){const box=el('a'+n);if(box)box.querySelectorAll('button').forEach(x=>x.disabled=true);const input=el('c'+n);if(input)input.disabled=true}
+function complete(n){done=Math.max(done,n);el('b'+n).textContent='Complete';el('b'+n).style.background='#dcfce7';el('b'+n).style.color='#166534';unlock(n<20?n+1:21);update()}
+function update(){el('score').textContent=`Score: ${score} / 20`;const p=Math.round((done/21)*100);el('prog').textContent=`Progress: ${p}%`;el('bar').style.width=p+'%';el('clock').textContent=startTime?'Started: '+fmt(startTime):'Not started'}
+function finish(){if(locked||!started||done<20)return toast('Complete all 20 questions first.');const r=el('reflection').value.trim();endTime=new Date();done=21;update();el('b21').textContent='Complete';el('b21').style.background='#dcfce7';el('b21').style.color='#166534';const pct=Math.round(score/20*100);el('certHeading').textContent=pct>=90?'Outstanding Work!':pct>=80?'Strong Work!':pct>=70?'Nice Progress!':'Module Complete!';el('certName').textContent=el('first').value.trim()+' '+el('last').value.trim();el('certScore').textContent=score+' / 20';el('certPct').textContent=pct+'%';el('certStart').textContent=fmt(startTime);el('certEnd').textContent=fmt(endTime);el('certRef').textContent=r||'No reflection entered.';el('cert').classList.add('show');submit(r,pct);locked=true;document.body.classList.add('done')}
+async function submit(ref,pct){
+  if(submitted)return;submitted=true;const mins=Math.max(1,Math.round((endTime-startTime)/60000));
+  const record={moduleId:META.id,moduleTitle:META.title,category:META.category,topic:META.topic,productType:META.productType,moduleSize:META.moduleSize,score,totalQuestions:20,percent:pct+'%',completed:'Yes',questionTypes:types.join(', '),answers:JSON.stringify(answers),timeStarted:fmt(startTime),timeFinished:fmt(endTime),totalTime:mins+' minutes',reflection:ref,version:META.version,sessionId:sid};
+  const p=new URLSearchParams({action:'moduleSubmit',manualEntry:'1',moduleNumber:'7',bellId:'PFM-MODULE-7-CAR-COSTS-MPG',label:'Personal Finance Module 7 - Car Costs MPG Maintenance',firstName:el('first').value.trim(),lastName:el('last').value.trim(),name:el('first').value.trim()+' '+el('last').value.trim(),answer:JSON.stringify(record),late:'0',duration:String(mins),timestamp:new Date().toISOString(),cls:'Personal Finance',googleName:'Manual entry',schoolEmail:'',block:el('period').value.trim()});
+  try{el('saveStatus').textContent='Saving your score...';el('retrySave').hidden=true;const response=await fetch(ENDPOINT,{method:'POST',body:p});const result=await response.json();if(!result.success&&result.error!=='This completion was already submitted.')throw new Error(result.error||'Save not confirmed');el('saveStatus').textContent='Score saved to Mr. D. Keep your certificate.';toast('Score saved to Mr. D.')}
+  catch(e){submitted=false;el('saveStatus').textContent='Your certificate is ready, but saving could not be confirmed. Keep this page open and retry.';el('retrySave').hidden=false}
+}
+render();
+</script>
+</body>
+</html>
