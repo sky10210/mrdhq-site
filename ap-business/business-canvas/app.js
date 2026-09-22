@@ -485,11 +485,15 @@ function renderCanvas(targetId, compact = false) {
   });
 }
 
+function caseWasSubmitted(state = {}) {
+  return Boolean(state?.submitted || state?.submittedAt);
+}
+
 function updateDashboardProgress() {
   const canvasPercent = Math.round(
     sectionOrder.reduce((sum, key) => sum + statusPercent(canvasState[key].status), 0) / sectionOrder.length
   );
-  const submittedCount = CASES.filter(item => caseStates[item.id]?.submitted).length;
+  const submittedCount = CASES.filter(item => caseWasSubmitted(caseStates[item.id])).length;
   const evidenceCount = CASES.reduce(
     (sum, item) => sum + Object.keys(caseStates[item.id]?.highlights || {}).length,
     0
@@ -613,7 +617,8 @@ function getCaseLibrary() {
 function caseProgressLabel(caseRecord) {
   const state = caseStates[caseRecord.id];
   if (state?.submitted) return "Submitted";
-  const filled = (state?.answers || []).filter(answer => answer.trim()).length;
+  if (state?.submittedAt) return "Submitted · edits saved";
+  const filled = (state?.answers || []).filter(answer => String(answer || "").trim()).length;
   if (filled || Object.keys(state?.highlights || {}).length) return "In progress";
   return "Not started";
 }
@@ -975,7 +980,13 @@ function updateQuestionProgress() {
   const filled = state.answers.filter(answer => answer.trim()).length;
   document.getElementById("question-progress-chip").textContent = `${filled}/${caseRecord.questions.length}`;
   document.getElementById("case-submit-status").textContent =
-    state.submitted ? "Submitted" : filled === caseRecord.questions.length ? "Ready to submit" : "Draft in progress";
+    state.submitted
+      ? "Submitted"
+      : state.submittedAt
+        ? "Submitted before · edits need resubmission"
+        : filled === caseRecord.questions.length
+          ? "Ready to submit"
+          : "Draft in progress";
 }
 
 function saveCaseDraft() {
@@ -990,7 +1001,7 @@ function saveCaseDraft() {
   updateQuestionProgress();
 }
 
-function submitCase() {
+async function submitCase() {
   const caseRecord = currentCase();
   const state = currentCaseState();
   saveCaseDraft();
@@ -1001,6 +1012,14 @@ function submitCase() {
   state.submitted = true;
   state.submittedAt = new Date().toISOString();
   saveAll({caseId: caseRecord.id});
+
+  // Case submission is high-value state: persist it immediately so a
+  // fast submit-and-close cannot leave the cloud copy as an old draft.
+  if (cloud.enabled && cloud.user && cloud.db) {
+    clearTimeout(cloudSaveTimer);
+    await saveCloudNow();
+  }
+
   updateQuestionProgress();
   renderProgress();
   renderCaseLibrary();
@@ -1099,9 +1118,10 @@ function renderProgress() {
     caseList.innerHTML = getCaseLibrary().map(caseRecord => {
       const state = caseStates[caseRecord.id];
       const label = caseProgressLabel(caseRecord);
+      const completed = caseWasSubmitted(state);
       return `
-        <div class="progress-row ${state.submitted ? "complete" : ""}">
-          <span class="progress-dot">${state.submitted ? "✓" : label === "In progress" ? "½" : caseRecord.locked ? "🔒" : "○"}</span>
+        <div class="progress-row ${completed ? "complete" : ""}">
+          <span class="progress-dot">${completed ? "✓" : label === "In progress" ? "½" : caseRecord.locked ? "🔒" : "○"}</span>
           <div><strong>${caseRecord.title}</strong><span>${caseRecord.topic} · ${caseRecord.days} · ${caseRecord.locked ? "Locked" : label}</span></div>
         </div>
       `;
