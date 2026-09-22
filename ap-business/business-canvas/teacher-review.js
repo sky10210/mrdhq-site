@@ -76,13 +76,15 @@
         if (!filled && !state.submitted) return "";
         const badge = state.submitted
           ? `<span class="tp-submitted-pill">Submitted${state.submittedAt ? ` · ${escapeHtml(fmtDate(state.submittedAt))}` : ""}</span>`
-          : `<span class="tp-draft-pill">Draft · ${filled}/${record.questions.length} answered</span>`;
+          : state.submittedAt
+            ? `<span class="tp-submitted-pill">Submitted before · edits saved</span>`
+            : `<span class="tp-draft-pill">Draft · ${filled}/${record.questions.length} answered</span>`;
         const answersHtml = record.questions.map((question, index) => {
           const answer = String(answers[index] || "").trim();
           if (!answer) return "";
           return `<div class="tp-answer"><strong>Q${index + 1}. ${escapeHtml(question.text || "Question")}</strong><p>${escapeHtml(answer)}</p></div>`;
         }).join("");
-        return `<details class="tp-review-card" ${state.submitted ? "open" : ""}>
+        return `<details class="tp-review-card" ${(state.submitted || state.submittedAt) ? "open" : ""}>
           <summary>${escapeHtml(record.title)} ${badge}</summary>
           <div class="tp-review-body">${answersHtml || `<p class="tp-empty-writing">No written responses saved.</p>`}</div>
         </details>`;
@@ -232,6 +234,7 @@
         const filled = answers.filter(answer => String(answer || "").trim()).length;
         let status = "Not started";
         if (state.submitted) status = "Submitted";
+        else if (state.submittedAt) status = "Submitted - edited after submit";
         else if (filled) status = "Saved draft";
 
         const updated = state.updatedAt?.toDate ? state.updatedAt.toDate() : null;
