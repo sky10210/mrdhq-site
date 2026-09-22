@@ -31,7 +31,8 @@
 <div id="feed" class="feed"></div><div id="status" class="status">Loading board…</div>
 </div>
 <div class="card">
-<div class="card-head"><div><h2>Important Dates</h2><div class="caption">Current month + next month</div></div><span class="caption" id="editHint"></span></div>
+<div class="card-head"><div><h2>Important Dates</h2><div class="caption">CASD + CASHS athletics + your class dates through December</div></div><span class="caption" id="editHint"></span></div>
+<div style="padding:12px 18px 0;display:flex;gap:8px;flex-wrap:wrap"><a class="smallbtn" href="https://www.casdonline.org/district-calendar" target="_blank" rel="noopener">CASD Calendar ↗</a><a class="smallbtn" href="https://www.casdonline.org/athletics" target="_blank" rel="noopener">Athletics Calendar ↗</a><a class="smallbtn" href="https://cashs.casdonline.org/" target="_blank" rel="noopener">CASHS Events ↗</a></div>
 <div class="calendar-wrap" id="calendar"></div>
 </div>
 </section>
@@ -44,6 +45,31 @@
 <script>
 const ENDPOINT='https://script.google.com/macros/s/AKfycbyucfQcDDR9S_4i8_EiI2LAm0k49NNGT0IBiRnXTjZQKgtfuOwM73Wtxxt5fzojGFY/exec';
 const app=document.getElementById('app'),feed=document.getElementById('feed'),calendar=document.getElementById('calendar'),statusEl=document.getElementById('status'),teacherBtn=document.getElementById('teacherBtn'),lockBtn=document.getElementById('lockBtn');
+const seedEvents=[
+{id:'seed-0922-board',date:'2026-09-22',text:'CASD School Board Meeting • 7:00 PM',course:'CASD'},
+{id:'seed-0922-xc',date:'2026-09-22',text:'Varsity Cross Country vs Central Dauphin • 4:45 PM',course:'SPORTS'},
+{id:'seed-0922-vb',date:'2026-09-22',text:'Varsity Volleyball vs State College • 6:30 PM',course:'SPORTS'},
+{id:'seed-0923-gsoc',date:'2026-09-23',text:'Varsity Girls Soccer vs Cumberland Valley • 7:00 PM',course:'SPORTS'},
+{id:'seed-0925-fb',date:'2026-09-25',text:'Varsity Football @ Central Dauphin • 7:00 PM',course:'SPORTS'},
+{id:'seed-0926-gsoc',date:'2026-09-26',text:'Varsity Girls Soccer vs State College • 12:30 PM',course:'SPORTS'},
+{id:'seed-0929-vb',date:'2026-09-29',text:'Varsity Volleyball vs Cumberland Valley • 6:30 PM',course:'SPORTS'},
+{id:'seed-1001-pics',date:'2026-10-01',text:'CASHS Picture Retakes • 8:00 AM–2:00 PM',course:'CASHS'},
+{id:'seed-1001-walk',date:'2026-10-01',text:'CASHS Trojan Walk • 8:00 AM–3:00 PM',course:'CASHS'},
+{id:'seed-1001-gsoc',date:'2026-10-01',text:'Varsity Girls Soccer vs Carlisle • 7:00 PM',course:'SPORTS'},
+{id:'seed-1002-fb',date:'2026-10-02',text:'Varsity Football @ Altoona • 7:00 PM',course:'SPORTS'},
+{id:'seed-1003-vb',date:'2026-10-03',text:'Varsity Volleyball vs Williamsport • 2:00 PM',course:'SPORTS'},
+{id:'seed-1007-hoco',date:'2026-10-07',text:'Homecoming Parade + PowderPuff • 6:00–9:00 PM',course:'CASHS'},
+{id:'seed-1009-fb',date:'2026-10-09',text:'Varsity Football vs Carlisle • 7:00 PM',course:'SPORTS'},
+{id:'seed-1010-dance',date:'2026-10-10',text:'CASHS Homecoming Dance • 7:00–9:30 PM',course:'CASHS'},
+{id:'seed-1012-closed',date:'2026-10-12',text:'SCHOOLS CLOSED • Columbus Day Holiday',course:'CASD'},
+{id:'seed-1013-board',date:'2026-10-13',text:'CASD Committee-of-the-Whole • 7:00 PM',course:'CASD'},
+{id:'seed-1017-xc',date:'2026-10-17',text:'Mid Penn Cross Country Championships',course:'SPORTS'},
+{id:'seed-1023-vets',date:'2026-10-23',text:"CASHS Veterans' Appreciation Night + Home Football",course:'CASHS'},
+{id:'seed-1103-election',date:'2026-11-03',text:'Election Day',course:'HOLIDAY'},
+{id:'seed-1111-vets',date:'2026-11-11',text:'Veterans Day',course:'HOLIDAY'},
+{id:'seed-1126-thanks',date:'2026-11-26',text:'Thanksgiving Day',course:'HOLIDAY'},
+{id:'seed-1225-xmas',date:'2026-12-25',text:'Christmas Day',course:'HOLIDAY'}
+];
 let state={posts:[],events:[]},teacherToken='',selectedDate='',editingPostId=null;
 const localKey='mrdhq-info-board-cache-v1';
 function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
@@ -51,8 +77,8 @@ function localLoad(){try{return JSON.parse(localStorage.getItem(localKey)||'null
 function localSave(){localStorage.setItem(localKey,JSON.stringify(state))}
 function sortState(){state.posts.sort((a,b)=>(Number(b.pinned)-Number(a.pinned))||new Date(b.createdAt)-new Date(a.createdAt));state.events.sort((a,b)=>String(a.date).localeCompare(String(b.date)))}
 function renderFeed(){sortState();if(!state.posts.length){feed.innerHTML='<div class="empty">No updates posted yet.</div>';return}feed.innerHTML=state.posts.map(p=>`<article class="post"><div class="post-top">${p.pinned?'<span class="pill pin">PINNED</span>':''}<span class="pill">${esc(p.course||'ALL')}</span><span class="date">${new Date(p.createdAt).toLocaleString([], {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}</span></div><div class="post-text">${esc(p.text)}</div><div class="post-actions"><button class="smallbtn" onclick="editPost('${esc(p.id)}')">Edit</button><button class="smallbtn danger" onclick="deletePost('${esc(p.id)}')">Delete</button></div></article>`).join('')}
-function monthHtml(year,month){const first=new Date(year,month,1),last=new Date(year,month+1,0),start=first.getDay(),today=new Date();let h=`<div class="month"><div class="month-title"><strong>${first.toLocaleString([],{month:'long',year:'numeric'})}</strong></div><div class="dow"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div><div class="days">`;for(let i=0;i<start;i++)h+='<div class="day other"></div>';for(let d=1;d<=last.getDate();d++){const date=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`,isToday=today.getFullYear()===year&&today.getMonth()===month&&today.getDate()===d,events=state.events.filter(e=>e.date===date);h+=`<div class="day ${isToday?'today':''}" data-date="${date}"><div class="num">${d}</div>${events.map(e=>`<div class="event" title="${esc(e.text)}">${e.course&&e.course!=='ALL'?esc(e.course)+': ':''}${esc(e.text)}</div>`).join('')}</div>`}return h+'</div></div>'}
-function renderCalendar(){const n=new Date(),y=n.getFullYear(),m=n.getMonth(),next=new Date(y,m+1,1);calendar.innerHTML=monthHtml(y,m)+monthHtml(next.getFullYear(),next.getMonth());calendar.querySelectorAll('.day[data-date]').forEach(el=>el.addEventListener('click',()=>{if(!teacherToken)return;selectedDate=el.dataset.date;document.getElementById('eventDateLabel').textContent=new Date(selectedDate+'T12:00:00').toLocaleDateString([],{weekday:'long',month:'long',day:'numeric',year:'numeric'});document.getElementById('eventText').value='';openModal('eventModal')}))}
+function monthHtml(year,month){const first=new Date(year,month,1),last=new Date(year,month+1,0),start=first.getDay(),today=new Date();let h=`<div class="month"><div class="month-title"><strong>${first.toLocaleString([],{month:'long',year:'numeric'})}</strong></div><div class="dow"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div><div class="days">`;for(let i=0;i<start;i++)h+='<div class="day other"></div>';for(let d=1;d<=last.getDate();d++){const date=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`,isToday=today.getFullYear()===year&&today.getMonth()===month&&today.getDate()===d,events=[...seedEvents,...state.events].filter(e=>e.date===date);h+=`<div class="day ${isToday?'today':''}" data-date="${date}"><div class="num">${d}</div>${events.map(e=>`<div class="event" title="${esc(e.text)}">${e.course&&e.course!=='ALL'?esc(e.course)+': ':''}${esc(e.text)}</div>`).join('')}</div>`}return h+'</div></div>'}
+function renderCalendar(){const n=new Date(),y=n.getFullYear(),m=n.getMonth();let html='';for(let mm=m;mm<=11;mm++)html+=monthHtml(y,mm);calendar.innerHTML=html;calendar.querySelectorAll('.day[data-date]').forEach(el=>el.addEventListener('click',()=>{if(!teacherToken)return;selectedDate=el.dataset.date;document.getElementById('eventDateLabel').textContent=new Date(selectedDate+'T12:00:00').toLocaleDateString([],{weekday:'long',month:'long',day:'numeric',year:'numeric'});document.getElementById('eventText').value='';openModal('eventModal')}))}
 function render(){renderFeed();renderCalendar();document.getElementById('editHint').textContent=teacherToken?'Tap a date to add an item':''}
 async function apiGet(){try{const r=await fetch(ENDPOINT+'?action=infoBoardGet',{cache:'no-store'});const j=await r.json();if(j.success&&j.data){state={posts:j.data.posts||[],events:j.data.events||[]};localSave();statusEl.textContent='Board is synced.';statusEl.className='status good';render();return}}catch(e){}const cached=localLoad();if(cached)state=cached;statusEl.textContent='Showing the most recently saved board.';statusEl.className='status';render()}
 async function postAction(action,payload={}){const body=new URLSearchParams({action,token:teacherToken,...payload});const r=await fetch(ENDPOINT,{method:'POST',body});const j=await r.json();if(!j.success)throw new Error(j.error||'Save failed');if(j.data)state={posts:j.data.posts||[],events:j.data.events||[]};localSave();render();statusEl.textContent='Saved and synced.';statusEl.className='status good';return j}
