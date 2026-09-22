@@ -51,6 +51,10 @@
     );
   }
 
+  function wasSubmitted(state = {}) {
+    return Boolean(state?.submitted || state?.submittedAt);
+  }
+
   function caseStats(caseMap = {}) {
     let submitted = 0;
     let started = 0;
@@ -61,8 +65,8 @@
         ? state.answers.filter(answer => String(answer || "").trim()).length
         : 0;
       answered += filled;
-      if (filled || state.submitted) started += 1;
-      if (state.submitted) submitted += 1;
+      if (filled || wasSubmitted(state)) started += 1;
+      if (wasSubmitted(state)) submitted += 1;
     });
     return {submitted, started, answered};
   }
@@ -211,7 +215,13 @@
             const state = student.caseMap[record.id] || {};
             const total = Array.isArray(record.questions) ? record.questions.length : 0;
             const filled = Array.isArray(state.answers) ? state.answers.filter(answer => String(answer || "").trim()).length : 0;
-            const label = state.submitted ? "Submitted" : filled ? `${filled}/${total} answered` : "Not started";
+            const label = state.submitted
+              ? "Submitted"
+              : state.submittedAt
+                ? "Submitted · edits saved"
+                : filled
+                  ? `${filled}/${total} answered`
+                  : "Not started";
             return `<div class="tp-detail-item"><strong>${escapeHtml(record.title)}</strong><span>${escapeHtml(label)}</span></div>`;
           }).join("")}
         </div>
