@@ -52,6 +52,7 @@ const seedEvents=[
 {id:'seed-0923-gsoc',date:'2026-09-23',text:'Varsity Girls Soccer vs Cumberland Valley • 7:00 PM',course:'SPORTS'},
 {id:'seed-0925-fb',date:'2026-09-25',text:'Varsity Football @ Central Dauphin • 7:00 PM',course:'SPORTS'},
 {id:'seed-0926-gsoc',date:'2026-09-26',text:'Varsity Girls Soccer vs State College • 12:30 PM',course:'SPORTS'},
+{id:'seed-0928-winterreg',date:'2026-09-28',text:'Winter Sports Registration Opens',course:'SPORTS'},
 {id:'seed-0929-vb',date:'2026-09-29',text:'Varsity Volleyball vs Cumberland Valley • 6:30 PM',course:'SPORTS'},
 {id:'seed-1001-pics',date:'2026-10-01',text:'CASHS Picture Retakes • 8:00 AM–2:00 PM',course:'CASHS'},
 {id:'seed-1001-walk',date:'2026-10-01',text:'CASHS Trojan Walk • 8:00 AM–3:00 PM',course:'CASHS'},
@@ -59,17 +60,33 @@ const seedEvents=[
 {id:'seed-1002-fb',date:'2026-10-02',text:'Varsity Football @ Altoona • 7:00 PM',course:'SPORTS'},
 {id:'seed-1003-vb',date:'2026-10-03',text:'Varsity Volleyball vs Williamsport • 2:00 PM',course:'SPORTS'},
 {id:'seed-1007-hoco',date:'2026-10-07',text:'Homecoming Parade + PowderPuff • 6:00–9:00 PM',course:'CASHS'},
-{id:'seed-1009-fb',date:'2026-10-09',text:'Varsity Football vs Carlisle • 7:00 PM',course:'SPORTS'},
+{id:'seed-1009-fb',date:'2026-10-09',text:'Homecoming Football Game • 7:00 PM',course:'SPORTS'},
 {id:'seed-1010-dance',date:'2026-10-10',text:'CASHS Homecoming Dance • 7:00–9:30 PM',course:'CASHS'},
-{id:'seed-1012-closed',date:'2026-10-12',text:'SCHOOLS CLOSED • Columbus Day Holiday',course:'CASD'},
+{id:'seed-1012-closed',date:'2026-10-12',text:'Columbus Day Holiday • Schools Closed',course:'CASD'},
 {id:'seed-1013-board',date:'2026-10-13',text:'CASD Committee-of-the-Whole • 7:00 PM',course:'CASD'},
 {id:'seed-1017-xc',date:'2026-10-17',text:'Mid Penn Cross Country Championships',course:'SPORTS'},
-{id:'seed-1023-vets',date:'2026-10-23',text:"CASHS Veterans' Appreciation Night + Home Football",course:'CASHS'},
+{id:'seed-1022-mp',date:'2026-10-22',text:'End of 1st Marking Period',course:'CASD'},
+{id:'seed-1023-inservice',date:'2026-10-23',text:'Staff In-Service / Parent-Teacher Conferences • Schools Closed',course:'CASD'},
+{id:'seed-1023-vets',date:'2026-10-23',text:"Veterans' Night • Home Football Game",course:'SPORTS'},
 {id:'seed-1103-election',date:'2026-11-03',text:'Election Day',course:'HOLIDAY'},
-{id:'seed-1111-vets',date:'2026-11-11',text:'Veterans Day',course:'HOLIDAY'},
-{id:'seed-1126-thanks',date:'2026-11-26',text:'Thanksgiving Day',course:'HOLIDAY'},
-{id:'seed-1225-xmas',date:'2026-12-25',text:'Christmas Day',course:'HOLIDAY'}
-];
+{id:'seed-1106-inservice',date:'2026-11-06',text:'Staff In-Service / Parent-Teacher Conferences • Schools Closed',course:'CASD'},
+{id:'seed-1111-vets',date:'2026-11-11',text:'Veterans Day Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1116-winterreg',date:'2026-11-16',text:'Winter Sports Registration Closes',course:'SPORTS'},
+{id:'seed-1125-thanks',date:'2026-11-25',text:'Thanksgiving Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1126-thanks',date:'2026-11-26',text:'Thanksgiving Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1127-thanks',date:'2026-11-27',text:'Thanksgiving Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1130-thanks',date:'2026-11-30',text:'Thanksgiving Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1211-inservice',date:'2026-12-11',text:'Staff In-Service / Parent-Teacher Conferences • Schools Closed',course:'CASD'},
+{id:'seed-1221-xmas',date:'2026-12-21',text:'Christmas Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1222-xmas',date:'2026-12-22',text:'Christmas Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1223-xmas',date:'2026-12-23',text:'Christmas Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1224-xmas',date:'2026-12-24',text:'Christmas Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1225-xmas',date:'2026-12-25',text:'Christmas Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1228-xmas',date:'2026-12-28',text:'Christmas Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1229-xmas',date:'2026-12-29',text:'Christmas Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1230-xmas',date:'2026-12-30',text:'Christmas Holiday • Schools Closed',course:'CASD'},
+{id:'seed-1231-xmas',date:'2026-12-31',text:'Christmas Holiday • Schools Closed',course:'CASD'}
+]
 let state={posts:[],events:[]},teacherToken='',selectedDate='',editingPostId=null;
 const localKey='mrdhq-info-board-cache-v1';
 function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
