@@ -13,8 +13,8 @@ window.STOCK_LAB_FIREBASE_CONFIG = {
 };
 
 window.STOCK_LAB_SETTINGS = {
-  startingCapital: 15000,
-  allocationPerIndustry: 1500,
+  startingCapital: 150000,
+  allocationPerIndustry: 15000,
   teacherEmails: [
     "skyler.dipasquale@casdonline.org",
     "elijah.snyder@casdonline.org",
