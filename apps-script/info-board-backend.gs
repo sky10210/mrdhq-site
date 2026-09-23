@@ -2,28 +2,46 @@
  * MRDHQ Info Board backend.
  * Add this file to the SAME deployed Apps Script project already used by MRDHQ.
  * Then add the routing snippets noted at bottom to the project's doGet(e) / doPost(e).
- * Storage uses ScriptProperties, so no extra Sheet is required.
+ * Uses dedicated Info Board Google Sheet; legacy ScriptProperties are read only for migration.
  */
 // Set INFO_BOARD_TEACHER_PASSWORD in Apps Script > Project Settings > Script Properties.
 // No teacher credential is stored in the public repository.
 const INFO_BOARD_KEY = 'MRDHQ_INFO_BOARD_V1';
 const INFO_BOARD_TOKEN_PREFIX = 'MRDHQ_INFO_TOKEN_';
 
-function infoBoardRead_() {
+const INFO_BOARD_SHEET_ID = '1d_zPuh5grCwwYIbzuZN-KHPqry_B4NEM1bJyt9e7rZw';
+function infoBoardSheet_(name) {
+  const sh = SpreadsheetApp.openById(INFO_BOARD_SHEET_ID).getSheetByName(name);
+  if (!sh) throw new Error('Missing Info Board sheet tab: ' + name);
+  return sh;
+}
+function infoBoardLegacy_() {
   const raw = PropertiesService.getScriptProperties().getProperty(INFO_BOARD_KEY);
-  if (!raw) return {posts:[], events:[]};
-  try {
-    const data = JSON.parse(raw);
-    return {posts:Array.isArray(data.posts)?data.posts:[], events:Array.isArray(data.events)?data.events:[]};
-  } catch (err) {
-    return {posts:[], events:[]};
+  if (!raw) return {posts:[],events:[]};
+  try { const d=JSON.parse(raw);return {posts:Array.isArray(d.posts)?d.posts:[],events:Array.isArray(d.events)?d.events:[]}; }
+  catch(e) { return {posts:[],events:[]}; }
+}
+function infoBoardRead_() {
+  const ps=infoBoardSheet_('Announcements').getDataRange().getDisplayValues().slice(1);
+  const es=infoBoardSheet_('Calendar Events').getDataRange().getDisplayValues().slice(1);
+  const posts=ps.filter(r=>r[0]&&r[6]!=='Deleted').map(r=>({id:r[0],createdAt:r[1],updatedAt:r[2],course:r[3],text:r[4],pinned:r[5]==='TRUE'}));
+  const events=es.filter(r=>r[0]&&r[6]!=='Deleted').map(r=>({id:r[0],date:r[1],text:r[2],course:r[3],updatedAt:r[5]}));
+  if (!posts.length&&!events.length) {
+    const old=infoBoardLegacy_();
+    if(old.posts.length||old.events.length) { infoBoardWrite_(old);return old; }
   }
+  return {posts:posts,events:events};
 }
 function infoBoardWrite_(data) {
-  data.posts = (data.posts || []).slice(0,150);
-  data.events = (data.events || []).filter(x => x && x.date).slice(0,300);
-  PropertiesService.getScriptProperties().setProperty(INFO_BOARD_KEY, JSON.stringify(data));
-  return data;
+  const p=infoBoardSheet_('Announcements'),e=infoBoardSheet_('Calendar Events');
+  const posts=(data.posts||[]).slice(0,150),events=(data.events||[]).filter(x=>x&&x.date).slice(0,300);
+  const pv=posts.map(x=>[x.id,x.createdAt||'',x.updatedAt||'',x.course||'ALL',x.text||'',!!x.pinned,'Active']);
+  const ev=events.map(x=>[x.id,x.date,x.text||'',x.course||'ALL','Teacher',x.updatedAt||x.createdAt||'','Active']);
+  if(p.getLastRow()>1)p.getRange(2,1,p.getLastRow()-1,7).clearContent();
+  if(e.getLastRow()>1)e.getRange(2,1,e.getLastRow()-1,7).clearContent();
+  if(pv.length)p.getRange(2,1,pv.length,7).setValues(pv);
+  if(ev.length)e.getRange(2,1,ev.length,7).setValues(ev);
+  return {posts:posts,events:events};
 }
 function infoBoardJson_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
