@@ -23,11 +23,13 @@ def main():
     if (datetime.now(timezone.utc).date()-datetime.strptime(asof,"%Y-%m-%d").date()).days>5:
         raise SystemExit("Stale market data; no snapshots written.")
     count=0
+    required=("technology","retail","transport","food","media","finance","health","energy","brands","housing")
     for doc in db.collection("stockLabUsers").stream():
         data=doc.to_dict() or {}
         holdings=data.get("holdings") or {}
-        total=15000.0*sum(1 for x in ["technology","retail","transport","food","media","finance","health","energy","brands","housing"] if x not in holdings)
-        for holding in holdings.values():
+        total=15000.0*sum(1 for x in required if x not in holdings)
+        for industry,holding in holdings.items():
+            if industry not in required: continue
             ticker=holding.get("ticker","")
             market=prices.get(ticker)
             if not market or float(market.get("price",0))<=0:
