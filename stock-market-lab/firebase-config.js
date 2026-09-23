@@ -12,7 +12,7 @@ window.STOCK_LAB_FIREBASE_CONFIG = {
   measurementId: "G-93WD5K9347"
 };
 
-window.STOCK_LAB_TRADING_ENABLED = false; // Keep student selections locked until teacher launch.
+window.STOCK_LAB_TRADING_ENABLED = true; // Student portfolio selections open after Google sign-in and intro quiz.
 
 window.STOCK_LAB_SETTINGS = {
   startingCapital: 150000,
