@@ -73,6 +73,33 @@ body{background:#0a1422;color:var(--ink)}
 .gate .class-choice:hover,.gate .class-choice:focus-visible{background:#e7f5f3;border-color:#0c777c}
 .gate .text-btn{color:#075b65!important}
 .gate .primary{color:#062b32!important;background:#39c6b8}
+
+
+/* Student usability pass: compact controls, readable onboarding, predictable scrolling. */
+.terminal-content{padding-top:18px}
+.terminal-content .page-head h1{font-size:clamp(25px,2.7vw,38px);line-height:1.17;max-width:850px}
+.terminal-content .page-head p{font-size:clamp(13px,1.15vw,16px);line-height:1.55;max-width:850px}
+.terminal-content .hero{padding:clamp(22px,3vw,38px)}
+.terminal-content .hero h1{font-size:clamp(26px,2.8vw,40px);line-height:1.13}
+.terminal-content button,.terminal-sidebar button{font-size:13px;line-height:1.3}
+.terminal-content .primary,.terminal-content .secondary{min-height:38px;padding:9px 14px;max-width:100%}
+.terminal-sidebar nav button{font-size:12px;line-height:1.3}
+.terminal-topbar .topbar-login{font-size:12px;min-height:36px}
+.terminal-content .industry-card .industry-top{gap:12px}
+.terminal-content .industry-card .industry-top button{flex-shrink:0}
+.gate .gate-card{max-height:min(92vh,900px);overflow-y:auto}
+.gate .gate-card h1{font-size:clamp(27px,3vw,40px)!important}
+.gate .gate-card>p:not(.eyebrow){font-size:clamp(14px,1.2vw,17px)!important}
+.gate .class-options{gap:12px}
+.gate .class-choice{padding:17px 20px;min-height:90px}
+.gate .class-choice strong{font-size:clamp(16px,1.5vw,21px)!important}
+.gate .class-choice span{font-size:13px!important}
+.gate .text-btn{font-size:15px!important;line-height:1.4}
+.modal-card{max-height:88vh;overflow-y:auto}
+.modal-card .pick-row{gap:12px}
+.modal-card .pick-row button{min-width:85px;flex-shrink:0}
+#toast{max-width:min(440px,calc(100vw - 24px));line-height:1.45}
+@media(max-width:760px){.terminal-content .hero h1{font-size:27px}.terminal-topbar .topbar-auth{font-size:9px}.gate .class-options{grid-template-columns:1fr}.gate .class-choice{min-height:76px}.terminal-content .industry-card .industry-top{flex-wrap:wrap}}
 </style></head><body>
 <div id="classGate" class="gate"><div class="gate-card class-card"><p class="eyebrow">WELCOME TO STOCK MARKET LAB</p><h1>Choose your class.</h1><p>Your class connects your portfolio to the correct teacher dashboard. You only do this once.</p><div id="mrDClasses" class="class-options"></div><button id="otherTeacherBtn" class="text-btn">Not in Mr. D’s class? Click here.</button><div id="otherTeacherPanel" hidden><p class="eyebrow">OTHER TEACHERS</p><div id="otherTeacherClasses" class="class-options"></div></div></div></div><div id="authGate" class="gate"><div class="gate-card"><p class="eyebrow">MR. D · BUSINESS EDUCATION</p><h1>Stock Market Lab</h1><p>Build a diversified portfolio by choosing one company from each industry. Learn why prices move, then defend every swap with evidence.</p><button id="googleBtn" class="primary">Continue with Google</button><button id="demoBtn" class="secondary">Preview Demo</button><small>No real money is involved. Market data may be delayed.</small></div></div>
 <div class="terminal-layout"><aside class="terminal-sidebar" id="terminalSidebar"><a href="https://mrdhq.com" class="terminal-logo"><span class="logo-mark">M</span><span>MRDHQ<small>STOCK MARKET LAB</small></span></a><div class="terminal-mode"><span class="live-dot"></span> CLASSROOM SIMULATION <span class="terminal-readonly">PORTFOLIOS OPEN</span></div><div class="sidebar-label">WORKSPACE</div><nav aria-label="Stock Lab sections"><button data-view="learn" class="active"><span class="nav-icon">◈</span> Start Here <span id="navQuizStatus" class="nav-mini">1</span></button><button data-view="dashboard"><span class="nav-icon">▦</span> My Portfolio</button><button data-view="research"><span class="nav-icon">⌕</span> Stock Explorer</button><button data-view="market"><span class="nav-icon">↗</span> Market Watch</button><button data-view="history"><span class="nav-icon">▥</span> Performance</button><button data-view="journal"><span class="nav-icon">≡</span> Decision Journal</button><button data-view="teacher" id="teacherTab" hidden><span class="nav-icon">⚙</span> Teacher Desk</button></nav><div class="sidebar-account"><div class="sidebar-label">YOUR ACCOUNT</div><div class="account-avatar" id="accountAvatar">?</div><strong id="accountName">Checking sign-in…</strong><span id="accountEmail">Connect Google to save progress</span><span class="account-state" id="accountState">● Checking connection</span><button id="sidebarSignIn" class="account-action">Sign in with Google</button><button id="logoutBtn" class="account-action" hidden>Sign out</button></div></aside><div class="terminal-workspace"><header class="terminal-topbar"><button id="mobileMenu" class="mobile-menu" aria-label="Toggle navigation">☰</button><div><span class="topbar-kicker">MRDHQ / INVESTING SIMULATOR</span><strong id="topbarTitle">Start Here</strong></div><div class="topbar-actions"><span id="topbarDate">EOD MARKET DATA</span><span id="topbarAuth" class="topbar-auth">Checking Google sign-in…</span><button id="topbarSignIn" class="topbar-login">Sign in</button></div></header><div class="terminal-content"><main><section class="market-ribbon"><div class="market-ribbon-head"><div><p class="eyebrow">MARKET PULSE</p><strong>Previous trading day</strong></div><span id="tickerAsOf">Loading market snapshot…</span></div><div class="ticker-window"><div id="stockTicker" class="ticker-track">Awaiting latest market close…</div></div></section>
@@ -93,4 +120,4 @@ body{background:#0a1422;color:var(--ink)}
 <div id="modal" class="modal" aria-hidden="true"><div class="modal-card"><button id="closeModal" class="close">×</button><p class="eyebrow" id="modalIndustry"></p><h2 id="modalTitle">Choose a company</h2><div id="modalCompanies"></div></div></div>
 <div id="toast" class="toast"></div>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js?v=portfolio-open-1"></script><script src="companies.js?v=terminal-20260923-2"></script><script src="market-snapshot.js?v=terminal-20260923-2"></script><script src="app.js?v=portfolio-open-1"></script><script src="research-browser.js?v=portfolio-open-1"></script></body></html>
+<script src="firebase-config.js?v=portfolio-open-1"></script><script src="companies.js?v=terminal-20260923-2"></script><script src="market-snapshot.js?v=terminal-20260923-2"></script><script src="app.js?v=ux-audit-2"></script><script src="research-browser.js?v=portfolio-open-1"></script></body></html>
