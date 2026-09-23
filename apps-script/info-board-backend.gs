@@ -26,10 +26,11 @@ function infoBoardRead_() {
   const es=infoBoardSheet_('Calendar Events').getDataRange().getDisplayValues().slice(1);
   const posts=ps.filter(r=>r[0]&&r[6]!=='Deleted').map(r=>({id:r[0],createdAt:r[1],updatedAt:r[2],course:r[3],text:r[4],pinned:r[5]==='TRUE'}));
   const events=es.filter(r=>r[0]&&r[6]!=='Deleted').map(r=>({id:r[0],date:r[1],text:r[2],course:r[3],updatedAt:r[5]}));
-  if (!posts.length&&!events.length) {
+  if (!posts.length&&!events.length && PropertiesService.getScriptProperties().getProperty('INFO_BOARD_SHEET_MIGRATED') !== '1') {
     const old=infoBoardLegacy_();
-    if(old.posts.length||old.events.length) { infoBoardWrite_(old);return old; }
+    if(old.posts.length||old.events.length) { infoBoardWrite_(old);PropertiesService.getScriptProperties().setProperty('INFO_BOARD_SHEET_MIGRATED','1');return old; }
   }
+  PropertiesService.getScriptProperties().setProperty('INFO_BOARD_SHEET_MIGRATED','1');
   return {posts:posts,events:events};
 }
 function infoBoardWrite_(data) {
