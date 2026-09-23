@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Car Ownership Essentials | Personal Finance Module 8 | MRDHQ</title>
+<meta name="description" content="Learn the most important basics of fuel economy, repair costs, warning signs, tires, oil, brakes, and long-run vehicle ownership costs.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102235;--blue:#2f6fb5;--teal:#18776f;--amber:#d99224;--red:#b63b34;--ink:#172033;--muted:#667085;--line:#d8e0e7;--soft:#f5f8fb;--cream:#f7f1e7;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,sans-serif;background:linear-gradient(180deg,var(--cream),#eef5f8 55%,#f8fafc);color:var(--ink);line-height:1.55}
+.wrap{width:min(1080px,92%);margin:24px auto 70px}.hero{background:linear-gradient(135deg,#102235,#173d58 68%,#1b6e73);color:white;border-radius:30px;padding:30px;box-shadow:0 18px 42px rgba(15,23,42,.13);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-90px;top:-130px;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(65,198,201,.27),transparent 68%)}
+.eyebrow{font-size:.76rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#b9ece7}.hero h1{font-size:clamp(2rem,4.7vw,3.7rem);line-height:1.03;letter-spacing:-.055em;margin:10px 0 14px;position:relative;z-index:1}.hero p{max-width:850px;color:#dce8ef;position:relative;z-index:1}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px;position:relative;z-index:1}.pill{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.15);font-size:.76rem;font-weight:800}
+.progressrow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px;color:#c6f0ec;font-weight:800;font-size:.86rem}.progress{height:11px;background:rgba(255,255,255,.13);border-radius:999px;overflow:hidden;margin-top:7px}.bar{height:100%;width:0;background:linear-gradient(90deg,#47c6c9,#6aa7df,#f5c15e);transition:.3s}
+.card,.question,.cert{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 10px 28px rgba(15,23,42,.06)}.card{padding:22px;margin-top:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px}
+label{font-size:.84rem;font-weight:900;color:#475569;display:block;margin-bottom:5px}input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:#f8fafc;font:inherit;font-weight:600;color:var(--ink)}textarea{min-height:110px;resize:vertical}.btn{border:0;border-radius:14px;padding:11px 15px;font:inherit;font-weight:900;cursor:pointer}.primary{background:var(--blue);color:white}.secondary{background:white;border:1px solid var(--line);color:var(--navy)}
+.note{padding:14px 16px;border-left:4px solid var(--teal);background:#edf8f6;border-radius:11px;margin-top:18px}.formula{padding:12px 14px;border:1px solid #ead6a8;background:#fff7df;border-radius:13px;margin:11px 0;font-weight:800;color:#5d4318}
+#questions{display:grid;gap:16px;margin-top:18px}.question{overflow:hidden}.qhead{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;align-items:center}.qhead h2{font-size:1.08rem;margin:0;color:var(--navy)}
+.qbody{padding:20px}.badge{font-size:.71rem;font-weight:900;padding:6px 9px;border-radius:999px;background:#eff6ff;color:var(--blue);white-space:nowrap}.locked{opacity:.58}.locked .qbody{display:none}
+.lesson{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:14px}.prompt{font-weight:800;margin:0 0 12px}.options{display:grid;gap:9px}.option{padding:12px 13px;text-align:left;border:1px solid var(--line);background:#f8fafc;border-radius:13px;font:inherit;font-weight:700;cursor:pointer;color:#334155}.option:hover{background:#eef6fb;border-color:#bfd7e9}.option.good{background:#dcfce7;border-color:#86efac;color:#166534}.option.bad{background:#fee2e2;border-color:#fca5a5;color:#991b1b}
+.calcrow{display:grid;grid-template-columns:minmax(0,220px) auto;gap:9px;align-items:center}.feedback{display:none;margin-top:11px;padding:11px 13px;border-radius:13px;font-weight:800}.feedback.show{display:block}.feedback.good{background:#dcfce7;color:#166534}.feedback.bad{background:#fee2e2;color:#991b1b}
+.cert{display:none;padding:28px;text-align:center;margin-top:18px;border:2px solid #b8d9d3}.cert.show{display:block}.cert h2{font-size:2rem;color:var(--navy);margin:0}.certname{font-size:1.5rem;font-weight:900;color:var(--teal);margin:8px}.certstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.stat{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:12px}.stat strong{display:block;color:var(--navy)}
+.actions{margin-top:13px}.toast{position:fixed;right:18px;bottom:18px;background:var(--navy);color:white;padding:12px 15px;border-radius:13px;opacity:0;transform:translateY(8px);transition:.2s;font-weight:800;z-index:10}.toast.show{opacity:1;transform:none}.footer{color:#64748b;font-size:.83rem;margin:25px 0;text-align:center}body.done .question button,body.done textarea,body.done input{pointer-events:none}
+@media(max-width:760px){.grid3,.certstats,.calcrow{grid-template-columns:1fr}.qhead{align-items:flex-start}}
+@media print{.hero,#start,#questions,.note,.toast,.cert button{display:none!important}.cert{display:block!important;box-shadow:none}.wrap{width:100%;margin:0}body{background:white}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="hero">
+<div class="eyebrow">Vivid Lessons • Personal Finance</div>
+<h1>Module 8 <span style="color:#8ce2db">Car Ownership Essentials.</span></h1>
+<p>A car can drain money slowly through fuel and maintenance—or very quickly when warning signs are ignored. Learn the few basics that save the most money over time.</p>
+<div class="pills"><span class="pill">20 Questions</span><span class="pill">Minimal Prior Knowledge</span><span class="pill">MPG Math</span><span class="pill">Repair Costs</span><span class="pill">Warning Signs</span><span class="pill">Long-Run Ownership Cost</span><span class="pill">Reflection</span></div>
+<div class="progressrow"><span id="prog">Progress: 0%</span><span id="score">Score: 0 / 15</span><span id="clock">Not started</span></div><div class="progress"><div class="bar" id="bar"></div></div>
+</section>
+
+<section class="card" id="start">
+<h2>Student Start</h2>
+<p style="color:var(--muted)">Enter your information. Questions unlock one at a time. Correct on the first attempt = 1 point; correct on the second attempt = 0.5 points. After two attempts, the module explains the answer and moves on.</p>
+<div class="grid3"><div><label for="first">First Name</label><input id="first" autocomplete="given-name"></div><div><label for="last">Last Name</label><input id="last" autocomplete="family-name"></div><div><label for="period">Block</label><select id="period"><option value="">Choose a block...</option><option value="1">Block 1</option><option value="2">Block 2</option><option value="3">Block 3</option><option value="4">Block 4</option></select></div></div>
+<div class="actions"><button class="btn primary" onclick="begin()">Start Module</button></div>
+</section>
+
+<div class="note"><strong>Big idea:</strong> Know your required documents, registration and inspection deadlines, emissions rules, and the maintenance that keeps your first car safe and affordable.</div>
+<div id="questions"></div>
+
+<section class="cert" id="cert">
+<div class="eyebrow" style="color:#18776f">Certificate of Completion</div><h2 id="certHeading">Module Complete!</h2><div class="certname" id="certName"></div><div>completed <strong>Personal Finance Module 8 - Car Ownership Essentials</strong></div>
+<div class="certstats"><div class="stat"><strong id="certScore"></strong><span>Score</span></div><div class="stat"><strong id="certPct"></strong><span>Percent</span></div><div class="stat"><strong id="certStart"></strong><span>Started</span></div><div class="stat"><strong id="certEnd"></strong><span>Finished</span></div></div>
+<div class="lesson" style="text-align:left"><strong>Reflection</strong><div id="certRef"></div></div><p id="saveStatus" role="status" aria-live="polite">Saving your score...</p>
+<button id="retrySave" hidden class="btn primary" onclick="submit(document.getElementById('certRef').textContent,Math.round(score/15*100))">Retry saving score</button> <button class="btn secondary" onclick="window.print()">Print / Save Certificate</button>
+</section>
+<div class="footer">MR. D • Personal Financial Management • Module 8 • Vivid Lessons</div>
+</main><div class="toast" id="toast"></div>
+
+<script>
+const META={id:'pfm-module-8-car-ownership-essentials',title:'Personal Finance Module 8 - Car Ownership Essentials',category:'Personal Finance',topic:'Pennsylvania Documents, Registration, Inspections and Maintenance',productType:'Interactive Module',moduleSize:'standard',version:'1.0-pfm-u8',questionCount:15};
+const ENDPOINT='https://script.google.com/macros/s/AKfycbyucfQcDDR9S_4i8_EiI2LAm0k49NNGT0IBiRnXTjZQKgtfuOwM73Wtxxt5fzojGFY/exec';
+
+const Q=[
+{n:1,t:"Documents in the Car",lesson:"In Pennsylvania, drivers should be able to present their license, registration card, and proof of insurance when required.",prompt:"A police officer asks for your driving documents. Which set should you provide?",o:["License, registration, insurance","Title, purchase receipt, and the original loan agreement","Inspection receipt, warranty, and the most recent oil-change invoice","License, title, and the dealership's advertising paperwork"],a:0,fb:"Keep current registration and proof of insurance accessible; the title generally belongs in a secure place, not in the car."},
+{n:2,t:"Vehicle Title",lesson:"A title establishes ownership; registration authorizes road use. They are not the same document.",prompt:"You buy a used car. What does the vehicle title primarily establish?",o:["The date of the next oil change and inspection","Ownership","The amount of insurance coverage selected by the previous owner","Permission to park in every Pennsylvania municipality"],a:1,fb:"The title is the ownership document; the registration card shows current registration."},
+{n:3,t:"Renewing Registration",lesson:"Standard Pennsylvania registration is annual. Certain eligible vehicles can use an optional two-year registration period.",prompt:"Your standard one-year PA registration expires soon. How often must you renew it?",o:["Only when selling the vehicle to another person","Every three years if the car passes its safety inspection","Annually","Only when the license plate becomes damaged or unreadable"],a:2,fb:"Renew by the expiration date. Eligible vehicles may instead choose a two-year period."},
+{n:4,t:"Two-Year Registration",lesson:"PennDOT permits optional two-year registration for certain vehicle types; it does not replace safety inspections.",prompt:"You choose an eligible two-year registration. What happens to your annual safety inspection?",o:["It is replaced by a one-time inspection at purchase","It becomes optional when the car is under ten years old","It is required only when the registration is renewed","Still annual"],a:3,fb:"Registration and safety inspection have separate schedules."},
+{n:5,t:"Safety Inspection",lesson:"Most PA passenger cars must pass a safety inspection every 12 months at an authorized station.",prompt:"How often does a typical Pennsylvania passenger car need a safety inspection?",o:["Every 12 months","Every two years if the driver has no traffic violations","Only when the vehicle changes owners or license plates","Every five years unless the dashboard shows a warning"],a:0,fb:"Check the inspection sticker's expiration; registration expiration may be different."},
+{n:6,t:"Inspection Failure",lesson:"Pennsylvania safety inspections check tires, brakes, lights, steering, suspension, glass and other safety equipment.",prompt:"Which condition can cause a car to fail its safety inspection?",o:["A small cosmetic scratch on an undamaged door panel","Exposed tire cords","A missing dealership decal on the rear window","An older but clean seat cover that matches the interior"],a:1,fb:"Severely damaged tires are a safety problem, not a cosmetic issue."},
+{n:7,t:"Brake Wear",lesson:"Worn pads may damage rotors. Grinding or poor braking calls for prompt professional inspection.",prompt:"You ignore grinding brakes for weeks. What additional repair might become necessary?",o:["Replacing the windshield washer reservoir and its fluid","Reprogramming the radio and replacing its speakers","Rotor replacement","Replacing the fuel cap and resetting the trip odometer"],a:2,fb:"Brake pads are wear items; delaying repairs can damage related parts."},
+{n:8,t:"Emissions Purpose",lesson:"Emissions inspections help identify problems with pollution-control systems and reduce harmful vehicle emissions.",prompt:"What is the main purpose of an emissions inspection?",o:["To calculate the resale value of the vehicle","To certify that the tires meet winter traction standards","To determine whether the driver qualifies for cheaper insurance","Check pollution"],a:3,fb:"Emissions testing is different from a mechanical safety inspection."},
+{n:9,t:"County Rules",lesson:"Pennsylvania's emissions program applies in designated counties and has vehicle-specific rules and exemptions.",prompt:"Do all Pennsylvania counties have the same emissions-testing requirement?",o:["No","Yes, every vehicle receives the identical test regardless of county","Only counties with toll highways require the full annual test","The requirement depends entirely on the driver's age and license"],a:0,fb:"Check the current requirements for the county where the vehicle is registered."},
+{n:10,t:"Computer Diagnostics",lesson:"OBD means onboard diagnostics. For applicable vehicles, emissions testing can read the vehicle's computer for emissions-related faults.",prompt:"What does an OBD emissions check primarily examine?",o:["The age of the tires and the remaining brake-pad thickness","Computer diagnostics","The amount of gasoline purchased during the past year","The owner's registration payment history and driving record"],a:1,fb:"The vehicle computer can report emissions-system faults and readiness information."},
+{n:11,t:"Red Oil Warning",lesson:"A red oil-pressure warning may indicate inadequate lubrication and serious engine-damage risk.",prompt:"The red oil-pressure light comes on while driving. What should you do?",o:["Continue to the next scheduled service appointment","Increase engine speed to circulate more oil through the system","Stop safely; engine off","Drive home slowly and check the oil after the engine cools"],a:2,fb:"Pull over safely and shut off the engine; arrange appropriate assistance."},
+{n:12,t:"Correct Engine Oil",lesson:"The owner's manual identifies the manufacturer's required oil specification and maintenance guidance.",prompt:"Which source should guide your choice of engine oil?",o:["The most expensive bottle at the nearest gas station","A friend's recommendation for an unrelated vehicle model","The largest viscosity number printed on the shelf label","Owner's manual"],a:3,fb:"Using the correct specification matters more than choosing oil by price or guesswork."},
+{n:13,t:"Tire Pressure",lesson:"The driver's door-jamb placard normally lists recommended cold tire pressure; the tire sidewall lists a maximum.",prompt:"Your tire says MAX 44 PSI, but the door placard says 32 PSI. Which is the normal target?",o:["32 PSI","44 PSI because the tire manufacturer's maximum always overrides the vehicle placard","38 PSI because the average of both printed numbers is safest","Whatever pressure makes the tire appear completely round"],a:0,fb:"Use the vehicle's recommended cold tire pressure, not the sidewall maximum."},
+{n:14,t:"Wet-Road Traction",lesson:"Tread helps channel water away from the tire's contact patch and maintain traction.",prompt:"Why can worn tire tread be especially dangerous in rain?",o:["It causes the battery to discharge faster during braking","Reduced traction","It automatically disables the anti-lock braking system","It increases engine temperature by restricting coolant flow"],a:1,fb:"Worn tread increases the risk of losing traction on wet pavement."},
+{n:15,t:"First-Car Decision",lesson:"An expired inspection and damaged tires are warning signs to address before relying on a used car.",prompt:"A used car has an expired inspection sticker and visibly damaged tires. What is the sensible next step?",o:["Buy it immediately because a lower price offsets safety concerns","Assume the seller's verbal promise means the car will pass inspection","Inspect and repair","Drive it for several months before checking the sticker or tire condition"],a:2,fb:"Arrange an independent inspection and account for needed repairs before relying on the vehicle."}
+];
+
+let started=false,locked=false,submitted=false,score=0,done=0,startTime=null,endTime=null;
+const attempts={},answers={},types=['multiple-choice'];const el=id=>document.getElementById(id);
+const sid='pfm8-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,9);
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function render(){
+  el('questions').innerHTML=Q.map(q=>{
+    const activity=q.type==='calc'
+      ? `<div class="calcrow"><input id="c${q.n}" type="number" step="any" inputmode="decimal" placeholder="Enter number"><button class="btn primary" onclick="checkCalc(${q.n})">Check Answer</button></div>`
+      : `<div class="options" id="a${q.n}">${shuffle(q.o.map((x,i)=>({x,i}))).map(c=>`<button class="option" onclick="pick(this,${q.n},${c.i})">${c.x}</button>`).join('')}</div>`;
+    return `<section class="question locked" id="q${q.n}"><div class="qhead"><h2>${q.n}. ${q.t}</h2><span class="badge" id="b${q.n}">Locked</span></div><div class="qbody"><div class="lesson">${q.lesson}</div>${q.type==='calc'?'<div class="formula">'+(q.n===2?'MPG = miles ÷ gallons':q.n===3?'Gallons used = miles ÷ MPG':q.n===4?'Fuel cost = miles ÷ MPG × price per gallon':'Compare all added costs and savings')+'</div>':''}<p class="prompt">${q.prompt}</p>${activity}<div class="feedback" id="f${q.n}"></div></div></section>`;
+  }).join('')+`<section class="question locked" id="q16"><div class="qhead"><h2>16. Final Reflection</h2><span class="badge" id="b16">Locked</span></div><div class="qbody"><div class="lesson"><strong>Think ahead:</strong> Pennsylvania registration, inspection, insurance and maintenance are separate responsibilities.</div><p class="prompt">Name one car document, one inspection requirement, and one maintenance habit you will remember.</p><textarea id="reflection" placeholder="A short response is okay. There is no minimum."></textarea><div class="actions"><button class="btn primary" onclick="finish()">Finish Module</button></div><div class="feedback" id="f16"></div></div></section>`;
+}
+function toast(m){const t=el('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function fmt(d){return d?d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}):''}
+function begin(){if(started)return toast('Module already started.');if(!el('first').value.trim()||!el('last').value.trim()||!el('period').value)return toast('Enter your first name, last name, and block.');started=true;['first','last','period'].forEach(id=>el(id).disabled=true);startTime=new Date();unlock(1);update();toast('Module 8 started.')}
+function unlock(n){el('q'+n).classList.remove('locked');el('b'+n).textContent='Unlocked'}
+function award(n,ok,answerText){
+  const q=Q[n-1],k=(attempts[n]||0)+1;attempts[n]=k;answers['Q'+n]={answer:answerText,correct:ok,pointsAwarded:0,attemptsUsed:k,resolved:ok||k>=2};const f=el('f'+n);
+  if(ok){const pts=k===1?1:.5;score+=pts;answers['Q'+n].pointsAwarded=pts;f.className='feedback show good';f.textContent=k===1?'Correct. '+q.fb:'Correct on the second attempt — half credit earned. '+q.fb;freeze(n);setTimeout(()=>complete(n),450)}
+  else if(k===1){f.className='feedback show bad';f.textContent='Not quite. Read the mini lesson and try once more for half credit.'}
+  else{f.className='feedback show bad';f.textContent='Not quite. '+q.fb;freeze(n);setTimeout(()=>complete(n),650)}
+}
+function pick(btn,n,choice){if(!started||locked||answers['Q'+n]?.resolved)return;const q=Q[n-1],ok=choice===q.a;btn.classList.add(ok?'good':'bad');award(n,ok,btn.textContent.trim())}
+function checkCalc(n){if(!started||locked||answers['Q'+n]?.resolved)return;const q=Q[n-1],input=el('c'+n),v=Number(input.value);if(!Number.isFinite(v))return toast('Enter a number first.');const ok=Math.abs(v-q.answer)<=(q.tolerance||.01);input.disabled=ok||(attempts[n]||0)>=1;award(n,ok,String(v))}
+function freeze(n){const box=el('a'+n);if(box)box.querySelectorAll('button').forEach(x=>x.disabled=true);const input=el('c'+n);if(input)input.disabled=true}
+function complete(n){done=Math.max(done,n);el('b'+n).textContent='Complete';el('b'+n).style.background='#dcfce7';el('b'+n).style.color='#166534';unlock(n<15?n+1:16);update()}
+function update(){el('score').textContent=`Score: ${score} / 15`;const p=Math.round((done/16)*100);el('prog').textContent=`Progress: ${p}%`;el('bar').style.width=p+'%';el('clock').textContent=startTime?'Started: '+fmt(startTime):'Not started'}
+function finish(){if(locked||!started||done<15)return toast('Complete all 15 questions first.');const r=el('reflection').value.trim();endTime=new Date();done=21;update();el('b16').textContent='Complete';el('b16').style.background='#dcfce7';el('b16').style.color='#166534';const pct=Math.round(score/15*100);el('certHeading').textContent=pct>=90?'Outstanding Work!':pct>=80?'Strong Work!':pct>=70?'Nice Progress!':'Module Complete!';el('certName').textContent=el('first').value.trim()+' '+el('last').value.trim();el('certScore').textContent=score+' / 15';el('certPct').textContent=pct+'%';el('certStart').textContent=fmt(startTime);el('certEnd').textContent=fmt(endTime);el('certRef').textContent=r||'No reflection entered.';el('cert').classList.add('show');submit(r,pct);locked=true;document.body.classList.add('done')}
+async function submit(ref,pct){
+  if(submitted)return;submitted=true;const mins=Math.max(1,Math.round((endTime-startTime)/60000));
+  const record={moduleId:META.id,moduleTitle:META.title,category:META.category,topic:META.topic,productType:META.productType,moduleSize:META.moduleSize,score,totalQuestions:15,percent:pct+'%',completed:'Yes',questionTypes:types.join(', '),answers:JSON.stringify(answers),timeStarted:fmt(startTime),timeFinished:fmt(endTime),totalTime:mins+' minutes',reflection:ref,version:META.version,sessionId:sid};
+  const p=new URLSearchParams({action:'moduleSubmit',manualEntry:'1',moduleNumber:'8',bellId:'PFM-MODULE-8-CAR-OWNERSHIP',label:'Personal Finance Module 8 - Car Costs MPG Maintenance',firstName:el('first').value.trim(),lastName:el('last').value.trim(),name:el('first').value.trim()+' '+el('last').value.trim(),answer:JSON.stringify(record),late:'0',duration:String(mins),timestamp:new Date().toISOString(),cls:'Personal Finance',googleName:'Manual entry',schoolEmail:'',block:el('period').value.trim()});
+  try{el('saveStatus').textContent='Saving your score...';el('retrySave').hidden=true;const response=await fetch(ENDPOINT,{method:'POST',body:p});const result=await response.json();if(!result.success&&result.error!=='This completion was already submitted.')throw new Error(result.error||'Save not confirmed');el('saveStatus').textContent='Score saved to Mr. D. Keep your certificate.';toast('Score saved to Mr. D.')}
+  catch(e){submitted=false;el('saveStatus').textContent='Your certificate is ready, but saving could not be confirmed. Keep this page open and retry.';el('retrySave').hidden=false}
+}
+render();
+</script>
+</body>
+</html>
