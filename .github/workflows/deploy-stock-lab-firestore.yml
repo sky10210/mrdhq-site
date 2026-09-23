@@ -25,5 +25,15 @@ jobs:
           fi
           printf '%s' "$STOCK_LAB_FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/stock-lab-service-account.json"
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/stock-lab-service-account.json" >> "$GITHUB_ENV"
+      - name: Validate dedicated project identity
+        run: |
+          python - <<'PY'
+          import json, os
+          with open(os.environ["GOOGLE_APPLICATION_CREDENTIALS"], encoding="utf-8") as f:
+              account=json.load(f)
+          if account.get("project_id") != "mrdhq-stock-market-lab":
+              raise SystemExit("Credential project mismatch; refusing deployment.")
+          print("Dedicated Stock Lab credential project verified.")
+          PY
       - name: Deploy rules to dedicated Stock Lab project
         run: npx --yes firebase-tools@14 deploy --only firestore:rules --project mrdhq-stock-market-lab --config stock-market-lab/firebase.json --non-interactive
