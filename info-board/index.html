@@ -18,12 +18,23 @@
 .status{font-size:.74rem;color:var(--muted);padding:0 22px 16px}.status.good{color:var(--teal)}.status.bad{color:var(--danger)}.hidden{display:none!important}
 .modal{position:fixed;inset:0;background:rgba(23,32,51,.35);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal.open{display:flex}.modal-card{width:min(430px,100%);background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 24px 70px rgba(23,32,51,.2)}.modal-card h3{margin:0 0 6px;letter-spacing:-.04em}.modal-card p{margin:0 0 14px;color:var(--muted);font-size:.86rem}.modal-card input,.modal-card textarea,.modal-card select{width:100%;border:1px solid var(--line);border-radius:13px;background:white;padding:11px;font:inherit;margin-bottom:10px}.modal-actions{display:flex;justify-content:flex-end;gap:8px}.footer{padding:24px 0 40px;text-align:center;color:var(--muted);font-size:.78rem}
 @media(max-width:820px){.grid{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column;padding:13px 0}.day{min-height:54px;padding:4px}.event{font-size:.55rem}.hero{padding-top:28px}}@media(max-width:520px){.shell{width:min(100% - 18px,1120px)}.calendar-wrap{padding:10px}.day{min-height:46px;border-radius:8px}.event{padding:3px;font-size:.5rem}.card-head{padding:16px}.feed{padding:6px 15px 15px}}
+
+/* Full-width Info Board sections */
+#app.grid{display:flex!important;flex-direction:column!important;grid-template-columns:none!important;width:100%;gap:22px}
+#app.grid>.card{width:100%;min-width:0}
+#calendar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#calendar .month{min-width:0}
+.schedule-graphic{width:100%;display:block;max-width:1120px;margin:0 auto;height:auto}
+.class-shortcuts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.class-shortcuts a{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border:1px solid #a7b8d3;border-radius:9px;background:#f5f8fe;color:#10234b;text-decoration:none;font-size:.82rem;font-weight:750}
+.class-shortcuts a:hover,.class-shortcuts a:focus-visible{background:#dfeafa;outline:2px solid #315b9a;outline-offset:1px}
+@media(max-width:680px){#calendar{grid-template-columns:1fr}.class-shortcuts a{flex:1 1 42%}}
 </style>
 </head>
 <body>
 <header class="topbar"><nav class="shell nav"><a class="brand" href="/"><span class="mark">D</span><span>Mr. D's HQ</span></a><div class="navlinks"><a href="/">Home</a><a href="/opening-bell/">Opening Bell</a><button id="teacherBtn">Teacher Edit</button></div></nav></header>
 <main class="shell">
-<section class="hero"><div class="eyebrow">Classroom Information</div><h1>Info Board</h1><p>Running class updates, important dates, and four rolling months at a glance. New announcements appear first.</p></section>
+<section class="hero"><nav class="class-shortcuts" aria-label="Return to class pages"><a href="/ap-business/">AP Business</a><a href="/business-101/">Business 101</a><a href="/personal-finance/">Personal Finance</a><a href="/marketing/">Marketing</a></nav><div class="eyebrow" style="margin-top:18px">Classroom Information</div><h1>Info Board</h1><p>Running class updates, important dates, and four rolling months at a glance. New announcements appear first.</p></section>
 <section class="grid" id="app">
 <div class="card">
 <div class="card-head"><div><h2>Updates</h2><div class="caption">Newest first • pinned notices stay on top</div></div><button class="secondary hidden" id="lockBtn">Lock</button></div>
