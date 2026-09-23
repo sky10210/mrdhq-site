@@ -1,0 +1,29 @@
+name: Deploy Stock Lab Firestore Rules
+on:
+  push:
+    branches: [main]
+    paths:
+      - "stock-market-lab/firestore-stock-lab.rules"
+      - "stock-market-lab/firebase.json"
+      - ".github/workflows/deploy-stock-lab-firestore.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  rules:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      STOCK_LAB_FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.STOCK_LAB_FIREBASE_SERVICE_ACCOUNT_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check dedicated Firebase credentials
+        run: |
+          if [ -z "$STOCK_LAB_FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            echo "::error::Set STOCK_LAB_FIREBASE_SERVICE_ACCOUNT_JSON in repository Actions secrets."
+            exit 1
+          fi
+          printf '%s' "$STOCK_LAB_FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/stock-lab-service-account.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/stock-lab-service-account.json" >> "$GITHUB_ENV"
+      - name: Deploy rules to dedicated Stock Lab project
+        run: npx --yes firebase-tools@14 deploy --only firestore:rules --project mrdhq-stock-market-lab --config stock-market-lab/firebase.json --non-interactive
