@@ -2,7 +2,8 @@
   "version": 1,
   "include": [
     "/api/live/*",
-    "/api/oil-gas"
+    "/api/oil-gas",
+    "/api/info-board"
   ],
   "exclude": []
 }
