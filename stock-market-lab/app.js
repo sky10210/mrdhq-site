@@ -25,6 +25,7 @@ async function saveEventControls(){if(!teacher||!db)return;eventConfig={eventNam
 function showView(id){if(id==="teacher"&&!teacher)return;if(id==="teacher")loadTeacherDashboard();document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("active",x.dataset.view===id));$(id)?.classList.add("active");const titles={learn:"Start Here",dashboard:"My Portfolio",research:"Stock Explorer",market:"Market Watch",history:"Performance",journal:"Decision Journal",teacher:"Teacher Desk"};if($("topbarTitle"))$("topbarTitle").textContent=titles[id]||"Stock Market Lab";$("terminalSidebar")?.classList.remove("mobile-open")}
 function renderTimeline(){if(!$("timelineText"))return;$("timelineText").textContent=timeline[timelineIndex];$("timelineStep").textContent=(timelineIndex+1)+" / "+timeline.length;$("timelineBack").disabled=timelineIndex===0;$("timelineNext").textContent=timelineIndex===timeline.length-1?"Start Quiz ↓":"Next →"}
 function startQuiz(){
+  if(!user&&!state.profile){toast("Sign in with Google first so your quiz result saves to your semester account.");beginGoogleSignIn();return;}
   let q=0,score=0,answers=[];const area=$("quizArea"),button=$("startQuiz");
   button.hidden=true;$("quizResult").textContent="";
   function draw(){
