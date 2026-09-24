@@ -43,3 +43,15 @@ CREATE TABLE IF NOT EXISTS agreements (employee_id INTEGER PRIMARY KEY REFERENCE
 CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY AUTOINCREMENT,employee_id INTEGER NOT NULL REFERENCES employees(id),topic TEXT NOT NULL,token_hash TEXT UNIQUE NOT NULL,created_at TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS note_messages (id INTEGER PRIMARY KEY AUTOINCREMENT,note_id INTEGER NOT NULL REFERENCES notes(id),author TEXT NOT NULL,message TEXT NOT NULL,created_at TEXT NOT NULL);
 CREATE INDEX IF NOT EXISTS idx_note_messages ON note_messages(note_id,id);
+
+-- Apply once after the earlier migration. Do not put names, lunch numbers, signatures or emails in the repo.
+ALTER TABLE shifts ADD COLUMN lunch_period TEXT NOT NULL DEFAULT '';
+CREATE TABLE IF NOT EXISTS informal_agreements (
+ employee_id INTEGER PRIMARY KEY REFERENCES employees(id),
+ student_signature TEXT NOT NULL,
+ parent_signature TEXT NOT NULL,
+ parent_name TEXT NOT NULL,
+ parent_email TEXT NOT NULL,
+ student_signed_at TEXT NOT NULL,
+ parent_signed_at TEXT NOT NULL
+);
