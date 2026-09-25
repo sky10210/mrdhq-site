@@ -55,6 +55,7 @@
     if(button.dataset.research){expanded=expanded===button.dataset.research?null:button.dataset.research;draw()}
     else if(button.dataset.rpick)openPicker(button.dataset.rpick);
   });
+  window.STOCK_LAB_RENDER_RESEARCH=draw;
   renderResearch=draw;
   draw();
 })();
