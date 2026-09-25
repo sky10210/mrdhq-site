@@ -124,11 +124,11 @@
     "source": "https://www.geaerospace.com/investor-relations/annual-report"
   },
   "HON": {
-    "overview": "A diversified industrial company with aerospace systems alongside automation and other operations.",
-    "products": "Auxiliary power units, avionics, navigation systems, Honeywell Forge and industrial automation.",
+    "overview": "Honeywell's former aerospace business was separated into an independent company in June 2026. HON now represents the remaining automation-focused business, not the aerospace company.",
+    "products": "Industrial automation, building controls and Honeywell Forge.",
     "businessModel": "Equipment, components, software, spare parts and maintenance services.",
-    "insight": "This aerospace-category ticker includes non-aerospace businesses, so students should inspect segment reporting.",
-    "watch": "Segment mix, portfolio changes, aircraft demand and service orders.",
+    "insight": "This legacy category placement is outdated following the aerospace separation; distinguish HON from the separately traded aerospace business.",
+    "watch": "Automation orders, software and services, and post-separation reporting.",
     "source": "https://investor.honeywell.com/"
   }
 };
@@ -623,14 +623,14 @@
     "question": "How does Roblox benefit when creators build popular experiences on its platform?",
     "source": "https://ir.roblox.com/"
   },
-  "PARA": {
-    "overview": "Paramount's legacy media business includes film, television, streaming and well-known entertainment brands; students should verify its current corporate structure and ticker before using it for live investment research.",
+  "PSKY": {
+    "overview": "Paramount, a Skydance Corporation, combines film and television studios, streaming and broadcast/cable media following the 2025 merger.",
     "products": "Paramount Pictures, CBS, Nickelodeon, MTV and Paramount+.",
     "customers": "Viewers, advertisers, distributors and licensing partners.",
     "businessModel": "Advertising, distribution fees, streaming subscriptions, licensing and film releases.",
-    "insight": "A media company's name, ownership and ticker can change after a merger; an educational stock list must be checked against current exchange data.",
-    "watch": "Corporate actions, ticker validity, streaming economics, advertising and content costs.",
-    "question": "Why should investors verify a ticker after a merger rather than assume an old stock symbol still trades?",
+    "insight": "The company's studio releases, streaming services and television networks earn revenue in different ways; its current trading symbol is PSKY, not the former PARA.",
+    "watch": "Streaming economics, advertising, content costs and merger-related integration.",
+    "question": "How do Paramount's studios, streaming services and TV networks each earn revenue?",
     "source": "https://ir.paramount.com/"
   },
   "ROKU": {
@@ -1302,12 +1302,12 @@
     "source": "https://www.eaton.com/us/en-us/company/investor-relations.html"
   },
   "HON": {
-    "overview": "Honeywell supplies industrial technology, aerospace products, building systems and automation solutions; its business mix can change through corporate transactions.",
-    "products": "Industrial automation, building controls, aerospace technology and safety systems.",
-    "customers": "Manufacturers, airlines, building operators and industrial customers.",
+    "overview": "Honeywell Technologies focuses on industrial and building automation following the June 2026 separation of Honeywell Aerospace.",
+    "products": "Industrial automation, building controls, process technology and safety systems.",
+    "customers": "Manufacturers, building operators and industrial customers.",
     "businessModel": "Equipment, software, parts and long-term service contracts.",
     "insight": "A building-control system can create ongoing maintenance and software revenue after installation; students should check current segment reporting.",
-    "watch": "Industrial investment, aerospace demand, software/services and portfolio changes.",
+    "watch": "Industrial investment, automation demand, software/services and post-separation reporting.",
     "question": "Why should students check a conglomerate's current divisions instead of relying on an old list of brands?",
     "source": "https://investor.honeywell.com/"
   },
