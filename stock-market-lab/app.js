@@ -121,27 +121,22 @@ $("teacherClassFilter").onchange=renderTeacherRows;$("refreshTeacher").onclick=l
 document.querySelectorAll("nav [data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));$("timelineBack").onclick=()=>{timelineIndex=Math.max(0,timelineIndex-1);renderTimeline()};$("timelineNext").onclick=()=>{if(timelineIndex<timeline.length-1){timelineIndex++;renderTimeline()}else startQuiz()};$("startQuiz").onclick=startQuiz;renderTimeline();$("closeModal").onclick=()=>$("modal").classList.remove("open");$("modal").onclick=e=>{if(e.target.id==="modal")$("modal").classList.remove("open")};$("sidebarSignIn").onclick=beginGoogleSignIn;$("topbarSignIn").onclick=beginGoogleSignIn;$("mobileMenu").onclick=()=>$("terminalSidebar").classList.toggle("mobile-open");$("googleBtn").onclick=async()=>{
   if(!auth){toast("Google sign-in is still loading. Try again.");return}
   if(window.stockLabSignInPending)return;
-  const p=new firebase.auth.GoogleAuthProvider();
-  p.setCustomParameters({prompt:"select_account"});
+  const provider=new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({prompt:"select_account"});
   const btn=$("googleBtn");window.stockLabSignInPending=true;btn.disabled=true;
-  const mobile=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   try{
-    if(mobile){
-      toast("Opening Google sign-in in this browser…");
-      await auth.signInWithRedirect(p);
-    }else{
-      toast("Opening Google sign-in…");
-      await auth.signInWithPopup(p);
-    }
+    // Start the popup directly from the user's tap. A redirect to a different
+    // Firebase auth domain can lose the session on Safari's storage isolation.
+    const result=await auth.signInWithPopup(provider);
+    if(result?.user){user=result.user;toast("Signed in as "+(result.user.displayName||result.user.email||"Google user")+". Loading portfolio…");}
   }catch(e){
     console.warn("Google sign-in:",e);
     const code=e?.code||"";
-    if(!mobile&&["auth/popup-blocked","auth/popup-closed-by-user","auth/cancelled-popup-request"].includes(code)){
-      try{toast("Popup unavailable. Switching to Google sign-in in this tab…");await auth.signInWithRedirect(p);return}catch(redirectError){console.warn("Google redirect:",redirectError);toast("Google sign-in failed: "+(redirectError?.code||redirectError?.message||"unknown error"));return}
-    }
-    if(code==="auth/unauthorized-domain")toast("This website must be added to Firebase authorized domains.");
+    if(code==="auth/popup-blocked")toast("Safari blocked the sign-in window. Allow pop-ups for this site in Safari settings, then retry.");
+    else if(code==="auth/popup-closed-by-user"||code==="auth/cancelled-popup-request")toast("Google sign-in was closed before it finished. Please try again.");
+    else if(code==="auth/unauthorized-domain")toast("Firebase must authorize mrdhq.com for Google sign-in.");
     else if(code==="auth/operation-not-allowed")toast("Google sign-in must be enabled in Firebase.");
-    else if(code==="auth/operation-not-supported-in-this-environment"||code==="auth/web-storage-unsupported")toast("This in-app browser may block Google sign-in. Open mrdhq.com in Safari or Chrome.");
+    else if(code==="auth/operation-not-supported-in-this-environment"||code==="auth/web-storage-unsupported")toast("This browser cannot complete Google sign-in. Try Safari with pop-ups enabled.");
     else toast("Google sign-in failed: "+(code||e?.message||"unknown error"));
   }finally{window.stockLabSignInPending=false;btn.disabled=false}
 };$("otherTeacherBtn").onclick=()=>{$("otherTeacherPanel").hidden=!$("otherTeacherPanel").hidden};$("demoBtn").onclick=()=>{state.profile={name:"Demo Student",className:"Business 101",teacherId:"mr-d"};profile(null);$("authGate").classList.remove("open");save();render()};const signOut=()=>auth?.signOut().then(()=>{state.profile=null;localStorage.removeItem(KEY);localStorage.removeItem(HISTORY_KEY);location.reload()}).catch(e=>toast("Could not sign out. Please retry."));$("logoutBtn").onclick=signOut;$("topbarSignOut").onclick=signOut;render();showView("learn");updateAccountUI();loadMarketPrices();initFirebase();
