@@ -846,6 +846,168 @@
     "source": "https://investors.modernatx.com/"
   }
 };
+  const transportProfiles={
+  "TSLA": {
+    "overview": "Tesla designs and sells electric vehicles and energy products, and develops software and charging services.",
+    "products": "Model 3, Model Y, Cybertruck, Supercharger, Powerwall and Megapack.",
+    "customers": "Vehicle buyers, fleet operators, homeowners and utility-scale energy customers.",
+    "businessModel": "Vehicle and energy-product sales, regulatory credits, software and service revenue.",
+    "insight": "Battery costs, manufacturing scale and charging access influence the economics of EV ownership; energy storage is a separate growth business.",
+    "watch": "Vehicle deliveries, average selling prices, margins, energy-storage deployments, competition and regulation.",
+    "question": "Why could Tesla's vehicle deliveries rise while its profit per vehicle falls?",
+    "source": "https://ir.tesla.com/"
+  },
+  "F": {
+    "overview": "Ford manufactures vehicles and sells commercial fleet products, with financing and service operations.",
+    "products": "F-Series, Mustang, Bronco, Transit and Ford Pro.",
+    "customers": "Consumers, businesses, fleet operators and dealerships.",
+    "businessModel": "Vehicle sales, commercial services, parts and financing through Ford Credit.",
+    "insight": "Pickup trucks and commercial vans serve work-related needs, while the transition to electric vehicles requires new investment.",
+    "watch": "Truck demand, warranty costs, EV profitability, financing and manufacturing efficiency.",
+    "question": "Why might a commercial fleet customer value vehicle uptime more than a new styling feature?",
+    "source": "https://shareholder.ford.com/"
+  },
+  "GM": {
+    "overview": "General Motors designs and manufactures vehicles and operates financing and software-related businesses.",
+    "products": "Chevrolet, GMC, Cadillac, Buick, Silverado and Chevrolet Equinox EV.",
+    "customers": "Consumers, dealerships and fleet customers.",
+    "businessModel": "Vehicle sales, parts and services, and GM Financial financing activity.",
+    "insight": "Large vehicle platforms and shared components can spread development costs across multiple models and brands.",
+    "watch": "Truck and SUV sales, EV demand, manufacturing costs, financing and recalls.",
+    "question": "How does sharing a vehicle platform across brands change development costs?",
+    "source": "https://investor.gm.com/"
+  },
+  "TM": {
+    "overview": "Toyota is a global automaker offering gasoline, hybrid, plug-in hybrid and electric vehicles, alongside financing and mobility services.",
+    "products": "Toyota, Lexus, Corolla, Camry, RAV4 and Prius.",
+    "customers": "Drivers, dealerships, businesses and fleet buyers.",
+    "businessModel": "Vehicle sales, parts and financial services.",
+    "insight": "Toyota's hybrid lineup serves customers who want lower fuel use without relying entirely on charging infrastructure.",
+    "watch": "Hybrid demand, global production, currency, supply chains and regional competition.",
+    "question": "Why might a hybrid appeal to a buyer who cannot charge a vehicle at home?",
+    "source": "https://global.toyota/en/ir/"
+  },
+  "UBER": {
+    "overview": "Uber operates a digital platform connecting riders, drivers, delivery couriers, restaurants and merchants.",
+    "products": "Uber rides, Uber Eats and Uber for Business.",
+    "customers": "Riders, delivery customers, restaurants, merchants and drivers/couriers.",
+    "businessModel": "Platform service fees and related mobility and delivery revenue.",
+    "insight": "Uber generally coordinates trips and deliveries rather than owning every vehicle; balancing rider demand and driver supply affects wait times and pricing.",
+    "watch": "Trip growth, gross bookings, take rate, driver supply, insurance costs and regulation.",
+    "question": "Why can a platform's total customer spending be much larger than the revenue it records?",
+    "source": "https://investor.uber.com/"
+  },
+  "LYFT": {
+    "overview": "Lyft runs a transportation platform focused on connecting riders with drivers and other mobility options.",
+    "products": "Lyft rides, scheduled rides and business transportation.",
+    "customers": "Riders, drivers and business travel customers.",
+    "businessModel": "Fees and related revenue from rides arranged through its platform.",
+    "insight": "Reliable pickup times depend on enough drivers being available near customers; pricing must appeal to both sides of the marketplace.",
+    "watch": "Ride volumes, active riders, driver supply, insurance expense and competition.",
+    "question": "Why does a rideshare company need to attract drivers and passengers at the same time?",
+    "source": "https://investor.lyft.com/"
+  },
+  "DAL": {
+    "overview": "Delta Air Lines transports passengers and cargo and operates a loyalty program.",
+    "products": "Delta flights, SkyMiles, Delta One and Delta Cargo.",
+    "customers": "Leisure travelers, business travelers, cargo shippers and loyalty partners.",
+    "businessModel": "Passenger tickets, premium cabins, cargo, loyalty-related arrangements and ancillary fees.",
+    "insight": "An airline sells a seat on a flight that departs whether or not every seat is filled; load factor and ticket yield matter.",
+    "watch": "Passenger demand, fuel costs, labor, premium travel and aircraft availability.",
+    "question": "Why is an unsold airline seat difficult to sell after a flight departs?",
+    "source": "https://ir.delta.com/"
+  },
+  "LUV": {
+    "overview": "Southwest Airlines operates a U.S.-focused airline network with passenger and loyalty businesses.",
+    "products": "Southwest flights and Rapid Rewards.",
+    "customers": "Leisure travelers, business travelers and loyalty partners.",
+    "businessModel": "Passenger tickets, ancillary revenue and loyalty-related arrangements.",
+    "insight": "Route planning, aircraft utilization and operating efficiency are central to airline economics; verify current fare and seating policies rather than relying on older brand assumptions.",
+    "watch": "Ticket yield, fuel, labor, route performance and operational changes.",
+    "question": "How could faster aircraft turnaround allow an airline to offer more flights with the same planes?",
+    "source": "https://investors.southwest.com/"
+  },
+  "AAL": {
+    "overview": "American Airlines operates a large passenger airline network and an associated loyalty program.",
+    "products": "American Airlines, AAdvantage and American Eagle regional service.",
+    "customers": "Domestic and international travelers, cargo customers and loyalty partners.",
+    "businessModel": "Passenger fares, premium services, cargo and loyalty-related arrangements.",
+    "insight": "Connecting hubs combine passengers from many smaller routes onto larger flights, but disruptions at a hub can affect the network.",
+    "watch": "Passenger revenue, debt, fuel, labor, international demand and operational reliability.",
+    "question": "Why can a storm at one major hub disrupt flights in many other cities?",
+    "source": "https://americanairlines.gcs-web.com/"
+  },
+  "UPS": {
+    "overview": "UPS is a package-delivery and logistics company operating an integrated transportation network.",
+    "products": "UPS parcel delivery, UPS Supply Chain Solutions and logistics services.",
+    "customers": "Online retailers, businesses, healthcare shippers and consumers.",
+    "businessModel": "Domestic and international package shipping plus supply-chain services.",
+    "insight": "Dense delivery routes can lower cost per package because a driver makes many nearby stops.",
+    "watch": "Package volume, revenue per piece, labor contracts, fuel and network efficiency.",
+    "question": "Why does delivering ten packages on one street cost less per package than ten widely separated deliveries?",
+    "source": "https://investors.ups.com/"
+  },
+  "RIVN": {
+    "overview": "Rivian designs and manufactures electric vehicles and related technology, including consumer vehicles and commercial vans.",
+    "products": "R1T, R1S and electric delivery vehicles.",
+    "customers": "Outdoor-oriented vehicle buyers and commercial fleet customers.",
+    "businessModel": "Vehicle sales and related services, software and technology arrangements.",
+    "insight": "Launching new vehicle platforms requires major factory investment before production volumes can spread fixed costs.",
+    "watch": "Vehicle production, deliveries, cash spending, manufacturing costs and new-model launches.",
+    "question": "Why might a growing automaker lose money while it builds factories and increases production?",
+    "source": "https://rivian.com/investors"
+  },
+  "LCID": {
+    "overview": "Lucid manufactures premium electric vehicles and develops electric powertrain technology.",
+    "products": "Lucid Air and Lucid Gravity.",
+    "customers": "Premium vehicle buyers and potential technology partners.",
+    "businessModel": "Vehicle sales and related technology and service arrangements.",
+    "insight": "High-end EV design can showcase range and performance, but a small production scale makes factory and development costs difficult to spread.",
+    "watch": "Production, deliveries, liquidity, manufacturing efficiency and demand.",
+    "question": "Why can a high vehicle selling price still be insufficient to make a young automaker profitable?",
+    "source": "https://ir.lucidmotors.com/"
+  },
+  "RACE": {
+    "overview": "Ferrari designs and sells luxury performance vehicles with a strong global brand and exclusivity strategy.",
+    "products": "Ferrari sports cars, limited-series vehicles and branded experiences.",
+    "customers": "High-income buyers, collectors and brand partners.",
+    "businessModel": "Vehicle and spare-parts sales, personalization, sponsorship and brand-related activities.",
+    "insight": "Limited supply and customization support exclusivity; Ferrari does not compete mainly by selling the highest number of cars.",
+    "watch": "Vehicle mix, personalization, order book, brand strength and currency.",
+    "question": "Why might Ferrari deliberately limit production instead of trying to sell as many cars as possible?",
+    "source": "https://www.ferrari.com/en-EN/corporate/investors"
+  },
+  "NIO": {
+    "overview": "NIO develops and sells premium electric vehicles, with a distinctive battery-swapping and service ecosystem.",
+    "products": "NIO vehicles, battery-swap stations and related services.",
+    "customers": "EV buyers, especially in its primary markets, and users of its service network.",
+    "businessModel": "Vehicle sales and associated services and energy offerings.",
+    "insight": "Battery swapping offers a different ownership and charging experience, but stations require capital and sufficient customer use.",
+    "watch": "Vehicle deliveries, gross margin, battery-swap utilization, competition and financing.",
+    "question": "How many drivers must use a battery-swap station for its operating economics to make sense?",
+    "source": "https://ir.nio.com/"
+  },
+  "FDX": {
+    "overview": "FedEx operates transportation, express delivery and logistics networks serving domestic and international shipments.",
+    "products": "FedEx Express, FedEx Ground-related services and FedEx Freight.",
+    "customers": "Businesses, e-commerce sellers, healthcare shippers and consumers.",
+    "businessModel": "Shipping and freight charges plus logistics services.",
+    "insight": "Air delivery can prioritize speed while ground networks optimize different costs; network design shapes service prices.",
+    "watch": "Package volumes, shipping yield, aircraft and truck costs, labor and network consolidation.",
+    "question": "Why does overnight delivery usually cost more than a slower ground shipment?",
+    "source": "https://investors.fedex.com/"
+  },
+  "CVNA": {
+    "overview": "Carvana operates an online-focused used-car retail and vehicle-reconditioning business.",
+    "products": "Carvana online car shopping, trade-ins, financing options and vehicle vending machines.",
+    "customers": "Used-car buyers and sellers.",
+    "businessModel": "Used-vehicle sales, wholesale activity and finance-related products.",
+    "insight": "Buying, inspecting, reconditioning and delivering used cars requires physical operations even when the storefront is digital.",
+    "watch": "Retail units sold, gross profit per unit, financing conditions, vehicle sourcing and debt.",
+    "question": "Why is selling a used car online still a logistics and inventory business?",
+    "source": "https://investors.carvana.com/"
+  }
+};
   const revenueModels={AAPL:"Device sales and recurring services",MSFT:"Software subscriptions, cloud computing and licenses",NVDA:"AI and graphics chips, systems and networking",GOOGL:"Advertising, cloud services and subscriptions",META:"Advertising across its apps",AMZN:"Retail, seller fees, AWS, advertising and subscriptions",TSM:"Contract chip manufacturing for chip designers",PLTR:"Government and commercial software contracts",CRWD:"Cybersecurity subscriptions",PANW:"Security products, subscriptions and support",V:"Payment-network service fees, not primarily cardholder lending",MA:"Payment-network and related service fees",JPM:"Loan interest and banking and investment fees",KO:"Beverage concentrate and finished-drink sales",PEP:"Beverage and packaged-food sales",MCD:"Franchise royalties, rent and restaurant sales",NFLX:"Subscriptions and advertising",SPOT:"Premium subscriptions and advertising",DIS:"Entertainment, streaming, parks and licensing",TSLA:"Vehicles, energy storage and services",UBER:"Fees from rides, delivery and freight",DASH:"Delivery fees, subscriptions and advertising",LLY:"Prescription medicine sales",ISRG:"Surgical systems, instruments and services",XOM:"Oil, gas, refining and chemicals",CEG:"Electricity and energy-product sales",CAT:"Machinery, parts, services and financing",NKE:"Footwear and apparel sales",O:"Rent from commercial tenants",PLD:"Rent from logistics properties",LMT:"Defense and aerospace contracts"};
   const industryRevenue={technology:"Technology products, software subscriptions or services",retail:"Merchandise, memberships or marketplace services",transport:"Vehicles, fares, delivery or related services",food:"Food and beverage sales, distribution or franchise fees",media:"Subscriptions, advertising, licensing or experiences",finance:"Interest, transactions or financial-service fees",health:"Medicines, devices, care or healthcare services",energy:"Energy, industrial equipment or project contracts",brands:"Branded merchandise sold directly or wholesale",housing:"Homes, materials, rent or property services",defense:"Government and commercial contracts"};
   // Editorially checked, dated stories. No generated headline is presented as verified news.
@@ -861,6 +1023,8 @@
   }
   function companyExplainer(c){
     const industry=c.industries?.find(i=>!i.optional)||c.industries?.[0]||{id:"",name:"Business"};
+    const transportResearch=transportProfiles[c.ticker];
+    if(transportResearch && c.industries?.some(i=>i.id==="transport")) return {overview:transportResearch.overview,revenue:"Recognizable products / services: "+transportResearch.products+".",businessModel:transportResearch.businessModel,importance:"Customers: "+transportResearch.customers+". Why it matters: "+transportResearch.insight+" What to watch: "+transportResearch.watch,product:transportResearch.products,customers:transportResearch.customers,watch:transportResearch.watch,examples:transportResearch.products,verified:true,source:transportResearch.source,question:transportResearch.question};
     const healthResearch=healthProfiles[c.ticker];
     if(healthResearch && c.industries?.some(i=>i.id==="health")) return {overview:healthResearch.overview,revenue:"Recognizable products / services: "+healthResearch.products+".",businessModel:healthResearch.businessModel,importance:"Customers: "+healthResearch.customers+". Why it matters: "+healthResearch.insight+" What to watch: "+healthResearch.watch,product:healthResearch.products,customers:healthResearch.customers,watch:healthResearch.watch,examples:healthResearch.products,verified:true,source:healthResearch.source,question:healthResearch.question};
     const mediaResearch=mediaProfiles[c.ticker];
@@ -887,7 +1051,7 @@
   }
   Object.assign(officialSites,{LMT:"lockheedmartin.com",RTX:"rtx.com",NOC:"northropgrumman.com",GD:"gd.com",LHX:"l3harris.com",HII:"hii.com",BA:"boeing.com",HWM:"howmet.com",AVAV:"avinc.com",AXON:"axon.com",PLTR:"palantir.com",GE:"geaerospace.com",HON:"honeywell.com"});
   Object.assign(officialSites,{AMZN:"amazon.com",WMT:"walmart.com",TGT:"target.com",COST:"costco.com",HD:"homedepot.com",LOW:"lowes.com",BBY:"bestbuy.com",EBAY:"ebay.com",ETSY:"etsy.com",CHWY:"chewy.com",BABA:"alibabagroup.com",MELI:"mercadolibre.com",ROST:"rossstores.com",TJX:"tjx.com"});
-  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles,healthProfiles};
+  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles,healthProfiles,transportProfiles};
   function passportBackground(c){
     const info=companyExplainer(c);
     return '<div class="passport-background"><h4>What this company does</h4><p>'+esc(info.overview)+'</p><h4>Products and brands</h4><p>'+esc(info.revenue)+'</p><h4>How it earns revenue</h4><p>'+esc(info.businessModel)+'</p><h4>Company context</h4><p>'+esc(info.importance)+'</p><h4>Student research checklist</h4><ul><li>What product or service does it sell?</li><li>Who pays for it?</li><li>Who competes with it?</li><li>What do its latest revenue and profit figures show?</li></ul>'+(info.question?'<p><strong>Company-specific research question:</strong> '+esc(info.question)+'</p>':'')+'<p class="passport-disclaimer">Introductory company-specific business context, not a live news report or financial recommendation. Check company filings for updated figures.</p>'+(info.source?'<p><a href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">Read company annual reports / investor relations ↗</a></p>':'')+'</div>';
