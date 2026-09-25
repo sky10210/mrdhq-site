@@ -25,8 +25,7 @@ window.STOCK_LAB_SETTINGS = {
   ],
   classOptions: ["AP Business 1","AP Business 4","Personal Finance","Business 101"],
   teachers: [
-    {id:"mr-d",name:"Mr. D",classes:["AP Business 1","AP Business 4","Personal Finance","Business 101"]},
-    {id:"mr-snyder",name:"Mr. Snyder",classes:["Business 101","Accounting"]},
-    {id:"mr-jamelli",name:"Mr. Jamelli",classes:["Business 101","Accounting"]}
+    {id:"mr-d",name:"Mr. D",classes:["AP Business 1","AP Business 4","Personal Finance","Business 101"]}
+    // Add future teachers here: {id:"teacher-id",name:"Teacher Name",classes:["Class name"]}
   ]
 };
