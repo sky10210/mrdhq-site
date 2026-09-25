@@ -1170,6 +1170,188 @@
     "source": "https://investors.affirm.com/"
   }
 };
+  const energyProfiles={
+  "XOM": {
+    "overview": "ExxonMobil is an integrated energy company involved in producing oil and natural gas, refining fuels and making chemical products.",
+    "products": "Exxon and Mobil fuels, motor oils, natural gas, refined products and chemicals.",
+    "customers": "Fuel distributors, industrial customers, chemical manufacturers and consumers.",
+    "businessModel": "Oil and gas production, refining, fuels and chemical sales.",
+    "insight": "An integrated company can earn at several stages of the energy supply chain; high crude prices can help production but raise a refinery's input costs.",
+    "watch": "Oil and gas prices, production volumes, refining margins, capital spending and emissions policy.",
+    "question": "Why might rising crude-oil prices affect Exxon's production and refining businesses differently?",
+    "source": "https://investor.exxonmobil.com/"
+  },
+  "CVX": {
+    "overview": "Chevron produces oil and natural gas and operates refining, fuel-marketing and other energy businesses.",
+    "products": "Chevron, Texaco, natural gas, lubricants and refined fuels.",
+    "customers": "Fuel retailers, industrial buyers, utilities and chemical customers.",
+    "businessModel": "Oil and gas sales, refining and marketing, and related energy activities.",
+    "insight": "Finding and developing a field requires large investment before years of production can recover the cost.",
+    "watch": "Commodity prices, production, project costs, refining margins and geopolitical exposure.",
+    "question": "Why do oil producers evaluate projects using long-term price assumptions rather than one day's oil price?",
+    "source": "https://www.chevron.com/investors"
+  },
+  "COP": {
+    "overview": "ConocoPhillips is primarily an exploration and production company that finds and produces oil and natural gas.",
+    "products": "Crude oil, natural gas and natural-gas liquids.",
+    "customers": "Refiners, gas buyers and energy-market intermediaries.",
+    "businessModel": "Sales of produced oil, natural gas and related liquids.",
+    "insight": "Unlike an integrated oil company, its results are more directly tied to production volumes and commodity prices rather than operating a large consumer fuel-retail network.",
+    "watch": "Oil and gas prices, production costs, reserve replacement, project investment and cash flow.",
+    "question": "How does ConocoPhillips' business differ from a company that operates gas stations and refineries?",
+    "source": "https://www.conocophillips.com/investor-relations/"
+  },
+  "CAT": {
+    "overview": "Caterpillar manufactures heavy machinery, engines and equipment used in construction, mining and energy projects.",
+    "products": "Cat excavators, bulldozers, mining trucks, engines and parts.",
+    "customers": "Construction firms, miners, equipment dealers and industrial operators.",
+    "businessModel": "Equipment sales, parts, services and financing-related activity.",
+    "insight": "Machines can operate for years and need maintenance, so replacement parts and dealer support remain important after the original sale.",
+    "watch": "Construction and mining investment, dealer inventories, equipment orders and service revenue.",
+    "question": "Why can selling replacement parts be valuable even when customers postpone buying new machines?",
+    "source": "https://www.caterpillar.com/en/investors.html"
+  },
+  "DE": {
+    "overview": "Deere manufactures agricultural, turf and construction equipment and provides related technology and financing.",
+    "products": "John Deere tractors, combines, precision-agriculture tools and construction machines.",
+    "customers": "Farmers, agricultural businesses, landscapers and contractors.",
+    "businessModel": "Equipment sales, parts, precision technology and financial services.",
+    "insight": "Farmers' ability to buy machinery depends partly on crop prices and farm income, while precision tools aim to improve efficiency.",
+    "watch": "Farm income, crop prices, machinery orders, dealer inventory and technology adoption.",
+    "question": "Why might lower crop prices reduce demand for a new tractor even if the old tractor still works?",
+    "source": "https://www.deere.com/en/our-company/investors/"
+  },
+  "GE": {
+    "overview": "GE Aerospace designs and services jet engines and propulsion systems for commercial and military aircraft; it is no longer the former diversified GE conglomerate.",
+    "products": "LEAP engines through CFM International, GE90, GEnx and military engines.",
+    "customers": "Airlines, aircraft manufacturers and defense customers.",
+    "businessModel": "Engine and equipment sales plus maintenance, repair and spare-parts services.",
+    "insight": "An engine can generate service revenue throughout its operating life, making aircraft flight hours important after the initial engine sale.",
+    "watch": "Aircraft deliveries, engine reliability, flight hours, service demand and supply-chain capacity.",
+    "question": "Why can GE Aerospace benefit when airlines fly existing aircraft more often?",
+    "source": "https://www.geaerospace.com/investor-relations"
+  },
+  "NEE": {
+    "overview": "NextEra Energy owns regulated utility operations and develops and operates energy infrastructure, including renewable generation.",
+    "products": "Florida Power & Light and NextEra Energy Resources.",
+    "customers": "Electricity customers, utilities and power-purchase counterparties.",
+    "businessModel": "Regulated electricity bills and contracted power and energy-infrastructure revenue.",
+    "insight": "A regulated utility earns under rules governing rates and investment, while renewable projects may sell electricity under long-term contracts.",
+    "watch": "Electricity demand, regulatory rate decisions, project construction, interest rates and grid investment.",
+    "question": "Why is a regulated household electricity bill different from revenue under a wind-farm power contract?",
+    "source": "https://www.investor.nexteraenergy.com/"
+  },
+  "DUK": {
+    "overview": "Duke Energy is a regulated electric and natural-gas utility serving customers in several U.S. states.",
+    "products": "Duke Energy electricity and natural-gas utility service.",
+    "customers": "Homes, businesses and industrial electricity and gas customers.",
+    "businessModel": "Customer utility bills under regulated rates.",
+    "insight": "Utilities invest in generation, transmission and distribution infrastructure, then seek regulator-approved recovery of prudent costs.",
+    "watch": "Regulatory decisions, storms, capital spending, electricity demand and financing costs.",
+    "question": "Why does a utility need regulatory approval for many of the rates it charges customers?",
+    "source": "https://investors.duke-energy.com/"
+  },
+  "SLB": {
+    "overview": "SLB provides technology, equipment and services used to explore, drill and produce energy resources.",
+    "products": "Drilling and reservoir technologies, well services and digital energy tools.",
+    "customers": "Oil and gas producers and energy operators.",
+    "businessModel": "Technology, equipment, software and oilfield-service contracts.",
+    "insight": "SLB sells expertise and tools to producers rather than primarily earning money by selling the oil those customers extract.",
+    "watch": "Producer capital budgets, international drilling, offshore activity and technology demand.",
+    "question": "Why can an oilfield-services company benefit when producers increase drilling budgets?",
+    "source": "https://investorcenter.slb.com/"
+  },
+  "FSLR": {
+    "overview": "First Solar manufactures photovoltaic solar modules used mainly in large-scale solar power projects.",
+    "products": "First Solar thin-film solar panels.",
+    "customers": "Solar developers, utilities and large energy-project customers.",
+    "businessModel": "Solar-module sales and related contracted activities.",
+    "insight": "A module manufacturer sells equipment for a solar project; it does not automatically own the power plant or collect the future electricity bills.",
+    "watch": "Module orders, manufacturing capacity, project timing, policy, pricing and production costs.",
+    "question": "How is selling solar panels different from owning a solar farm and selling its electricity?",
+    "source": "https://investor.firstsolar.com/"
+  },
+  "CEG": {
+    "overview": "Constellation Energy operates power-generation assets and supplies electricity and energy products to customers, with a substantial nuclear-generation business.",
+    "products": "Nuclear power plants, electricity supply and energy products.",
+    "customers": "Utilities, businesses, households and large power purchasers.",
+    "businessModel": "Wholesale electricity generation, retail energy supply and related services.",
+    "insight": "Nuclear plants can provide large amounts of around-the-clock power, but require extensive maintenance, safety oversight and capital.",
+    "watch": "Power prices, plant availability, nuclear policy, customer contracts and operating costs.",
+    "question": "Why might a data center value a long-term contract for reliable electricity?",
+    "source": "https://investors.constellationenergy.com/"
+  },
+  "VST": {
+    "overview": "Vistra generates electricity and serves retail electricity customers in competitive power markets.",
+    "products": "Power plants, retail electricity brands and energy-storage assets.",
+    "customers": "Households, businesses and wholesale power buyers.",
+    "businessModel": "Power generation, electricity retail and related energy services.",
+    "insight": "Electricity prices can vary by time and region; the company manages both generating assets and customer supply obligations.",
+    "watch": "Wholesale power prices, plant performance, retail customer margins and fuel costs.",
+    "question": "Why can a power generator's earnings change even when the amount of electricity it produces stays similar?",
+    "source": "https://investor.vistracorp.com/"
+  },
+  "ETN": {
+    "overview": "Eaton makes electrical and industrial power-management equipment used in buildings, factories, data centers and other infrastructure.",
+    "products": "Circuit breakers, switchgear, power-distribution equipment and industrial components.",
+    "customers": "Electrical contractors, data-center operators, manufacturers and utilities.",
+    "businessModel": "Equipment, components and associated service sales.",
+    "insight": "Electricity demand creates a need not only for generation but also for equipment that safely distributes and controls power.",
+    "watch": "Electrical equipment orders, data-center investment, manufacturing capacity and project timing.",
+    "question": "Why does building a data center require spending on electrical equipment beyond the computers themselves?",
+    "source": "https://www.eaton.com/us/en-us/company/investor-relations.html"
+  },
+  "HON": {
+    "overview": "Honeywell supplies industrial technology, aerospace products, building systems and automation solutions; its business mix can change through corporate transactions.",
+    "products": "Industrial automation, building controls, aerospace technology and safety systems.",
+    "customers": "Manufacturers, airlines, building operators and industrial customers.",
+    "businessModel": "Equipment, software, parts and long-term service contracts.",
+    "insight": "A building-control system can create ongoing maintenance and software revenue after installation; students should check current segment reporting.",
+    "watch": "Industrial investment, aerospace demand, software/services and portfolio changes.",
+    "question": "Why should students check a conglomerate's current divisions instead of relying on an old list of brands?",
+    "source": "https://investor.honeywell.com/"
+  },
+  "GEV": {
+    "overview": "GE Vernova supplies power-generation and grid technologies, including gas power, wind and electrification.",
+    "products": "Gas turbines, wind turbines, grid equipment and power services.",
+    "customers": "Utilities, power developers and industrial energy customers.",
+    "businessModel": "Equipment sales, project execution and long-term service agreements.",
+    "insight": "Building new generation is only one part of the electricity system: transmission and grid equipment must deliver power to users.",
+    "watch": "Gas-turbine and grid orders, wind profitability, project execution and service backlog.",
+    "question": "Why can a grid-equipment manufacturer benefit from both new power plants and rising electricity demand?",
+    "source": "https://www.gevernova.com/investors"
+  },
+  "MPC": {
+    "overview": "Marathon Petroleum operates petroleum refining and fuel-marketing businesses and has midstream exposure.",
+    "products": "Refined gasoline, diesel, jet fuel and Marathon-branded fuel channels.",
+    "customers": "Fuel distributors, transportation businesses and industrial buyers.",
+    "businessModel": "Refining crude oil into products, marketing fuel and related midstream activity.",
+    "insight": "A refiner's economics depend heavily on the difference between crude input costs and the selling prices of finished fuels.",
+    "watch": "Refining margins, fuel demand, refinery utilization, maintenance and crude supply.",
+    "question": "Why can gasoline prices rise without refinery profits increasing by the same amount?",
+    "source": "https://www.marathonpetroleum.com/Investors/"
+  },
+  "VLO": {
+    "overview": "Valero operates refineries and produces transportation fuels, with renewable-fuels interests.",
+    "products": "Gasoline, diesel, jet fuel and renewable diesel.",
+    "customers": "Fuel distributors, transportation operators and wholesale buyers.",
+    "businessModel": "Sales of refined petroleum products and renewable fuels.",
+    "insight": "Refinery configuration determines which crude types and product mix a plant can process efficiently.",
+    "watch": "Refining spreads, plant utilization, maintenance, renewable-fuel economics and demand.",
+    "question": "Why does the type of crude oil a refinery can process matter to its costs?",
+    "source": "https://investorvalero.com/"
+  },
+  "PWR": {
+    "overview": "Quanta Services provides specialized contracting and infrastructure services for electric power, renewable energy and communications networks.",
+    "products": "Electric transmission lines, substations, grid upgrades and infrastructure projects.",
+    "customers": "Utilities, energy developers and communications providers.",
+    "businessModel": "Engineering, construction, installation and maintenance contracts.",
+    "insight": "As electricity use grows, transmission lines and substations must be built or upgraded; Quanta earns by doing the work rather than selling the electricity.",
+    "watch": "Utility capital budgets, project backlog, labor availability, execution and permitting.",
+    "question": "Why might rising electricity demand create work for a construction contractor even if it owns no power plants?",
+    "source": "https://investors.quantaservices.com/"
+  }
+};
   const revenueModels={AAPL:"Device sales and recurring services",MSFT:"Software subscriptions, cloud computing and licenses",NVDA:"AI and graphics chips, systems and networking",GOOGL:"Advertising, cloud services and subscriptions",META:"Advertising across its apps",AMZN:"Retail, seller fees, AWS, advertising and subscriptions",TSM:"Contract chip manufacturing for chip designers",PLTR:"Government and commercial software contracts",CRWD:"Cybersecurity subscriptions",PANW:"Security products, subscriptions and support",V:"Payment-network service fees, not primarily cardholder lending",MA:"Payment-network and related service fees",JPM:"Loan interest and banking and investment fees",KO:"Beverage concentrate and finished-drink sales",PEP:"Beverage and packaged-food sales",MCD:"Franchise royalties, rent and restaurant sales",NFLX:"Subscriptions and advertising",SPOT:"Premium subscriptions and advertising",DIS:"Entertainment, streaming, parks and licensing",TSLA:"Vehicles, energy storage and services",UBER:"Fees from rides, delivery and freight",DASH:"Delivery fees, subscriptions and advertising",LLY:"Prescription medicine sales",ISRG:"Surgical systems, instruments and services",XOM:"Oil, gas, refining and chemicals",CEG:"Electricity and energy-product sales",CAT:"Machinery, parts, services and financing",NKE:"Footwear and apparel sales",O:"Rent from commercial tenants",PLD:"Rent from logistics properties",LMT:"Defense and aerospace contracts"};
   const industryRevenue={technology:"Technology products, software subscriptions or services",retail:"Merchandise, memberships or marketplace services",transport:"Vehicles, fares, delivery or related services",food:"Food and beverage sales, distribution or franchise fees",media:"Subscriptions, advertising, licensing or experiences",finance:"Interest, transactions or financial-service fees",health:"Medicines, devices, care or healthcare services",energy:"Energy, industrial equipment or project contracts",brands:"Branded merchandise sold directly or wholesale",housing:"Homes, materials, rent or property services",defense:"Government and commercial contracts"};
   // Editorially checked, dated stories. No generated headline is presented as verified news.
@@ -1185,6 +1367,8 @@
   }
   function companyExplainer(c){
     const industry=c.industries?.find(i=>!i.optional)||c.industries?.[0]||{id:"",name:"Business"};
+    const energyResearch=energyProfiles[c.ticker];
+    if(energyResearch && c.industries?.some(i=>i.id==="energy")) return {overview:energyResearch.overview,revenue:"Recognizable products / services: "+energyResearch.products+".",businessModel:energyResearch.businessModel,importance:"Customers: "+energyResearch.customers+". Why it matters: "+energyResearch.insight+" What to watch: "+energyResearch.watch,product:energyResearch.products,customers:energyResearch.customers,watch:energyResearch.watch,examples:energyResearch.products,verified:true,source:energyResearch.source,question:energyResearch.question};
     const financeResearch=financeProfiles[c.ticker];
     if(financeResearch && c.industries?.some(i=>i.id==="finance")) return {overview:financeResearch.overview,revenue:"Recognizable products / services: "+financeResearch.products+".",businessModel:financeResearch.businessModel,importance:"Customers: "+financeResearch.customers+". Why it matters: "+financeResearch.insight+" What to watch: "+financeResearch.watch,product:financeResearch.products,customers:financeResearch.customers,watch:financeResearch.watch,examples:financeResearch.products,verified:true,source:financeResearch.source,question:financeResearch.question};
     const transportResearch=transportProfiles[c.ticker];
@@ -1215,7 +1399,7 @@
   }
   Object.assign(officialSites,{LMT:"lockheedmartin.com",RTX:"rtx.com",NOC:"northropgrumman.com",GD:"gd.com",LHX:"l3harris.com",HII:"hii.com",BA:"boeing.com",HWM:"howmet.com",AVAV:"avinc.com",AXON:"axon.com",PLTR:"palantir.com",GE:"geaerospace.com",HON:"honeywell.com"});
   Object.assign(officialSites,{AMZN:"amazon.com",WMT:"walmart.com",TGT:"target.com",COST:"costco.com",HD:"homedepot.com",LOW:"lowes.com",BBY:"bestbuy.com",EBAY:"ebay.com",ETSY:"etsy.com",CHWY:"chewy.com",BABA:"alibabagroup.com",MELI:"mercadolibre.com",ROST:"rossstores.com",TJX:"tjx.com"});
-  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles,healthProfiles,transportProfiles,financeProfiles};
+  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles,healthProfiles,transportProfiles,financeProfiles,energyProfiles};
   function passportBackground(c){
     const info=companyExplainer(c);
     return '<div class="passport-background"><h4>What this company does</h4><p>'+esc(info.overview)+'</p><h4>Products and brands</h4><p>'+esc(info.revenue)+'</p><h4>How it earns revenue</h4><p>'+esc(info.businessModel)+'</p><h4>Company context</h4><p>'+esc(info.importance)+'</p><h4>Student research checklist</h4><ul><li>What product or service does it sell?</li><li>Who pays for it?</li><li>Who competes with it?</li><li>What do its latest revenue and profit figures show?</li></ul>'+(info.question?'<p><strong>Company-specific research question:</strong> '+esc(info.question)+'</p>':'')+'<p class="passport-disclaimer">Introductory company-specific business context, not a live news report or financial recommendation. Check company filings for updated figures.</p>'+(info.source?'<p><a href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">Read company annual reports / investor relations ↗</a></p>':'')+'</div>';
