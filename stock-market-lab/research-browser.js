@@ -2027,10 +2027,10 @@
     const section=(heading,body)=>'<section class="passport-research-section"><h4>'+heading+'</h4><p>'+esc(body||"Check the company’s latest filings.")+'</p></section>';
     return '<div class="passport-background"><p class="passport-intro">COMPLETE COMPANY RESEARCH PROFILE</p>'+
       section("What this company does",info.overview)+
-      section("Recognizable products, brands and services",info.products||info.revenue)+
+      section("Recognizable products, brands and services",info.product||info.revenue)+
       section("Who its customers are",info.customers)+
       section("How the company earns money",info.businessModel)+
-      section("Why this business matters",info.insight||info.importance)+
+      section("Customers and business context",info.importance)+
       section("What to watch",info.watch)+
       '<section class="passport-research-section passport-question"><h4>Think like a business analyst</h4><p>'+esc(info.question||"How does this company make money, and what could change its business?")+'</p></section>'+
       '<section class="passport-research-section"><h4>Research checklist</h4><ul><li>Identify the company’s main customers and competitors.</li><li>Find its latest annual revenue and profit or loss.</li><li>Compare recent results with the prior year.</li><li>Investigate one current business development using a dated source.</li><li>Explain one business risk in your own words.</li></ul></section>'+
