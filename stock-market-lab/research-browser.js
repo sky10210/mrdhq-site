@@ -542,6 +542,158 @@
     "source": "https://ir.celsiusholdingsinc.com/"
   }
 };
+  const mediaProfiles={
+  "DIS": {
+    "overview": "Disney is a global entertainment company combining film and television, streaming, theme parks, cruises and consumer products.",
+    "products": "Disney, Pixar, Marvel, Star Wars, ESPN, Disney+, Hulu, Disneyland and Walt Disney World.",
+    "customers": "Families, entertainment audiences, advertisers, travelers and licensing partners.",
+    "businessModel": "Streaming subscriptions, advertising, park tickets and spending, cruises, film distribution and merchandise licensing.",
+    "insight": "A successful character can generate value across movies, streaming, rides and toys, making intellectual property useful across several businesses.",
+    "watch": "Streaming profitability, park attendance, sports-rights costs, film releases and consumer travel spending.",
+    "question": "How can one popular movie character earn money for Disney in more than one division?",
+    "source": "https://thewaltdisneycompany.com/investor-relations/"
+  },
+  "NFLX": {
+    "overview": "Netflix operates a global subscription entertainment service offering series, films and games, with an advertising-supported plan in some markets.",
+    "products": "Netflix series, films, mobile games and subscription plans.",
+    "customers": "Households and individual viewers, plus advertisers on supported plans.",
+    "businessModel": "Monthly subscriptions and advertising.",
+    "insight": "Netflix spends on content before knowing exactly which titles will attract or retain viewers; its library and recommendations help subscribers find reasons to stay.",
+    "watch": "Paid memberships, revenue per member, content costs, engagement and ad-plan growth.",
+    "question": "Why does a streaming company care about both new subscribers and cancellations?",
+    "source": "https://ir.netflix.net/"
+  },
+  "SPOT": {
+    "overview": "Spotify is an audio platform connecting listeners with music, podcasts and audiobooks.",
+    "products": "Spotify Premium, free ad-supported listening, podcasts and audiobooks.",
+    "customers": "Listeners, advertisers, artists, labels and podcast creators.",
+    "businessModel": "Premium subscriptions and advertising on free and other supported listening.",
+    "insight": "Subscription revenue is not all profit: music royalties and licensing are major costs, and creators and rights holders are key partners.",
+    "watch": "Premium subscribers, ad revenue, royalties, pricing and podcast/audiobook economics.",
+    "question": "Why might two streaming services with similar subscriber counts have different profit margins?",
+    "source": "https://investors.spotify.com/"
+  },
+  "SONY": {
+    "overview": "Sony is a diversified Japanese entertainment and technology group spanning gaming, music, pictures and electronics.",
+    "products": "PlayStation, Sony Pictures, Sony Music, image sensors and consumer electronics.",
+    "customers": "Gamers, music and film audiences, electronics buyers and device manufacturers.",
+    "businessModel": "Game hardware and software, network services, music rights, film and television, electronics and imaging components.",
+    "insight": "Sony can earn from both entertainment people watch or play and technology other companies build into devices.",
+    "watch": "PlayStation software and services, music growth, film releases, sensor demand and currency effects.",
+    "question": "Why is Sony's business broader than the sales of PlayStation consoles?",
+    "source": "https://www.sony.com/en/SonyInfo/IR/"
+  },
+  "TTWO": {
+    "overview": "Take-Two Interactive develops and publishes video games through major publishing labels.",
+    "products": "Rockstar Games, Grand Theft Auto, 2K, NBA 2K and Zynga.",
+    "customers": "Console, PC and mobile gamers.",
+    "businessModel": "Game sales, digital add-ons, in-game spending and mobile game monetization.",
+    "insight": "A major release can influence several years of results; recurring in-game spending can continue after the initial purchase.",
+    "watch": "Release schedules, development costs, player engagement and recurrent consumer spending.",
+    "question": "Why can delaying one major game change a publisher's financial outlook?",
+    "source": "https://www.take2games.com/ir"
+  },
+  "CMCSA": {
+    "overview": "Comcast operates connectivity and media businesses, including broadband, television, studios, streaming and theme parks.",
+    "products": "Xfinity, NBC, Universal, Peacock and Universal theme parks.",
+    "customers": "Broadband households, advertisers, entertainment viewers and park visitors.",
+    "businessModel": "Connectivity subscriptions, advertising, content distribution, streaming and theme-park spending.",
+    "insight": "Broadband service can create recurring bills while a movie or theme-park opening generates a different pattern of revenue.",
+    "watch": "Broadband customers, competition, Peacock economics, advertising and theme-park attendance.",
+    "question": "How does a monthly internet bill differ from revenue earned by a movie release?",
+    "source": "https://www.cmcsa.com/"
+  },
+  "WBD": {
+    "overview": "Warner Bros. Discovery owns film, television and streaming entertainment businesses and a large library of content.",
+    "products": "Warner Bros., HBO, Max, DC and Discovery brands.",
+    "customers": "Streaming subscribers, TV distributors, advertisers and film audiences.",
+    "businessModel": "Subscriptions, content licensing, advertising and film distribution.",
+    "insight": "A deep content library can be licensed repeatedly, but producing new premium shows and films requires substantial spending.",
+    "watch": "Streaming subscribers, content investment, advertising, debt and corporate restructuring.",
+    "question": "Why might a company license a popular show to another service rather than keep it exclusive?",
+    "source": "https://ir.wbd.com/"
+  },
+  "RBLX": {
+    "overview": "Roblox operates a platform where users play and create interactive experiences, with a virtual economy supporting creators.",
+    "products": "Roblox experiences, Roblox Studio and Robux.",
+    "customers": "Players, developers, creators and advertisers.",
+    "businessModel": "Sales of virtual currency and related platform monetization, with a share flowing to creators.",
+    "insight": "Roblox depends on independent creators to make experiences that attract users; virtual currency connects player spending with the creator ecosystem.",
+    "watch": "Daily active users, engagement hours, bookings, creator payouts and safety investment.",
+    "question": "How does Roblox benefit when creators build popular experiences on its platform?",
+    "source": "https://ir.roblox.com/"
+  },
+  "PARA": {
+    "overview": "Paramount's legacy media business includes film, television, streaming and well-known entertainment brands; students should verify its current corporate structure and ticker before using it for live investment research.",
+    "products": "Paramount Pictures, CBS, Nickelodeon, MTV and Paramount+.",
+    "customers": "Viewers, advertisers, distributors and licensing partners.",
+    "businessModel": "Advertising, distribution fees, streaming subscriptions, licensing and film releases.",
+    "insight": "A media company's name, ownership and ticker can change after a merger; an educational stock list must be checked against current exchange data.",
+    "watch": "Corporate actions, ticker validity, streaming economics, advertising and content costs.",
+    "question": "Why should investors verify a ticker after a merger rather than assume an old stock symbol still trades?",
+    "source": "https://ir.paramount.com/"
+  },
+  "ROKU": {
+    "overview": "Roku operates a TV streaming platform and sells streaming devices and television-related products.",
+    "products": "Roku streaming platform, Roku devices, Roku TVs and The Roku Channel.",
+    "customers": "TV viewers, advertisers, streaming services and TV partners.",
+    "businessModel": "Platform advertising, distribution-related revenue and device sales.",
+    "insight": "The inexpensive streaming device can help bring users onto a platform where viewing and advertising generate ongoing revenue.",
+    "watch": "Streaming hours, platform revenue, advertising demand and device margins.",
+    "question": "Why might Roku value the number of households using its platform more than profit on a device sale?",
+    "source": "https://www.roku.com/investor"
+  },
+  "SNAP": {
+    "overview": "Snap runs a visual messaging and social platform with camera-based features and advertising products.",
+    "products": "Snapchat, Stories, Spotlight and augmented-reality Lenses.",
+    "customers": "Social-media users, advertisers and business partners.",
+    "businessModel": "Digital advertising and related platform services.",
+    "insight": "Advertisers pay to reach audiences, while camera tools and messaging encourage users to return.",
+    "watch": "Daily active users, ad pricing, engagement, privacy changes and competition.",
+    "question": "Why can a free messaging app still be a business worth studying?",
+    "source": "https://investor.snap.com/"
+  },
+  "PINS": {
+    "overview": "Pinterest is a visual discovery platform where users find ideas and products and advertisers promote relevant offerings.",
+    "products": "Pinterest boards, Pins, visual search and shopping features.",
+    "customers": "People planning purchases or projects, advertisers and merchants.",
+    "businessModel": "Advertising and shopping-related monetization.",
+    "insight": "A person saving kitchen ideas may have purchase intent, making discovery behavior useful to advertisers and merchants.",
+    "watch": "Monthly active users, shopping engagement, ad pricing and international monetization.",
+    "question": "How is a user searching for home-decor ideas different from someone scrolling without a purchase plan?",
+    "source": "https://investor.pinterestinc.com/"
+  },
+  "RDDT": {
+    "overview": "Reddit operates a network of topic-based communities where users post, discuss and vote on content.",
+    "products": "Subreddits, Reddit posts, comments and community discussions.",
+    "customers": "Community members, advertisers and data-licensing partners.",
+    "businessModel": "Advertising and data-licensing arrangements.",
+    "insight": "Communities create much of the content; maintaining trust and moderation matters because participation makes the platform valuable.",
+    "watch": "Daily active users, ad revenue, licensing revenue, moderation and search traffic.",
+    "question": "Why does a community platform depend on users contributing content rather than only consuming it?",
+    "source": "https://investor.redditinc.com/"
+  },
+  "TKO": {
+    "overview": "TKO Group is a sports and entertainment company built around live events, media rights and combat-sports brands.",
+    "products": "UFC and WWE.",
+    "customers": "Fans, broadcasters, streaming partners, sponsors and event attendees.",
+    "businessModel": "Media-rights contracts, live-event tickets, sponsorships, merchandise and licensing.",
+    "insight": "A popular event can earn money from a broadcaster, sponsors and ticket buyers at the same time.",
+    "watch": "Media-rights renewals, event demand, sponsorships and talent or production costs.",
+    "question": "Why might a sports league value a long-term media-rights deal more than a single sold-out event?",
+    "source": "https://investor.tkogrp.com/"
+  },
+  "APP": {
+    "overview": "AppLovin provides advertising technology that helps businesses acquire customers and monetize digital audiences; it is not primarily a film or streaming studio.",
+    "products": "AppLovin advertising platform and software tools.",
+    "customers": "Advertisers, app publishers and other businesses buying digital advertising.",
+    "businessModel": "Advertising-platform and related technology revenue.",
+    "insight": "Its business is selling tools and access that help advertisers measure results, so performance depends on advertising demand and platform effectiveness.",
+    "watch": "Advertiser spending, platform performance, customer concentration and privacy rules.",
+    "question": "How is selling advertising technology different from creating the entertainment people watch?",
+    "source": "https://investors.applovin.com/"
+  }
+};
   const revenueModels={AAPL:"Device sales and recurring services",MSFT:"Software subscriptions, cloud computing and licenses",NVDA:"AI and graphics chips, systems and networking",GOOGL:"Advertising, cloud services and subscriptions",META:"Advertising across its apps",AMZN:"Retail, seller fees, AWS, advertising and subscriptions",TSM:"Contract chip manufacturing for chip designers",PLTR:"Government and commercial software contracts",CRWD:"Cybersecurity subscriptions",PANW:"Security products, subscriptions and support",V:"Payment-network service fees, not primarily cardholder lending",MA:"Payment-network and related service fees",JPM:"Loan interest and banking and investment fees",KO:"Beverage concentrate and finished-drink sales",PEP:"Beverage and packaged-food sales",MCD:"Franchise royalties, rent and restaurant sales",NFLX:"Subscriptions and advertising",SPOT:"Premium subscriptions and advertising",DIS:"Entertainment, streaming, parks and licensing",TSLA:"Vehicles, energy storage and services",UBER:"Fees from rides, delivery and freight",DASH:"Delivery fees, subscriptions and advertising",LLY:"Prescription medicine sales",ISRG:"Surgical systems, instruments and services",XOM:"Oil, gas, refining and chemicals",CEG:"Electricity and energy-product sales",CAT:"Machinery, parts, services and financing",NKE:"Footwear and apparel sales",O:"Rent from commercial tenants",PLD:"Rent from logistics properties",LMT:"Defense and aerospace contracts"};
   const industryRevenue={technology:"Technology products, software subscriptions or services",retail:"Merchandise, memberships or marketplace services",transport:"Vehicles, fares, delivery or related services",food:"Food and beverage sales, distribution or franchise fees",media:"Subscriptions, advertising, licensing or experiences",finance:"Interest, transactions or financial-service fees",health:"Medicines, devices, care or healthcare services",energy:"Energy, industrial equipment or project contracts",brands:"Branded merchandise sold directly or wholesale",housing:"Homes, materials, rent or property services",defense:"Government and commercial contracts"};
   // Editorially checked, dated stories. No generated headline is presented as verified news.
@@ -557,6 +709,8 @@
   }
   function companyExplainer(c){
     const industry=c.industries?.find(i=>!i.optional)||c.industries?.[0]||{id:"",name:"Business"};
+    const mediaResearch=mediaProfiles[c.ticker];
+    if(mediaResearch && c.industries?.some(i=>i.id==="media")) return {overview:mediaResearch.overview,revenue:"Recognizable products / brands: "+mediaResearch.products+".",businessModel:mediaResearch.businessModel,importance:"Customers: "+mediaResearch.customers+". Why it matters: "+mediaResearch.insight+" What to watch: "+mediaResearch.watch,product:mediaResearch.products,customers:mediaResearch.customers,watch:mediaResearch.watch,examples:mediaResearch.products,verified:true,source:mediaResearch.source,question:mediaResearch.question};
     const brandResearch=brandProfiles[c.ticker];
     if(brandResearch && c.industries?.some(i=>i.id==="brands")) return {overview:brandResearch.overview,revenue:"Recognizable brands / products: "+brandResearch.products+".",businessModel:brandResearch.businessModel,importance:"Customers: "+brandResearch.customers+". Why it matters: "+brandResearch.insight+" What to watch: "+brandResearch.watch,product:brandResearch.products,customers:brandResearch.customers,watch:brandResearch.watch,examples:brandResearch.products,verified:true,source:brandResearch.source,question:brandResearch.question};
     const housingResearch=housingProfiles[c.ticker];
@@ -579,7 +733,7 @@
   }
   Object.assign(officialSites,{LMT:"lockheedmartin.com",RTX:"rtx.com",NOC:"northropgrumman.com",GD:"gd.com",LHX:"l3harris.com",HII:"hii.com",BA:"boeing.com",HWM:"howmet.com",AVAV:"avinc.com",AXON:"axon.com",PLTR:"palantir.com",GE:"geaerospace.com",HON:"honeywell.com"});
   Object.assign(officialSites,{AMZN:"amazon.com",WMT:"walmart.com",TGT:"target.com",COST:"costco.com",HD:"homedepot.com",LOW:"lowes.com",BBY:"bestbuy.com",EBAY:"ebay.com",ETSY:"etsy.com",CHWY:"chewy.com",BABA:"alibabagroup.com",MELI:"mercadolibre.com",ROST:"rossstores.com",TJX:"tjx.com"});
-  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles};
+  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles};
   function passportBackground(c){
     const info=companyExplainer(c);
     return '<div class="passport-background"><h4>What this company does</h4><p>'+esc(info.overview)+'</p><h4>Products and brands</h4><p>'+esc(info.revenue)+'</p><h4>How it earns revenue</h4><p>'+esc(info.businessModel)+'</p><h4>Company context</h4><p>'+esc(info.importance)+'</p><h4>Student research checklist</h4><ul><li>What product or service does it sell?</li><li>Who pays for it?</li><li>Who competes with it?</li><li>What do its latest revenue and profit figures show?</li></ul>'+(info.question?'<p><strong>Company-specific research question:</strong> '+esc(info.question)+'</p>':'')+'<p class="passport-disclaimer">Introductory company-specific business context, not a live news report or financial recommendation. Check company filings for updated figures.</p>'+(info.source?'<p><a href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">Read company annual reports / investor relations ↗</a></p>':'')+'</div>';
