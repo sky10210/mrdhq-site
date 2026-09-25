@@ -50,7 +50,7 @@
     const status=$("newsStatus"),area=$("newsArticles");
     if(!status||!area)return;
     if(!force&&lastLoaded&&Date.now()-lastLoaded<600000)return;
-    const id=++request;status.textContent="Loading publisher headlines…";
+    const id=++request;drawNewsCharts();status.textContent="Loading publisher headlines…";
     const results=await Promise.allSettled(sources.map(source=>getFeed(source,force)));
     if(id!==request)return;
     const available=results.filter(r=>r.status==="fulfilled").length;
