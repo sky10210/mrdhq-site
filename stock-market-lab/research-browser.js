@@ -33,6 +33,8 @@
     "businessModel": "Government development, production and long-term maintenance contracts fund most work.",
     "insight": "An aircraft generates service, upgrade and spare-parts work long after delivery.",
     "watch": "Order backlog, program costs, production and government funding.",
+    "customers": "Defense departments and allied governments.",
+    "question": "How do long government contracts affect Lockheed Martin's revenue?",
     "source": "https://www.lockheedmartin.com/en-us/news/annual-reports.html"
   },
   "RTX": {
@@ -41,6 +43,8 @@
     "businessModel": "Sells engines, aerospace systems, defense equipment and replacement parts and services.",
     "insight": "Airlines may pay to maintain an engine through years of flying, not just buy it once.",
     "watch": "Aircraft build rates, engine maintenance costs, defense orders and supply chains.",
+    "customers": "Airlines, aircraft makers and defense customers.",
+    "question": "Why can an aircraft-engine sale lead to years of maintenance revenue?",
     "source": "https://www.rtx.com/investors"
   },
   "NOC": {
@@ -49,6 +53,8 @@
     "businessModel": "Government-funded research, engineering, production and support contracts.",
     "insight": "Some programs spend years in development before production deliveries begin.",
     "watch": "Program funding, testing milestones, contract costs and suppliers.",
+    "customers": "Defense agencies and aerospace customers.",
+    "question": "Why do complex defense programs require years of development before delivery?",
     "source": "https://investor.northropgrumman.com/"
   },
   "GD": {
@@ -57,6 +63,8 @@
     "businessModel": "Aircraft sales, government shipbuilding and vehicle contracts, technology services and support.",
     "insight": "Business-jet buyers and Navy shipbuilding customers create very different demand cycles.",
     "watch": "Jet deliveries, shipyard labor, submarine schedules and backlog.",
+    "customers": "Defense departments, business-jet customers and technology clients.",
+    "question": "How do submarine contracts differ from business-jet sales?",
     "source": "https://investorrelations.gd.com/"
   },
   "LHX": {
@@ -65,6 +73,8 @@
     "businessModel": "Government and prime-contractor systems contracts, upgrades and support.",
     "insight": "A small radio or sensor can be essential even though its brand is not seen by consumers.",
     "watch": "Program awards, missile demand, contract execution and backlog.",
+    "customers": "Defense and government communications customers.",
+    "question": "Why are secure communications essential to defense systems?",
     "source": "https://www.l3harris.com/investors"
   },
   "HII": {
@@ -73,6 +83,8 @@
     "businessModel": "Long-term government shipbuilding, repair and technology contracts.",
     "insight": "Shipyards need specialized workers and facilities; they cannot instantly expand output.",
     "watch": "Ship schedules, skilled labor, supplier capacity and contract costs.",
+    "customers": "The U.S. Navy and defense agencies.",
+    "question": "Why does building a ship require specialized facilities and a long production schedule?",
     "source": "https://ir.hii.com/"
   },
   "BA": {
@@ -81,6 +93,8 @@
     "businessModel": "Commercial aircraft deliveries, government contracts, spare parts and services.",
     "insight": "An airline order is not the same as a delivered plane or recognized revenue.",
     "watch": "Production quality, certification, deliveries, cash flow and contract performance.",
+    "customers": "Airlines, leasing companies and defense agencies.",
+    "question": "Why can production delays affect an aircraft manufacturer's cash flow?",
     "source": "https://investors.boeing.com/"
   },
   "HWM": {
@@ -89,6 +103,8 @@
     "businessModel": "Sells specialized components to aircraft and engine manufacturers and replacement parts to service markets.",
     "insight": "Travelers may fly on aircraft containing Howmet parts without ever seeing its name.",
     "watch": "Aircraft build rates, engine repair demand, materials and manufacturing capacity.",
+    "customers": "Aircraft-engine and aerospace-system manufacturers.",
+    "question": "Why does a supplier of aircraft components depend on engine production?",
     "source": "https://www.howmet.com/annualreport/"
   },
   "AVAV": {
@@ -97,6 +113,8 @@
     "businessModel": "Sales of equipment, engineering, training and support to defense customers.",
     "insight": "Some uncrewed systems are reusable and others are designed for single-use missions.",
     "watch": "Government orders, production scaling and contract integration.",
+    "customers": "Defense and government unmanned-systems customers.",
+    "question": "How does selling a drone differ from selling its ongoing support services?",
     "source": "https://investor.avinc.com/financial-information/annual-reports"
   },
   "AXON": {
@@ -105,6 +123,8 @@
     "businessModel": "Device sales plus recurring cloud software, evidence storage and service subscriptions.",
     "insight": "A camera sale creates an ongoing need for secure video storage and evidence management.",
     "watch": "Subscription renewals, agency budgets, product adoption and privacy requirements.",
+    "customers": "Police departments, public-safety agencies and enterprise customers.",
+    "question": "How can body-camera hardware create recurring software revenue?",
     "source": "https://investor.axon.com/"
   },
   "PLTR": {
@@ -113,6 +133,8 @@
     "businessModel": "Software subscriptions, platform contracts, implementation and support.",
     "insight": "It sells software, not primarily physical defense equipment; government is only one customer group.",
     "watch": "Government versus commercial revenue, renewals and customer concentration.",
+    "customers": "Government agencies and commercial organizations.",
+    "question": "Why would a government agency pay to connect data from several systems?",
     "source": "https://investors.palantir.com/"
   },
   "GE": {
@@ -121,6 +143,8 @@
     "businessModel": "Engine sales, long-term maintenance, repairs and replacement parts.",
     "insight": "More flight hours can create aftermarket work for an installed engine fleet.",
     "watch": "Engine deliveries, aircraft utilization, service margins and manufacturing capacity.",
+    "customers": "Airlines, aircraft makers and defense customers.",
+    "question": "Why does an engine maker benefit when existing planes fly more hours?",
     "source": "https://www.geaerospace.com/investor-relations/annual-report"
   },
   "HONA": {
@@ -142,6 +166,8 @@
     "businessModel": "Product sales, third-party seller fees, AWS cloud services, advertising and Prime subscriptions.",
     "insight": "A shopper sees a retailer, but AWS sells computing power to businesses and advertising sells visibility to merchants.",
     "watch": "Compare AWS growth with retail margins, fulfillment costs and advertising revenue.",
+    "customers": "Online shoppers, marketplace sellers and cloud customers.",
+    "question": "Why does Amazon earn money from a third-party seller even when Amazon does not own the item?",
     "source": "https://ir.aboutamazon.com/"
   },
   "WMT": {
@@ -150,6 +176,8 @@
     "businessModel": "Retail merchandise and groceries, Sam's Club membership fees, advertising and marketplace services.",
     "insight": "Groceries draw frequent visits; Walmart's huge purchasing volume can help it negotiate supplier prices.",
     "watch": "Comparable-store sales, grocery mix, labor, inventory and e-commerce profitability.",
+    "customers": "Households, grocery shoppers and marketplace sellers.",
+    "question": "How can grocery shopping generate repeat store visits?",
     "source": "https://stock.walmart.com/"
   },
   "TGT": {
@@ -158,6 +186,8 @@
     "businessModel": "Merchandise sales, owned-brand products, marketplace activity and loyalty-related services.",
     "insight": "Target designs many of its own store brands, so a product can be exclusive rather than identical to a rival's.",
     "watch": "Customer traffic, discretionary purchases, shrink, inventory and profit margins.",
+    "customers": "Households, shoppers and retail brand partners.",
+    "question": "Why does a retailer develop exclusive store brands?",
     "source": "https://corporate.target.com/investors"
   },
   "COST": {
@@ -166,6 +196,8 @@
     "businessModel": "Membership fees and merchandise sales at relatively low product markups.",
     "insight": "Membership renewals are an important measure because annual fees support a business built around value pricing.",
     "watch": "Membership renewal rates, comparable sales, warehouse expansion and merchandise margins.",
+    "customers": "Membership households and small businesses.",
+    "question": "Why does Costco charge a membership fee in addition to selling goods?",
     "source": "https://investor.costco.com/"
   },
   "HD": {
@@ -174,6 +206,8 @@
     "businessModel": "Product sales, installation-related services and professional-customer business.",
     "insight": "A contractor buying supplies for many jobs behaves differently from a homeowner buying paint once.",
     "watch": "Home sales, renovation demand, professional sales, inventory and lumber prices.",
+    "customers": "Homeowners, contractors and construction professionals.",
+    "question": "Why are professional contractors an important customer group for Home Depot?",
     "source": "https://ir.homedepot.com/"
   },
   "LOW": {
@@ -182,6 +216,8 @@
     "businessModel": "Merchandise sales and related services across stores and digital channels.",
     "insight": "Homeowners may postpone a kitchen remodel when borrowing costs rise, while essential repairs still need supplies.",
     "watch": "DIY versus professional demand, housing activity, product margins and store productivity.",
+    "customers": "Homeowners and professional tradespeople.",
+    "question": "How does a home-improvement retailer respond when housing activity slows?",
     "source": "https://corporate.lowes.com/investors"
   },
   "BBY": {
@@ -190,6 +226,8 @@
     "businessModel": "Electronics and appliance sales plus service, installation and membership offerings.",
     "insight": "A laptop sale can lead to additional revenue from setup, protection or repairs, but shoppers can delay upgrades.",
     "watch": "Device replacement cycles, comparable sales, services and competition from online sellers.",
+    "customers": "Electronics shoppers and business customers.",
+    "question": "Why can installation and repair services matter after an electronics sale?",
     "source": "https://investors.bestbuy.com/"
   },
   "EBAY": {
@@ -198,6 +236,8 @@
     "businessModel": "Transaction fees, promoted listings and other seller services.",
     "insight": "A marketplace can earn a fee when someone else sells an item, without buying and stocking that item itself.",
     "watch": "Gross merchandise volume, active buyers, seller fees and competition.",
+    "customers": "Individual sellers, collectors and online shoppers.",
+    "question": "Why does eBay record marketplace fees rather than the full value of every item sold?",
     "source": "https://investors.ebayinc.com/"
   },
   "ETSY": {
@@ -206,6 +246,8 @@
     "businessModel": "Seller transaction and listing fees, advertising and merchant services.",
     "insight": "A custom gift can compete on uniqueness rather than price alone; Etsy depends on keeping buyers and sellers engaged.",
     "watch": "Active buyers, repeat purchases, seller activity and marketplace fees.",
+    "customers": "Independent makers, vintage sellers and specialty shoppers.",
+    "question": "Why do marketplace fees depend on seller activity?",
     "source": "https://investors.etsy.com/"
   },
   "CHWY": {
@@ -214,6 +256,8 @@
     "businessModel": "Direct sales of pet products and related pet-health goods and services.",
     "insight": "Autoship turns recurring pet-food needs into repeat orders, which can make demand more predictable.",
     "watch": "Autoship sales, customer retention, fulfillment costs and pet-health expansion.",
+    "customers": "Pet owners and pet-product suppliers.",
+    "question": "Why can recurring pet-food deliveries support customer retention?",
     "source": "https://investor.chewy.com/"
   },
   "BABA": {
@@ -222,6 +266,8 @@
     "businessModel": "Merchant advertising and services, commerce activity, cloud computing and other digital services.",
     "insight": "Alibaba.com helps businesses source products wholesale, while Taobao and Tmall serve different consumer-shopping needs.",
     "watch": "China consumer demand, merchant activity, cloud growth and regulatory developments.",
+    "customers": "Consumers, merchants and cloud-computing customers.",
+    "question": "How do Alibaba's commerce and cloud businesses earn revenue differently?",
     "source": "https://www.alibabagroup.com/en-US/ir/home"
   },
   "MELI": {
@@ -230,6 +276,8 @@
     "businessModel": "Marketplace fees, advertising, payment processing, financial services and logistics.",
     "insight": "A seller may use the same ecosystem to list a product, collect payment and ship the order.",
     "watch": "Regional consumer demand, payment volumes, credit losses and delivery costs.",
+    "customers": "Latin American online shoppers, merchants and payment users.",
+    "question": "Why is payments infrastructure useful to an online marketplace?",
     "source": "https://investor.mercadolibre.com/"
   },
   "ROST": {
@@ -238,6 +286,8 @@
     "businessModel": "Merchandise purchased from suppliers and resold through its stores.",
     "insight": "Off-price buyers can purchase excess or seasonal inventory and offer shoppers changing assortments.",
     "watch": "Store traffic, merchandise buying opportunities, freight and operating costs.",
+    "customers": "Value-focused apparel and home-goods shoppers.",
+    "question": "How can buying excess branded inventory support lower retail prices?",
     "source": "https://investors.rossstores.com/"
   },
   "TJX": {
@@ -246,6 +296,8 @@
     "businessModel": "Retail sales of branded and other merchandise sourced through an off-price buying model.",
     "insight": "Its treasure-hunt assortment encourages browsing because the same item may not be available on the next visit.",
     "watch": "Comparable sales, buying opportunities, inventory turnover and international performance.",
+    "customers": "Off-price apparel and home-goods shoppers.",
+    "question": "Why can changing inventory encourage repeat visits to an off-price store?",
     "source": "https://investor.tjx.com/"
   }
 };
