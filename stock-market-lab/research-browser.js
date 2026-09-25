@@ -1594,6 +1594,328 @@
     "source": "https://www.rbi.com/English/investors/default.aspx"
   }
 };
+  const technologyProfiles={
+  "AAPL": {
+    "overview": "Apple designs consumer devices and runs a software and services ecosystem.",
+    "products": "iPhone, Mac, iPad, Apple Watch, App Store and iCloud.",
+    "customers": "Consumers, businesses and developers.",
+    "businessModel": "Device sales, subscriptions, app-related services and accessories.",
+    "insight": "A large installed base creates recurring service opportunities, while new devices require costly design and supply-chain coordination.",
+    "watch": "iPhone demand, services growth, China exposure, component costs and regulation.",
+    "question": "Why can a customer buying one iPhone create future service revenue?",
+    "source": "https://investor.apple.com/"
+  },
+  "MSFT": {
+    "overview": "Microsoft sells enterprise software, cloud computing, productivity tools, gaming and AI services.",
+    "products": "Windows, Microsoft 365, Azure, GitHub, Xbox and Copilot.",
+    "customers": "Businesses, governments, developers and consumers.",
+    "businessModel": "Software subscriptions and licenses, Azure usage, devices and gaming.",
+    "insight": "Enterprise customers can pay repeatedly for software and cloud capacity; switching systems can be costly.",
+    "watch": "Azure growth, AI infrastructure spending, software renewals and competition.",
+    "question": "How does a monthly Microsoft 365 subscription differ from a one-time PC sale?",
+    "source": "https://www.microsoft.com/en-us/Investor/"
+  },
+  "NVDA": {
+    "overview": "NVIDIA designs accelerated computing chips and software platforms used in AI, gaming and other demanding workloads.",
+    "products": "GeForce GPUs, H100/H200 and Blackwell platforms, CUDA and networking.",
+    "customers": "Cloud providers, AI developers, enterprises and gamers.",
+    "businessModel": "GPU systems, networking products, software and related platform sales.",
+    "insight": "CUDA software and developer adoption complement hardware performance; NVIDIA generally designs chips while foundries manufacture them.",
+    "watch": "AI infrastructure orders, supply, competition, export restrictions and product transitions.",
+    "question": "Why is NVIDIA's software ecosystem relevant when customers buy its chips?",
+    "source": "https://investor.nvidia.com/"
+  },
+  "AMD": {
+    "overview": "AMD designs processors and accelerators for computers, servers, gaming and AI.",
+    "products": "Ryzen, EPYC, Radeon and Instinct accelerators.",
+    "customers": "PC makers, cloud providers, enterprises and gamers.",
+    "businessModel": "Chip and platform sales through manufacturers and distribution partners.",
+    "insight": "AMD competes across CPU and GPU markets but relies on outside semiconductor manufacturing partners.",
+    "watch": "Server share, AI accelerator adoption, PC demand and manufacturing supply.",
+    "question": "How is designing a processor different from owning the factory that produces it?",
+    "source": "https://ir.amd.com/"
+  },
+  "DELL": {
+    "overview": "Dell supplies personal computers, servers, storage and IT services to organizations and consumers.",
+    "products": "Dell laptops, PowerEdge servers, storage and AI infrastructure systems.",
+    "customers": "Businesses, schools, governments and consumers.",
+    "businessModel": "Hardware, infrastructure solutions and support services.",
+    "insight": "A data-center customer needs complete servers, storage and support, not just the processor inside.",
+    "watch": "Server orders, component availability, enterprise spending and margins.",
+    "question": "Why can rising demand for AI chips also increase demand for server manufacturers?",
+    "source": "https://investors.delltechnologies.com/"
+  },
+  "INTC": {
+    "overview": "Intel designs processors and develops semiconductor manufacturing capabilities.",
+    "products": "Core and Xeon processors, Intel Foundry and related platforms.",
+    "customers": "PC manufacturers, data centers and chip-design customers.",
+    "businessModel": "Processor sales and foundry-related services.",
+    "insight": "Owning fabrication plants offers manufacturing control but requires enormous capital and consistent factory utilization.",
+    "watch": "PC/server demand, foundry customers, process yields and capital spending.",
+    "question": "Why does an underused chip factory create financial pressure?",
+    "source": "https://www.intc.com/"
+  },
+  "ADBE": {
+    "overview": "Adobe provides creative, document and digital-experience software.",
+    "products": "Photoshop, Illustrator, Premiere Pro, Acrobat and Creative Cloud.",
+    "customers": "Designers, students, businesses and marketing teams.",
+    "businessModel": "Software subscriptions and enterprise digital-experience services.",
+    "insight": "Subscription access creates recurring revenue; AI tools must add value while competing with simpler alternatives.",
+    "watch": "Subscriber growth, retention, AI adoption and enterprise demand.",
+    "question": "Why does Adobe care whether a student keeps using its software after graduation?",
+    "source": "https://www.adobe.com/investor-relations.html"
+  },
+  "CRM": {
+    "overview": "Salesforce sells cloud software that helps organizations manage customer relationships and workflows.",
+    "products": "Sales Cloud, Service Cloud, Slack, Tableau and Agentforce.",
+    "customers": "Sales teams, service departments and enterprises.",
+    "businessModel": "Recurring cloud subscriptions and professional services.",
+    "insight": "Customer records become more useful when sales, service and analytics share information.",
+    "watch": "Subscription renewals, customer spending, AI adoption and operating margins.",
+    "question": "Why might a company pay for one shared customer database across departments?",
+    "source": "https://investor.salesforce.com/"
+  },
+  "GOOGL": {
+    "overview": "Alphabet owns Google and other businesses centered on search, advertising, video, cloud and technology.",
+    "products": "Google Search, YouTube, Android, Google Cloud and Waymo.",
+    "customers": "Advertisers, internet users, businesses and developers.",
+    "businessModel": "Search and YouTube advertising, cloud services, subscriptions and other activities.",
+    "insight": "Free consumer products attract audiences that advertisers pay to reach; cloud computing serves a different customer need.",
+    "watch": "Search advertising, AI competition, cloud profitability and antitrust regulation.",
+    "question": "Why can Google offer Search for free while earning substantial revenue?",
+    "source": "https://abc.xyz/investor/"
+  },
+  "META": {
+    "overview": "Meta operates social platforms, messaging services and immersive-technology businesses.",
+    "products": "Facebook, Instagram, WhatsApp, Messenger and Quest.",
+    "customers": "Users, advertisers and businesses.",
+    "businessModel": "Primarily digital advertising, plus other products and services.",
+    "insight": "Engagement and ad targeting drive much of the business; building AI and immersive products requires heavy infrastructure investment.",
+    "watch": "Ad demand, engagement, AI spending, privacy rules and competition.",
+    "question": "How can a free social-media app earn money from businesses?",
+    "source": "https://investor.atmeta.com/"
+  },
+  "AVGO": {
+    "overview": "Broadcom designs semiconductors and sells infrastructure software.",
+    "products": "Networking chips, custom accelerators, VMware and infrastructure software.",
+    "customers": "Cloud providers, networking manufacturers and large enterprises.",
+    "businessModel": "Semiconductor product sales and software subscriptions or licenses.",
+    "insight": "Custom chips are developed for particular customers, while software adds a distinct recurring-revenue stream.",
+    "watch": "AI networking demand, major-customer concentration, software renewals and integration.",
+    "question": "Why is selling a custom chip to one cloud provider different from selling a standard consumer chip?",
+    "source": "https://investors.broadcom.com/"
+  },
+  "ORCL": {
+    "overview": "Oracle provides databases, enterprise applications and cloud infrastructure.",
+    "products": "Oracle Database, Oracle Cloud Infrastructure, NetSuite and Fusion applications.",
+    "customers": "Businesses, governments and developers.",
+    "businessModel": "Cloud usage, software subscriptions, licenses and support.",
+    "insight": "Organizations rely on databases for critical records, creating long customer relationships and migration challenges.",
+    "watch": "Cloud capacity, enterprise contracts, infrastructure spending and margins.",
+    "question": "Why might a company hesitate before moving its critical database to a new provider?",
+    "source": "https://www.oracle.com/investor/"
+  },
+  "MU": {
+    "overview": "Micron manufactures memory and storage semiconductor products.",
+    "products": "DRAM, NAND flash and high-bandwidth memory.",
+    "customers": "Server manufacturers, device makers and data-center customers.",
+    "businessModel": "Sales of memory chips and storage components.",
+    "insight": "Memory prices are cyclical; AI accelerators require specialized high-bandwidth memory alongside computing chips.",
+    "watch": "Memory pricing, HBM supply, capital spending and inventory cycles.",
+    "question": "Why does an AI server need both processing chips and memory chips?",
+    "source": "https://investors.micron.com/"
+  },
+  "PLTR": {
+    "overview": "Palantir provides software platforms for integrating data, analytics and operational decision-making.",
+    "products": "Foundry, Gotham, Apollo and Artificial Intelligence Platform.",
+    "customers": "Government agencies and commercial organizations.",
+    "businessModel": "Software subscriptions, licenses and implementation-related services.",
+    "insight": "Its value depends on turning disconnected organizational data into useful workflows, not selling consumer hardware.",
+    "watch": "Government contracts, commercial adoption, renewals and implementation scale.",
+    "question": "Why would an organization pay to connect data from several existing systems?",
+    "source": "https://investors.palantir.com/"
+  },
+  "SMCI": {
+    "overview": "Super Micro Computer designs and assembles servers and data-center systems.",
+    "products": "GPU servers, rack-scale systems and liquid-cooled infrastructure.",
+    "customers": "Cloud operators, enterprises and AI infrastructure builders.",
+    "businessModel": "Server, storage and rack-system sales.",
+    "insight": "Integrating powerful components into working systems requires power, cooling and reliable supply chains.",
+    "watch": "GPU availability, server demand, margins, working capital and reporting quality.",
+    "question": "Why can a server assembler face challenges even when demand for AI computing is high?",
+    "source": "https://ir.supermicro.com/"
+  },
+  "CSCO": {
+    "overview": "Cisco sells networking, security and collaboration technology.",
+    "products": "Switches, routers, Meraki, Webex and security products.",
+    "customers": "Businesses, telecom operators, schools and governments.",
+    "businessModel": "Hardware, software subscriptions, support and services.",
+    "insight": "Networks connect devices and data centers; customers also need ongoing security and management.",
+    "watch": "Enterprise network spending, subscriptions, security demand and product transitions.",
+    "question": "Why does buying more servers often require investment in network equipment?",
+    "source": "https://investor.cisco.com/"
+  },
+  "QCOM": {
+    "overview": "Qualcomm designs wireless chips and licenses communications technology.",
+    "products": "Snapdragon processors, modem chips and wireless patents.",
+    "customers": "Smartphone makers, automotive suppliers and device manufacturers.",
+    "businessModel": "Chip sales and patent-licensing revenue.",
+    "insight": "Its inventions can generate licensing revenue even when another company manufactures a finished phone.",
+    "watch": "Smartphone demand, licensing, automotive growth and customer concentration.",
+    "question": "How can Qualcomm earn revenue from a phone without selling the whole phone?",
+    "source": "https://investor.qualcomm.com/"
+  },
+  "IBM": {
+    "overview": "IBM provides enterprise technology, consulting and infrastructure, with a focus on hybrid cloud and AI.",
+    "products": "Red Hat, watsonx, IBM mainframes and consulting.",
+    "customers": "Large businesses and government organizations.",
+    "businessModel": "Software, consulting, infrastructure and support contracts.",
+    "insight": "Many organizations combine old critical systems with newer cloud tools, creating demand for integration expertise.",
+    "watch": "Software growth, consulting demand, mainframe cycles and enterprise AI adoption.",
+    "question": "Why might a bank keep a mainframe while adding cloud services?",
+    "source": "https://www.ibm.com/investor"
+  },
+  "NOW": {
+    "overview": "ServiceNow provides workflow software that helps organizations manage IT and other business processes.",
+    "products": "Now Platform, IT Service Management and enterprise workflows.",
+    "customers": "IT teams, HR departments and large organizations.",
+    "businessModel": "Recurring software subscriptions and related services.",
+    "insight": "A workflow platform can standardize requests, approvals and service tasks across departments.",
+    "watch": "Subscription growth, renewals, large deals and AI workflow adoption.",
+    "question": "Why is automating an employee's IT help request valuable to a large company?",
+    "source": "https://www.servicenow.com/company/investor-relations.html"
+  },
+  "SNOW": {
+    "overview": "Snowflake provides a cloud data platform for storing, analyzing and sharing organizational data.",
+    "products": "Snowflake Data Cloud and AI/data services.",
+    "customers": "Enterprises, analysts and software developers.",
+    "businessModel": "Usage-based data-platform consumption and related services.",
+    "insight": "Consumption-based billing can rise as customers run more workloads, but customers can also optimize spending.",
+    "watch": "Product revenue, customer consumption, retention and cloud competition.",
+    "question": "Why might a customer's bill change from month to month on a usage-based data platform?",
+    "source": "https://investors.snowflake.com/"
+  },
+  "TSM": {
+    "overview": "Taiwan Semiconductor Manufacturing Company manufactures chips designed by other firms.",
+    "products": "Advanced semiconductor fabrication and packaging services.",
+    "customers": "Chip designers including major computing and device companies.",
+    "businessModel": "Foundry manufacturing and packaging services.",
+    "insight": "A foundry turns chip designs into physical products; advanced process technology and manufacturing yield are central.",
+    "watch": "Leading-edge capacity, yields, geopolitical risk and customer demand.",
+    "question": "Why can NVIDIA design a chip while TSMC manufactures it?",
+    "source": "https://investor.tsmc.com/"
+  },
+  "SNDK": {
+    "overview": "Sandisk focuses on flash-memory storage products; students should verify current reporting after its separation from Western Digital.",
+    "products": "Flash storage products, memory cards and solid-state storage.",
+    "customers": "Consumers, device makers and enterprise customers.",
+    "businessModel": "Sales of flash-based storage products.",
+    "insight": "Storage demand depends on how much data devices and businesses need to keep; corporate separations can change which products belong to a ticker.",
+    "watch": "Flash prices, storage demand, inventory and current company filings.",
+    "question": "Why should students check whether a familiar brand belongs to the same public company after a spin-off?",
+    "source": "https://investor.sandisk.com/"
+  },
+  "WDC": {
+    "overview": "Western Digital supplies data-storage technology, with its current business structure shaped by the Sandisk separation.",
+    "products": "Hard disk drives and data-storage solutions.",
+    "customers": "Cloud data centers, enterprises and device makers.",
+    "businessModel": "Sales of hard drives and related storage products.",
+    "insight": "Large cloud operators need cost-effective capacity for enormous amounts of data, which differs from the speed needs of active computing.",
+    "watch": "Cloud storage demand, drive capacity, manufacturing costs and current segment reporting.",
+    "question": "Why might a data center use both hard drives and flash storage?",
+    "source": "https://investor.wdc.com/"
+  },
+  "STX": {
+    "overview": "Seagate makes mass-capacity data-storage products, especially hard disk drives.",
+    "products": "Seagate hard drives and enterprise storage.",
+    "customers": "Cloud providers, enterprises and hardware manufacturers.",
+    "businessModel": "Hard-drive and storage-system sales.",
+    "insight": "Storing huge data volumes economically is different from processing data quickly; capacity per drive matters.",
+    "watch": "Cloud demand, high-capacity drive adoption, pricing and manufacturing yield.",
+    "question": "Why does a cloud company care about the cost per terabyte of storage?",
+    "source": "https://investors.seagate.com/"
+  },
+  "MRVL": {
+    "overview": "Marvell designs semiconductor technology for data infrastructure and connectivity.",
+    "products": "Custom silicon, networking, optical and storage-related chips.",
+    "customers": "Cloud operators, network-equipment makers and infrastructure providers.",
+    "businessModel": "Semiconductor and custom-chip sales.",
+    "insight": "Moving data between processors and servers is a major part of AI infrastructure, not just computing on the GPU.",
+    "watch": "Custom-chip programs, networking demand, customer concentration and supply.",
+    "question": "Why does a large AI cluster need specialized chips to move data between machines?",
+    "source": "https://investor.marvell.com/"
+  },
+  "LRCX": {
+    "overview": "Lam Research makes equipment used to manufacture semiconductor chips.",
+    "products": "Wafer fabrication equipment for deposition and etching.",
+    "customers": "Semiconductor foundries and memory manufacturers.",
+    "businessModel": "Equipment sales, spare parts and customer-support services.",
+    "insight": "Chipmakers must buy complex tools before producing chips; equipment demand follows factory investment cycles.",
+    "watch": "Fab spending, memory investment, export controls and installed-base services.",
+    "question": "Why can Lam benefit from new chip factories without designing chips itself?",
+    "source": "https://investor.lamresearch.com/"
+  },
+  "AMAT": {
+    "overview": "Applied Materials supplies manufacturing equipment and services for semiconductor and display production.",
+    "products": "Wafer-processing equipment, materials engineering and fab services.",
+    "customers": "Chip manufacturers and display producers.",
+    "businessModel": "Equipment, services and parts sales.",
+    "insight": "Smaller and more complex chips require precise manufacturing processes and materials engineering.",
+    "watch": "Semiconductor capital spending, advanced packaging, export controls and services.",
+    "question": "Why does a chip factory need many different machines rather than one machine that makes a whole chip?",
+    "source": "https://ir.appliedmaterials.com/"
+  },
+  "APP": {
+    "overview": "AppLovin provides advertising technology to help businesses find customers and monetize digital audiences.",
+    "products": "AppLovin advertising platform and software tools.",
+    "customers": "Advertisers, app publishers and other digital businesses.",
+    "businessModel": "Advertising-platform and related technology revenue.",
+    "insight": "Its platform aims to match ads with audiences and measure outcomes; it is not primarily a chip or cloud hardware company.",
+    "watch": "Advertiser spending, platform performance, privacy policy and customer concentration.",
+    "question": "Why is advertising technology categorized with software rather than semiconductor manufacturing?",
+    "source": "https://investors.applovin.com/"
+  },
+  "VRT": {
+    "overview": "Vertiv makes critical infrastructure that keeps data centers powered and cooled.",
+    "products": "UPS power systems, thermal management, racks and services.",
+    "customers": "Data-center operators, cloud providers and industrial facilities.",
+    "businessModel": "Power and cooling equipment sales plus maintenance and services.",
+    "insight": "Powerful AI servers produce heat and require reliable electricity; cooling and backup power are essential to uptime.",
+    "watch": "Data-center construction, liquid cooling, orders, backlog and project execution.",
+    "question": "Why can demand for AI computing create business for a cooling-equipment manufacturer?",
+    "source": "https://investors.vertiv.com/"
+  },
+  "ANET": {
+    "overview": "Arista Networks sells high-performance networking equipment and software, especially for cloud and data centers.",
+    "products": "Ethernet switches, EOS software and networking systems.",
+    "customers": "Cloud providers, enterprises and AI data-center operators.",
+    "businessModel": "Networking hardware, software and support.",
+    "insight": "Fast networks let large groups of servers exchange data efficiently; congestion can waste expensive computing capacity.",
+    "watch": "Cloud capital spending, AI network adoption, customer concentration and competition.",
+    "question": "Why can a slow network reduce the usefulness of otherwise powerful AI servers?",
+    "source": "https://investors.arista.com/"
+  },
+  "CRWD": {
+    "overview": "CrowdStrike provides cloud-delivered cybersecurity software focused on protecting devices, identities and workloads.",
+    "products": "Falcon platform, endpoint security and threat intelligence.",
+    "customers": "Businesses, governments and security teams.",
+    "businessModel": "Recurring software subscriptions and services.",
+    "insight": "Security software needs continuous updates and reliable operations because customers depend on it to protect critical systems.",
+    "watch": "Subscription growth, retention, incident response, competition and platform reliability.",
+    "question": "Why might a cybersecurity customer value reliability as much as detection capability?",
+    "source": "https://ir.crowdstrike.com/"
+  },
+  "PANW": {
+    "overview": "Palo Alto Networks provides cybersecurity platforms for networks, cloud environments and security operations.",
+    "products": "Next-generation firewalls, Prisma Cloud and Cortex.",
+    "customers": "Enterprises, governments and security teams.",
+    "businessModel": "Security hardware, software subscriptions and support services.",
+    "insight": "Organizations often use several security tools; platform consolidation can simplify management but increases dependence on one provider.",
+    "watch": "Recurring revenue, platform adoption, enterprise spending and cyber threats.",
+    "question": "Why might a company combine network and cloud security under one provider?",
+    "source": "https://investors.paloaltonetworks.com/"
+  }
+};
   const revenueModels={AAPL:"Device sales and recurring services",MSFT:"Software subscriptions, cloud computing and licenses",NVDA:"AI and graphics chips, systems and networking",GOOGL:"Advertising, cloud services and subscriptions",META:"Advertising across its apps",AMZN:"Retail, seller fees, AWS, advertising and subscriptions",TSM:"Contract chip manufacturing for chip designers",PLTR:"Government and commercial software contracts",CRWD:"Cybersecurity subscriptions",PANW:"Security products, subscriptions and support",V:"Payment-network service fees, not primarily cardholder lending",MA:"Payment-network and related service fees",JPM:"Loan interest and banking and investment fees",KO:"Beverage concentrate and finished-drink sales",PEP:"Beverage and packaged-food sales",MCD:"Franchise royalties, rent and restaurant sales",NFLX:"Subscriptions and advertising",SPOT:"Premium subscriptions and advertising",DIS:"Entertainment, streaming, parks and licensing",TSLA:"Vehicles, energy storage and services",UBER:"Fees from rides, delivery and freight",DASH:"Delivery fees, subscriptions and advertising",LLY:"Prescription medicine sales",ISRG:"Surgical systems, instruments and services",XOM:"Oil, gas, refining and chemicals",CEG:"Electricity and energy-product sales",CAT:"Machinery, parts, services and financing",NKE:"Footwear and apparel sales",O:"Rent from commercial tenants",PLD:"Rent from logistics properties",LMT:"Defense and aerospace contracts"};
   const industryRevenue={technology:"Technology products, software subscriptions or services",retail:"Merchandise, memberships or marketplace services",transport:"Vehicles, fares, delivery or related services",food:"Food and beverage sales, distribution or franchise fees",media:"Subscriptions, advertising, licensing or experiences",finance:"Interest, transactions or financial-service fees",health:"Medicines, devices, care or healthcare services",energy:"Energy, industrial equipment or project contracts",brands:"Branded merchandise sold directly or wholesale",housing:"Homes, materials, rent or property services",defense:"Government and commercial contracts"};
   // Editorially checked, dated stories. No generated headline is presented as verified news.
@@ -1609,6 +1931,8 @@
   }
   function companyExplainer(c){
     const industry=c.industries?.find(i=>!i.optional)||c.industries?.[0]||{id:"",name:"Business"};
+    const technologyResearch=technologyProfiles[c.ticker];
+    if(technologyResearch && c.industries?.some(i=>i.id==="technology")) return {overview:technologyResearch.overview,revenue:"Recognizable products / services: "+technologyResearch.products+".",businessModel:technologyResearch.businessModel,importance:"Customers: "+technologyResearch.customers+". Why it matters: "+technologyResearch.insight+" What to watch: "+technologyResearch.watch,product:technologyResearch.products,customers:technologyResearch.customers,watch:technologyResearch.watch,examples:technologyResearch.products,verified:true,source:technologyResearch.source,question:technologyResearch.question};
     const foodResearch=foodProfiles[c.ticker];
     if(foodResearch && c.industries?.some(i=>i.id==="food")) return {overview:foodResearch.overview,revenue:"Recognizable products / brands: "+foodResearch.products+".",businessModel:foodResearch.businessModel,importance:"Customers: "+foodResearch.customers+". Why it matters: "+foodResearch.insight+" What to watch: "+foodResearch.watch,product:foodResearch.products,customers:foodResearch.customers,watch:foodResearch.watch,examples:foodResearch.products,verified:true,source:foodResearch.source,question:foodResearch.question};
     const energyResearch=energyProfiles[c.ticker];
@@ -1643,7 +1967,7 @@
   }
   Object.assign(officialSites,{LMT:"lockheedmartin.com",RTX:"rtx.com",NOC:"northropgrumman.com",GD:"gd.com",LHX:"l3harris.com",HII:"hii.com",BA:"boeing.com",HWM:"howmet.com",AVAV:"avinc.com",AXON:"axon.com",PLTR:"palantir.com",GE:"geaerospace.com",HON:"honeywell.com"});
   Object.assign(officialSites,{AMZN:"amazon.com",WMT:"walmart.com",TGT:"target.com",COST:"costco.com",HD:"homedepot.com",LOW:"lowes.com",BBY:"bestbuy.com",EBAY:"ebay.com",ETSY:"etsy.com",CHWY:"chewy.com",BABA:"alibabagroup.com",MELI:"mercadolibre.com",ROST:"rossstores.com",TJX:"tjx.com"});
-  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles,healthProfiles,transportProfiles,financeProfiles,energyProfiles,foodProfiles};
+  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles,healthProfiles,transportProfiles,financeProfiles,energyProfiles,foodProfiles,technologyProfiles};
   function passportBackground(c){
     const info=companyExplainer(c);
     return '<div class="passport-background"><h4>What this company does</h4><p>'+esc(info.overview)+'</p><h4>Products and brands</h4><p>'+esc(info.revenue)+'</p><h4>How it earns revenue</h4><p>'+esc(info.businessModel)+'</p><h4>Company context</h4><p>'+esc(info.importance)+'</p><h4>Student research checklist</h4><ul><li>What product or service does it sell?</li><li>Who pays for it?</li><li>Who competes with it?</li><li>What do its latest revenue and profit figures show?</li></ul>'+(info.question?'<p><strong>Company-specific research question:</strong> '+esc(info.question)+'</p>':'')+'<p class="passport-disclaimer">Introductory company-specific business context, not a live news report or financial recommendation. Check company filings for updated figures.</p>'+(info.source?'<p><a href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">Read company annual reports / investor relations ↗</a></p>':'')+'</div>';
