@@ -1,22 +1,76 @@
-/* Market News Desk: source-linked RSS, with explicit fetch failures. */
+/* Lightweight, read-only publisher RSS headlines for the Stock Lab. */
 (function(){
-const $=id=>document.getElementById(id), esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const all=[...new Map(I.flatMap(i=>i.companies.map(c=>[c.ticker,c]))).values()];
-const select=$("newsTicker");if(!select)return;
-select.innerHTML='<option value="">All companies</option>'+all.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(c=>'<option value="'+esc(c.ticker)+'">'+esc(c.name)+' ('+esc(c.ticker)+')</option>').join("");
-const cache=new Map();let request=0;
-const feed=q=>'https://news.google.com/rss/search?q='+encodeURIComponent(q)+'&hl=en-US&gl=US&ceid=US:en';
-function movers(){return all.map(c=>({c,m:marketPrices[c.ticker]})).filter(x=>Number.isFinite(Number(x.m?.changePercent))&&x.m?.price>0).sort((a,b)=>Math.abs(b.m.changePercent)-Math.abs(a.m.changePercent)).slice(0,8)}
-function query(){
-const ticker=select.value,topic=$("newsTopic").value;
-if(ticker){const c=all.find(x=>x.ticker===ticker);return '"'+c.name+'" '+ticker+' stock when:7d'}
-if(topic==="portfolio"){const held=Object.values(state.holdings||{}).slice(0,6);return held.length?held.map(h=>'"'+h.name+'"').join(' OR ')+' stock when:7d':'stock market company earnings when:2d'}
-if(topic==="movers"){const top=movers().slice(0,5);return top.length?top.map(x=>'"'+x.c.name+'"').join(' OR ')+' stock when:2d':'stock market movers when:2d'}
-return {market:'stock market business companies when:2d',technology:'artificial intelligence semiconductor cloud companies when:3d',earnings:'company earnings revenue quarterly results when:3d'}[topic];
-}
-function strip(){const rows=movers();$("newsMoverStrip").innerHTML=rows.length?rows.map(x=>'<button type="button" class="secondary" data-news-ticker="'+esc(x.c.ticker)+'">'+esc(x.c.ticker)+' · '+(x.m.changePercent>=0?'+':'')+Number(x.m.changePercent).toFixed(2)+'%</button>').join(''):'<p>Latest completed market snapshot is not available yet.</p>'}
-function parse(xml){const doc=new DOMParser().parseFromString(xml,'text/xml');if(doc.querySelector('parsererror'))throw Error('Invalid RSS response');return [...doc.querySelectorAll('item')].slice(0,24).map(item=>({title:item.querySelector('title')?.textContent||'',link:item.querySelector('link')?.textContent||'',date:item.querySelector('pubDate')?.textContent||'',source:item.querySelector('source')?.textContent||'Google News'})).filter(x=>x.title&&/^https:\/\//.test(x.link))}
-async function fetchFeed(url){if(cache.has(url)&&Date.now()-cache.get(url).at<300000)return cache.get(url).items;const endpoints=['https://api.allorigins.win/raw?url='+encodeURIComponent(url),'https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(url)];let error;for(const endpoint of endpoints){try{const response=await fetch(endpoint,{signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error('Feed service '+response.status);const body=await response.text();let items;if(body.trim().startsWith('{')){const json=JSON.parse(body);if(json.status!=='ok')throw Error(json.message||'Feed unavailable');items=(json.items||[]).slice(0,24).map(x=>({title:x.title,link:x.link,date:x.pubDate,source:json.feed?.title||'RSS'})).filter(x=>/^https:\/\//.test(x.link))}else items=parse(body);if(!items.length)throw Error('No recent articles');cache.set(url,{at:Date.now(),items});return items}catch(e){error=e}}throw error||Error('RSS unavailable')}
-async function load(force=false){const id=++request;strip();const url=feed(query());if(force)cache.delete(url);$("newsStatus").textContent='Loading source headlines…';$("newsArticles").innerHTML='';try{const items=await fetchFeed(url);if(id!==request)return;$("newsStatus").textContent=items.length+' articles · RSS · refreshed '+new Date().toLocaleTimeString();$("newsArticles").innerHTML=items.map(x=>'<article class="stock-card"><p class="eyebrow">'+esc(x.source)+' · '+esc(x.date?new Date(x.date).toLocaleDateString():'Date unavailable')+'</p><h3>'+esc(x.title)+'</h3><a class="secondary" style="display:inline-block;text-decoration:none" href="'+esc(x.link)+'" target="_blank" rel="noopener noreferrer">Read article ↗</a></article>').join('')}catch(e){if(id!==request)return;$("newsStatus").textContent='Live feed unavailable';$("newsArticles").innerHTML='<article class="stock-card"><h3>Headlines could not load</h3><p>The RSS service may be unavailable or limiting requests. Open the original feed to see its current headlines.</p><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Open source RSS ↗</a></article>'}}
-$("newsTopic").onchange=()=>{select.value='';load()};select.onchange=()=>load();$("newsRefresh").onclick=()=>load(true);$("newsMoverStrip").onclick=e=>{const b=e.target.closest('[data-news-ticker]');if(b){select.value=b.dataset.newsTicker;load()}};window.STOCK_LAB_LOAD_NEWS=()=>load();
+  const $=id=>document.getElementById(id);
+  const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const sources=[
+    {name:"CNBC · Business",url:"https://www.cnbc.com/id/10001147/device/rss/rss.html"},
+    {name:"CNBC · Earnings",url:"https://www.cnbc.com/id/15839135/device/rss/rss.html"},
+    {name:"CNBC · Technology",url:"https://www.cnbc.com/id/19854910/device/rss/rss.html"},
+    {name:"NPR · Business",url:"https://feeds.npr.org/1006/rss.xml"}
+  ];
+  const cache=new Map();let request=0,lastLoaded=0;
+  const text=(node,tag)=>node.querySelector(tag)?.textContent?.trim()||"";
+  function parse(xml,source){
+    const doc=new DOMParser().parseFromString(xml,"text/xml");
+    if(doc.querySelector("parsererror"))throw Error("Invalid RSS response");
+    return [...doc.querySelectorAll("item")].slice(0,18).map(n=>({
+      title:text(n,"title"),url:text(n,"link"),date:text(n,"pubDate"),source
+    })).filter(n=>n.title&&/^https:\/\//i.test(n.url));
+  }
+  async function getFeed(source,force){
+    const cached=cache.get(source.url);
+    if(!force&&cached&&Date.now()-cached.at<600000)return cached.items;
+    // Publisher RSS stays the source. Public readers only bridge cross-origin XML.
+    const proxies=[
+      "https://api.allorigins.win/raw?url="+encodeURIComponent(source.url),
+      "https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(source.url)
+    ];
+    let error;
+    for(const proxy of proxies){
+      try{
+        const response=await fetch(proxy,{signal:AbortSignal.timeout(10000)});
+        if(!response.ok)throw Error("RSS bridge unavailable");
+        const raw=await response.text();
+        let items;
+        if(raw.trim().startsWith("{")){
+          const json=JSON.parse(raw);
+          if(json.status!=="ok")throw Error("RSS bridge returned no feed");
+          items=(json.items||[]).slice(0,18).map(n=>({title:n.title||"",url:n.link||"",date:n.pubDate||"",source:source.name})).filter(n=>n.title&&/^https:\/\//i.test(n.url));
+        }else items=parse(raw,source.name);
+        if(!items.length)throw Error("Empty feed");
+        cache.set(source.url,{at:Date.now(),items});
+        return items;
+      }catch(e){error=e}
+    }
+    if(cached)return cached.items; // Keep existing headlines if a later refresh fails.
+    throw error||Error("Feed unavailable");
+  }
+  async function load(force=false){
+    const status=$("newsStatus"),area=$("newsArticles");
+    if(!status||!area)return;
+    if(!force&&lastLoaded&&Date.now()-lastLoaded<600000)return;
+    const id=++request;status.textContent="Loading publisher headlines…";
+    const results=await Promise.allSettled(sources.map(source=>getFeed(source,force)));
+    if(id!==request)return;
+    const stories=results.flatMap(r=>r.status==="fulfilled"?r.value:[]);
+    const seen=new Set();
+    const items=stories.filter(s=>{const key=s.url.split("?")[0];if(seen.has(key))return false;seen.add(key);return true})
+      .sort((a,b)=>(Date.parse(b.date)||0)-(Date.parse(a.date)||0)).slice(0,28);
+    const failed=results.filter(r=>r.status==="rejected").length;
+    if(!items.length){
+      status.textContent="Feeds temporarily unavailable";
+      area.innerHTML='<article class="stock-card"><h3>Headlines unavailable</h3><p>Open a publisher feed directly or try Refresh later.</p>'+sources.map(s=>'<p><a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+esc(s.name)+' RSS ↗</a></p>').join("")+'</article>';
+      return;
+    }
+    lastLoaded=Date.now();
+    status.textContent=items.length+" headlines · "+(sources.length-failed)+"/"+sources.length+" feeds · updated "+new Date().toLocaleTimeString();
+    area.innerHTML=items.map(s=>{
+      const d=Date.parse(s.date);const date=Number.isFinite(d)?new Date(d).toLocaleDateString():"Date unavailable";
+      return '<article class="stock-card"><p class="eyebrow">'+esc(s.source)+' · '+esc(date)+'</p><h3>'+esc(s.title)+'</h3><a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">Read original story ↗</a></article>';
+    }).join("");
+  }
+  $("newsRefresh")?.addEventListener("click",()=>load(true));
+  window.STOCK_LAB_LOAD_NEWS=()=>load();
+  // Only refresh on the news tab; no persistent background requests.
+  setInterval(()=>{if($("news")?.classList.contains("active")&&!document.hidden)load()},60000);
 })();
