@@ -247,6 +247,149 @@
     "source": "https://investor.tjx.com/"
   }
 };
+  // Comprehensive housing and real estate educational profiles.
+  const housingProfiles={
+  "Z": {
+    "overview": "Zillow Group runs a digital real-estate marketplace that helps people search for homes, connect with agents, arrange tours and access related services. It is not primarily a homebuilder or a landlord.",
+    "products": "Zillow, Trulia, StreetEasy, Zillow Rentals and Premier Agent.",
+    "customers": "Home shoppers, renters, real-estate agents, property managers and mortgage customers.",
+    "businessModel": "Advertising and marketing services for agents and rental properties, plus mortgage and related transaction services.",
+    "insight": "A home search is often free for consumers because professionals pay to reach prospective customers; traffic is valuable only if it produces useful leads and transactions.",
+    "watch": "Housing transaction volume, mortgage rates, agent spending, lead quality and competition from other listing portals.",
+    "question": "Why can Zillow's revenue change even when its website traffic stays high?",
+    "source": "https://investors.zillowgroup.com/"
+  },
+  "DHI": {
+    "overview": "D.R. Horton is a major U.S. homebuilder that acquires or develops land, builds houses and sells completed homes. Its operations also include related financial and rental businesses.",
+    "products": "D.R. Horton, Express Homes, Emerald Homes and Freedom Homes.",
+    "customers": "First-time, move-up and other homebuyers.",
+    "businessModel": "New-home sales, related mortgage and title services, and other housing operations.",
+    "insight": "A builder can offer mortgage-rate incentives or adjust home prices to attract buyers, but those incentives may reduce profit per home.",
+    "watch": "Mortgage affordability, orders, cancellations, community count, land costs and gross margin.",
+    "question": "How does a higher mortgage rate affect the number of buyers who can afford a new house?",
+    "source": "https://investor.drhorton.com/"
+  },
+  "LEN": {
+    "overview": "Lennar builds and sells new homes across U.S. markets and provides homebuyer financing and related services.",
+    "products": "Lennar homes, Everything's Included approach and Lennar Mortgage.",
+    "customers": "Homebuyers in the communities where it develops and builds.",
+    "businessModel": "Home closings, mortgage origination and other related housing services.",
+    "insight": "The sale of a completed home differs from signing a contract: construction and closing determine when the builder receives much of its revenue.",
+    "watch": "New orders, deliveries, backlog, incentives, land supply and construction costs.",
+    "question": "Why might a builder report strong orders but fewer completed home deliveries?",
+    "source": "https://investors.lennar.com/"
+  },
+  "PHM": {
+    "overview": "PulteGroup builds homes for several life stages, from first-time purchasers to move-up buyers and active adults.",
+    "products": "Pulte Homes, Centex, Del Webb and DiVosta.",
+    "customers": "First-time buyers, growing households and active-adult buyers.",
+    "businessModel": "New-home sales and related mortgage, title and insurance services.",
+    "insight": "Different brands target different customers: an active-adult community may respond to different needs than a starter-home neighborhood.",
+    "watch": "Buyer affordability, community openings, cancellation rates, land investment and construction margins.",
+    "question": "How would marketing a Del Webb community differ from marketing a first-time buyer home?",
+    "source": "https://www.pultegroupinc.com/investor-relations/default.aspx"
+  },
+  "O": {
+    "overview": "Realty Income is a real-estate investment trust (REIT) that owns properties and leases them to businesses, often under long-term net leases.",
+    "products": "Retail, industrial and other commercial properties leased to operating businesses.",
+    "customers": "Business tenants such as retailers, service providers and industrial operators.",
+    "businessModel": "Rental payments from tenants and returns on its property portfolio.",
+    "insight": "In a triple-net lease, tenants generally pay property taxes, insurance and maintenance, which changes the landlord's expense exposure.",
+    "watch": "Tenant financial health, occupancy, lease duration, debt costs, acquisitions and dividend coverage.",
+    "question": "Why does a landlord care about a tenant's ability to keep paying rent even when the lease is long?",
+    "source": "https://www.realtyincome.com/investors"
+  },
+  "PLD": {
+    "overview": "Prologis is a REIT specializing in logistics real estate such as warehouses and distribution centers near major markets.",
+    "products": "Distribution centers, logistics parks and supply-chain real estate.",
+    "customers": "E-commerce businesses, retailers, manufacturers and logistics providers.",
+    "businessModel": "Warehouse rent, property-related services and development/investment activities.",
+    "insight": "A warehouse near customers, highways and ports can reduce delivery time; location is part of the product.",
+    "watch": "Warehouse occupancy, rental growth, new supply, e-commerce demand and financing costs.",
+    "question": "Why might a warehouse near a major city command more rent than one far from customers?",
+    "source": "https://ir.prologis.com/"
+  },
+  "SHW": {
+    "overview": "Sherwin-Williams manufactures and sells paints, coatings and related products to contractors, homeowners and industrial customers.",
+    "products": "Sherwin-Williams paints, stores, Valspar, Minwax and industrial coatings.",
+    "customers": "Painting contractors, DIY customers, builders, manufacturers and retailers.",
+    "businessModel": "Paint and coating sales through its own stores, retail partners and industrial channels.",
+    "insight": "A professional painter may value consistent color matching, availability and jobsite service as much as the price of a gallon.",
+    "watch": "Renovation and construction activity, raw-material prices, contractor demand and operating margins.",
+    "question": "How can a paint company earn revenue from both home remodeling and industrial manufacturing?",
+    "source": "https://investors.sherwin-williams.com/"
+  },
+  "BLDR": {
+    "overview": "Builders FirstSource supplies building materials and manufactured components to professional builders and contractors.",
+    "products": "Lumber, trusses, wall panels, windows, doors and other building products.",
+    "customers": "Homebuilders, remodelers and construction contractors.",
+    "businessModel": "Sales of construction materials, prefabricated components and value-added building services.",
+    "insight": "Factory-made trusses and wall panels can reduce work at the construction site, so the company sells both materials and labor-saving solutions.",
+    "watch": "Housing starts, lumber prices, builder demand, product mix and manufacturing capacity.",
+    "question": "Why might a builder buy a prefabricated wall panel rather than assemble every piece on site?",
+    "source": "https://investors.bldr.com/"
+  },
+  "LOW": {
+    "overview": "Lowe's sells home-improvement products and services to homeowners and professional contractors through stores and digital channels.",
+    "products": "Lowe's stores, Pro services, appliances, tools and building supplies.",
+    "customers": "DIY shoppers, homeowners, property managers and contractors.",
+    "businessModel": "Retail product sales and related services.",
+    "insight": "Unlike a homebuilder, Lowe's can benefit from repair and renovation spending even when fewer new houses are built.",
+    "watch": "Comparable sales, professional-customer demand, renovation spending, inventory and margins.",
+    "question": "How could an aging home create business for Lowe's even without a home sale?",
+    "source": "https://corporate.lowes.com/investors"
+  },
+  "HD": {
+    "overview": "Home Depot sells home-improvement materials and tools and serves professional tradespeople as well as individual households.",
+    "products": "Home Depot stores, Pro services, building materials, tools and installation services.",
+    "customers": "Homeowners, remodelers, builders and trade professionals.",
+    "businessModel": "Merchandise sales and associated services.",
+    "insight": "Professional contractors often purchase repeatedly for many projects, making their needs different from a one-time DIY shopper.",
+    "watch": "Large-project demand, Pro sales, housing turnover, renovation activity and inventory.",
+    "question": "Why could slower home sales affect purchases of flooring, cabinets and appliances?",
+    "source": "https://ir.homedepot.com/"
+  },
+  "CBRE": {
+    "overview": "CBRE Group provides commercial real-estate services rather than mainly selling homes to consumers.",
+    "products": "Commercial property brokerage, leasing, property management, valuation and investment management.",
+    "customers": "Corporate occupiers, landlords, property investors and institutions.",
+    "businessModel": "Leasing and transaction fees, recurring property/facilities management fees and investment-related services.",
+    "insight": "Some revenue depends on big property deals, while managing buildings can generate more recurring service income.",
+    "watch": "Commercial leasing, property sales, interest rates, outsourcing contracts and assets under management.",
+    "question": "How is earning a brokerage fee different from collecting monthly rent as a building owner?",
+    "source": "https://ir.cbre.com/"
+  },
+  "AMT": {
+    "overview": "American Tower is a REIT that owns communications infrastructure, especially wireless towers, and leases space to network operators.",
+    "products": "Cell towers, rooftop communications sites and related infrastructure.",
+    "customers": "Wireless carriers and other communications-network operators.",
+    "businessModel": "Long-term lease payments for space and equipment on communications sites.",
+    "insight": "Several carriers can use different positions on the same tower, allowing one physical asset to support multiple tenants.",
+    "watch": "Carrier network investment, lease renewals, tenant concentration, debt and capital spending.",
+    "question": "Why might adding another carrier to an existing tower improve the economics of that tower?",
+    "source": "https://www.americantower.com/investor-relations/"
+  },
+  "SPG": {
+    "overview": "Simon Property Group is a REIT that owns and operates shopping, dining and entertainment properties, including malls and outlet centers.",
+    "products": "Simon malls, Premium Outlets and The Mills properties.",
+    "customers": "Retailers, restaurants and other commercial tenants, with shoppers as the end visitors.",
+    "businessModel": "Base rent, percentage rent in some leases, property services and other real-estate activities.",
+    "insight": "Foot traffic matters because successful stores are better able to pay rent; some leases also link part of rent to tenant sales.",
+    "watch": "Occupancy, tenant sales, lease renewals, redevelopment costs and consumer spending.",
+    "question": "Why does a mall landlord care about how much money its tenants' stores make?",
+    "source": "https://investors.simon.com/"
+  },
+  "WY": {
+    "overview": "Weyerhaeuser owns and manages timberlands and produces wood products used in construction and other industries.",
+    "products": "Timberlands, lumber, oriented strand board and engineered wood products.",
+    "customers": "Homebuilders, building-material distributors and industrial wood buyers.",
+    "businessModel": "Timber sales, wood-product sales and related land activities.",
+    "insight": "Trees take years to grow; timberland is both a productive asset and a resource that must be managed over long periods.",
+    "watch": "Lumber prices, housing construction, mill costs, timber harvest volumes and land management.",
+    "question": "Why might a decline in lumber prices hurt a timber and wood-products company even if it owns valuable land?",
+    "source": "https://investor.weyerhaeuser.com/"
+  }
+};
   const revenueModels={AAPL:"Device sales and recurring services",MSFT:"Software subscriptions, cloud computing and licenses",NVDA:"AI and graphics chips, systems and networking",GOOGL:"Advertising, cloud services and subscriptions",META:"Advertising across its apps",AMZN:"Retail, seller fees, AWS, advertising and subscriptions",TSM:"Contract chip manufacturing for chip designers",PLTR:"Government and commercial software contracts",CRWD:"Cybersecurity subscriptions",PANW:"Security products, subscriptions and support",V:"Payment-network service fees, not primarily cardholder lending",MA:"Payment-network and related service fees",JPM:"Loan interest and banking and investment fees",KO:"Beverage concentrate and finished-drink sales",PEP:"Beverage and packaged-food sales",MCD:"Franchise royalties, rent and restaurant sales",NFLX:"Subscriptions and advertising",SPOT:"Premium subscriptions and advertising",DIS:"Entertainment, streaming, parks and licensing",TSLA:"Vehicles, energy storage and services",UBER:"Fees from rides, delivery and freight",DASH:"Delivery fees, subscriptions and advertising",LLY:"Prescription medicine sales",ISRG:"Surgical systems, instruments and services",XOM:"Oil, gas, refining and chemicals",CEG:"Electricity and energy-product sales",CAT:"Machinery, parts, services and financing",NKE:"Footwear and apparel sales",O:"Rent from commercial tenants",PLD:"Rent from logistics properties",LMT:"Defense and aerospace contracts"};
   const industryRevenue={technology:"Technology products, software subscriptions or services",retail:"Merchandise, memberships or marketplace services",transport:"Vehicles, fares, delivery or related services",food:"Food and beverage sales, distribution or franchise fees",media:"Subscriptions, advertising, licensing or experiences",finance:"Interest, transactions or financial-service fees",health:"Medicines, devices, care or healthcare services",energy:"Energy, industrial equipment or project contracts",brands:"Branded merchandise sold directly or wholesale",housing:"Homes, materials, rent or property services",defense:"Government and commercial contracts"};
   // Editorially checked, dated stories. No generated headline is presented as verified news.
@@ -262,6 +405,8 @@
   }
   function companyExplainer(c){
     const industry=c.industries?.find(i=>!i.optional)||c.industries?.[0]||{id:"",name:"Business"};
+    const housingResearch=housingProfiles[c.ticker];
+    if(housingResearch && c.industries?.some(i=>i.id==="housing")) return {overview:housingResearch.overview,revenue:"Recognizable products / properties: "+housingResearch.products+".",businessModel:housingResearch.businessModel,importance:"Customers: "+housingResearch.customers+". Why it matters: "+housingResearch.insight+" What to watch: "+housingResearch.watch,product:housingResearch.products,customers:housingResearch.customers,watch:housingResearch.watch,examples:housingResearch.products,verified:true,source:housingResearch.source,question:housingResearch.question};
     const retailResearch=retailProfiles[c.ticker];
     if(retailResearch && c.industries?.some(i=>i.id==="retail")) return {overview:retailResearch.overview,revenue:"Recognizable products / brands: "+retailResearch.products+".",businessModel:retailResearch.businessModel,importance:"Why it matters: "+retailResearch.insight+" What to watch: "+retailResearch.watch,product:retailResearch.products,customers:"See company filings",watch:retailResearch.watch,examples:retailResearch.products,verified:true,source:retailResearch.source};
     const researched=defenseProfiles[c.ticker];
@@ -280,10 +425,10 @@
   }
   Object.assign(officialSites,{LMT:"lockheedmartin.com",RTX:"rtx.com",NOC:"northropgrumman.com",GD:"gd.com",LHX:"l3harris.com",HII:"hii.com",BA:"boeing.com",HWM:"howmet.com",AVAV:"avinc.com",AXON:"axon.com",PLTR:"palantir.com",GE:"geaerospace.com",HON:"honeywell.com"});
   Object.assign(officialSites,{AMZN:"amazon.com",WMT:"walmart.com",TGT:"target.com",COST:"costco.com",HD:"homedepot.com",LOW:"lowes.com",BBY:"bestbuy.com",EBAY:"ebay.com",ETSY:"etsy.com",CHWY:"chewy.com",BABA:"alibabagroup.com",MELI:"mercadolibre.com",ROST:"rossstores.com",TJX:"tjx.com"});
-  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles};
+  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles};
   function passportBackground(c){
     const info=companyExplainer(c);
-    return '<div class="passport-background"><h4>What this company does</h4><p>'+esc(info.overview)+'</p><h4>Products and brands</h4><p>'+esc(info.revenue)+'</p><h4>How it earns revenue</h4><p>'+esc(info.businessModel)+'</p><h4>Company context</h4><p>'+esc(info.importance)+'</p><h4>Student research checklist</h4><ul><li>What product or service does it sell?</li><li>Who pays for it?</li><li>Who competes with it?</li><li>What do its latest revenue and profit figures show?</li></ul><p class="passport-disclaimer">Introductory company-specific business context, not a live news report or financial recommendation. Check company filings for updated figures.</p>'+(info.source?'<p><a href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">Read company annual reports / investor relations ↗</a></p>':'')+'</div>';
+    return '<div class="passport-background"><h4>What this company does</h4><p>'+esc(info.overview)+'</p><h4>Products and brands</h4><p>'+esc(info.revenue)+'</p><h4>How it earns revenue</h4><p>'+esc(info.businessModel)+'</p><h4>Company context</h4><p>'+esc(info.importance)+'</p><h4>Student research checklist</h4><ul><li>What product or service does it sell?</li><li>Who pays for it?</li><li>Who competes with it?</li><li>What do its latest revenue and profit figures show?</li></ul>'+(info.question?'<p><strong>Company-specific research question:</strong> '+esc(info.question)+'</p>':'')+'<p class="passport-disclaimer">Introductory company-specific business context, not a live news report or financial recommendation. Check company filings for updated figures.</p>'+(info.source?'<p><a href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">Read company annual reports / investor relations ↗</a></p>':'')+'</div>';
   }
   function companyWebsite(c){const domain=officialSites[c.ticker];return domain?'<a href="https://'+domain+'/" target="_blank" rel="noopener noreferrer">Official company website ↗</a>':'<a href="https://www.google.com/search?q='+encodeURIComponent(c.name+' '+c.ticker+' official website')+'" target="_blank" rel="noopener noreferrer">Find official website ↗</a>';}
   function card(c){
