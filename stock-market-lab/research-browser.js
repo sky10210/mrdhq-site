@@ -390,6 +390,158 @@
     "source": "https://investor.weyerhaeuser.com/"
   }
 };
+  const brandProfiles={
+  "NKE": {
+    "overview": "Nike designs and markets athletic footwear, apparel and equipment worldwide, selling through its own channels and wholesale partners.",
+    "products": "Nike, Jordan, Converse, Air Max, Air Jordan and Nike Running.",
+    "customers": "Athletes, everyday consumers, sports teams and retail partners.",
+    "businessModel": "Footwear, clothing and equipment sales through Nike stores, websites and wholesale retailers.",
+    "insight": "Nike pays for product design, athlete partnerships and marketing while relying heavily on contracted manufacturers; brand demand and inventory discipline matter.",
+    "watch": "Consumer demand, direct versus wholesale sales, product launches, competition and inventory.",
+    "question": "Why can an athlete endorsement help sell shoes even to customers who do not play that sport?",
+    "source": "https://investors.nike.com/"
+  },
+  "LULU": {
+    "overview": "Lululemon designs premium athletic and lifestyle clothing, with a strong focus on yoga, training and everyday wear.",
+    "products": "Align leggings, ABC pants, athletic tops and lululemon stores.",
+    "customers": "Fitness and lifestyle shoppers, including women and men.",
+    "businessModel": "Apparel and accessory sales through stores and e-commerce.",
+    "insight": "Its positioning combines fabric design, product fit and community-led marketing; premium prices require customers to perceive added value.",
+    "watch": "Comparable sales, international expansion, new product categories and discounting.",
+    "question": "How could frequent discounts change the way customers perceive a premium brand?",
+    "source": "https://corporate.lululemon.com/investors"
+  },
+  "RL": {
+    "overview": "Ralph Lauren is a lifestyle fashion company that designs and markets clothing, accessories, fragrances and home products.",
+    "products": "Polo Ralph Lauren, Ralph Lauren Collection, Purple Label and Ralph Lauren Home.",
+    "customers": "Fashion consumers, department stores and licensed-product partners.",
+    "businessModel": "Retail and wholesale sales plus licensing income.",
+    "insight": "A recognizable logo and consistent design language can extend from shirts to fragrances and home goods through different business arrangements.",
+    "watch": "Brand pricing, wholesale relationships, international demand and licensing.",
+    "question": "Why might a fashion company license its name for a product rather than manufacture it itself?",
+    "source": "https://investor.ralphlauren.com/"
+  },
+  "DECK": {
+    "overview": "Deckers Brands owns footwear brands serving lifestyle and performance customers.",
+    "products": "UGG and HOKA.",
+    "customers": "Casual-footwear shoppers, runners, outdoor athletes and retail partners.",
+    "businessModel": "Footwear and apparel sales through direct channels and wholesale partners.",
+    "insight": "UGG and HOKA serve different occasions and customers, giving one parent company exposure to both lifestyle and performance footwear.",
+    "watch": "HOKA growth, UGG seasonality, product availability and direct-to-consumer margins.",
+    "question": "How does owning two different footwear brands change a company's dependence on one fashion trend?",
+    "source": "https://ir.deckers.com/"
+  },
+  "UAA": {
+    "overview": "Under Armour designs performance sportswear, footwear and accessories for training and competition.",
+    "products": "Under Armour, HeatGear, ColdGear and Curry Brand.",
+    "customers": "Athletes, teams, fitness customers and retail partners.",
+    "businessModel": "Sales of performance apparel, footwear and accessories through wholesale and direct channels.",
+    "insight": "Performance claims and technical fabrics are central to its pitch; product innovation must translate into repeat purchases.",
+    "watch": "Brand demand, footwear sales, promotional activity, margins and restructuring efforts.",
+    "question": "Why does a performance clothing brand need to explain what its fabric actually does?",
+    "source": "https://about.underarmour.com/en/investors.html"
+  },
+  "LEVI": {
+    "overview": "Levi Strauss & Co. designs and sells denim clothing and casual apparel through its brands and channels.",
+    "products": "Levi's jeans, 501 jeans, denim jackets and Dockers where applicable to reporting period.",
+    "customers": "Denim buyers, casualwear shoppers and wholesale retailers.",
+    "businessModel": "Apparel sales through company-operated stores, e-commerce and wholesale accounts.",
+    "insight": "The 501 is a recognizable product with a long history, but the company still needs new fits and styles to attract changing customers.",
+    "watch": "Denim demand, direct-to-consumer growth, wholesale trends and inventory.",
+    "question": "How can a company keep a classic product recognizable while responding to new fashion trends?",
+    "source": "https://investors.levistrauss.com/"
+  },
+  "CROX": {
+    "overview": "Crocs Inc. owns casual-footwear brands known for distinctive designs and comfort.",
+    "products": "Crocs Classic Clog, Jibbitz charms and HEYDUDE.",
+    "customers": "Casual-footwear shoppers, families and wholesale retailers.",
+    "businessModel": "Footwear and accessory sales through direct and wholesale channels.",
+    "insight": "Jibbitz turns a basic clog into a customizable product; brand collaborations can create attention but demand can change with fashion.",
+    "watch": "Crocs and HEYDUDE brand performance, inventory, pricing and wholesale demand.",
+    "question": "Why might inexpensive customization accessories increase the appeal of a basic shoe?",
+    "source": "https://investors.crocs.com/"
+  },
+  "COLM": {
+    "overview": "Columbia Sportswear designs outdoor apparel, footwear and accessories for different activities and price points.",
+    "products": "Columbia, SOREL, Mountain Hardwear and prAna.",
+    "customers": "Hikers, outdoor enthusiasts, winter-weather shoppers and retail partners.",
+    "businessModel": "Apparel, footwear and accessory sales through wholesale and direct channels.",
+    "insight": "Weather and seasonal demand influence product mix, while multiple brands cover different outdoor activities.",
+    "watch": "Wholesale orders, winter demand, international markets and inventory.",
+    "question": "Why could an unusually warm winter affect an outdoor apparel company's sales mix?",
+    "source": "https://investor.columbia.com/"
+  },
+  "ONON": {
+    "overview": "On Holding is a Swiss sportswear company known for running footwear and expanding athletic apparel.",
+    "products": "On running shoes, CloudTec cushioning and On apparel.",
+    "customers": "Runners, active lifestyle shoppers and specialty retail partners.",
+    "businessModel": "Premium footwear, apparel and accessory sales through direct and wholesale channels.",
+    "insight": "Distinctive cushioning design helps differentiate the product, while retail expansion increases reach and inventory needs.",
+    "watch": "Footwear demand, new models, store expansion, gross margin and supply chain.",
+    "question": "What must a premium running shoe demonstrate beyond a recognizable appearance?",
+    "source": "https://investors.on-running.com/"
+  },
+  "VFC": {
+    "overview": "VF Corporation owns apparel and footwear brands serving outdoor and lifestyle markets.",
+    "products": "The North Face, Vans and Timberland.",
+    "customers": "Outdoor customers, skateboard and lifestyle shoppers, and retail partners.",
+    "businessModel": "Brand product sales through wholesale and direct channels.",
+    "insight": "Its brands have different customer communities, so a slowdown in one brand need not reflect the same trend across all brands.",
+    "watch": "Brand-by-brand sales, debt, inventory and turnaround execution.",
+    "question": "Why should an investor inspect each brand instead of judging a parent company by only one popular label?",
+    "source": "https://www.vfc.com/investors"
+  },
+  "PVH": {
+    "overview": "PVH is a global apparel company centered on two major fashion brands.",
+    "products": "Calvin Klein and Tommy Hilfiger.",
+    "customers": "Fashion shoppers, department stores, franchisees and licensing partners.",
+    "businessModel": "Wholesale and direct product sales, plus licensing and related brand arrangements.",
+    "insight": "Brand identity can be monetized across apparel and other categories, but consistency matters when products are sold by many partners.",
+    "watch": "Calvin Klein and Tommy Hilfiger demand, regional sales, margins and licensing.",
+    "question": "How does licensing help a brand appear on products outside its core clothing business?",
+    "source": "https://www.pvh.com/investors"
+  },
+  "BIRK": {
+    "overview": "Birkenstock Holding markets premium footwear associated with its contoured footbed.",
+    "products": "Arizona sandals, Boston clogs and Birkenstock footbed designs.",
+    "customers": "Comfort-footwear and fashion consumers, plus retail partners.",
+    "businessModel": "Footwear sales through wholesale and direct channels.",
+    "insight": "Its product identity rests on recognizable fit and construction; demand can span comfort use and fashion cycles.",
+    "watch": "Production capacity, product mix, wholesale relationships and pricing.",
+    "question": "How can a functional design feature become a recognizable fashion signature?",
+    "source": "https://www.birkenstock-holding.com/investor-relations/"
+  },
+  "TPR": {
+    "overview": "Tapestry is a parent company operating accessible-luxury fashion and accessories brands.",
+    "products": "Coach and kate spade new york.",
+    "customers": "Handbag, accessory and fashion shoppers across several markets.",
+    "businessModel": "Sales of handbags, leather goods and other products through direct and wholesale channels.",
+    "insight": "The parent allocates resources across distinct brands, while each brand needs its own positioning and customer loyalty.",
+    "watch": "Coach and kate spade trends, international demand, pricing and margins.",
+    "question": "Why should two handbag brands under one owner maintain different styles and identities?",
+    "source": "https://www.tapestry.com/investors/"
+  },
+  "ASO": {
+    "overview": "Academy Sports + Outdoors operates sporting-goods and outdoor retail stores rather than primarily manufacturing its own products.",
+    "products": "Academy stores, sports equipment, footwear, outdoor gear and private-label merchandise.",
+    "customers": "Families, athletes, hunters, anglers and recreational shoppers.",
+    "businessModel": "Retail sales of branded and private-label merchandise.",
+    "insight": "Its assortment serves many sports and outdoor activities; private-label products can offer different pricing and margins from national brands.",
+    "watch": "Store traffic, comparable sales, new stores, seasonal demand and inventory.",
+    "question": "How is Academy's business model different from Nike's even when both sell athletic shoes?",
+    "source": "https://investors.academy.com/"
+  },
+  "CELH": {
+    "overview": "Celsius Holdings is a beverage company included in this broader consumer-brand category, not an apparel maker.",
+    "products": "CELSIUS energy drinks and its beverage portfolio.",
+    "customers": "Energy-drink consumers, convenience stores, grocery chains and distributors.",
+    "businessModel": "Sales of packaged beverages through retail and distribution networks.",
+    "insight": "Shelf space, distribution reach and repeat purchases matter: a brand can gain recognition yet still need reliable store availability.",
+    "watch": "Retail sales velocity, distribution, competition, promotional spending and beverage margins.",
+    "question": "Why is gaining space in convenience-store refrigerators important to an energy-drink brand?",
+    "source": "https://ir.celsiusholdingsinc.com/"
+  }
+};
   const revenueModels={AAPL:"Device sales and recurring services",MSFT:"Software subscriptions, cloud computing and licenses",NVDA:"AI and graphics chips, systems and networking",GOOGL:"Advertising, cloud services and subscriptions",META:"Advertising across its apps",AMZN:"Retail, seller fees, AWS, advertising and subscriptions",TSM:"Contract chip manufacturing for chip designers",PLTR:"Government and commercial software contracts",CRWD:"Cybersecurity subscriptions",PANW:"Security products, subscriptions and support",V:"Payment-network service fees, not primarily cardholder lending",MA:"Payment-network and related service fees",JPM:"Loan interest and banking and investment fees",KO:"Beverage concentrate and finished-drink sales",PEP:"Beverage and packaged-food sales",MCD:"Franchise royalties, rent and restaurant sales",NFLX:"Subscriptions and advertising",SPOT:"Premium subscriptions and advertising",DIS:"Entertainment, streaming, parks and licensing",TSLA:"Vehicles, energy storage and services",UBER:"Fees from rides, delivery and freight",DASH:"Delivery fees, subscriptions and advertising",LLY:"Prescription medicine sales",ISRG:"Surgical systems, instruments and services",XOM:"Oil, gas, refining and chemicals",CEG:"Electricity and energy-product sales",CAT:"Machinery, parts, services and financing",NKE:"Footwear and apparel sales",O:"Rent from commercial tenants",PLD:"Rent from logistics properties",LMT:"Defense and aerospace contracts"};
   const industryRevenue={technology:"Technology products, software subscriptions or services",retail:"Merchandise, memberships or marketplace services",transport:"Vehicles, fares, delivery or related services",food:"Food and beverage sales, distribution or franchise fees",media:"Subscriptions, advertising, licensing or experiences",finance:"Interest, transactions or financial-service fees",health:"Medicines, devices, care or healthcare services",energy:"Energy, industrial equipment or project contracts",brands:"Branded merchandise sold directly or wholesale",housing:"Homes, materials, rent or property services",defense:"Government and commercial contracts"};
   // Editorially checked, dated stories. No generated headline is presented as verified news.
@@ -405,6 +557,8 @@
   }
   function companyExplainer(c){
     const industry=c.industries?.find(i=>!i.optional)||c.industries?.[0]||{id:"",name:"Business"};
+    const brandResearch=brandProfiles[c.ticker];
+    if(brandResearch && c.industries?.some(i=>i.id==="brands")) return {overview:brandResearch.overview,revenue:"Recognizable brands / products: "+brandResearch.products+".",businessModel:brandResearch.businessModel,importance:"Customers: "+brandResearch.customers+". Why it matters: "+brandResearch.insight+" What to watch: "+brandResearch.watch,product:brandResearch.products,customers:brandResearch.customers,watch:brandResearch.watch,examples:brandResearch.products,verified:true,source:brandResearch.source,question:brandResearch.question};
     const housingResearch=housingProfiles[c.ticker];
     if(housingResearch && c.industries?.some(i=>i.id==="housing")) return {overview:housingResearch.overview,revenue:"Recognizable products / properties: "+housingResearch.products+".",businessModel:housingResearch.businessModel,importance:"Customers: "+housingResearch.customers+". Why it matters: "+housingResearch.insight+" What to watch: "+housingResearch.watch,product:housingResearch.products,customers:housingResearch.customers,watch:housingResearch.watch,examples:housingResearch.products,verified:true,source:housingResearch.source,question:housingResearch.question};
     const retailResearch=retailProfiles[c.ticker];
@@ -425,7 +579,7 @@
   }
   Object.assign(officialSites,{LMT:"lockheedmartin.com",RTX:"rtx.com",NOC:"northropgrumman.com",GD:"gd.com",LHX:"l3harris.com",HII:"hii.com",BA:"boeing.com",HWM:"howmet.com",AVAV:"avinc.com",AXON:"axon.com",PLTR:"palantir.com",GE:"geaerospace.com",HON:"honeywell.com"});
   Object.assign(officialSites,{AMZN:"amazon.com",WMT:"walmart.com",TGT:"target.com",COST:"costco.com",HD:"homedepot.com",LOW:"lowes.com",BBY:"bestbuy.com",EBAY:"ebay.com",ETSY:"etsy.com",CHWY:"chewy.com",BABA:"alibabagroup.com",MELI:"mercadolibre.com",ROST:"rossstores.com",TJX:"tjx.com"});
-  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles};
+  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles};
   function passportBackground(c){
     const info=companyExplainer(c);
     return '<div class="passport-background"><h4>What this company does</h4><p>'+esc(info.overview)+'</p><h4>Products and brands</h4><p>'+esc(info.revenue)+'</p><h4>How it earns revenue</h4><p>'+esc(info.businessModel)+'</p><h4>Company context</h4><p>'+esc(info.importance)+'</p><h4>Student research checklist</h4><ul><li>What product or service does it sell?</li><li>Who pays for it?</li><li>Who competes with it?</li><li>What do its latest revenue and profit figures show?</li></ul>'+(info.question?'<p><strong>Company-specific research question:</strong> '+esc(info.question)+'</p>':'')+'<p class="passport-disclaimer">Introductory company-specific business context, not a live news report or financial recommendation. Check company filings for updated figures.</p>'+(info.source?'<p><a href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">Read company annual reports / investor relations ↗</a></p>':'')+'</div>';
