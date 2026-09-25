@@ -1352,6 +1352,248 @@
     "source": "https://investors.quantaservices.com/"
   }
 };
+  const foodProfiles={
+  "KO": {
+    "overview": "Coca-Cola is a global beverage company that owns brands and works with bottling partners to manufacture and distribute many finished drinks.",
+    "products": "Coca-Cola, Sprite, Fanta, Minute Maid and smartwater.",
+    "customers": "Bottlers, retailers, restaurants and consumers.",
+    "businessModel": "Sales of beverage concentrates, syrups and finished products, plus related brand activity.",
+    "insight": "A concentrate business can earn from a drink sold by a separate bottler; brand marketing and shelf space are critical.",
+    "watch": "Beverage volumes, pricing, bottler relationships, sugar-related regulation and currency.",
+    "question": "Why does selling syrup to a bottler differ from selling a finished soda at a store?",
+    "source": "https://investors.coca-colacompany.com/"
+  },
+  "PEP": {
+    "overview": "PepsiCo sells both beverages and packaged foods through a global portfolio.",
+    "products": "Pepsi, Gatorade, Lay's, Doritos, Cheetos and Quaker.",
+    "customers": "Grocery stores, convenience stores, restaurants and consumers.",
+    "businessModel": "Sales of beverages, snacks and other packaged foods.",
+    "insight": "A beverage-and-snack portfolio reaches different shopping occasions, while distribution and merchandising influence which products customers see.",
+    "watch": "Organic volume, pricing, snack demand, input costs and international sales.",
+    "question": "How could owning both drinks and snacks help PepsiCo serve the same retailer?",
+    "source": "https://www.pepsico.com/investors"
+  },
+  "MCD": {
+    "overview": "McDonald's is a global quick-service restaurant brand with a large franchised restaurant system.",
+    "products": "Big Mac, McNuggets, McCafé and McDonald's restaurants.",
+    "customers": "Restaurant guests and franchise operators.",
+    "businessModel": "Rent and royalties from franchised restaurants plus sales at company-operated locations.",
+    "insight": "A franchised restaurant may be operated by a local owner who pays McDonald's for brand and property rights; the parent does not record every franchise sale as its own restaurant revenue.",
+    "watch": "Comparable sales, franchise economics, menu value, labor and commodity costs.",
+    "question": "Why does a franchisor's revenue differ from the total amount customers spend at all its restaurants?",
+    "source": "https://corporate.mcdonalds.com/corpcorp/investors.html"
+  },
+  "SBUX": {
+    "overview": "Starbucks operates coffeehouses and sells coffee and other beverages through company-operated and licensed channels.",
+    "products": "Starbucks coffeehouses, Frappuccino, espresso drinks and packaged coffee.",
+    "customers": "Coffeehouse guests, licensees and retail partners.",
+    "businessModel": "Company-operated store sales, licensing and packaged-product arrangements.",
+    "insight": "Store traffic and average ticket both matter; a licensed location has a different revenue structure from a store Starbucks operates itself.",
+    "watch": "Transactions, ticket size, labor, coffee prices and international demand.",
+    "question": "How can Starbucks sales change if customer visits fall but average spending per visit rises?",
+    "source": "https://investor.starbucks.com/"
+  },
+  "CMG": {
+    "overview": "Chipotle operates fast-casual restaurants centered on customizable meals.",
+    "products": "Chipotle burritos, bowls, tacos and digital ordering.",
+    "customers": "Restaurant guests and catering customers.",
+    "businessModel": "Food and beverage sales at company-operated restaurants.",
+    "insight": "A relatively focused menu supports repeatable preparation, while ingredient costs and restaurant throughput influence margins.",
+    "watch": "Comparable sales, restaurant openings, food costs, labor and digital orders.",
+    "question": "Why does serving more customers per hour matter to a restaurant with high fixed costs?",
+    "source": "https://ir.chipotle.com/"
+  },
+  "DPZ": {
+    "overview": "Domino's operates a pizza brand with franchised and company-owned stores and a supply-chain business.",
+    "products": "Domino's pizza, delivery and carryout ordering, franchise stores.",
+    "customers": "Pizza customers and franchise operators.",
+    "businessModel": "Franchise royalties and fees, company-store sales and supply-chain sales to stores.",
+    "insight": "The supply chain can earn by supplying ingredients and equipment to franchisees in addition to brand royalties.",
+    "watch": "Order counts, delivery versus carryout, franchise openings and food costs.",
+    "question": "Why can Domino's earn revenue when a franchised store buys pizza ingredients?",
+    "source": "https://ir.dominos.com/"
+  },
+  "YUM": {
+    "overview": "Yum! Brands owns major restaurant brands and relies heavily on franchised locations worldwide.",
+    "products": "KFC, Taco Bell, Pizza Hut and Habit Burger & Grill.",
+    "customers": "Restaurant guests and franchisees.",
+    "businessModel": "Franchise royalties, fees and company-operated restaurant revenue.",
+    "insight": "Different brands serve different menus and markets, while franchisees provide much of the capital needed to open locations.",
+    "watch": "Same-store sales, unit growth, franchise health and international markets.",
+    "question": "Why might a parent company prefer franchisees to finance new restaurant locations?",
+    "source": "https://investors.yum.com/"
+  },
+  "MNST": {
+    "overview": "Monster Beverage develops and markets energy drinks through a distribution network.",
+    "products": "Monster Energy, Reign and other energy-drink brands.",
+    "customers": "Convenience stores, grocery chains, distributors and consumers.",
+    "businessModel": "Sales of packaged beverages and related brands.",
+    "insight": "Packaging, flavor launches, sponsorships and refrigerated shelf space help compete for repeat purchases.",
+    "watch": "Sales volume, distribution, competition, marketing and ingredient costs.",
+    "question": "Why does placement in a convenience-store cooler matter to an energy-drink brand?",
+    "source": "https://investors.monsterbevcorp.com/"
+  },
+  "CAVA": {
+    "overview": "CAVA operates Mediterranean fast-casual restaurants and sells branded food products.",
+    "products": "CAVA bowls, pitas, dips and spreads.",
+    "customers": "Restaurant guests and grocery shoppers.",
+    "businessModel": "Restaurant food sales and consumer-packaged-product sales.",
+    "insight": "Customizable bowls support a repeatable kitchen model, while branded dips extend the name beyond restaurants.",
+    "watch": "New restaurant openings, comparable sales, food costs and labor.",
+    "question": "How does selling a branded dip in a grocery store differ from selling a bowl in a restaurant?",
+    "source": "https://investor.cava.com/"
+  },
+  "SHAK": {
+    "overview": "Shake Shack operates burger-focused restaurants in company-operated and licensed formats.",
+    "products": "ShackBurger, crinkle-cut fries, shakes and Shake Shack locations.",
+    "customers": "Restaurant guests and licensed operators.",
+    "businessModel": "Company-operated restaurant sales and licensing revenue.",
+    "insight": "Restaurant design and brand experience support positioning, but higher labor and occupancy costs can pressure unit economics.",
+    "watch": "Restaurant openings, same-Shack sales, food costs, labor and licensing.",
+    "question": "Why can a popular restaurant still struggle to earn a strong profit after rent and labor?",
+    "source": "https://investor.shakeshack.com/"
+  },
+  "DASH": {
+    "overview": "DoorDash operates a local-commerce platform connecting customers, merchants and delivery workers.",
+    "products": "DoorDash marketplace, DashPass and merchant services.",
+    "customers": "Consumers, restaurants, retailers, merchants and Dashers.",
+    "businessModel": "Marketplace fees, merchant services, subscriptions and advertising.",
+    "insight": "The value of an order is not all company revenue: merchants receive payment for goods and delivery workers are compensated for service.",
+    "watch": "Order volume, gross order value, take rate, delivery costs and merchant retention.",
+    "question": "Why is the full price of a delivered meal not the same as DoorDash revenue?",
+    "source": "https://ir.doordash.com/"
+  },
+  "KDP": {
+    "overview": "Keurig Dr Pepper sells beverages and coffee products, including single-serve brewing systems.",
+    "products": "Dr Pepper, 7UP in applicable markets, Keurig brewers and K-Cup pods.",
+    "customers": "Retailers, beverage distributors, coffee drinkers and households.",
+    "businessModel": "Packaged-beverage sales, coffee-pod sales and brewer sales.",
+    "insight": "A brewer can create repeat demand for compatible pods, making the installed base of machines relevant.",
+    "watch": "Beverage volumes, pod demand, brewer adoption, pricing and distribution.",
+    "question": "Why can selling a coffee machine lead to future recurring product sales?",
+    "source": "https://investors.keurigdrpepper.com/"
+  },
+  "MDLZ": {
+    "overview": "Mondelēz International makes and sells packaged snacks across global markets.",
+    "products": "Oreo, Ritz, Cadbury, Milka and Toblerone.",
+    "customers": "Grocery stores, convenience retailers and snack consumers.",
+    "businessModel": "Sales of biscuits, chocolate and other packaged snacks.",
+    "insight": "Strong snack brands depend on distribution and repeat purchases, while cocoa and other ingredient costs can affect margins.",
+    "watch": "Snack volume, cocoa costs, pricing, international demand and brand investment.",
+    "question": "How can a jump in cocoa prices affect a chocolate brand even if customers buy the same number of bars?",
+    "source": "https://www.mondelezinternational.com/investors/"
+  },
+  "HSY": {
+    "overview": "Hershey makes confectionery and other snacks, with a particularly recognizable U.S. candy portfolio.",
+    "products": "Hershey's, Reese's, Kit Kat in the U.S., and other snacks.",
+    "customers": "Retailers, seasonal candy buyers and everyday snack consumers.",
+    "businessModel": "Sales of chocolate, candy and salty snacks.",
+    "insight": "Halloween and other holidays create seasonal demand; cocoa costs and retail shelf placement are major considerations.",
+    "watch": "Cocoa prices, seasonal inventory, candy demand and pricing.",
+    "question": "Why does a candy manufacturer need to plan production months before Halloween?",
+    "source": "https://investors.thehersheycompany.com/"
+  },
+  "CELH": {
+    "overview": "Celsius Holdings develops and sells energy drinks through retail and distribution partners.",
+    "products": "CELSIUS energy drinks and its beverage portfolio.",
+    "customers": "Convenience stores, grocery chains, distributors and energy-drink consumers.",
+    "businessModel": "Sales of packaged beverages through distribution and retail channels.",
+    "insight": "The company needs both consumer demand and store availability; distribution gains are different from repeat purchase growth.",
+    "watch": "Retail sales velocity, distribution reach, promotions, competition and margins.",
+    "question": "How can a brand gain shelf space without yet proving customers will repeatedly buy it?",
+    "source": "https://ir.celsiusholdingsinc.com/"
+  },
+  "BROS": {
+    "overview": "Dutch Bros operates drive-through beverage shops and offers a broad menu of coffee and energy drinks.",
+    "products": "Dutch Bros coffee, Rebel energy drinks and drive-through shops.",
+    "customers": "Drive-through beverage customers.",
+    "businessModel": "Sales at company-operated shops and revenue from franchised locations.",
+    "insight": "Speed, convenient locations and repeat visits matter in a drive-through format; expansion requires site selection and staff training.",
+    "watch": "Shop openings, same-shop sales, labor and beverage costs.",
+    "question": "Why might the number of cars served per hour matter more for a drive-through than for a sit-down café?",
+    "source": "https://investors.dutchbros.com/"
+  },
+  "TSN": {
+    "overview": "Tyson Foods processes and sells meat and prepared foods through multiple protein businesses.",
+    "products": "Tyson chicken, Jimmy Dean, Hillshire Farm and Ball Park.",
+    "customers": "Grocers, restaurants, food-service operators and consumers.",
+    "businessModel": "Sales of chicken, beef, pork and prepared foods.",
+    "insight": "Livestock and feed prices affect processing costs; branded prepared foods have different economics from commodity meat.",
+    "watch": "Protein demand, livestock supply, feed costs, plant efficiency and food safety.",
+    "question": "Why can a meat processor's profit fall when the retail price of meat rises?",
+    "source": "https://ir.tyson.com/"
+  },
+  "GIS": {
+    "overview": "General Mills manufactures branded packaged foods for households and food-service customers.",
+    "products": "Cheerios, Nature Valley, Betty Crocker, Pillsbury and Häagen-Dazs in applicable markets.",
+    "customers": "Grocery retailers, food-service buyers and consumers.",
+    "businessModel": "Sales of cereals, snacks, baking products and other packaged foods.",
+    "insight": "Brand recognition and shelf space support repeat sales, but customers can switch to lower-priced store brands.",
+    "watch": "Volumes, pricing, input costs, retailer inventory and consumer trade-down.",
+    "question": "Why might a shopper switch from a famous cereal brand to a store brand during inflation?",
+    "source": "https://investors.generalmills.com/"
+  },
+  "KHC": {
+    "overview": "Kraft Heinz sells packaged foods, sauces and condiments through major consumer brands.",
+    "products": "Heinz ketchup, Kraft Mac & Cheese, Philadelphia and Oscar Mayer.",
+    "customers": "Grocery stores, restaurants and households.",
+    "businessModel": "Sales of branded packaged foods and food-service products.",
+    "insight": "Established brands benefit from familiarity, but must balance pricing with consumer demand and product innovation.",
+    "watch": "Volume, brand investment, retailer relationships, input costs and portfolio changes.",
+    "question": "Why can raising the price of ketchup increase revenue per bottle but reduce bottles sold?",
+    "source": "https://ir.kraftheinzcompany.com/"
+  },
+  "CPB": {
+    "overview": "The Campbell's Company sells soups, sauces, snacks and other packaged foods.",
+    "products": "Campbell's soup, Goldfish, Pepperidge Farm and Prego.",
+    "customers": "Grocery retailers, food-service customers and households.",
+    "businessModel": "Sales of meals, beverages and snacks.",
+    "insight": "Soup and snacks meet different shopping needs; the company manages a portfolio rather than depending on one product.",
+    "watch": "Snack and meal volumes, retailer promotions, ingredient costs and brand demand.",
+    "question": "How can one parent company be affected differently by soup sales and snack sales?",
+    "source": "https://investor.thecampbellscompany.com/"
+  },
+  "CAG": {
+    "overview": "Conagra Brands owns a portfolio of frozen, shelf-stable and snack food brands.",
+    "products": "Birds Eye, Healthy Choice, Marie Callender's, Slim Jim and Orville Redenbacher's.",
+    "customers": "Grocery stores, food-service operators and consumers.",
+    "businessModel": "Sales of packaged frozen foods, meals and snacks.",
+    "insight": "Frozen meals compete on convenience and price, and freezer-space availability matters alongside brand marketing.",
+    "watch": "Frozen-food demand, promotional spending, packaging costs and retailer inventory.",
+    "question": "Why might freezer space in a supermarket be especially important to a frozen-meal brand?",
+    "source": "https://www.conagrabrands.com/investor-relations"
+  },
+  "WING": {
+    "overview": "Wingstop is a restaurant brand built primarily around franchised chicken-wing restaurants.",
+    "products": "Wingstop wings, tenders, fries and digital ordering.",
+    "customers": "Restaurant guests and franchise operators.",
+    "businessModel": "Franchise royalties and fees, advertising-related arrangements and company-store sales.",
+    "insight": "Franchisees run most restaurants, while chicken-wing costs and delivery demand affect their restaurant-level economics.",
+    "watch": "Domestic and international openings, same-store sales, chicken costs and franchise health.",
+    "question": "Why should an investor examine franchisee profitability as well as Wingstop's royalty revenue?",
+    "source": "https://ir.wingstop.com/"
+  },
+  "TXRH": {
+    "overview": "Texas Roadhouse operates casual-dining restaurants and related restaurant brands.",
+    "products": "Texas Roadhouse, Bubba's 33 and Jaggers.",
+    "customers": "Dine-in guests, takeout customers and restaurant employees.",
+    "businessModel": "Food and beverage sales at company-operated restaurants plus franchise-related revenue.",
+    "insight": "A full-service restaurant must coordinate table turnover, food quality and labor; busy dining rooms do not automatically mean high margins.",
+    "watch": "Guest traffic, average check, beef prices, labor and restaurant openings.",
+    "question": "Why can rising steak prices pressure a restaurant even when its dining room is full?",
+    "source": "https://investor.texasroadhouse.com/"
+  },
+  "QSR": {
+    "overview": "Restaurant Brands International owns global quick-service restaurant brands, many operated by franchisees.",
+    "products": "Burger King, Tim Hortons, Popeyes and Firehouse Subs.",
+    "customers": "Restaurant guests and franchise operators.",
+    "businessModel": "Franchise royalties and fees, property and supply-chain-related revenue and company restaurant sales.",
+    "insight": "A parent can expand several distinct brands using franchise partners, but brand health and store economics vary by chain.",
+    "watch": "Same-store sales, unit growth, franchisee returns, international markets and commodity costs.",
+    "question": "Why should students analyze Burger King and Tim Hortons separately even though they share a parent?",
+    "source": "https://www.rbi.com/English/investors/default.aspx"
+  }
+};
   const revenueModels={AAPL:"Device sales and recurring services",MSFT:"Software subscriptions, cloud computing and licenses",NVDA:"AI and graphics chips, systems and networking",GOOGL:"Advertising, cloud services and subscriptions",META:"Advertising across its apps",AMZN:"Retail, seller fees, AWS, advertising and subscriptions",TSM:"Contract chip manufacturing for chip designers",PLTR:"Government and commercial software contracts",CRWD:"Cybersecurity subscriptions",PANW:"Security products, subscriptions and support",V:"Payment-network service fees, not primarily cardholder lending",MA:"Payment-network and related service fees",JPM:"Loan interest and banking and investment fees",KO:"Beverage concentrate and finished-drink sales",PEP:"Beverage and packaged-food sales",MCD:"Franchise royalties, rent and restaurant sales",NFLX:"Subscriptions and advertising",SPOT:"Premium subscriptions and advertising",DIS:"Entertainment, streaming, parks and licensing",TSLA:"Vehicles, energy storage and services",UBER:"Fees from rides, delivery and freight",DASH:"Delivery fees, subscriptions and advertising",LLY:"Prescription medicine sales",ISRG:"Surgical systems, instruments and services",XOM:"Oil, gas, refining and chemicals",CEG:"Electricity and energy-product sales",CAT:"Machinery, parts, services and financing",NKE:"Footwear and apparel sales",O:"Rent from commercial tenants",PLD:"Rent from logistics properties",LMT:"Defense and aerospace contracts"};
   const industryRevenue={technology:"Technology products, software subscriptions or services",retail:"Merchandise, memberships or marketplace services",transport:"Vehicles, fares, delivery or related services",food:"Food and beverage sales, distribution or franchise fees",media:"Subscriptions, advertising, licensing or experiences",finance:"Interest, transactions or financial-service fees",health:"Medicines, devices, care or healthcare services",energy:"Energy, industrial equipment or project contracts",brands:"Branded merchandise sold directly or wholesale",housing:"Homes, materials, rent or property services",defense:"Government and commercial contracts"};
   // Editorially checked, dated stories. No generated headline is presented as verified news.
@@ -1367,6 +1609,8 @@
   }
   function companyExplainer(c){
     const industry=c.industries?.find(i=>!i.optional)||c.industries?.[0]||{id:"",name:"Business"};
+    const foodResearch=foodProfiles[c.ticker];
+    if(foodResearch && c.industries?.some(i=>i.id==="food")) return {overview:foodResearch.overview,revenue:"Recognizable products / brands: "+foodResearch.products+".",businessModel:foodResearch.businessModel,importance:"Customers: "+foodResearch.customers+". Why it matters: "+foodResearch.insight+" What to watch: "+foodResearch.watch,product:foodResearch.products,customers:foodResearch.customers,watch:foodResearch.watch,examples:foodResearch.products,verified:true,source:foodResearch.source,question:foodResearch.question};
     const energyResearch=energyProfiles[c.ticker];
     if(energyResearch && c.industries?.some(i=>i.id==="energy")) return {overview:energyResearch.overview,revenue:"Recognizable products / services: "+energyResearch.products+".",businessModel:energyResearch.businessModel,importance:"Customers: "+energyResearch.customers+". Why it matters: "+energyResearch.insight+" What to watch: "+energyResearch.watch,product:energyResearch.products,customers:energyResearch.customers,watch:energyResearch.watch,examples:energyResearch.products,verified:true,source:energyResearch.source,question:energyResearch.question};
     const financeResearch=financeProfiles[c.ticker];
@@ -1399,7 +1643,7 @@
   }
   Object.assign(officialSites,{LMT:"lockheedmartin.com",RTX:"rtx.com",NOC:"northropgrumman.com",GD:"gd.com",LHX:"l3harris.com",HII:"hii.com",BA:"boeing.com",HWM:"howmet.com",AVAV:"avinc.com",AXON:"axon.com",PLTR:"palantir.com",GE:"geaerospace.com",HON:"honeywell.com"});
   Object.assign(officialSites,{AMZN:"amazon.com",WMT:"walmart.com",TGT:"target.com",COST:"costco.com",HD:"homedepot.com",LOW:"lowes.com",BBY:"bestbuy.com",EBAY:"ebay.com",ETSY:"etsy.com",CHWY:"chewy.com",BABA:"alibabagroup.com",MELI:"mercadolibre.com",ROST:"rossstores.com",TJX:"tjx.com"});
-  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles,healthProfiles,transportProfiles,financeProfiles,energyProfiles};
+  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles,healthProfiles,transportProfiles,financeProfiles,energyProfiles,foodProfiles};
   function passportBackground(c){
     const info=companyExplainer(c);
     return '<div class="passport-background"><h4>What this company does</h4><p>'+esc(info.overview)+'</p><h4>Products and brands</h4><p>'+esc(info.revenue)+'</p><h4>How it earns revenue</h4><p>'+esc(info.businessModel)+'</p><h4>Company context</h4><p>'+esc(info.importance)+'</p><h4>Student research checklist</h4><ul><li>What product or service does it sell?</li><li>Who pays for it?</li><li>Who competes with it?</li><li>What do its latest revenue and profit figures show?</li></ul>'+(info.question?'<p><strong>Company-specific research question:</strong> '+esc(info.question)+'</p>':'')+'<p class="passport-disclaimer">Introductory company-specific business context, not a live news report or financial recommendation. Check company filings for updated figures.</p>'+(info.source?'<p><a href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">Read company annual reports / investor relations ↗</a></p>':'')+'</div>';
