@@ -132,6 +132,121 @@
     "source": "https://investor.honeywell.com/"
   }
 };
+  // Retail and shopping company-specific student research.
+  const retailProfiles={
+  "AMZN": {
+    "overview": "Amazon operates an online marketplace, sells goods directly and runs cloud computing, advertising and subscription businesses.",
+    "products": "Amazon.com, Prime, Amazon Web Services (AWS), Kindle, Ring and Whole Foods.",
+    "businessModel": "Product sales, third-party seller fees, AWS cloud services, advertising and Prime subscriptions.",
+    "insight": "A shopper sees a retailer, but AWS sells computing power to businesses and advertising sells visibility to merchants.",
+    "watch": "Compare AWS growth with retail margins, fulfillment costs and advertising revenue.",
+    "source": "https://ir.aboutamazon.com/"
+  },
+  "WMT": {
+    "overview": "Walmart operates large stores, grocery and online shopping businesses, and membership warehouse stores.",
+    "products": "Walmart Supercenters, Walmart.com, Sam's Club and Walmart+.",
+    "businessModel": "Retail merchandise and groceries, Sam's Club membership fees, advertising and marketplace services.",
+    "insight": "Groceries draw frequent visits; Walmart's huge purchasing volume can help it negotiate supplier prices.",
+    "watch": "Comparable-store sales, grocery mix, labor, inventory and e-commerce profitability.",
+    "source": "https://stock.walmart.com/"
+  },
+  "TGT": {
+    "overview": "Target sells groceries, clothing, home goods, beauty products and everyday merchandise through stores and digital channels.",
+    "products": "Target stores, Good & Gather, Cat & Jack, up&up, Drive Up and Target Circle.",
+    "businessModel": "Merchandise sales, owned-brand products, marketplace activity and loyalty-related services.",
+    "insight": "Target designs many of its own store brands, so a product can be exclusive rather than identical to a rival's.",
+    "watch": "Customer traffic, discretionary purchases, shrink, inventory and profit margins.",
+    "source": "https://corporate.target.com/investors"
+  },
+  "COST": {
+    "overview": "Costco operates membership-only warehouse clubs selling bulk groceries, household goods and other merchandise.",
+    "products": "Costco warehouses, Kirkland Signature, Costco Gas and Costco.com.",
+    "businessModel": "Membership fees and merchandise sales at relatively low product markups.",
+    "insight": "Membership renewals are an important measure because annual fees support a business built around value pricing.",
+    "watch": "Membership renewal rates, comparable sales, warehouse expansion and merchandise margins.",
+    "source": "https://investor.costco.com/"
+  },
+  "HD": {
+    "overview": "Home Depot sells building materials, tools, appliances and home-improvement products to households and professionals.",
+    "products": "Home Depot stores, Pro services, tool rental and online ordering.",
+    "businessModel": "Product sales, installation-related services and professional-customer business.",
+    "insight": "A contractor buying supplies for many jobs behaves differently from a homeowner buying paint once.",
+    "watch": "Home sales, renovation demand, professional sales, inventory and lumber prices.",
+    "source": "https://ir.homedepot.com/"
+  },
+  "LOW": {
+    "overview": "Lowe's is a home-improvement retailer serving homeowners, do-it-yourself shoppers and professional contractors.",
+    "products": "Lowe's stores, MyLowe's, Pro services and home-improvement merchandise.",
+    "businessModel": "Merchandise sales and related services across stores and digital channels.",
+    "insight": "Homeowners may postpone a kitchen remodel when borrowing costs rise, while essential repairs still need supplies.",
+    "watch": "DIY versus professional demand, housing activity, product margins and store productivity.",
+    "source": "https://corporate.lowes.com/investors"
+  },
+  "BBY": {
+    "overview": "Best Buy sells consumer electronics and appliances and provides technology installation, repair and support.",
+    "products": "Best Buy stores, Geek Squad, Best Buy online and appliance installation.",
+    "businessModel": "Electronics and appliance sales plus service, installation and membership offerings.",
+    "insight": "A laptop sale can lead to additional revenue from setup, protection or repairs, but shoppers can delay upgrades.",
+    "watch": "Device replacement cycles, comparable sales, services and competition from online sellers.",
+    "source": "https://investors.bestbuy.com/"
+  },
+  "EBAY": {
+    "overview": "eBay connects independent buyers and sellers through an online marketplace rather than primarily owning the merchandise listed.",
+    "products": "eBay marketplace, eBay Motors and authenticated collectibles and fashion categories.",
+    "businessModel": "Transaction fees, promoted listings and other seller services.",
+    "insight": "A marketplace can earn a fee when someone else sells an item, without buying and stocking that item itself.",
+    "watch": "Gross merchandise volume, active buyers, seller fees and competition.",
+    "source": "https://investors.ebayinc.com/"
+  },
+  "ETSY": {
+    "overview": "Etsy runs a marketplace centered on handmade, vintage and distinctive goods sold by independent merchants.",
+    "products": "Etsy marketplace, personalized gifts, handmade products and vintage listings.",
+    "businessModel": "Seller transaction and listing fees, advertising and merchant services.",
+    "insight": "A custom gift can compete on uniqueness rather than price alone; Etsy depends on keeping buyers and sellers engaged.",
+    "watch": "Active buyers, repeat purchases, seller activity and marketplace fees.",
+    "source": "https://investors.etsy.com/"
+  },
+  "CHWY": {
+    "overview": "Chewy is an online pet-products retailer offering food, supplies, pharmacy and pet-health services.",
+    "products": "Chewy.com, Autoship recurring deliveries, Chewy Pharmacy and pet supplies.",
+    "businessModel": "Direct sales of pet products and related pet-health goods and services.",
+    "insight": "Autoship turns recurring pet-food needs into repeat orders, which can make demand more predictable.",
+    "watch": "Autoship sales, customer retention, fulfillment costs and pet-health expansion.",
+    "source": "https://investor.chewy.com/"
+  },
+  "BABA": {
+    "overview": "Alibaba operates Chinese and international commerce platforms and a cloud-computing business.",
+    "products": "Taobao, Tmall, Alibaba.com, AliExpress and Alibaba Cloud.",
+    "businessModel": "Merchant advertising and services, commerce activity, cloud computing and other digital services.",
+    "insight": "Alibaba.com helps businesses source products wholesale, while Taobao and Tmall serve different consumer-shopping needs.",
+    "watch": "China consumer demand, merchant activity, cloud growth and regulatory developments.",
+    "source": "https://www.alibabagroup.com/en-US/ir/home"
+  },
+  "MELI": {
+    "overview": "MercadoLibre operates a Latin American online marketplace with payments, credit and logistics businesses.",
+    "products": "Mercado Libre marketplace, Mercado Pago and Mercado Envios.",
+    "businessModel": "Marketplace fees, advertising, payment processing, financial services and logistics.",
+    "insight": "A seller may use the same ecosystem to list a product, collect payment and ship the order.",
+    "watch": "Regional consumer demand, payment volumes, credit losses and delivery costs.",
+    "source": "https://investor.mercadolibre.com/"
+  },
+  "ROST": {
+    "overview": "Ross Stores runs off-price stores selling branded apparel, footwear and home products at discounted prices.",
+    "products": "Ross Dress for Less and dd's DISCOUNTS.",
+    "businessModel": "Merchandise purchased from suppliers and resold through its stores.",
+    "insight": "Off-price buyers can purchase excess or seasonal inventory and offer shoppers changing assortments.",
+    "watch": "Store traffic, merchandise buying opportunities, freight and operating costs.",
+    "source": "https://investors.rossstores.com/"
+  },
+  "TJX": {
+    "overview": "TJX operates off-price retail chains selling apparel and home merchandise across several countries.",
+    "products": "TJ Maxx, Marshalls, HomeGoods, Sierra and TK Maxx.",
+    "businessModel": "Retail sales of branded and other merchandise sourced through an off-price buying model.",
+    "insight": "Its treasure-hunt assortment encourages browsing because the same item may not be available on the next visit.",
+    "watch": "Comparable sales, buying opportunities, inventory turnover and international performance.",
+    "source": "https://investor.tjx.com/"
+  }
+};
   const revenueModels={AAPL:"Device sales and recurring services",MSFT:"Software subscriptions, cloud computing and licenses",NVDA:"AI and graphics chips, systems and networking",GOOGL:"Advertising, cloud services and subscriptions",META:"Advertising across its apps",AMZN:"Retail, seller fees, AWS, advertising and subscriptions",TSM:"Contract chip manufacturing for chip designers",PLTR:"Government and commercial software contracts",CRWD:"Cybersecurity subscriptions",PANW:"Security products, subscriptions and support",V:"Payment-network service fees, not primarily cardholder lending",MA:"Payment-network and related service fees",JPM:"Loan interest and banking and investment fees",KO:"Beverage concentrate and finished-drink sales",PEP:"Beverage and packaged-food sales",MCD:"Franchise royalties, rent and restaurant sales",NFLX:"Subscriptions and advertising",SPOT:"Premium subscriptions and advertising",DIS:"Entertainment, streaming, parks and licensing",TSLA:"Vehicles, energy storage and services",UBER:"Fees from rides, delivery and freight",DASH:"Delivery fees, subscriptions and advertising",LLY:"Prescription medicine sales",ISRG:"Surgical systems, instruments and services",XOM:"Oil, gas, refining and chemicals",CEG:"Electricity and energy-product sales",CAT:"Machinery, parts, services and financing",NKE:"Footwear and apparel sales",O:"Rent from commercial tenants",PLD:"Rent from logistics properties",LMT:"Defense and aerospace contracts"};
   const industryRevenue={technology:"Technology products, software subscriptions or services",retail:"Merchandise, memberships or marketplace services",transport:"Vehicles, fares, delivery or related services",food:"Food and beverage sales, distribution or franchise fees",media:"Subscriptions, advertising, licensing or experiences",finance:"Interest, transactions or financial-service fees",health:"Medicines, devices, care or healthcare services",energy:"Energy, industrial equipment or project contracts",brands:"Branded merchandise sold directly or wholesale",housing:"Homes, materials, rent or property services",defense:"Government and commercial contracts"};
   // Editorially checked, dated stories. No generated headline is presented as verified news.
@@ -147,6 +262,8 @@
   }
   function companyExplainer(c){
     const industry=c.industries?.find(i=>!i.optional)||c.industries?.[0]||{id:"",name:"Business"};
+    const retailResearch=retailProfiles[c.ticker];
+    if(retailResearch && c.industries?.some(i=>i.id==="retail")) return {overview:retailResearch.overview,revenue:"Recognizable products / brands: "+retailResearch.products+".",businessModel:retailResearch.businessModel,importance:"Why it matters: "+retailResearch.insight+" What to watch: "+retailResearch.watch,product:retailResearch.products,customers:"See company filings",watch:retailResearch.watch,examples:retailResearch.products,verified:true,source:retailResearch.source};
     const researched=defenseProfiles[c.ticker];
     if(researched && c.industries?.some(i=>i.id==="defense")) return {overview:researched.overview,revenue:"Recognizable products / brands: "+researched.products+".",businessModel:researched.businessModel,importance:"Why it matters: "+researched.insight+" What to watch: "+researched.watch,product:researched.products,customers:"See company filings",watch:researched.watch,examples:researched.products,verified:true,source:researched.source};
     const detail=detailedProfiles[c.ticker]||additionalProfiles[c.ticker];
@@ -162,7 +279,8 @@
     return {overview,revenue,businessModel,importance,product,customers,watch,examples,verified:!!detail};
   }
   Object.assign(officialSites,{LMT:"lockheedmartin.com",RTX:"rtx.com",NOC:"northropgrumman.com",GD:"gd.com",LHX:"l3harris.com",HII:"hii.com",BA:"boeing.com",HWM:"howmet.com",AVAV:"avinc.com",AXON:"axon.com",PLTR:"palantir.com",GE:"geaerospace.com",HON:"honeywell.com"});
-  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles};
+  Object.assign(officialSites,{AMZN:"amazon.com",WMT:"walmart.com",TGT:"target.com",COST:"costco.com",HD:"homedepot.com",LOW:"lowes.com",BBY:"bestbuy.com",EBAY:"ebay.com",ETSY:"etsy.com",CHWY:"chewy.com",BABA:"alibabagroup.com",MELI:"mercadolibre.com",ROST:"rossstores.com",TJX:"tjx.com"});
+  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles};
   function passportBackground(c){
     const info=companyExplainer(c);
     return '<div class="passport-background"><h4>What this company does</h4><p>'+esc(info.overview)+'</p><h4>Products and brands</h4><p>'+esc(info.revenue)+'</p><h4>How it earns revenue</h4><p>'+esc(info.businessModel)+'</p><h4>Company context</h4><p>'+esc(info.importance)+'</p><h4>Student research checklist</h4><ul><li>What product or service does it sell?</li><li>Who pays for it?</li><li>Who competes with it?</li><li>What do its latest revenue and profit figures show?</li></ul><p class="passport-disclaimer">Introductory company-specific business context, not a live news report or financial recommendation. Check company filings for updated figures.</p>'+(info.source?'<p><a href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">Read company annual reports / investor relations ↗</a></p>':'')+'</div>';
