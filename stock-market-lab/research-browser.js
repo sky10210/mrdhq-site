@@ -123,13 +123,15 @@
     "watch": "Engine deliveries, aircraft utilization, service margins and manufacturing capacity.",
     "source": "https://www.geaerospace.com/investor-relations/annual-report"
   },
-  "HON": {
-    "overview": "Honeywell's former aerospace business was separated into an independent company in June 2026. HON now represents the remaining automation-focused business, not the aerospace company.",
-    "products": "Industrial automation, building controls and Honeywell Forge.",
-    "businessModel": "Equipment, components, software, spare parts and maintenance services.",
-    "insight": "This legacy category placement is outdated following the aerospace separation; distinguish HON from the separately traded aerospace business.",
-    "watch": "Automation orders, software and services, and post-separation reporting.",
-    "source": "https://investor.honeywell.com/"
+  "HONA": {
+    "overview": "Honeywell Aerospace is an independent aerospace and defense supplier following its June 2026 separation from Honeywell Technologies.",
+    "products": "Aircraft avionics, auxiliary power units, navigation systems, propulsion and aircraft systems.",
+    "customers": "Aircraft manufacturers, airlines, business aviation operators and defense customers.",
+    "businessModel": "Aircraft equipment, aftermarket spare parts, maintenance and related services.",
+    "insight": "Aerospace equipment can generate service and replacement-parts revenue throughout an aircraft\u0027s operating life; HONA is distinct from automation-focused HON.",
+    "watch": "Aircraft production, flight activity, defense orders, aftermarket demand and separation-related reporting.",
+    "question": "How can Honeywell Aerospace earn revenue years after an aircraft is first delivered?",
+    "source": "https://www.honeywell.com/us/en/news/press-releases/2026/06/honeywell-board-of-directors-approves-spin-off-of-honeywell-aerospace"
   }
 };
   // Retail and shopping company-specific student research.
