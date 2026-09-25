@@ -95,25 +95,33 @@ function fetchStockLabFeed(){
   return stockLabFeedPending;
 }
 async function loadMarketPrices(){
-  // Show the last published close immediately; the dedicated Sheet feed takes precedence.
+  // A bundled snapshot is a fallback, never a reason to overwrite newer prices.
+  let cached=null;
+  try{cached=JSON.parse(localStorage.getItem(MARKET_KEY)||"null")}catch(e){}
   const staticSnapshot=window.STOCK_LAB_MARKET_SNAPSHOT;
-  if(staticSnapshot?.prices&&applyMarketSnapshot(staticSnapshot))render();
-  else try{
-    const cached=JSON.parse(localStorage.getItem(MARKET_KEY)||"null");
-    if(cached?.prices&&applyMarketSnapshot(cached))render();
-  }catch(e){}
+  const initial=[cached,staticSnapshot].filter(x=>x?.prices).sort((a,b)=>String(b.asOf||"").localeCompare(String(a.asOf||"")))[0];
+  if(initial&&applyMarketSnapshot(initial))render();
   try{
     const live=await fetchStockLabFeed();
-    if(applyMarketSnapshot(live)){render();return}
+    if(live?.prices&&(!marketMeta.asOf||String(live.asOf||"")>=String(marketMeta.asOf))){
+      if(applyMarketSnapshot(live)){render();return}
+    }else if(live?.prices){console.warn("Stock Lab feed older than displayed snapshot",live.asOf,marketMeta.asOf)}
   }catch(e){console.warn("Stock Lab Sheet feed:",e)}
-  if(!Object.keys(marketPrices).length&&db){
-    try{
+  try{
+    if(db){
       const snap=await db.collection("stockLabMarket").doc("latest").get();
-      if(snap.exists&&applyMarketSnapshot(snap.data()))render();
-    }catch(e){console.warn("Market snapshot fallback:",e)}
-  }
-  if(!Object.keys(marketPrices).length){
-    const el=$("marketStatus");if(el)el.textContent="Market data unavailable";
+      if(snap.exists){
+        const data=snap.data();
+        if(data?.prices&&(!marketMeta.asOf||String(data.asOf||"")>String(marketMeta.asOf))){
+          if(applyMarketSnapshot(data))render();
+        }
+      }
+    }
+  }catch(e){console.warn("Market snapshot fallback:",e)}
+  const el=$("marketStatus");
+  if(el){
+    if(!Object.keys(marketPrices).length)el.textContent="Market data unavailable";
+    else if(marketMeta.asOf)el.textContent="Latest available close · "+marketMeta.asOf+" · "+(marketMeta.source||"market snapshot")+(String(marketMeta.asOf)<new Date(Date.now()-3*86400000).toISOString().slice(0,10)?" · Data may be delayed":"");
   }
 }
 async function initFirebase(){const cfg=window.STOCK_LAB_FIREBASE_CONFIG||{};if(!cfg.apiKey||String(cfg.apiKey).includes("REPLACE")){console.info("Stock Lab Firebase is intentionally not connected until its separate project config is supplied.");updateAccountUI();return}try{const stockApp=firebase.initializeApp(cfg,"stock-market-lab");auth=stockApp.auth();db=stockApp.firestore();await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);await auth.getRedirectResult().catch(e=>{console.warn("Google redirect:",e);toast("Google sign-in could not finish: "+(e?.code||e?.message||"unknown error")+". If using an in-app browser, try Safari or Chrome.")});auth.onAuthStateChanged(async u=>{user=u;if(u){const snap=await db.collection("stockLabUsers").doc(u.uid).get().catch(()=>null);if(snap?.exists){const d=snap.data();state={holdings:d.holdings||{},journal:d.journal||[],history:d.history||[],onboardingPassed:!!d.onboardingPassed,quizResult:d.quizResult||null,profile:{name:d.name||u.displayName,email:u.email,className:d.className||"",teacherId:d.teacherId||""}};localStorage.setItem(KEY,JSON.stringify(state))}else{state={holdings:{},journal:[],history:[],onboardingPassed:false,quizResult:null,profile:{name:u.displayName||"",email:u.email||"",className:"",teacherId:""}};localStorage.setItem(KEY,JSON.stringify(state));localStorage.removeItem(HISTORY_KEY);profile(u);await db.collection("stockLabUsers").doc(u.uid).set({name:u.displayName||"",email:u.email||"",className:state.profile?.className||"",teacherId:state.profile?.teacherId||"",holdings:state.holdings||{},journal:state.journal||[],history:state.history||[],onboardingPassed:!!state.onboardingPassed,quizResult:state.quizResult||null,createdAt:firebase.firestore.FieldValue.serverTimestamp(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})}profile(u);$("authGate").classList.remove("open");renderClassGate();if(state.profile?.className&&Object.keys(state.holdings||{}).length)showView("dashboard");try{const es=await db.collection("stockLabConfig").doc("currentEvent").get();if(es.exists)eventConfig={...eventConfig,...es.data()}}catch(e){}await loadMarketPrices();render();renderTicker()}else {state.profile=null;updateAccountUI();$("authGate").classList.remove("open");showView("learn")}})}catch(e){console.warn(e);updateAccountUI();toast("Google connection unavailable; research remains accessible.")}}
