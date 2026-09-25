@@ -1008,6 +1008,168 @@
     "source": "https://investors.carvana.com/"
   }
 };
+  const financeProfiles={
+  "JPM": {
+    "overview": "JPMorgan Chase is a diversified financial institution serving consumers, businesses, corporations and investors.",
+    "products": "Chase checking and credit cards, JPMorgan investment banking and asset management.",
+    "customers": "Households, small businesses, corporations and institutional investors.",
+    "businessModel": "Net interest income from lending and deposits, card and banking fees, investment banking, trading and asset-management fees.",
+    "insight": "A bank earns a spread between what it receives on loans and pays on funding, but must absorb credit losses when borrowers fail to repay.",
+    "watch": "Deposit costs, loan defaults, interest rates, capital requirements and investment-banking activity.",
+    "question": "Why can a bank's profit change when interest rates move even if its customer count stays similar?",
+    "source": "https://www.jpmorganchase.com/ir"
+  },
+  "BAC": {
+    "overview": "Bank of America provides consumer banking, lending, wealth management and corporate financial services.",
+    "products": "Bank of America accounts and cards, Merrill and BofA Securities.",
+    "customers": "Consumers, businesses, wealthy clients and institutional investors.",
+    "businessModel": "Interest on loans and securities plus banking, investment and wealth-management fees.",
+    "insight": "Its large deposit base helps fund lending, while Merrill serves customers whose main need is investing rather than borrowing.",
+    "watch": "Deposit balances, interest-rate sensitivity, credit quality, expenses and wealth-management activity.",
+    "question": "How does a deposit help fund a bank's lending business?",
+    "source": "https://investor.bankofamerica.com/"
+  },
+  "COF": {
+    "overview": "Capital One provides credit cards, consumer banking and lending, with a substantial focus on credit-card customers.",
+    "products": "Capital One credit cards, checking and savings accounts and auto loans.",
+    "customers": "Cardholders, depositors, borrowers and merchants.",
+    "businessModel": "Interest and fees from lending, interchange-related card revenue and banking services.",
+    "insight": "Card lending can earn interest but exposes the company to missed payments and charge-offs, especially when household finances weaken.",
+    "watch": "Credit-card delinquencies, charge-offs, funding costs, regulation and integration of acquired businesses.",
+    "question": "Why might credit-card revenue rise while losses from unpaid balances also increase?",
+    "source": "https://investor.capitalone.com/"
+  },
+  "V": {
+    "overview": "Visa operates a global payment network that connects banks, merchants and payment providers; it generally does not issue the cards or lend cardholders money.",
+    "products": "Visa-branded credit and debit payment network, Visa Direct and payment services.",
+    "customers": "Banks, merchants, fintechs and payment processors.",
+    "businessModel": "Fees tied to payment volumes, processed transactions, cross-border activity and value-added services.",
+    "insight": "A Visa logo on a credit card does not mean Visa is the lender: the issuing bank generally handles the cardholder's credit risk.",
+    "watch": "Payment volume, transaction counts, cross-border spending, network competition and regulation.",
+    "question": "Who takes the credit risk when a shopper fails to pay a Visa-branded credit-card bill?",
+    "source": "https://investor.visa.com/"
+  },
+  "MA": {
+    "overview": "Mastercard operates a global payments network and provides security, data and related services to financial institutions and merchants.",
+    "products": "Mastercard payment network, Mastercard Send and cybersecurity services.",
+    "customers": "Banks, merchants, payment providers and businesses.",
+    "businessModel": "Network assessment and transaction-processing fees plus value-added services.",
+    "insight": "Mastercard moves transaction information through a network; issuing banks and other partners typically provide the actual credit.",
+    "watch": "Consumer spending, cross-border volumes, transaction growth, services and regulation.",
+    "question": "Why is Mastercard better compared with Visa than with a bank that makes personal loans?",
+    "source": "https://investor.mastercard.com/"
+  },
+  "AXP": {
+    "overview": "American Express operates a card and payments business with lending, merchant relationships and a travel-and-rewards ecosystem.",
+    "products": "American Express cards, Membership Rewards, Centurion Lounges and travel services.",
+    "customers": "Cardmembers, merchants and business customers.",
+    "businessModel": "Merchant discount revenue, interest on loans, annual card fees and other services.",
+    "insight": "Unlike a pure payment network, American Express also directly manages substantial cardmember relationships and credit exposure.",
+    "watch": "Card spending, credit losses, premium-card retention, merchant acceptance and travel demand.",
+    "question": "How can an annual card fee support rewards and travel benefits while still contributing to revenue?",
+    "source": "https://ir.americanexpress.com/"
+  },
+  "PYPL": {
+    "overview": "PayPal provides digital payment tools for consumers and merchants, including online checkout and peer-to-peer transfers.",
+    "products": "PayPal checkout, Venmo, Braintree and PayPal-branded payment services.",
+    "customers": "Online shoppers, merchants, app developers and people sending money.",
+    "businessModel": "Transaction fees and other payment-related services.",
+    "insight": "A merchant values easier checkout and fraud tools, while consumers value convenience; payment volume alone does not equal company revenue.",
+    "watch": "Total payment volume, transaction margin, branded checkout, Venmo monetization and competition.",
+    "question": "Why can PayPal process a large purchase without recording the full purchase price as revenue?",
+    "source": "https://investor.pypl.com/"
+  },
+  "HOOD": {
+    "overview": "Robinhood operates an investing and financial-services platform offering trading, accounts and related products.",
+    "products": "Robinhood app, stocks and options trading, crypto offerings and Robinhood Gold.",
+    "customers": "Retail investors and other eligible financial-services customers.",
+    "businessModel": "Transaction-related revenue, net interest revenue, subscriptions and other financial services.",
+    "insight": "Commission-free trading can still generate revenue through trading-related arrangements and interest; incentives and risk disclosures matter.",
+    "watch": "Customer assets, net deposits, trading activity, interest rates and regulation.",
+    "question": "How can a brokerage offer a zero-commission trade and still earn revenue?",
+    "source": "https://investors.robinhood.com/"
+  },
+  "SOFI": {
+    "overview": "SoFi is a digital financial-services company combining lending, banking and technology services.",
+    "products": "SoFi checking and savings, personal loans, student-loan refinancing and Galileo technology.",
+    "customers": "Consumers, borrowers and financial-technology partners.",
+    "businessModel": "Net interest income, loan-related revenue, fees and technology-platform services.",
+    "insight": "A digital bank still faces credit and funding risks, while technology services can provide a different source of revenue.",
+    "watch": "Member growth, deposit funding, loan credit quality, capital and technology revenue.",
+    "question": "Why might deposit growth change the cost of funding SoFi's loans?",
+    "source": "https://investors.sofi.com/"
+  },
+  "COIN": {
+    "overview": "Coinbase provides a platform and infrastructure for digital-asset trading, custody and related services.",
+    "products": "Coinbase exchange, Coinbase Wallet, Coinbase Prime and USDC-related services.",
+    "customers": "Retail and institutional digital-asset customers.",
+    "businessModel": "Transaction fees, subscription and services revenue, and custody-related offerings.",
+    "insight": "Trading fees can fluctuate with market activity, while custody and services have different drivers; crypto assets remain volatile and regulation varies.",
+    "watch": "Trading volumes, crypto prices, custody, security, regulation and service revenue.",
+    "question": "Why can a crypto exchange's revenue change sharply even without a major change in customer accounts?",
+    "source": "https://investor.coinbase.com/"
+  },
+  "XYZ": {
+    "overview": "Block is a financial-technology company serving merchants and consumers through payments and money-management products.",
+    "products": "Square point-of-sale tools, Cash App and Afterpay.",
+    "customers": "Small businesses, merchants and consumer-app users.",
+    "businessModel": "Merchant transaction fees, software and hardware, Cash App services and other financial products.",
+    "insight": "Square helps a shop accept payments and manage operations, while Cash App serves individuals; the same parent serves two different customer groups.",
+    "watch": "Merchant payment volume, Cash App engagement, lending losses, regulation and profitability.",
+    "question": "How does a small business using Square differ from a consumer using Cash App?",
+    "source": "https://investors.block.xyz/"
+  },
+  "GS": {
+    "overview": "Goldman Sachs is a financial institution focused on investment banking, trading and asset and wealth management.",
+    "products": "Goldman Sachs advisory, underwriting, trading and asset management.",
+    "customers": "Corporations, governments, institutions and wealthy investors.",
+    "businessModel": "Advisory and underwriting fees, trading revenue, asset-management fees and net interest income.",
+    "insight": "A company issuing bonds or acquiring another business may hire an investment bank for specialized advice and access to investors.",
+    "watch": "Deal activity, trading conditions, assets under supervision, capital and regulation.",
+    "question": "Why might an investment bank earn less when companies postpone mergers and stock offerings?",
+    "source": "https://www.goldmansachs.com/investor-relations"
+  },
+  "MS": {
+    "overview": "Morgan Stanley provides investment banking, institutional securities and wealth and investment management.",
+    "products": "Morgan Stanley advisory, E*TRADE and wealth management.",
+    "customers": "Institutions, corporations, retail investors and wealthy clients.",
+    "businessModel": "Advisory and trading revenue, wealth-management fees, net interest income and investment-management fees.",
+    "insight": "Recurring fees on managed client assets can balance the more variable income from trading and corporate deals.",
+    "watch": "Client assets, market levels, net new assets, deal activity and trading conditions.",
+    "question": "Why could a market decline affect asset-management fees even if clients do not withdraw money?",
+    "source": "https://www.morganstanley.com/about-us-ir"
+  },
+  "SCHW": {
+    "overview": "Charles Schwab provides brokerage, investing, advisory and banking services to individual and institutional customers.",
+    "products": "Schwab brokerage accounts, ETFs, advisory services and banking.",
+    "customers": "Retail investors, financial advisers and institutions.",
+    "businessModel": "Net interest revenue, asset-management and administration fees, trading and other services.",
+    "insight": "Clients can hold both investments and cash; how that cash is invested and funded affects the firm's interest income.",
+    "watch": "Client assets, net new assets, cash balances, interest rates and regulatory capital.",
+    "question": "Why can a brokerage be affected by interest rates even when stock trading activity is steady?",
+    "source": "https://www.aboutschwab.com/investor-relations"
+  },
+  "C": {
+    "overview": "Citigroup operates a global banking and financial-services network for institutions and consumers.",
+    "products": "Citi cards, corporate banking, treasury and trade solutions and wealth services.",
+    "customers": "Multinational companies, institutions, governments and consumers.",
+    "businessModel": "Interest income, card and banking fees, transaction services, trading and wealth management.",
+    "insight": "A multinational business may need payments and cash management in many countries, making global banking infrastructure valuable.",
+    "watch": "Credit losses, cross-border activity, restructuring, capital and regulation.",
+    "question": "Why might a company operating in many countries need a bank with international payment capabilities?",
+    "source": "https://www.citigroup.com/global/investors"
+  },
+  "AFRM": {
+    "overview": "Affirm provides buy-now-pay-later financing at checkout through merchant partnerships and consumer payment plans.",
+    "products": "Affirm installment payments and merchant checkout integrations.",
+    "customers": "Online and in-store shoppers, retailers and financing partners.",
+    "businessModel": "Merchant fees, interest on some loans and related loan or servicing revenue.",
+    "insight": "A merchant may pay to offer installment options that help convert a sale, while Affirm must evaluate whether the shopper can repay.",
+    "watch": "Merchant volume, loan delinquencies, funding costs, consumer spending and regulation.",
+    "question": "Why would a retailer pay a financing provider to offer installment payments at checkout?",
+    "source": "https://investors.affirm.com/"
+  }
+};
   const revenueModels={AAPL:"Device sales and recurring services",MSFT:"Software subscriptions, cloud computing and licenses",NVDA:"AI and graphics chips, systems and networking",GOOGL:"Advertising, cloud services and subscriptions",META:"Advertising across its apps",AMZN:"Retail, seller fees, AWS, advertising and subscriptions",TSM:"Contract chip manufacturing for chip designers",PLTR:"Government and commercial software contracts",CRWD:"Cybersecurity subscriptions",PANW:"Security products, subscriptions and support",V:"Payment-network service fees, not primarily cardholder lending",MA:"Payment-network and related service fees",JPM:"Loan interest and banking and investment fees",KO:"Beverage concentrate and finished-drink sales",PEP:"Beverage and packaged-food sales",MCD:"Franchise royalties, rent and restaurant sales",NFLX:"Subscriptions and advertising",SPOT:"Premium subscriptions and advertising",DIS:"Entertainment, streaming, parks and licensing",TSLA:"Vehicles, energy storage and services",UBER:"Fees from rides, delivery and freight",DASH:"Delivery fees, subscriptions and advertising",LLY:"Prescription medicine sales",ISRG:"Surgical systems, instruments and services",XOM:"Oil, gas, refining and chemicals",CEG:"Electricity and energy-product sales",CAT:"Machinery, parts, services and financing",NKE:"Footwear and apparel sales",O:"Rent from commercial tenants",PLD:"Rent from logistics properties",LMT:"Defense and aerospace contracts"};
   const industryRevenue={technology:"Technology products, software subscriptions or services",retail:"Merchandise, memberships or marketplace services",transport:"Vehicles, fares, delivery or related services",food:"Food and beverage sales, distribution or franchise fees",media:"Subscriptions, advertising, licensing or experiences",finance:"Interest, transactions or financial-service fees",health:"Medicines, devices, care or healthcare services",energy:"Energy, industrial equipment or project contracts",brands:"Branded merchandise sold directly or wholesale",housing:"Homes, materials, rent or property services",defense:"Government and commercial contracts"};
   // Editorially checked, dated stories. No generated headline is presented as verified news.
@@ -1023,6 +1185,8 @@
   }
   function companyExplainer(c){
     const industry=c.industries?.find(i=>!i.optional)||c.industries?.[0]||{id:"",name:"Business"};
+    const financeResearch=financeProfiles[c.ticker];
+    if(financeResearch && c.industries?.some(i=>i.id==="finance")) return {overview:financeResearch.overview,revenue:"Recognizable products / services: "+financeResearch.products+".",businessModel:financeResearch.businessModel,importance:"Customers: "+financeResearch.customers+". Why it matters: "+financeResearch.insight+" What to watch: "+financeResearch.watch,product:financeResearch.products,customers:financeResearch.customers,watch:financeResearch.watch,examples:financeResearch.products,verified:true,source:financeResearch.source,question:financeResearch.question};
     const transportResearch=transportProfiles[c.ticker];
     if(transportResearch && c.industries?.some(i=>i.id==="transport")) return {overview:transportResearch.overview,revenue:"Recognizable products / services: "+transportResearch.products+".",businessModel:transportResearch.businessModel,importance:"Customers: "+transportResearch.customers+". Why it matters: "+transportResearch.insight+" What to watch: "+transportResearch.watch,product:transportResearch.products,customers:transportResearch.customers,watch:transportResearch.watch,examples:transportResearch.products,verified:true,source:transportResearch.source,question:transportResearch.question};
     const healthResearch=healthProfiles[c.ticker];
@@ -1051,7 +1215,7 @@
   }
   Object.assign(officialSites,{LMT:"lockheedmartin.com",RTX:"rtx.com",NOC:"northropgrumman.com",GD:"gd.com",LHX:"l3harris.com",HII:"hii.com",BA:"boeing.com",HWM:"howmet.com",AVAV:"avinc.com",AXON:"axon.com",PLTR:"palantir.com",GE:"geaerospace.com",HON:"honeywell.com"});
   Object.assign(officialSites,{AMZN:"amazon.com",WMT:"walmart.com",TGT:"target.com",COST:"costco.com",HD:"homedepot.com",LOW:"lowes.com",BBY:"bestbuy.com",EBAY:"ebay.com",ETSY:"etsy.com",CHWY:"chewy.com",BABA:"alibabagroup.com",MELI:"mercadolibre.com",ROST:"rossstores.com",TJX:"tjx.com"});
-  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles,healthProfiles,transportProfiles};
+  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles,healthProfiles,transportProfiles,financeProfiles};
   function passportBackground(c){
     const info=companyExplainer(c);
     return '<div class="passport-background"><h4>What this company does</h4><p>'+esc(info.overview)+'</p><h4>Products and brands</h4><p>'+esc(info.revenue)+'</p><h4>How it earns revenue</h4><p>'+esc(info.businessModel)+'</p><h4>Company context</h4><p>'+esc(info.importance)+'</p><h4>Student research checklist</h4><ul><li>What product or service does it sell?</li><li>Who pays for it?</li><li>Who competes with it?</li><li>What do its latest revenue and profit figures show?</li></ul>'+(info.question?'<p><strong>Company-specific research question:</strong> '+esc(info.question)+'</p>':'')+'<p class="passport-disclaimer">Introductory company-specific business context, not a live news report or financial recommendation. Check company filings for updated figures.</p>'+(info.source?'<p><a href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">Read company annual reports / investor relations ↗</a></p>':'')+'</div>';
