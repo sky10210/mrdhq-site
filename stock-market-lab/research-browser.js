@@ -694,6 +694,158 @@
     "source": "https://investors.applovin.com/"
   }
 };
+  const healthProfiles={
+  "LLY": {
+    "overview": "Eli Lilly researches, develops and sells prescription medicines, including treatments for diabetes, obesity and other conditions.",
+    "products": "Mounjaro, Zepbound, Trulicity and other prescription medicines.",
+    "customers": "Patients and healthcare professionals; payment commonly involves insurers, government programs and patients.",
+    "businessModel": "Sales of approved prescription medicines through healthcare distribution channels.",
+    "insight": "Developing a medicine requires research, clinical trials, regulatory review and manufacturing capacity; a successful drug may need major investment to meet demand.",
+    "watch": "Clinical trial results, manufacturing supply, patent protection, competition, pricing and reimbursement.",
+    "question": "Why might strong demand for a medicine not immediately translate into enough product on pharmacy shelves?",
+    "source": "https://investor.lilly.com/"
+  },
+  "PFE": {
+    "overview": "Pfizer develops, manufactures and sells vaccines and prescription medicines across multiple therapeutic areas.",
+    "products": "Comirnaty, Prevnar vaccines, Paxlovid and other medicines.",
+    "customers": "Healthcare systems, pharmacies, governments and patients.",
+    "businessModel": "Sales of medicines and vaccines, often through wholesalers and public or private purchasers.",
+    "insight": "Vaccine demand can vary by season and public-health needs, while drug patents and new approvals affect longer-term revenue.",
+    "watch": "Product launches, vaccine demand, patent expirations, research pipeline and acquisition integration.",
+    "question": "Why does a pharmaceutical company need new medicines before older products lose patent protection?",
+    "source": "https://s28.q4cdn.com/781576035/files/doc_financials/"
+  },
+  "JNJ": {
+    "overview": "Johnson & Johnson operates in innovative medicines and medical technology; its former consumer-health business is separate.",
+    "products": "DARZALEX, TREMFYA, surgical technologies and orthopedic devices.",
+    "customers": "Hospitals, healthcare professionals, patients and health systems.",
+    "businessModel": "Prescription medicine sales and medical-device and technology sales.",
+    "insight": "A hospital purchasing a surgical system has different buying needs from a pharmacy ordering a prescription drug.",
+    "watch": "Drug development, medical-procedure volumes, device adoption, litigation and patent protection.",
+    "question": "Why should students avoid assuming familiar former consumer brands are still part of Johnson & Johnson?",
+    "source": "https://www.investor.jnj.com/"
+  },
+  "CVS": {
+    "overview": "CVS Health combines pharmacy retail, pharmacy-benefit services, health insurance and healthcare delivery businesses.",
+    "products": "CVS Pharmacy, CVS Caremark, Aetna and MinuteClinic.",
+    "customers": "Patients, employers, health plans, pharmacies and government-program members.",
+    "businessModel": "Prescription dispensing, pharmacy-benefit services, insurance premiums and healthcare services.",
+    "insight": "The same organization can fill a prescription, administer a drug benefit and insure a member, but those activities have different costs and incentives.",
+    "watch": "Medical cost trends, pharmacy reimbursement, insurance membership, regulation and retail performance.",
+    "question": "How is collecting an insurance premium different from earning revenue by dispensing a prescription?",
+    "source": "https://investors.cvshealth.com/"
+  },
+  "UNH": {
+    "overview": "UnitedHealth Group combines health insurance with health services, analytics and care-delivery businesses.",
+    "products": "UnitedHealthcare and Optum.",
+    "customers": "Employers, individuals, government programs, patients and healthcare providers.",
+    "businessModel": "Insurance premiums and fees from pharmacy, care delivery, data and other health services.",
+    "insight": "An insurer receives premiums and pays covered claims; medical spending rising faster than premiums can pressure profitability.",
+    "watch": "Medical cost ratios, enrollment, Medicare policy, regulatory scrutiny and service-business performance.",
+    "question": "Why can an insurer's revenue increase while its profit margin falls?",
+    "source": "https://www.unitedhealthgroup.com/investors.html"
+  },
+  "ABT": {
+    "overview": "Abbott makes medical devices, diagnostic tests, nutrition products and established pharmaceuticals.",
+    "products": "FreeStyle Libre glucose sensors, Alinity diagnostics, Ensure and Similac.",
+    "customers": "Hospitals, laboratories, patients, families and healthcare distributors.",
+    "businessModel": "Sales of devices, tests, nutritional products and medicines.",
+    "insight": "A continuous glucose monitor can generate repeat sensor purchases, while a laboratory may buy both an analyzer and the tests used with it.",
+    "watch": "Device adoption, testing demand, manufacturing quality, product recalls and international sales.",
+    "question": "How is selling an ongoing supply of test cartridges different from selling one diagnostic machine?",
+    "source": "https://www.abbottinvestor.com/"
+  },
+  "MRK": {
+    "overview": "Merck & Co. develops prescription medicines and vaccines and operates an animal-health business.",
+    "products": "KEYTRUDA, GARDASIL and animal-health products.",
+    "customers": "Hospitals, physicians, public-health purchasers, veterinarians and patients.",
+    "businessModel": "Human medicine and vaccine sales plus animal-health products.",
+    "insight": "A widely used medicine can account for a large share of revenue, creating a need for new research before exclusivity ends.",
+    "watch": "Clinical trials, major-product concentration, patent timelines, vaccine demand and regulatory decisions.",
+    "question": "Why is relying heavily on one successful medicine both valuable and risky?",
+    "source": "https://www.merck.com/investor-relations/"
+  },
+  "HCA": {
+    "overview": "HCA Healthcare operates hospitals and other care facilities rather than manufacturing drugs or medical devices.",
+    "products": "Hospitals, emergency departments, surgery centers and outpatient facilities.",
+    "customers": "Patients and payers including private insurers and government programs.",
+    "businessModel": "Payments for inpatient, outpatient, emergency and surgical care.",
+    "insight": "Hospitals have large fixed costs for buildings, staffing and equipment, so patient volume and payment rates affect results.",
+    "watch": "Admissions, labor costs, payer mix, reimbursement and capital investment.",
+    "question": "Why might two hospitals treating the same number of patients earn different revenue?",
+    "source": "https://investor.hcahealthcare.com/"
+  },
+  "TMO": {
+    "overview": "Thermo Fisher Scientific supplies instruments, laboratory materials and services used in research, diagnostics and medicine production.",
+    "products": "Thermo Scientific instruments, Fisher Scientific supplies and laboratory services.",
+    "customers": "Biotechnology companies, pharmaceutical firms, universities, laboratories and hospitals.",
+    "businessModel": "Sales of instruments, consumables, research services and manufacturing support.",
+    "insight": "Researchers need repeat purchases of reagents and supplies even after a lab buys a major instrument.",
+    "watch": "Biotech research budgets, instrument orders, recurring consumables and pharmaceutical outsourcing.",
+    "question": "Why can a laboratory-supply company benefit from drug research even when it does not sell the finished medicine?",
+    "source": "https://ir.thermofisher.com/"
+  },
+  "ISRG": {
+    "overview": "Intuitive Surgical develops robotic-assisted surgical systems and related instruments and services.",
+    "products": "da Vinci surgical systems and Ion endoluminal systems.",
+    "customers": "Hospitals and surgical teams.",
+    "businessModel": "Sales and leases of systems, recurring instruments and accessories, and service contracts.",
+    "insight": "The initial robot is only part of the business: each procedure can require instruments and accessories, making procedure volume important.",
+    "watch": "Installed systems, procedure growth, hospital capital budgets, training and competing technologies.",
+    "question": "Why might the number of surgeries performed matter more than the number of new robots sold in a quarter?",
+    "source": "https://isrg.intuitive.com/"
+  },
+  "MDT": {
+    "overview": "Medtronic develops medical devices used in cardiac care, surgery, diabetes care and other treatments.",
+    "products": "Pacemakers, implantable devices, surgical technologies and insulin-delivery products.",
+    "customers": "Hospitals, clinicians, healthcare systems and patients.",
+    "businessModel": "Sales of implantable devices, equipment, supplies and related services.",
+    "insight": "Many products require physician training and clinical evidence, while some therapies create ongoing demand for replacement supplies.",
+    "watch": "Procedure volumes, product approvals, reimbursement, competition and innovation.",
+    "question": "Why does physician training matter when a company introduces a new medical device?",
+    "source": "https://news.medtronic.com/investors"
+  },
+  "GILD": {
+    "overview": "Gilead Sciences develops medicines, especially in virology and oncology.",
+    "products": "Biktarvy, Descovy, Veklury and oncology therapies.",
+    "customers": "Patients, physicians, hospitals and public-health purchasers.",
+    "businessModel": "Prescription medicine sales.",
+    "insight": "Long-term treatment can create recurring demand, while new treatments, access programs and patent changes affect the business.",
+    "watch": "HIV treatment demand, oncology pipeline, clinical results, pricing and exclusivity.",
+    "question": "How does a medicine used for ongoing treatment differ commercially from a one-time therapy?",
+    "source": "https://investors.gilead.com/"
+  },
+  "VRTX": {
+    "overview": "Vertex Pharmaceuticals develops specialty medicines for serious diseases, including cystic fibrosis and other areas.",
+    "products": "TRIKAFTA/KAFTRIO and other specialty therapies.",
+    "customers": "Patients with eligible conditions, specialist clinicians and healthcare payers.",
+    "businessModel": "Sales of approved specialty medicines.",
+    "insight": "Treatments for smaller patient populations can require specialized research, diagnosis and reimbursement arrangements.",
+    "watch": "Cystic fibrosis franchise, pipeline diversification, approvals, access and competition.",
+    "question": "Why does a company treating a relatively small patient population need to understand diagnosis and insurance access?",
+    "source": "https://investors.vrtx.com/"
+  },
+  "MCK": {
+    "overview": "McKesson is a major healthcare distributor and services company that helps move medicines and supplies through the healthcare system.",
+    "products": "Pharmaceutical distribution, medical-surgical supplies and oncology-related services.",
+    "customers": "Pharmacies, hospitals, clinics, manufacturers and care providers.",
+    "businessModel": "Distribution and service fees, product sales and related healthcare services.",
+    "insight": "A distributor can handle enormous sales volume but earn a relatively small margin per item; reliable logistics and inventory control are essential.",
+    "watch": "Distribution margins, prescription volumes, specialty medicines, working capital and regulation.",
+    "question": "Why can a distributor report very large revenue without having the same profit margin as a drugmaker?",
+    "source": "https://investor.mckesson.com/"
+  },
+  "MRNA": {
+    "overview": "Moderna develops medicines using messenger RNA technology, with a commercial vaccine business and a research pipeline.",
+    "products": "mRNA vaccines and investigational mRNA-based therapies.",
+    "customers": "Public-health purchasers, pharmacies, health systems and patients.",
+    "businessModel": "Sales of approved vaccines and potentially other approved medicines.",
+    "insight": "A technology platform can support multiple research programs, but clinical trials, regulatory approval and actual demand determine which become products.",
+    "watch": "Seasonal vaccine demand, clinical trial results, cash spending, approvals and manufacturing.",
+    "question": "Why is a promising vaccine candidate not the same as an approved product generating revenue?",
+    "source": "https://investors.modernatx.com/"
+  }
+};
   const revenueModels={AAPL:"Device sales and recurring services",MSFT:"Software subscriptions, cloud computing and licenses",NVDA:"AI and graphics chips, systems and networking",GOOGL:"Advertising, cloud services and subscriptions",META:"Advertising across its apps",AMZN:"Retail, seller fees, AWS, advertising and subscriptions",TSM:"Contract chip manufacturing for chip designers",PLTR:"Government and commercial software contracts",CRWD:"Cybersecurity subscriptions",PANW:"Security products, subscriptions and support",V:"Payment-network service fees, not primarily cardholder lending",MA:"Payment-network and related service fees",JPM:"Loan interest and banking and investment fees",KO:"Beverage concentrate and finished-drink sales",PEP:"Beverage and packaged-food sales",MCD:"Franchise royalties, rent and restaurant sales",NFLX:"Subscriptions and advertising",SPOT:"Premium subscriptions and advertising",DIS:"Entertainment, streaming, parks and licensing",TSLA:"Vehicles, energy storage and services",UBER:"Fees from rides, delivery and freight",DASH:"Delivery fees, subscriptions and advertising",LLY:"Prescription medicine sales",ISRG:"Surgical systems, instruments and services",XOM:"Oil, gas, refining and chemicals",CEG:"Electricity and energy-product sales",CAT:"Machinery, parts, services and financing",NKE:"Footwear and apparel sales",O:"Rent from commercial tenants",PLD:"Rent from logistics properties",LMT:"Defense and aerospace contracts"};
   const industryRevenue={technology:"Technology products, software subscriptions or services",retail:"Merchandise, memberships or marketplace services",transport:"Vehicles, fares, delivery or related services",food:"Food and beverage sales, distribution or franchise fees",media:"Subscriptions, advertising, licensing or experiences",finance:"Interest, transactions or financial-service fees",health:"Medicines, devices, care or healthcare services",energy:"Energy, industrial equipment or project contracts",brands:"Branded merchandise sold directly or wholesale",housing:"Homes, materials, rent or property services",defense:"Government and commercial contracts"};
   // Editorially checked, dated stories. No generated headline is presented as verified news.
@@ -709,6 +861,8 @@
   }
   function companyExplainer(c){
     const industry=c.industries?.find(i=>!i.optional)||c.industries?.[0]||{id:"",name:"Business"};
+    const healthResearch=healthProfiles[c.ticker];
+    if(healthResearch && c.industries?.some(i=>i.id==="health")) return {overview:healthResearch.overview,revenue:"Recognizable products / services: "+healthResearch.products+".",businessModel:healthResearch.businessModel,importance:"Customers: "+healthResearch.customers+". Why it matters: "+healthResearch.insight+" What to watch: "+healthResearch.watch,product:healthResearch.products,customers:healthResearch.customers,watch:healthResearch.watch,examples:healthResearch.products,verified:true,source:healthResearch.source,question:healthResearch.question};
     const mediaResearch=mediaProfiles[c.ticker];
     if(mediaResearch && c.industries?.some(i=>i.id==="media")) return {overview:mediaResearch.overview,revenue:"Recognizable products / brands: "+mediaResearch.products+".",businessModel:mediaResearch.businessModel,importance:"Customers: "+mediaResearch.customers+". Why it matters: "+mediaResearch.insight+" What to watch: "+mediaResearch.watch,product:mediaResearch.products,customers:mediaResearch.customers,watch:mediaResearch.watch,examples:mediaResearch.products,verified:true,source:mediaResearch.source,question:mediaResearch.question};
     const brandResearch=brandProfiles[c.ticker];
@@ -733,7 +887,7 @@
   }
   Object.assign(officialSites,{LMT:"lockheedmartin.com",RTX:"rtx.com",NOC:"northropgrumman.com",GD:"gd.com",LHX:"l3harris.com",HII:"hii.com",BA:"boeing.com",HWM:"howmet.com",AVAV:"avinc.com",AXON:"axon.com",PLTR:"palantir.com",GE:"geaerospace.com",HON:"honeywell.com"});
   Object.assign(officialSites,{AMZN:"amazon.com",WMT:"walmart.com",TGT:"target.com",COST:"costco.com",HD:"homedepot.com",LOW:"lowes.com",BBY:"bestbuy.com",EBAY:"ebay.com",ETSY:"etsy.com",CHWY:"chewy.com",BABA:"alibabagroup.com",MELI:"mercadolibre.com",ROST:"rossstores.com",TJX:"tjx.com"});
-  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles};
+  window.STOCK_LAB_PROFILE_DATA={industryGuides,detailedProfiles,additionalProfiles,companyHighlights,officialSites,companyExplainer,defenseProfiles,retailProfiles,housingProfiles,brandProfiles,mediaProfiles,healthProfiles};
   function passportBackground(c){
     const info=companyExplainer(c);
     return '<div class="passport-background"><h4>What this company does</h4><p>'+esc(info.overview)+'</p><h4>Products and brands</h4><p>'+esc(info.revenue)+'</p><h4>How it earns revenue</h4><p>'+esc(info.businessModel)+'</p><h4>Company context</h4><p>'+esc(info.importance)+'</p><h4>Student research checklist</h4><ul><li>What product or service does it sell?</li><li>Who pays for it?</li><li>Who competes with it?</li><li>What do its latest revenue and profit figures show?</li></ul>'+(info.question?'<p><strong>Company-specific research question:</strong> '+esc(info.question)+'</p>':'')+'<p class="passport-disclaimer">Introductory company-specific business context, not a live news report or financial recommendation. Check company filings for updated figures.</p>'+(info.source?'<p><a href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">Read company annual reports / investor relations ↗</a></p>':'')+'</div>';
