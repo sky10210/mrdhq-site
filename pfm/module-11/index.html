@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Build Your Auto Policy | Personal Finance Module 11 | MRDHQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102235;--blue:#2f6fb5;--teal:#18776f;--amber:#d99224;--red:#b63b34;--ink:#172033;--muted:#667085;--line:#d8e0e7;--soft:#f5f8fb;--cream:#f7f1e7;--white:#fff;--green:#166534}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,sans-serif;background:linear-gradient(180deg,var(--cream),#eef5f8 55%,#f8fafc);color:var(--ink);line-height:1.55}.wrap{width:min(1100px,92%);margin:24px auto 70px}
+.hero{background:linear-gradient(135deg,#102235,#173d58 68%,#1b6e73);color:#fff;border-radius:30px;padding:30px;box-shadow:0 18px 42px rgba(15,23,42,.13)}
+.eyebrow{font-size:.76rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#b9ece7}.hero h1{font-size:clamp(2rem,4.7vw,3.7rem);line-height:1.03;letter-spacing:-.055em;margin:10px 0 14px}.hero p{max-width:880px;color:#dce8ef}.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.pill{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.15);font-size:.76rem;font-weight:800}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;margin-top:18px;box-shadow:0 10px 28px rgba(15,23,42,.05)}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+label{font-size:.84rem;font-weight:900;color:#475569;display:block;margin-bottom:5px}input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:#f8fafc;font:inherit;font-weight:600;color:var(--ink)}textarea{min-height:110px;resize:vertical}.btn{border:0;border-radius:14px;padding:12px 16px;font:inherit;font-weight:900;cursor:pointer}.primary{background:var(--blue);color:#fff}.secondary{background:#fff;border:1px solid var(--line);color:var(--navy)}
+.step{display:grid;grid-template-columns:58px 1fr;gap:15px;align-items:start}.stepnum{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#e9f2fb;color:var(--blue);font-weight:900}.section-title{margin:0 0 6px;color:var(--navy)}.muted{color:var(--muted)}.coverage{border:1px solid var(--line);border-radius:18px;padding:17px;margin-top:13px;background:#fff}.coverage h3{margin:0;color:var(--navy);font-size:1.05rem}.tag{display:inline-block;margin-top:5px;padding:4px 8px;border-radius:999px;font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em}.required{background:#fee2e2;color:#991b1b}.optional{background:#e0f2fe;color:#075985}.lender{background:#fef3c7;color:#92400e}
+.explain{background:var(--soft);border-radius:13px;padding:12px;margin:11px 0;font-size:.9rem}.choice{margin-top:9px}.quote{position:sticky;top:14px;background:#0f2235;color:#fff;border-radius:22px;padding:20px}.quote .big{font-size:2.2rem;font-weight:900}.quote small{color:#cbd5e1}.row{display:flex;justify-content:space-between;gap:14px;border-top:1px solid rgba(255,255,255,.13);padding-top:8px;margin-top:8px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px}.notice{padding:13px 15px;border-left:4px solid var(--teal);background:#edf8f6;border-radius:11px;margin-top:14px}.warn{border-left-color:var(--amber);background:#fff8e7}.scenarioButtons{display:flex;gap:8px;flex-wrap:wrap}.scenarioButtons button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;font:inherit;font-weight:700;cursor:pointer}.result{margin-top:12px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#f8fafc}.policy{display:none;margin-top:18px}.policy.show{display:block}.policygrid{display:grid;grid-template-columns:1.3fr 1fr;gap:14px}.doc{border:2px solid #cbd5e1;border-radius:18px;padding:18px;background:#fff}.doc h3{margin:0;color:var(--navy)}.dl{display:grid;grid-template-columns:150px 1fr;gap:6px 10px;font-size:.87rem;margin-top:12px}.dl b{color:#475569}.premium{font-size:1.4rem;font-weight:900;color:var(--green)}.footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:28px}
+.check{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);padding:13px;border-radius:14px;margin-top:10px}.check input{width:auto;margin-top:4px}.check label{margin:0;color:var(--ink);font-weight:700}.check span{display:block;color:var(--muted);font-size:.84rem;font-weight:500;margin-top:4px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}.quote{position:static}.grid2,.grid3,.policygrid{grid-template-columns:1fr}.step{grid-template-columns:44px 1fr}.stepnum{width:38px;height:38px}.dl{grid-template-columns:1fr}}
+@media print{.hero,.quote,.scenarioButtons,.btn,#start{display:none!important}.layout{display:block}.card{box-shadow:none}.policy{display:block!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">Vivid Lessons • Personal Finance</div><h1>Module 11 <span style="color:#8ce2db">Build Your Auto Policy.</span></h1><p>Shop for Pennsylvania car insurance like you are using a real insurance website. Learn each coverage, decide what protection is worth paying for, compare a financed car with a paid-off car, and issue a fictional six-month policy.</p><div class="pills"><span class="pill">Interactive Quote</span><span class="pill">Pennsylvania</span><span class="pill">Required vs Optional</span><span class="pill">Loan vs Paid Off</span><span class="pill">Deductibles</span><span class="pill">Mock Insurance Card</span></div></section>
+
+<section class="card" id="start"><h2>Student Start</h2><p class="muted">Use your real name and block. Your coverage choices and final six-month quote are submitted to Mr. D when you finish.</p><div class="grid3"><div><label>First Name</label><input id="first" autocomplete="given-name"></div><div><label>Last Name</label><input id="last" autocomplete="family-name"></div><div><label>Block</label><select id="period"><option value="">Choose a block...</option><option>Block 1</option><option>Block 2</option><option>Block 3</option><option>Block 4</option></select></div></div><button class="btn primary" style="margin-top:14px" id="startBtn">Start Quote</button></section>
+
+<div class="layout" id="module" style="display:none">
+<div>
+<section class="card step"><div class="stepnum">1</div><div><h2 class="section-title">Choose your vehicle situation</h2><p class="muted">The exact same driver can make different insurance choices depending on whether the car is financed or fully owned.</p>
+<div class="grid2">
+<label>Vehicle<select id="vehicle"><option value="loan">2024 Toyota Corolla LE — financed</option><option value="paid">2015 Toyota Corolla LE — fully paid off</option></select></label>
+<div class="explain" id="vehicleExplain"></div></div>
+<div class="notice warn"><strong>Why this matters:</strong> Pennsylvania law does not require collision or comprehensive just because you own a vehicle. However, a lender can require them while it has a financial interest in a financed car.</div></div></section>
+
+<section class="card step"><div class="stepnum">2</div><div><h2 class="section-title">Start with Pennsylvania-required coverages</h2><p class="muted">These are the protections a standard Pennsylvania personal auto policy must include at minimum. Higher limits cost more but move more financial risk to the insurer.</p>
+
+<div class="coverage"><h3>Bodily Injury Liability</h3><span class="tag required">Required</span><div class="explain"><strong>What it pays:</strong> damages when you are legally responsible for injuring another person in a crash, including covered medical and rehabilitation expenses. <strong>What it does not pay:</strong> damage to your own vehicle. Pennsylvania's minimum is $15,000 for one injured person and $30,000 total for one accident.</div><label>Choose a limit<select id="bi"><option value="185">$15,000 / $30,000 — PA minimum — $185</option><option value="238">$50,000 / $100,000 — $238</option><option value="282" selected>$100,000 / $300,000 — $282</option><option value="334">$250,000 / $500,000 — $334</option></select></label></div>
+
+<div class="coverage"><h3>Property Damage Liability</h3><span class="tag required">Required</span><div class="explain"><strong>What it pays:</strong> damage you cause to someone else's vehicle or property. Pennsylvania's minimum is only $5,000. Imagine totaling a newer SUV and you can see why students should think about whether minimum coverage is enough.</div><label>Choose a limit<select id="pd"><option value="96">$5,000 — PA minimum — $96</option><option value="112">$25,000 — $112</option><option value="126">$50,000 — $126</option><option value="142" selected>$100,000 — $142</option></select></label></div>
+
+<div class="coverage"><h3>Medical Benefits</h3><span class="tag required">Required</span><div class="explain"><strong>What it pays:</strong> medical bills for you and others covered by your policy after an auto accident, regardless of who caused the crash, subject to policy terms. Pennsylvania requires at least $5,000.</div><label>Choose a limit<select id="med"><option value="84">$5,000 — PA minimum — $84</option><option value="104" selected>$10,000 — $104</option><option value="139">$25,000 — $139</option><option value="177">$50,000 — $177</option></select></label></div>
+</div></section>
+
+<section class="card step"><div class="stepnum">3</div><div><h2 class="section-title">Choose Limited Tort or Full Tort</h2><div class="grid2">
+<label class="coverage"><input type="radio" name="tort" value="limited" checked style="width:auto"> <strong>Limited Tort</strong><div class="explain">Lower premium. You generally give up the right to recover certain non-economic damages such as pain and suffering unless an exception in Pennsylvania law applies.</div><strong>Classroom adjustment: −$92</strong></label>
+<label class="coverage"><input type="radio" name="tort" value="full" style="width:auto"> <strong>Full Tort</strong><div class="explain">Higher cost, but you retain unrestricted rights to bring suit against a negligent party for covered damages, including non-economic damages.</div><strong>Classroom adjustment: $0</strong></label>
+</div></div></section>
+
+<section class="card step"><div class="stepnum">4</div><div><h2 class="section-title">Protect yourself from drivers with too little insurance</h2>
+<div class="coverage"><h3>Uninsured / Underinsured Motorist Bodily Injury</h3><span class="tag optional">Optional</span><div class="explain"><strong>UM</strong> helps protect you, covered relatives, and passengers for bodily injury caused by an at-fault uninsured driver. <strong>UIM</strong> applies when the at-fault driver has insurance but not enough to cover the injury claim. In Pennsylvania these coverages do not pay for damage to your vehicle.</div><label>Choose coverage<select id="um"><option value="0">Reject UM/UIM — $0</option><option value="72">$15,000 / $30,000 — $72</option><option value="118" selected>$50,000 / $100,000 — $118</option><option value="166">$100,000 / $300,000 — $166</option></select></label></div>
+</div></section>
+
+<section class="card step"><div class="stepnum">5</div><div><h2 class="section-title">Protect your own vehicle</h2><div class="notice" id="lenderNotice"></div>
+<div class="coverage"><h3>Collision</h3><span class="tag optional" id="collisionTag">Optional</span><div class="explain"><strong>What it covers:</strong> covered damage to your own car from a collision, such as hitting another vehicle, a tree, pole, or guardrail. <strong>Deductible:</strong> the amount you pay toward a covered claim before the insurer pays its share.</div><label>Choose deductible<select id="collision"><option value="0">No collision — $0</option><option value="318">$1,000 deductible — $318</option><option value="376" selected>$500 deductible — $376</option><option value="444">$250 deductible — $444</option></select></label></div>
+<div class="coverage"><h3>Comprehensive</h3><span class="tag optional" id="compTag">Optional</span><div class="explain"><strong>What it covers:</strong> many non-collision losses such as theft, vandalism, weather, falling objects, fire, and animal strikes. Hitting a deer is a classic comprehensive example.</div><label>Choose deductible<select id="comp"><option value="0">No comprehensive — $0</option><option value="128">$1,000 deductible — $128</option><option value="156" selected>$500 deductible — $156</option><option value="194">$250 deductible — $194</option><option value="224">$100 deductible — $224</option></select></label></div>
+</div></section>
+
+<section class="card step"><div class="stepnum">6</div><div><h2 class="section-title">Optional add-ons</h2><p class="muted">Optional does not mean necessary for everyone. Decide whether each benefit is worth paying for.</p>
+<div class="check"><input id="rental" type="checkbox" data-price="38"><label for="rental">Rental Reimbursement — +$38<span>Helps pay for a temporary rental vehicle while your car is being repaired after a covered loss, subject to limits.</span></label></div>
+<div class="check"><input id="roadside" type="checkbox" data-price="21"><label for="roadside">Roadside / Towing — +$21<span>May help with towing, jump starts, flat-tire service, lockouts, or similar roadside problems.</span></label></div>
+<div class="check"><input id="income" type="checkbox" data-price="34"><label for="income">Income Loss Benefit — +$34<span>Can replace part of lost income when covered auto injuries keep you from working, subject to limits.</span></label></div>
+<div class="check"><input id="funeral" type="checkbox" data-price="9"><label for="funeral">Funeral Benefit — +$9<span>Provides a limited benefit toward covered funeral expenses after a fatal auto accident.</span></label></div>
+<div class="check"><input id="gap" type="checkbox" data-price="47"><label for="gap">Loan / Lease Payoff Protection — +$47<span>Relevant mainly to a financed or leased vehicle. It may help when the covered value of a totaled car is less than the remaining loan or lease balance, subject to policy terms and limits.</span></label></div>
+</div></section>
+
+<section class="card step"><div class="stepnum">7</div><div><h2 class="section-title">Stress-test your choices</h2><p class="muted">Click each situation and see which coverage would matter.</p><div class="scenarioButtons"><button data-case="suv">You hit a $42,000 SUV</button><button data-case="deer">You hit a deer</button><button data-case="uninsured">Uninsured driver injures you</button><button data-case="tree">You back into a tree</button></div><div class="result" id="scenarioResult">Choose a scenario.</div></div></section>
+
+<section class="card step"><div class="stepnum">8</div><div><h2 class="section-title">Compare before you buy</h2><div class="grid2"><div class="explain"><strong>If the car were financed:</strong><div id="loanCompare"></div></div><div class="explain"><strong>If the car were paid off:</strong><div id="paidCompare"></div></div></div><label style="margin-top:12px">Why did you choose your level of coverage?<textarea id="reflection" placeholder="Explain at least one tradeoff between a lower premium and the financial protection you selected."></textarea></label></div></section>
+
+<section class="card step"><div class="stepnum">9</div><div><h2 class="section-title">Issue your policy</h2><p class="muted">Review your selections, then generate your fictional declarations page and Pennsylvania-style insurance card.</p><button class="btn primary" id="issueBtn">Generate & Submit My Policy</button><div id="saveStatus" class="notice" style="display:none"></div><div class="policy" id="policy"></div></div></section>
+</div>
+
+<aside><div class="quote"><div class="eyebrow">Keystone Shield Auto</div><div style="margin-top:6px;font-weight:800">Your live quote</div><div class="big" id="six">$0</div><small>six-month classroom premium</small><div style="font-size:1.05rem;font-weight:800;margin-top:4px" id="month">$0 / month</div><div class="row"><span>Required coverage</span><b id="req">$0</b></div><div class="row"><span>Vehicle protection</span><b id="veh">$0</b></div><div class="row"><span>Optional protection</span><b id="opt">$0</b></div><div class="row"><span>Tort adjustment</span><b id="tort">$0</b></div><div class="row"><span>Policy/admin fee</span><b>$115</b></div><p style="font-size:.76rem;color:#cbd5e1;margin-top:16px">Fictional classroom pricing. This is not an actual insurance quote or rate filing.</p></div></aside>
+</div>
+<div class="footer">MR. D • Personal Financial Management • Module 11 • Vivid Lessons</div>
+</main>
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbyucfQcDDR9S_4i8_EiI2LAm0k49NNGT0IBiRnXTjZQKgtfuOwM73Wtxxt5fzojGFY/exec';
+const $=id=>document.getElementById(id), money=n=>'$'+Math.round(n).toLocaleString('en-US');
+let startedAt=null,submitted=false;
+function val(id){return Number($(id).value)||0}
+function text(id){return $(id).options[$(id).selectedIndex].text.split(' — $')[0]}
+function vehicleRules(){
+ const loan=$('vehicle').value==='loan';
+ $('vehicleExplain').innerHTML=loan?'<strong>Financed:</strong> You still owe a lender money. In this simulation the lender requires collision and comprehensive because it also has a financial interest in the car.':'<strong>Paid off:</strong> You own the car outright. Collision and comprehensive become your choice. Ask yourself whether you could afford to repair or replace the vehicle on your own.';
+ $('lenderNotice').innerHTML=loan?'<strong>Lender requirement:</strong> Collision and comprehensive are required on this financed vehicle in this simulation.':'<strong>Your decision:</strong> Because the car is fully paid off, you may choose to carry or drop collision and comprehensive.';
+ ['collision','comp'].forEach(id=>{const s=$(id);s.options[0].disabled=loan;if(loan&&s.value==='0')s.value=id==='collision'?'376':'156'});
+ $('collisionTag').className='tag '+(loan?'lender':'optional');$('collisionTag').textContent=loan?'Lender Required':'Optional';
+ $('compTag').className='tag '+(loan?'lender':'optional');$('compTag').textContent=loan?'Lender Required':'Optional';
+ $('gap').disabled=!loan;if(!loan)$('gap').checked=false;
+}
+function totals(){
+ const required=val('bi')+val('pd')+val('med'), vehicle=val('collision')+val('comp');
+ let optional=val('um');document.querySelectorAll('input[type=checkbox][data-price]:checked').forEach(x=>optional+=Number(x.dataset.price)||0);
+ const tort=document.querySelector('input[name=tort]:checked').value==='limited'?-92:0,total=Math.max(0,required+vehicle+optional+tort+115);
+ return{required,vehicle,optional,tort,total};
+}
+function update(){
+ vehicleRules();const t=totals();$('six').textContent=money(t.total);$('month').textContent=money(t.total/6)+' / month';$('req').textContent=money(t.required);$('veh').textContent=money(t.vehicle);$('opt').textContent=money(t.optional);$('tort').textContent=t.tort<0?'−'+money(Math.abs(t.tort)):money(t.tort);
+ const loanBase=t.required+376+156+val('um')+(document.querySelector('input[name=tort]:checked').value==='limited'?-92:0)+115;
+ const paidBase=t.required+val('um')+(document.querySelector('input[name=tort]:checked').value==='limited'?-92:0)+115;
+ $('loanCompare').innerHTML='<br>With $500 collision + $500 comprehensive: <strong>'+money(loanBase)+'/6 months</strong>. The lender-required protection raises cost, but the vehicle itself is insured against covered physical damage.';
+ $('paidCompare').innerHTML='<br>If you dropped collision + comprehensive: <strong>'+money(paidBase)+'/6 months</strong>. Premium is lower, but you would accept the risk of repairing or replacing your own car after many losses.';
+}
+function scenario(kind){
+ let out='';
+ if(kind==='suv')out='<strong>Property Damage Liability.</strong> Your current selection is '+text('pd')+'. If the covered damage exceeds the limit, you could potentially be responsible for the remaining amount.';
+ if(kind==='deer')out=val('comp')?'<strong>Comprehensive.</strong> You selected '+text('comp')+'. Your deductible would normally be your share of a covered loss.':'<strong>No comprehensive selected.</strong> You saved premium, but this policy would not provide comprehensive vehicle protection for this loss.';
+ if(kind==='uninsured')out=val('um')?'<strong>Uninsured Motorist bodily injury.</strong> You selected '+text('um')+'. This is the coverage designed to help with bodily injury caused by an at-fault uninsured driver, subject to terms.':'<strong>You rejected UM/UIM.</strong> You saved premium but gave up this layer of bodily-injury protection.';
+ if(kind==='tree')out=val('collision')?'<strong>Collision.</strong> You selected '+text('collision')+'. Your deductible applies to a covered collision loss.':'<strong>No collision selected.</strong> You would be accepting the vehicle-repair risk yourself in this simulation.';
+ $('scenarioResult').innerHTML=out;
+}
+async function issue(){
+ const first=$('first').value.trim(),last=$('last').value.trim(),block=$('period').value,reflection=$('reflection').value.trim();
+ if(!first||!last||!block){alert('Enter your first name, last name, and block first.');return}
+ if(reflection.length<20){alert('Write a short reflection explaining your coverage tradeoff before issuing the policy.');return}
+ const t=totals(),loan=$('vehicle').value==='loan', tortChoice=document.querySelector('input[name=tort]:checked').value==='limited'?'Limited Tort':'Full Tort';
+ const extras=[];[['rental','Rental reimbursement'],['roadside','Roadside/towing'],['income','Income loss'],['funeral','Funeral benefit'],['gap','Loan/lease payoff']].forEach(([id,n])=>{if($(id).checked)extras.push(n)});
+ const policy='KS-PA-'+new Date().getFullYear()+'-'+String(Math.floor(1000+Math.random()*9000));
+ $('policy').innerHTML='<div class="policygrid"><div class="doc"><div class="eyebrow" style="color:#18776f">Keystone Shield Auto • Declarations</div><h3>Mock Auto Policy</h3><div class="dl"><b>Named insured</b><span>'+first+' '+last+'</span><b>Policy</b><span>'+policy+'</span><b>Vehicle</b><span>'+(loan?'2024 Toyota Corolla LE — financed':'2015 Toyota Corolla LE — paid off')+'</span><b>Bodily injury</b><span>'+text('bi')+'</span><b>Property damage</b><span>'+text('pd')+'</span><b>Medical benefits</b><span>'+text('med')+'</span><b>UM/UIM</b><span>'+text('um')+'</span><b>Collision</b><span>'+text('collision')+'</span><b>Comprehensive</b><span>'+text('comp')+'</span><b>Tort</b><span>'+tortChoice+'</span><b>Add-ons</b><span>'+(extras.join(', ')||'None')+'</span></div><hr style="border:0;border-top:1px solid #d8e0e7;margin:15px 0"><div class="premium">6-month premium: '+money(t.total)+'</div><div>Approx. monthly equivalent: '+money(t.total/6)+'</div></div><div class="doc"><div class="eyebrow" style="color:#18776f">Pennsylvania Auto Insurance ID Card</div><h3>KEYSTONE SHIELD AUTO</h3><div class="dl"><b>Insured</b><span>'+first+' '+last+'</span><b>Policy</b><span>'+policy+'</span><b>Vehicle</b><span>'+(loan?'2024 Toyota Corolla LE':'2015 Toyota Corolla LE')+'</span><b>Effective</b><span>'+new Date().toLocaleDateString()+'</span><b>Term</b><span>6 months</span></div><div class="notice warn"><strong>Educational mock card only.</strong> Not valid proof of insurance.</div></div></div><button class="btn secondary" style="margin-top:14px" onclick="window.print()">Print / Save Policy</button>';
+ $('policy').classList.add('show');$('saveStatus').style.display='block';$('saveStatus').textContent='Saving your completed policy to Mr. D...';
+ const mins=Math.max(1,Math.round((Date.now()-startedAt)/60000));
+ const record={moduleId:'pfm-module-11-build-auto-policy',moduleTitle:'Personal Finance Module 11 - Build Your Auto Policy',category:'Personal Finance',topic:'Auto Insurance Coverage Selection',productType:'Interactive Simulation',moduleSize:'standard',score:100,totalQuestions:1,percent:'100%',completed:'Yes',vehicle:loan?'2024 Corolla financed':'2015 Corolla paid off',bodilyInjury:text('bi'),propertyDamage:text('pd'),medical:text('med'),umUim:text('um'),collision:text('collision'),comprehensive:text('comp'),tort:tortChoice,addOns:extras.join(', ')||'None',sixMonthPremium:t.total,monthlyEquivalent:Math.round(t.total/6),reflection,timeMinutes:mins,version:'1.0-pfm-m11'};
+ const p=new URLSearchParams({action:'moduleSubmit',manualEntry:'1',moduleNumber:'11',bellId:'PFM-MODULE-11-BUILD-AUTO-POLICY',label:'Personal Finance Module 11 - Build Your Auto Policy',firstName:first,lastName:last,name:first+' '+last,answer:JSON.stringify(record),late:'0',duration:String(mins),timestamp:new Date().toISOString(),cls:'Personal Finance',googleName:'Manual entry',schoolEmail:'',block});
+ try{const response=await fetch(ENDPOINT,{method:'POST',body:p});const result=await response.json();if(!result.success&&result.error!=='This completion was already submitted.')throw new Error(result.error||'Save failed');submitted=true;$('saveStatus').textContent='Policy saved to Mr. D. Keep your mock declarations page for comparison.'}
+ catch(e){$('saveStatus').textContent='Your policy is complete, but saving could not be confirmed. Keep this page open and try Generate & Submit again.'}
+}
+$('startBtn').addEventListener('click',()=>{if(!$('first').value.trim()||!$('last').value.trim()||!$('period').value){alert('Enter your first name, last name, and block.');return}startedAt=Date.now();$('module').style.display='grid';$('startBtn').disabled=true;update();$('module').scrollIntoView({behavior:'smooth'})});
+document.querySelectorAll('select,input[type=radio],input[type=checkbox]').forEach(x=>x.addEventListener('change',update));
+document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>scenario(b.dataset.case)));
+$('issueBtn').addEventListener('click',issue);update();
+</script>
+</body></html>
