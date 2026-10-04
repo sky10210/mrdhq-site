@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Insurance Beyond the Car | Module 13 | MRDHQ</title>
+<meta name="description" content="Explore renters, homeowners, introductory health, life, disability, public protections, AppleCare, electronics and music gear, and unusual insurance.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102235;--blue:#2f6fb5;--teal:#18776f;--amber:#d99224;--red:#b63b34;--ink:#172033;--muted:#667085;--line:#d8e0e7;--soft:#f5f8fb;--cream:#f7f1e7;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,sans-serif;background:linear-gradient(180deg,var(--cream),#eef5f8 55%,#f8fafc);color:var(--ink);line-height:1.58}
+.wrap{width:min(1080px,92%);margin:24px auto 70px}.hero{background:linear-gradient(135deg,#102235,#173d58 68%,#1b6e73);color:white;border-radius:30px;padding:30px;box-shadow:0 18px 42px rgba(15,23,42,.13)}
+.eyebrow{font-size:.76rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#b9ece7}.hero h1{font-size:clamp(2rem,4.7vw,3.7rem);line-height:1.03;letter-spacing:-.055em;margin:10px 0 14px}.hero p{max-width:900px;color:#dce8ef}.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.pill{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.15);font-size:.76rem;font-weight:800}
+.progressrow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px;color:#c6f0ec;font-weight:800;font-size:.86rem}.progress{height:11px;background:rgba(255,255,255,.13);border-radius:999px;overflow:hidden;margin-top:7px}.bar{height:100%;width:0;background:linear-gradient(90deg,#47c6c9,#6aa7df,#f5c15e);transition:.3s}
+.card,.question,.cert{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 10px 28px rgba(15,23,42,.06)}.card{padding:22px;margin-top:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px}
+label{font-size:.84rem;font-weight:900;color:#475569;display:block;margin-bottom:5px}input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:#f8fafc;font:inherit;font-weight:600;color:var(--ink)}textarea{min-height:110px;resize:vertical}
+.btn{border:0;border-radius:14px;padding:11px 15px;font:inherit;font-weight:900;cursor:pointer;display:inline-block}.primary{background:var(--blue);color:white}.secondary{background:white;border:1px solid var(--line);color:var(--navy)}.reviewbtn{background:var(--teal);color:white;margin-left:8px}
+.note{padding:14px 16px;border-left:4px solid var(--teal);background:#edf8f6;border-radius:11px;margin-top:18px}.coverage{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.coverage div{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fafcfd;font-size:.82rem;font-weight:700}
+#questions{display:grid;gap:16px;margin-top:18px}.question{overflow:hidden}.qhead{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;align-items:center}.qhead h2{font-size:1.08rem;margin:0;color:var(--navy)}.qbody{padding:20px}.badge{font-size:.71rem;font-weight:900;padding:6px 9px;border-radius:999px;background:#eff6ff;color:var(--blue);white-space:nowrap}.locked{opacity:.58}.locked .qbody{display:none}
+.lesson{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:14px}.lesson strong{color:var(--navy)}.prompt{font-weight:800;margin:0 0 12px}.options{display:grid;gap:9px}.option{padding:12px 13px;text-align:left;border:1px solid var(--line);background:#f8fafc;border-radius:13px;font:inherit;font-weight:700;cursor:pointer;color:#334155}.option:hover{background:#eef6fb;border-color:#bfd7e9}.option.good{background:#dcfce7;border-color:#86efac;color:#166534}.option.bad{background:#fee2e2;border-color:#fca5a5;color:#991b1b}.feedback{display:none;margin-top:11px;padding:11px 13px;border-radius:13px;font-weight:800}.feedback.show{display:block}.feedback.good{background:#dcfce7;color:#166534}.feedback.bad{background:#fee2e2;color:#991b1b}
+.cert{display:none;padding:28px;text-align:center;margin-top:18px;border:2px solid #b8d9d3}.cert.show{display:block}.cert h2{font-size:2rem;color:var(--navy);margin:0}.certname{font-size:1.5rem;font-weight:900;color:var(--teal);margin:8px}.certstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.stat{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:12px}.stat strong{display:block;color:var(--navy)}.actions{margin-top:13px}.toast{position:fixed;right:18px;bottom:18px;background:var(--navy);color:white;padding:12px 15px;border-radius:13px;opacity:0;transform:translateY(8px);transition:.2s;font-weight:800;z-index:10}.toast.show{opacity:1;transform:none}.footer{color:#64748b;font-size:.83rem;margin:25px 0;text-align:center}body.done .question button,body.done textarea,body.done input{pointer-events:none}
+@media(max-width:760px){.grid3,.certstats,.coverage{grid-template-columns:1fr}.qhead{align-items:flex-start}.reviewbtn{margin:8px 0 0}}
+@media print{.hero,#start,#questions,.note,.toast,.cert button{display:none!important}.cert{display:block!important;box-shadow:none}.wrap{width:100%;margin:0}body{background:white}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="hero">
+<div class="eyebrow">Vivid Lessons • Personal Finance</div>
+<h1>Module 13 <span style="color:#8ce2db">Insurance Beyond the Car.</span></h1>
+<p>Your car is only one part of your financial life. Protect your home, belongings, health, and income—then explore AppleCare, electronics, music gear, and some surprising things people insure.</p>
+<div class="pills"><span class="pill">20 Questions</span><span class="pill">After Collision &amp; Claims</span><span class="pill">Mini Lesson Before Every Question</span><span class="pill">Health: The Basics</span><span class="pill">2 Attempts</span><span class="pill">Reflection</span></div>
+<div class="progressrow"><span id="prog">Progress: 0%</span><span id="score">Score: 0 / 20</span><span id="clock">Not started</span></div><div class="progress"><div class="bar" id="bar"></div></div>
+</section>
+
+<section class="card" id="start">
+<h2>Student Start</h2>
+<p style="color:var(--muted)">Enter your information. Questions unlock one at a time. Correct on the first attempt = 1 point; correct on the second attempt = 0.5 points. After two attempts, the answer is explained and the module continues.</p>
+<div class="grid3"><div><label for="first">First Name</label><input id="first" autocomplete="given-name"></div><div><label for="last">Last Name</label><input id="last" autocomplete="family-name"></div><div><label for="period">Block</label><select id="period"><option value="">Choose a block...</option><option value="1">Block 1</option><option value="2">Block 2</option><option value="3">Block 3</option><option value="4">Block 4</option></select></div></div>
+<div class="actions"><button class="btn primary" onclick="begin()">Start Module 13</button><a class="btn secondary" href="/pfm/">Back to PFM</a></div>
+</section>
+
+<div class="note"><strong>Big question:</strong> What loss would be hard for you to afford? Match coverage to your life, check existing benefits, and compare the written terms. Health insurance stays introductory here; a later module will go deeper.</div>
+
+<div id="questions"></div><details class="card"><summary>Sources and real-world guidance</summary><p>Reviewed October 4, 2026. Coverage varies by policy, device, and eligibility. The device-plan math uses fictional prices. Celebrity examples are historical and do not establish current coverage. Links are learning resources, not endorsements.</p><ul><li><a href="https://www.pa.gov/agencies/insurance/consumer-help-center/learn-about-insurance/renters-insurance" target="_blank" rel="noopener">Pennsylvania: Renters coverage</a></li><li><a href="https://www.pa.gov/agencies/insurance/consumer-help-center/learn-about-insurance/homeowners" target="_blank" rel="noopener">Pennsylvania: Homeowners coverage</a></li><li><a href="https://www.pa.gov/agencies/insurance/consumer-help-center/learn-about-insurance/flood-insurance" target="_blank" rel="noopener">Pennsylvania: Flood coverage</a></li><li><a href="https://content.naic.org/consumer/homeowners-insurance.htm" target="_blank" rel="noopener">NAIC: Home insurance and inventory</a></li><li><a href="https://www.healthcare.gov/choose-a-plan/your-total-costs/" target="_blank" rel="noopener">HealthCare.gov: Costs and health-plan basics</a></li><li><a href="https://www.healthcare.gov/glossary/co-payment/" target="_blank" rel="noopener">HealthCare.gov: Copayment</a></li><li><a href="https://content.naic.org/consumer/life-insurance.htm" target="_blank" rel="noopener">NAIC: Life insurance</a></li><li><a href="https://content.naic.org/article/consumer-insight-if-disability-were-keep-you-earning-living-how-would-you-pay-your-bills" target="_blank" rel="noopener">NAIC: Disability income insurance</a></li><li><a href="https://www.medicare.gov/basics/get-started-with-medicare" target="_blank" rel="noopener">Medicare: Getting started</a></li><li><a href="https://www.pa.gov/agencies/dhs/resources/medicaid" target="_blank" rel="noopener">Pennsylvania: Medicaid / Medical Assistance</a></li><li><a href="https://www.pa.gov/agencies/dhs/resources/chip" target="_blank" rel="noopener">Pennsylvania: CHIP</a></li><li><a href="https://www.pa.gov/agencies/dli/departments-offices/workers-and-employers/office-of-unemployment-compensation" target="_blank" rel="noopener">Pennsylvania: Unemployment Compensation</a></li><li><a href="https://www.pa.gov/agencies/dli/programs-services/workers-compensation/state-workers--insurance-fund-home/swif-claims-and-indemnity/coverage-and-benefits" target="_blank" rel="noopener">Pennsylvania: Workers' compensation benefits</a></li><li><a href="https://www.ssa.gov/disability" target="_blank" rel="noopener">Social Security: Disability</a></li><li><a href="https://consumer.ftc.gov/articles/warranties" target="_blank" rel="noopener">FTC: Warranties and service contracts</a></li><li><a href="https://www.apple.com/applecare/" target="_blank" rel="noopener">Apple: AppleCare plans, product coverage, and service fees</a></li><li><a href="https://www.apple.com/legal/warranty/" target="_blank" rel="noopener">Apple: Hardware warranties</a></li><li><a href="https://www.guitarcenter.com/pages/Pro-Coverage.gc" target="_blank" rel="noopener">Guitar Center: Pro Coverage</a></li><li><a href="https://www.musicproinsurance.com/pages/faq" target="_blank" rel="noopener">MusicPro: Instrument and equipment insurance FAQ</a></li><li><a href="https://www.insurancejournal.com/magazines/mag-editorsnote/2011/12/16/227488.htm" target="_blank" rel="noopener">Insurance Journal (2011): Reported historical voice-insurance example</a></li><li><a href="https://troy43.com/2010/11/19/troy-makes-it-into-the-guinness-world-records/" target="_blank" rel="noopener">Troy Polamalu's official website (2010): Insured hair</a></li><li><a href="https://www.pa.gov/agencies/insurance/consumer-help-center" target="_blank" rel="noopener">Pennsylvania: Research insurance companies and agents</a></li></ul></details>
+<details class="card"><summary>Teacher notes: Pennsylvania standards connections</summary><p>This module extends the auto-insurance sequence with introductory practice in Pennsylvania's Risk and Insurance standards. It supports continued instruction; one module does not establish mastery of the whole strand.</p><ul><li><strong>17.5.9-12.A–B:</strong> Identify financial exposure and compare risk reduction, savings, and transfer (Q1, Q16, Q20).</li><li><strong>17.5.9-12.C:</strong> Match renters, homeowners, health, life, and disability coverage to needs (Q1–11, Q20).</li><li><strong>17.5.9-12.D–E:</strong> Use provider resources, compare protection terms, calculate costs, and outline claims steps (Q6, Q14–17, Q20).</li><li><strong>17.5.9-12.F:</strong> Recognize lease and mortgage proof-of-coverage requirements (Q2, Q4).</li><li><strong>17.5.9-12.G:</strong> Introduce the role and limits of public protections (Q12–13).</li></ul><p><a href="https://www.pa.gov/content/dam/copapwp-pagov/en/stateboard/documents/regulations-and-statements/state-academic-standards/personal%20finance%20standards.pdf" target="_blank" rel="noopener">Official Pennsylvania Personal Finance Standards</a> • Health-plan analysis will be developed further in a later module.</p></details>
+
+<section class="cert" id="cert">
+<div class="eyebrow" style="color:#18776f">Certificate of Completion</div><h2 id="certHeading">Module Complete!</h2><div class="certname" id="certName"></div><div>completed <strong>Personal Finance Module 13 - Insurance Beyond the Car</strong></div>
+<div class="certstats"><div class="stat"><strong id="certScore"></strong><span>Score</span></div><div class="stat"><strong id="certPct"></strong><span>Percent</span></div><div class="stat"><strong id="certStart"></strong><span>Started</span></div><div class="stat"><strong id="certEnd"></strong><span>Finished</span></div></div>
+<div class="lesson" style="text-align:left"><strong>Reflection</strong><div id="certRef"></div></div><p id="saveStatus" role="status" aria-live="polite">Saving your score...</p>
+<button id="retrySave" hidden class="btn primary" onclick="submit(document.getElementById('certRef').textContent,Math.round(score/20*100))">Retry saving score</button> <button class="btn secondary" onclick="window.print()">Print / Save Certificate</button>
+</section>
+<div class="footer">MR. D • Personal Financial Management • Module 13 • Insurance Beyond the Car</div>
+</main><div class="toast" id="toast"></div>
+
+<script>
+const META={id:'pfm-module-13-insurance-beyond-the-car',title:'Personal Finance Module 13 - Insurance Beyond the Car',category:'Personal Finance',topic:'Renters, Homeowners, Health Basics, Life, Disability, Public Protections, Devices and Music Gear',productType:'Interactive Module',moduleSize:'extended',version:'1.0-pfm-m13',questionCount:20};
+const ENDPOINT='https://script.google.com/macros/s/AKfycbyucfQcDDR9S_4i8_EiI2LAm0k49NNGT0IBiRnXTjZQKgtfuOwM73Wtxxt5fzojGFY/exec';
+const Q=[
+  {
+    "n": 1,
+    "t": "Protect More Than Your Car",
+    "lesson": "Insurance begins with a question: <strong>What loss would be hard for me to afford?</strong> Your risks change when you move out, buy a home, start a job, or support a family. A renter may need protection for belongings and liability; a homeowner also has a building to protect. Health, life, and disability address different losses. You can <strong>reduce</strong> risk with safety habits, <strong>retain</strong> some risk with savings, and <strong>transfer</strong> covered financial risk to an insurer. Buying insurance does not stop the event or erase every expense.",
+    "prompt": "Maya rents an apartment and wants protection for her clothes, laptop, and furniture. Which policy is the best starting point?",
+    "o": [
+      "Homeowners insurance",
+      "Term life insurance",
+      "Renters insurance",
+      "Disability insurance"
+    ],
+    "a": 2,
+    "fb": "Renters insurance is designed for a tenant's belongings and other covered risks. Maya does not own the building."
+  },
+  {
+    "n": 2,
+    "t": "Renters: The Landlord's Policy Is Not Yours",
+    "lesson": "A landlord's property policy generally protects the landlord's building, not your personal belongings. <strong>Renters insurance</strong> can cover your possessions after covered events such as theft or fire, subject to a deductible and limits. Add up clothes, bedding, cookware, furniture, and electronics: replacing everything costs more than replacing one item. A lease may require renters insurance and proof of coverage. A roommate's policy does not automatically cover you; check who is insured. College students should check any family-policy coverage rather than assume it follows them everywhere.",
+    "prompt": "A fire damages Alex's rented apartment. The landlord says the building is insured. What should Alex understand?",
+    "o": [
+      "Alex needs coverage for personal belongings",
+      "The landlord must replace every item Alex owns",
+      "Renters insurance pays the landlord's mortgage",
+      "Alex's car policy replaces apartment furniture"
+    ],
+    "a": 0,
+    "fb": "The landlord's building coverage does not automatically insure Alex's possessions. Check Alex's renters or applicable family-policy coverage."
+  },
+  {
+    "n": 3,
+    "t": "Renters: Liability and a Place to Stay",
+    "lesson": "Renters coverage can do more than replace stuff. <strong>Personal liability</strong> may help with covered claims that you are legally responsible for someone else's injury or property damage. <strong>Additional living expenses</strong>, sometimes called loss of use, may pay eligible extra costs when a covered event makes your place unlivable. It is not a blank check for a vacation or payment of all normal bills. Keep receipts, ask what the insurer approves, and check time and dollar limits. For example, a temporary hotel after a covered fire is different from choosing a nicer apartment.",
+    "prompt": "A covered fire makes Sam's apartment unlivable. Which renters benefit may help with eligible extra hotel costs?",
+    "o": [
+      "Personal property replacement",
+      "Personal liability protection",
+      "Life insurance death benefit",
+      "Additional living expenses"
+    ],
+    "a": 3,
+    "fb": "Additional living expenses may help with eligible extra housing costs after a covered loss, within policy limits."
+  },
+  {
+    "n": 4,
+    "t": "Homeowners: Protecting a Building You Own",
+    "lesson": "<strong>Homeowners insurance</strong> commonly combines coverage for the dwelling, personal belongings, liability, and eligible additional living expenses. The dwelling is the structure; contents are the things inside. A mortgage lender generally requires coverage to protect the financed property. Your coverage amount should consider rebuilding costs, not just what the house might sell for. Home insurance is not routine maintenance: an aging roof, worn-out furnace, or neglected leak is not automatically an insured loss. Read the specific covered events and exclusions before assuming a repair is covered.",
+    "prompt": "Taylor buys a house with a mortgage. Which coverage most directly addresses rebuilding the structure after a covered fire?",
+    "o": [
+      "Personal belongings coverage",
+      "Homeowners dwelling coverage",
+      "Disability income coverage",
+      "Home warranty appliance service"
+    ],
+    "a": 1,
+    "fb": "Dwelling coverage addresses the home's structure after a covered loss. Belongings, income, and appliance service address different needs."
+  },
+  {
+    "n": 5,
+    "t": "Flood: The Important Coverage Gap",
+    "lesson": "A policy covering a house does not cover every possible cause of damage. <strong>Standard homeowners and renters policies generally exclude flooding.</strong> Flood coverage is usually purchased separately, through the National Flood Insurance Program or a private insurer. Renters can seek flood protection for contents even though they do not own the building. Flood risk exists outside the highest-risk mapped areas, and flood policies can have waiting periods. Water from a burst pipe and water rising from outside are different situations; check the actual policy instead of treating all water damage as the same.",
+    "prompt": "A creek overflows and floods Jordan's living room. What is the best preparation before a future flood?",
+    "o": [
+      "Check and obtain appropriate flood coverage",
+      "Raise only the auto collision coverage limit",
+      "Buy only a longer appliance service contract",
+      "Rely on a standard home policy for all water"
+    ],
+    "a": 0,
+    "fb": "Flooding is generally excluded by standard home/renters coverage. Check separate flood coverage and its terms before a loss occurs."
+  },
+  {
+    "n": 6,
+    "t": "Inventory, Value, and Deductibles",
+    "lesson": "Make a <strong>home inventory</strong>: photos, descriptions, purchase receipts, and serial numbers, stored somewhere you can still access after a fire or theft. This helps document a claim. <strong>Replacement cost</strong> coverage pays based on replacing with a comparable item, under the policy's conditions. <strong>Actual cash value</strong> accounts for depreciation—age and use can reduce the value. Deductibles and limits still apply, and some replacement-cost claims pay in stages. Expensive gear may need specifically listed coverage. Our math example supplies the approved covered value, so you do not have to guess depreciation.",
+    "prompt": "An eligible stolen laptop has an approved covered value of $900. The applicable deductible is $250 and no other limits apply. What is the insurer's payment?",
+    "o": [
+      "$250",
+      "$900",
+      "$650",
+      "$1,150"
+    ],
+    "a": 2,
+    "fb": "$900 − $250 = $650. This example gives the approved covered value; a real claim also depends on valuation rules and limits."
+  },
+  {
+    "n": 7,
+    "t": "Health Insurance: Just the Starting Point",
+    "lesson": "<strong>Health insurance</strong> helps pay for covered medical care, such as doctor visits, hospital care, and medicines. You may still owe part of the cost. Coverage can come through an employer, an eligible family plan, an individual plan, or a public program. A <strong>provider network</strong> is the group of doctors and facilities participating in a plan; using care outside it can change coverage and cost. Before planned care, check the provider and the service. Health coverage helps with medical bills; it does not ordinarily replace wages you miss while recovering. We will study health plans more deeply later.",
+    "prompt": "Morgan needs protection against covered doctor and hospital bills. Which insurance type most directly fits?",
+    "o": [
+      "Disability income insurance",
+      "Health insurance",
+      "Renters personal property coverage",
+      "Term life insurance"
+    ],
+    "a": 1,
+    "fb": "Health insurance addresses covered medical care. Disability income insurance addresses qualifying lost income."
+  },
+  {
+    "n": 8,
+    "t": "Health Words: Premium, Deductible, and Copay",
+    "lesson": "Keep three basic terms straight. A <strong>premium</strong> is the price paid to keep coverage active. A health <strong>deductible</strong> is the amount you pay for certain covered services before the plan starts sharing those costs; some services can be covered before you meet it. A <strong>copayment</strong> is a fixed amount for a covered service, such as an office visit, according to the plan. Unlike the per-claim car deductible you studied, a health deductible commonly works across a plan year. Paying premiums does not mean every visit is free. For now, identify the terms; detailed health-plan comparisons come later.",
+    "prompt": "A plan charges $30 for a covered doctor visit under its copay rules. What is that fixed $30 charge called?",
+    "o": [
+      "Premium",
+      "Deductible",
+      "Replacement value",
+      "Copayment"
+    ],
+    "a": 3,
+    "fb": "A copayment is a fixed charge for a covered service. The premium keeps the policy active; the deductible follows separate plan rules."
+  },
+  {
+    "n": 9,
+    "t": "Life Insurance: Who Depends on Your Income?",
+    "lesson": "<strong>Life insurance</strong> generally pays a death benefit to named <strong>beneficiaries</strong> if the insured person dies while the policy is in force and the claim meets its terms. A beneficiary is the person or organization designated to receive the benefit. Consider who relies on your income or unpaid caregiving, debts and final expenses, available savings, and existing coverage. Needs differ: supporting children can create a different need from being a student with no dependents. Choose an amount and duration you can afford; the point is protecting people from a financial gap.",
+    "prompt": "Which situation most clearly creates a need to evaluate life insurance for income replacement?",
+    "o": [
+      "A student replaces a cracked phone screen",
+      "A renter wants protection for a stolen TV",
+      "A parent supports children with their earnings",
+      "A driver wants help after a tire goes flat"
+    ],
+    "a": 2,
+    "fb": "People who depend on a parent's income could face a major financial gap after that parent's death."
+  },
+  {
+    "n": 10,
+    "t": "Term and Permanent Life: A Basic Comparison",
+    "lesson": "<strong>Term life</strong> covers a stated period, such as 20 years, and generally does not build cash value. It pays an eligible death claim during that term. <strong>Permanent life</strong> is designed for longer-lasting coverage if policy requirements are met and can include cash value; it usually costs more for a comparable death benefit. Neither label tells you everything about fees, renewal, or guarantees. Compare the same benefit amount, coverage period, affordability, and terms. Review beneficiary choices when family circumstances change. Life insurance is not the same as health insurance or a paycheck while you are recovering.",
+    "prompt": "A parent wants to compare coverage for the 20 years while their children grow up, with an emphasis on affordable death-benefit protection. Which is a sensible starting point?",
+    "o": [
+      "Compare 20-year term life quotes",
+      "Compare only phone protection plans",
+      "Compare only renters liability limits",
+      "Compare only health insurance copays"
+    ],
+    "a": 0,
+    "fb": "A 20-year term policy matches the stated period. A final choice should compare benefits, costs, and family needs."
+  },
+  {
+    "n": 11,
+    "t": "Disability: Protecting Your Paycheck",
+    "lesson": "An injury or illness can create two problems: medical bills and missing paychecks. <strong>Disability income insurance</strong> may replace part of your earnings if a qualifying condition prevents you from working. Short-term and long-term plans differ. Check the definition of disability, benefit amount, waiting period before benefits start, payment duration, and employer coverage. Savings can help bridge a waiting period. This coverage is different from life insurance, which generally pays after death, and health insurance, which addresses medical care. Do not assume a policy replaces your full wage or covers every reason for missing work.",
+    "prompt": "A qualifying injury keeps Casey from working. Health insurance helps with treatment, but Casey still needs money for rent. Which coverage is aimed at that income gap?",
+    "o": [
+      "Homeowners dwelling insurance",
+      "Term life death benefit",
+      "A laptop manufacturer's warranty",
+      "Disability income insurance"
+    ],
+    "a": 3,
+    "fb": "Disability income insurance can replace part of qualifying lost earnings, subject to the waiting period and other policy terms."
+  },
+  {
+    "n": 12,
+    "t": "Public Health Protections: Different Programs",
+    "lesson": "Public programs can help people obtain health coverage, but their eligibility rules differ. <strong>Medicare</strong> generally serves people age 65 or older and certain eligible younger people. <strong>Medicaid</strong>, called Medical Assistance in Pennsylvania, covers eligible individuals under income and other program rules. <strong>CHIP</strong> is health coverage for eligible children; Pennsylvania offers free, low-cost, or full-cost coverage depending on eligibility and family circumstances. These are not interchangeable names, and qualifying is not automatic. A family should check official eligibility information and apply through the appropriate program instead of assuming it has no options.",
+    "prompt": "A Pennsylvania family with limited income needs to investigate health coverage for an adult. Which public program should they check for eligibility?",
+    "o": [
+      "Homeowners insurance",
+      "Medicaid / Medical Assistance",
+      "A musical instrument service plan",
+      "Auto roadside assistance"
+    ],
+    "a": 1,
+    "fb": "Medicaid / Medical Assistance is a relevant program to check. The agency determines eligibility; this scenario does not guarantee approval."
+  },
+  {
+    "n": 13,
+    "t": "Public Protections: Lost Jobs and Work Injuries",
+    "lesson": "<strong>Unemployment Compensation</strong> can provide temporary income support to eligible workers after job loss through no fault of their own or reduced hours. Pennsylvania considers earnings history, the separation circumstances, and ongoing requirements, including being able and available for work. It does not guarantee a full paycheck. <strong>Workers' compensation</strong> addresses covered work-related injuries or illnesses and can provide medical and wage-loss benefits. <strong>Social Security Disability Insurance</strong> has separate disability and work-history requirements; it is not a general short-term sick-pay plan. These protections can reduce hardship, but eligibility and processing time make emergency savings useful too.",
+    "prompt": "Lee is laid off when a store closes, is able to work, and is seeking another job. Which program is most directly relevant to investigate for temporary income support?",
+    "o": [
+      "Pennsylvania Unemployment Compensation",
+      "Homeowners additional living expenses",
+      "A manufacturer's product warranty",
+      "A term life insurance death benefit"
+    ],
+    "a": 0,
+    "fb": "Unemployment Compensation is relevant to a layoff. Lee still must meet financial and ongoing eligibility requirements."
+  },
+  {
+    "n": 14,
+    "t": "Warranty, Service Contract, or Insurance?",
+    "lesson": "A <strong>manufacturer's warranty</strong> promises specified remedies if a product has covered defects, usually for a stated time. A paid <strong>service contract</strong>, often marketed as an extended warranty or protection plan, may add repairs and sometimes accidental damage. <strong>Insurance</strong> can protect against specified losses such as theft or damage, depending on the contract. Names can blur: a branded protection package may combine services and insurance. Read the actual agreement. Ask: defects, drops, spills, theft, or loss? For how long? What fee per claim? A standard defect warranty does not automatically cover dropping a phone.",
+    "prompt": "A new game console stops working because of a covered manufacturing defect during its warranty period. Which protection should you check first?",
+    "o": [
+      "Life insurance beneficiary rules",
+      "Renters additional living expenses",
+      "The manufacturer's warranty",
+      "Unemployment benefit requirements"
+    ],
+    "a": 2,
+    "fb": "A manufacturing defect during the warranty period is a reason to check the manufacturer's warranty before paying for another repair option."
+  },
+  {
+    "n": 15,
+    "t": "AppleCare: Read the Exact Plan",
+    "lesson": "<strong>AppleCare is a family of plans, not a promise that every device loss is covered.</strong> AppleCare+ for eligible products adds service and accidental-damage protection under its terms. Theft/loss coverage depends on the plan and product: Apple offers plans specifically including Theft and Loss and AppleCare One for multiple eligible devices. Do not assume a lost AirPod or stolen Mac is covered because an iPhone has theft/loss protection. Claims can involve service fees or deductibles, eligibility rules, and conditions such as Find My requirements for theft/loss. Check the current product-specific agreement before buying or claiming.",
+    "prompt": "Riley wants protection if their iPhone is stolen. What should Riley verify before buying an AppleCare plan?",
+    "o": [
+      "Whether the case includes a screen protector",
+      "Whether that plan includes iPhone theft coverage",
+      "Whether their music app offers premium songs",
+      "Whether the charger supports fast charging"
+    ],
+    "a": 1,
+    "fb": "Verify theft coverage for that exact iPhone and plan, including eligibility, fees, limits, and required settings. Accidental-damage coverage alone is not theft coverage."
+  },
+  {
+    "n": 16,
+    "t": "Electronics: The Total Cost of Protection",
+    "lesson": "For phones, laptops, tablets, headphones, or game systems, compare the <strong>plan price plus your share of a claim</strong> with the risk you can afford. A monthly protection charge continues even when you never make a claim. A low advertised fee may apply only to one repair category. Also consider coverage you already have and whether a renters deductible makes a small claim impractical. Saving for repairs, a sturdy case, and careful storage are alternatives or complements to paid protection. The following device-plan numbers are <strong>fictional classroom prices, not AppleCare quotes</strong>.",
+    "prompt": "A fictional device plan costs $10/month. One eligible repair during the year has a $50 service fee. What is the total spent on the plan and that claim for the year?",
+    "o": [
+      "$50",
+      "$120",
+      "$600",
+      "$170"
+    ],
+    "a": 3,
+    "fb": "$10 × 12 = $120 in plan charges; $120 + $50 = $170. This is a fictional comparison, not a current Apple price."
+  },
+  {
+    "n": 17,
+    "t": "Music Gear: Defects, Drops, and Gigs",
+    "lesson": "A guitar, keyboard, amp, DJ controller, microphone, or recording laptop can face different risks. A manufacturer's warranty addresses covered defects. A retailer's plan may add covered breakdowns or handling accidents: Guitar Center's Pro Coverage is one real example, with terms and exclusions. <strong>Instrument/equipment insurance</strong> can address different risks. MusicPro, for example, advertises eligible theft and accidental damage coverage for gear at home or at gigs, subject to policy terms. Compare commercial use, travel, unattended vehicles, repair/replacement valuation, deductibles, and listed equipment. Your renters or car policy is not automatically a complete touring-gear policy.",
+    "prompt": "Dev earns money playing gigs and transports a valuable keyboard. What is the best comparison approach?",
+    "o": [
+      "Assume the car policy covers everything inside",
+      "Choose only the longest manufacturer warranty",
+      "Compare gear insurance and plans for gigs and theft",
+      "Rely on the venue to replace all damaged equipment"
+    ],
+    "a": 2,
+    "fb": "Check protection that fits paid gigs, transport, and theft. A defect warranty or auto policy alone may leave important gaps."
+  },
+  {
+    "n": 18,
+    "t": "Can You Insure a Famous Voice?",
+    "lesson": "<strong>Fun example: a voice can be an earning asset.</strong> Insurance Journal reported in 2011 that Bruce Springsteen had reportedly insured his voice through Lloyd's in the 1980s. Treat this as a historical reported example, not proof of his current coverage or exact policy terms. The financial idea is easy to apply: a singer, actor, or voice artist could lose income if unable to perform. A specialty contract may address a defined loss of earning ability. It does not make every sore throat a payday. The insured interest, covered event, exclusions, and evidence of loss all matter.",
+    "prompt": "Why might a professional singer investigate specialty coverage related to their voice?",
+    "o": [
+      "A covered loss of singing ability could reduce earnings",
+      "It would guarantee that every album makes a profit",
+      "It would pay whenever a listener dislikes a song",
+      "It would make ordinary health insurance unnecessary"
+    ],
+    "a": 0,
+    "fb": "The financial risk is reduced earning ability after a defined covered event. Specialty insurance does not guarantee artistic success."
+  },
+  {
+    "n": 19,
+    "t": "Million-Dollar Hair: A Steelers Connection",
+    "lesson": "<strong>Real historical example:</strong> Head &amp; Shoulders insured Pittsburgh Steelers player Troy Polamalu's hair for $1 million through Lloyd's in 2010. His official website documents the announcement and recognition for his insured hair. Why could hair matter financially? A distinctive appearance can be valuable in advertising and endorsement work. That business connection helps explain the unusual insurance interest; it does not reveal every claim condition. Do not assume an ordinary haircut or bad hair day would trigger payment. Celebrity insurance headlines are fun, but the contract still decides what is covered.",
+    "prompt": "What financial idea best explains a sponsor insuring a famous athlete's trademark hair?",
+    "o": [
+      "The policy pays $1 million for every haircut",
+      "Hair insurance replaces the athlete's medical plan",
+      "All athletes must buy the same coverage to compete",
+      "A trademark appearance may have endorsement value"
+    ],
+    "a": 3,
+    "fb": "A signature appearance can have financial value in endorsements. The historical headline does not establish when the policy would pay."
+  },
+  {
+    "n": 20,
+    "t": "Build a Protection Plan That Fits",
+    "lesson": "Use a repeatable process: <strong>identify the risk → check existing protection → compare written terms and total cost → choose coverage or savings → keep records.</strong> Compare the same limits, deductibles, covered causes, fees, and exclusions, not just the lowest premium. Verify company/agent information through Pennsylvania's Insurance Department. After a loss, protect yourself, document what happened, contact the provider promptly, and follow claim instructions. Do not invent information or assume a payment. Match major risks to appropriate coverage and use savings for affordable smaller losses; a costly add-on is not automatically the best choice.",
+    "prompt": "Avery rents, has health coverage through work, and can replace inexpensive headphones from savings. Which plan most reasonably fits these facts?",
+    "o": [
+      "Buy every checkout protection plan before checking terms",
+      "Compare renters coverage; check work benefits; save for small losses",
+      "Buy homeowners dwelling coverage for the landlord's building",
+      "Cancel health coverage and insure only the headphones"
+    ],
+    "a": 1,
+    "fb": "Avery can compare renters protection, review existing employee coverage, and retain an affordable small risk through savings. Choices should fit actual needs."
+  }
+];
+let started=false,locked=false,score=0,done=0,startTime=null,endTime=null,submitted=false;
+const attempts={},answers={},types=Q.map(()=> 'multiple choice');
+const sid=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(16).slice(2));
+const el=id=>document.getElementById(id);
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function toast(s){const t=el('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function fmt(d){return d?d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):''}
+function render(){el('questions').innerHTML=Q.map(q=>`<section class="question locked" id="q${q.n}"><div class="qhead"><h2>${q.n}. ${q.t}</h2><span class="badge" id="b${q.n}">Locked</span></div><div class="qbody"><div class="lesson"><strong>Mini Lesson</strong><br>${q.lesson}</div><p class="prompt">${esc(q.prompt)}</p><div class="options" id="a${q.n}">${q.o.map((x,i)=>`<button class="option" onclick="pick(this,${q.n},${i})">${esc(x)}</button>`).join('')}</div><div class="feedback" id="f${q.n}"></div></div></section>`).join('')+`<section class="question locked" id="q21"><div class="qhead"><h2>Final Reflection</h2><span class="badge" id="b21">Locked</span></div><div class="qbody"><div class="lesson"><strong>Protect what matters in your next stage of life.</strong> Think about moving out, starting a job, owning electronics or music gear, and supporting other people. Insurance and savings can work together.</div><p class="prompt">Choose two protections that could matter to you after high school and explain why. For one device or piece of music gear, would you buy a protection plan or save for repairs? Name one coverage detail you would check before deciding. Which unusual insurance example interested you most?</p><textarea id="reflection" placeholder="Write your reflection here..."></textarea><div class="actions"><button class="btn primary" onclick="finish()">Finish & Save</button></div></div></section>`}
+function begin(){if(started)return;const f=el('first').value.trim(),l=el('last').value.trim(),p=el('period').value;if(!f||!l||!p)return toast('Enter first name, last name, and block.');started=true;startTime=new Date();unlock(1);update();el('start').scrollIntoView({behavior:'smooth'});setTimeout(()=>el('q1').scrollIntoView({behavior:'smooth',block:'start'}),300)}
+function unlock(n){const q=el('q'+n);if(!q)return;q.classList.remove('locked');el('b'+n).textContent=n===21?'Reflection':'Ready'}
+function award(n,ok,txt){attempts[n]=(attempts[n]||0)+1;const k=attempts[n],q=Q[n-1],f=el('f'+n);if(!answers['Q'+n])answers['Q'+n]={attempts:[],resolved:false,earned:0};answers['Q'+n].attempts.push(txt);if(ok){const pts=k===1?1:.5;score+=pts;answers['Q'+n].resolved=true;answers['Q'+n].earned=pts;answers['Q'+n].correct=q.o[q.a];f.className='feedback show good';f.textContent=(k===1?'Correct. ':'Correct on the second attempt. ')+q.fb;freeze(n);setTimeout(()=>complete(n),450)}else if(k===1){f.className='feedback show bad';f.textContent='Not quite. Re-read the mini lesson and try once more for half credit.'}else{answers['Q'+n].resolved=true;answers['Q'+n].earned=0;answers['Q'+n].correct=q.o[q.a];f.className='feedback show bad';f.textContent='Not quite. '+q.fb;freeze(n);setTimeout(()=>complete(n),650)}}
+function pick(btn,n,choice){if(!started||locked||answers['Q'+n]?.resolved)return;const q=Q[n-1],ok=choice===q.a;btn.classList.add(ok?'good':'bad');award(n,ok,btn.textContent.trim())}
+function freeze(n){const box=el('a'+n);if(box)box.querySelectorAll('button').forEach(x=>x.disabled=true)}
+function complete(n){done=Math.max(done,n);el('b'+n).textContent='Complete';el('b'+n).style.background='#dcfce7';el('b'+n).style.color='#166534';unlock(n<20?n+1:21);update();if(n<20)setTimeout(()=>el('q'+(n+1)).scrollIntoView({behavior:'smooth',block:'start'}),250)}
+function update(){el('score').textContent=`Score: ${score} / 20`;const p=Math.round((done/21)*100);el('prog').textContent=`Progress: ${p}%`;el('bar').style.width=p+'%';el('clock').textContent=startTime?'Started: '+fmt(startTime):'Not started'}
+function finish(){if(locked||!started||done<20)return toast('Complete all 20 questions first.');const r=el('reflection').value.trim();endTime=new Date();done=21;update();el('b21').textContent='Complete';el('b21').style.background='#dcfce7';el('b21').style.color='#166534';const pct=Math.round(score/20*100);el('certHeading').textContent=pct>=90?'Outstanding Work!':pct>=80?'Strong Work!':pct>=70?'Nice Progress!':'Module Complete!';el('certName').textContent=el('first').value.trim()+' '+el('last').value.trim();el('certScore').textContent=score+' / 20';el('certPct').textContent=pct+'%';el('certStart').textContent=fmt(startTime);el('certEnd').textContent=fmt(endTime);el('certRef').textContent=r||'No reflection entered.';el('cert').classList.add('show');submit(r,pct);locked=true;document.body.classList.add('done');el('cert').scrollIntoView({behavior:'smooth'})}
+async function submit(ref,pct){
+ if(submitted)return;submitted=true;const mins=Math.max(1,Math.round((endTime-startTime)/60000));
+ const record={moduleId:META.id,moduleTitle:META.title,category:META.category,topic:META.topic,productType:META.productType,moduleSize:META.moduleSize,score,totalQuestions:20,percent:pct+'%',completed:'Yes',questionTypes:types.join(', '),answers:JSON.stringify(answers),timeStarted:fmt(startTime),timeFinished:fmt(endTime),totalTime:mins+' minutes',reflection:ref,version:META.version,sessionId:sid};
+ const p=new URLSearchParams({action:'moduleSubmit',manualEntry:'1',moduleNumber:'13',bellId:'PFM-MODULE-13-INSURANCE-BEYOND-THE-CAR',label:'Personal Finance Module 13 - Insurance Beyond the Car',firstName:el('first').value.trim(),lastName:el('last').value.trim(),name:el('first').value.trim()+' '+el('last').value.trim(),answer:JSON.stringify(record),late:'0',duration:String(mins),timestamp:new Date().toISOString(),cls:'Personal Finance',googleName:'Manual entry',schoolEmail:'',block:el('period').value.trim()});
+ try{el('saveStatus').textContent='Saving your score...';el('retrySave').hidden=true;const response=await fetch(ENDPOINT,{method:'POST',body:p});const result=await response.json();if(!result.success&&result.error!=='This completion was already submitted.')throw new Error(result.error||'Save not confirmed');el('saveStatus').textContent='Score saved to Mr. D. Keep your certificate.';toast('Score saved to Mr. D.')}
+ catch(e){submitted=false;el('saveStatus').textContent='Your certificate is ready, but saving could not be confirmed. Keep this page open and retry.';el('retrySave').hidden=false}
+}
+render();
+</script>
+</body>
+</html>
