@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Collision, Comprehensive & Insurance Claims | Module 12 | MRDHQ</title>
+<meta name="description" content="Practice auto insurance scenarios, crash and claim steps, roadside assistance, and five deductible calculations.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102235;--blue:#2f6fb5;--teal:#18776f;--amber:#d99224;--red:#b63b34;--ink:#172033;--muted:#667085;--line:#d8e0e7;--soft:#f5f8fb;--cream:#f7f1e7;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,sans-serif;background:linear-gradient(180deg,var(--cream),#eef5f8 55%,#f8fafc);color:var(--ink);line-height:1.58}
+.wrap{width:min(1080px,92%);margin:24px auto 70px}.hero{background:linear-gradient(135deg,#102235,#173d58 68%,#1b6e73);color:white;border-radius:30px;padding:30px;box-shadow:0 18px 42px rgba(15,23,42,.13)}
+.eyebrow{font-size:.76rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#b9ece7}.hero h1{font-size:clamp(2rem,4.7vw,3.7rem);line-height:1.03;letter-spacing:-.055em;margin:10px 0 14px}.hero p{max-width:900px;color:#dce8ef}.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.pill{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.15);font-size:.76rem;font-weight:800}
+.progressrow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px;color:#c6f0ec;font-weight:800;font-size:.86rem}.progress{height:11px;background:rgba(255,255,255,.13);border-radius:999px;overflow:hidden;margin-top:7px}.bar{height:100%;width:0;background:linear-gradient(90deg,#47c6c9,#6aa7df,#f5c15e);transition:.3s}
+.card,.question,.cert{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 10px 28px rgba(15,23,42,.06)}.card{padding:22px;margin-top:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px}
+label{font-size:.84rem;font-weight:900;color:#475569;display:block;margin-bottom:5px}input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:#f8fafc;font:inherit;font-weight:600;color:var(--ink)}textarea{min-height:110px;resize:vertical}
+.btn{border:0;border-radius:14px;padding:11px 15px;font:inherit;font-weight:900;cursor:pointer;display:inline-block}.primary{background:var(--blue);color:white}.secondary{background:white;border:1px solid var(--line);color:var(--navy)}.reviewbtn{background:var(--teal);color:white;margin-left:8px}
+.note{padding:14px 16px;border-left:4px solid var(--teal);background:#edf8f6;border-radius:11px;margin-top:18px}.coverage{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.coverage div{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fafcfd;font-size:.82rem;font-weight:700}
+#questions{display:grid;gap:16px;margin-top:18px}.question{overflow:hidden}.qhead{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;align-items:center}.qhead h2{font-size:1.08rem;margin:0;color:var(--navy)}.qbody{padding:20px}.badge{font-size:.71rem;font-weight:900;padding:6px 9px;border-radius:999px;background:#eff6ff;color:var(--blue);white-space:nowrap}.locked{opacity:.58}.locked .qbody{display:none}
+.lesson{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:14px}.lesson strong{color:var(--navy)}.prompt{font-weight:800;margin:0 0 12px}.options{display:grid;gap:9px}.option{padding:12px 13px;text-align:left;border:1px solid var(--line);background:#f8fafc;border-radius:13px;font:inherit;font-weight:700;cursor:pointer;color:#334155}.option:hover{background:#eef6fb;border-color:#bfd7e9}.option.good{background:#dcfce7;border-color:#86efac;color:#166534}.option.bad{background:#fee2e2;border-color:#fca5a5;color:#991b1b}.feedback{display:none;margin-top:11px;padding:11px 13px;border-radius:13px;font-weight:800}.feedback.show{display:block}.feedback.good{background:#dcfce7;color:#166534}.feedback.bad{background:#fee2e2;color:#991b1b}
+.cert{display:none;padding:28px;text-align:center;margin-top:18px;border:2px solid #b8d9d3}.cert.show{display:block}.cert h2{font-size:2rem;color:var(--navy);margin:0}.certname{font-size:1.5rem;font-weight:900;color:var(--teal);margin:8px}.certstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.stat{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:12px}.stat strong{display:block;color:var(--navy)}.actions{margin-top:13px}.toast{position:fixed;right:18px;bottom:18px;background:var(--navy);color:white;padding:12px 15px;border-radius:13px;opacity:0;transform:translateY(8px);transition:.2s;font-weight:800;z-index:10}.toast.show{opacity:1;transform:none}.footer{color:#64748b;font-size:.83rem;margin:25px 0;text-align:center}body.done .question button,body.done textarea,body.done input{pointer-events:none}
+@media(max-width:760px){.grid3,.certstats,.coverage{grid-template-columns:1fr}.qhead{align-items:flex-start}.reviewbtn{margin:8px 0 0}}
+@media print{.hero,#start,#questions,.note,.toast,.cert button{display:none!important}.cert{display:block!important;box-shadow:none}.wrap{width:100%;margin:0}body{background:white}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="hero">
+<div class="eyebrow">Vivid Lessons • Personal Finance</div>
+<h1>Module 12 <span style="color:#8ce2db">Collision, Comprehensive &amp; Claims.</span></h1>
+<p>After building your auto policy, practice what to do when your car is damaged, when you need roadside help, and when you must file a claim. Finish with five deductible and money calculations.</p>
+<div class="pills"><span class="pill">20 Questions</span><span class="pill">After Build Your Auto Policy</span><span class="pill">Mini Lesson Before Every Question</span><span class="pill">Q16–20: Money Math</span><span class="pill">2 Attempts</span><span class="pill">Reflection</span></div>
+<div class="progressrow"><span id="prog">Progress: 0%</span><span id="score">Score: 0 / 20</span><span id="clock">Not started</span></div><div class="progress"><div class="bar" id="bar"></div></div>
+</section>
+
+<section class="card" id="start">
+<h2>Student Start</h2>
+<p style="color:var(--muted)">Enter your information. Questions unlock one at a time. Correct on the first attempt = 1 point; correct on the second attempt = 0.5 points. After two attempts, the answer is explained and the module continues.</p>
+<div class="grid3"><div><label for="first">First Name</label><input id="first" autocomplete="given-name"></div><div><label for="last">Last Name</label><input id="last" autocomplete="family-name"></div><div><label for="period">Block</label><select id="period"><option value="">Choose a block...</option><option value="1">Block 1</option><option value="2">Block 2</option><option value="3">Block 3</option><option value="4">Block 4</option></select></div></div>
+<div class="actions"><button class="btn primary" onclick="begin()">Start Module 12</button><a class="btn secondary" href="/pfm/">Back to PFM</a></div>
+</section>
+
+<div class="note"><strong>Remember:</strong> Liability protects against covered harm you cause to others. Collision and comprehensive protect your own vehicle in different situations. Actual payments depend on the coverage you purchased and the policy terms.</div>
+
+<div id="questions"></div><details class="card"><summary>Sources and real-world guidance</summary><p>Reviewed October 4, 2026. Examples use standard coverage concepts; individual policies determine benefits and limits.</p><ul><li><a href="https://www.pa.gov/agencies/penndot/traveling-in-pa/safety/traffic-safety-driver-topics/pa-move-over-law" target="_blank" rel="noopener">PennDOT: If you are in a crash</a></li><li><a href="https://www.pa.gov/agencies/insurance/consumer-help-center/learn-about-insurance/auto-insurance" target="_blank" rel="noopener">Pennsylvania Insurance Department: Auto insurance</a></li><li><a href="https://www.progressive.com/answers/comprehensive-vs-collision-insurance/" target="_blank" rel="noopener">Progressive: Collision, comprehensive and deductibles</a></li><li><a href="https://www.geico.com/claims/claimsprocess/" target="_blank" rel="noopener">GEICO: Claims process</a></li><li><a href="https://www.geico.com/auto-insurance/emergency-road-service/" target="_blank" rel="noopener">GEICO: Roadside services and limits</a></li></ul></details>
+
+<section class="cert" id="cert">
+<div class="eyebrow" style="color:#18776f">Certificate of Completion</div><h2 id="certHeading">Module Complete!</h2><div class="certname" id="certName"></div><div>completed <strong>Personal Finance Module 12 - Collision, Comprehensive &amp; Claims</strong></div>
+<div class="certstats"><div class="stat"><strong id="certScore"></strong><span>Score</span></div><div class="stat"><strong id="certPct"></strong><span>Percent</span></div><div class="stat"><strong id="certStart"></strong><span>Started</span></div><div class="stat"><strong id="certEnd"></strong><span>Finished</span></div></div>
+<div class="lesson" style="text-align:left"><strong>Reflection</strong><div id="certRef"></div></div><p id="saveStatus" role="status" aria-live="polite">Saving your score...</p>
+<button id="retrySave" hidden class="btn primary" onclick="submit(document.getElementById('certRef').textContent,Math.round(score/20*100))">Retry saving score</button> <button class="btn secondary" onclick="window.print()">Print / Save Certificate</button>
+</section>
+<div class="footer">MR. D • Personal Financial Management • Module 12 • Collision, Comprehensive &amp; Claims</div>
+</main><div class="toast" id="toast"></div>
+
+<script>
+const META={id:'pfm-module-12-collision-comprehensive-claims',title:'Personal Finance Module 12 - Collision, Comprehensive & Claims',category:'Personal Finance',topic:'Collision, Comprehensive, Claims, Roadside and Deductibles',productType:'Interactive Module',moduleSize:'extended',version:'1.0-pfm-m12',questionCount:20};
+const ENDPOINT='https://script.google.com/macros/s/AKfycbyucfQcDDR9S_4i8_EiI2LAm0k49NNGT0IBiRnXTjZQKgtfuOwM73Wtxxt5fzojGFY/exec';
+const Q=[
+  {
+    "n": 1,
+    "t": "Collision: Ice and a Guardrail",
+    "lesson": "<strong>Collision</strong> protects your own vehicle after a covered crash with another vehicle or object, or a rollover. Ice may cause the crash, but sliding into a guardrail is still a collision. Your collision deductible usually applies. Liability pays for covered harm you cause to others; it does not repair your own car.",
+    "prompt": "You lose control on ice and hit a guardrail. Which coverage normally helps repair your own car?",
+    "o": [
+      "Bodily injury liability",
+      "Comprehensive",
+      "Collision",
+      "Roadside assistance"
+    ],
+    "a": 2,
+    "fb": "Collision applies to your own car hitting the guardrail. Weather causing a crash does not automatically make it comprehensive."
+  },
+  {
+    "n": 2,
+    "t": "Comprehensive: A Falling Tree Limb",
+    "lesson": "<strong>Comprehensive</strong> protects your vehicle against covered losses such as storms, fire, theft, vandalism, falling objects, and animal strikes. It usually has its own deductible. A branch falling onto a parked car is different from driving the car into a tree.",
+    "prompt": "A tree branch falls onto your parked vehicle during a storm. Which coverage normally applies?",
+    "o": [
+      "Collision",
+      "Comprehensive",
+      "Property damage liability",
+      "Bodily injury liability"
+    ],
+    "a": 1,
+    "fb": "The falling branch is a comprehensive loss. Driving into a tree would usually be collision."
+  },
+  {
+    "n": 3,
+    "t": "Liability: The Other Driver's Car",
+    "lesson": "<strong>Property damage liability</strong> addresses covered damage you are legally responsible for causing to someone else's property. Bodily injury liability addresses covered injuries to others. One crash can involve multiple coverages: liability for their car and collision for yours. The policy's limits and terms still apply.",
+    "prompt": "You rear-end another driver. Which coverage is primarily responsible for the damage you caused to their vehicle?",
+    "o": [
+      "Comprehensive",
+      "Your property damage liability",
+      "Your collision coverage",
+      "Roadside assistance"
+    ],
+    "a": 1,
+    "fb": "Property damage liability is for covered damage you cause to others' property. Collision protects your own vehicle."
+  },
+  {
+    "n": 4,
+    "t": "Storm Damage: Hail",
+    "lesson": "Hail dents, flooding, fire, and falling objects are common comprehensive scenarios. Once it is safe, photograph the damage and contact your insurer for instructions. Do not drive a flood-damaged car or assume it is safe to start the engine. Coverage must already be in force when the loss occurs.",
+    "prompt": "After a thunderstorm, you find hail dents across your hood. Which coverage normally addresses this damage?",
+    "o": [
+      "Collision",
+      "Comprehensive",
+      "Liability",
+      "Roadside assistance"
+    ],
+    "a": 1,
+    "fb": "Hail is usually a comprehensive loss, subject to the policy and applicable deductible."
+  },
+  {
+    "n": 5,
+    "t": "Parking Damage: Scraping a Pillar",
+    "lesson": "Collision can apply even when no other driver is involved. Backing into a pole, scraping a concrete pillar, hitting a guardrail, or rolling over are common examples. Normal wear, a worn-out engine, and routine maintenance are not covered collision losses. You must carry collision to use that protection.",
+    "prompt": "You scrape your car against a concrete pillar while parking. Which coverage normally helps repair your own car?",
+    "o": [
+      "Comprehensive",
+      "Collision",
+      "Liability only",
+      "Roadside assistance"
+    ],
+    "a": 1,
+    "fb": "Your car struck an object, so collision is the relevant protection."
+  },
+  {
+    "n": 6,
+    "t": "Deer: An Important Exception",
+    "lesson": "<strong>Direct contact with a deer or another animal</strong> normally falls under comprehensive. If you swerve to miss a deer and hit a tree instead, your car's damage normally falls under collision. Stop safely, check for injuries, and do not approach an injured wild animal. Report the incident to your insurer.",
+    "prompt": "A deer runs into the road and you strike it directly. Which coverage normally applies to your vehicle damage?",
+    "o": [
+      "Collision",
+      "Liability",
+      "Comprehensive",
+      "Medical benefits"
+    ],
+    "a": 2,
+    "fb": "Direct animal strikes are normally comprehensive. Swerving and hitting a tree normally involves collision."
+  },
+  {
+    "n": 7,
+    "t": "Break-In: Vehicle Damage vs. Belongings",
+    "lesson": "Comprehensive can address a broken window from theft or vandalism. <strong>Personal belongings stolen from the car</strong>, such as a backpack or laptop, generally are not covered by auto comprehensive; renters or homeowners insurance may apply. Document what is missing, report theft to police, and notify your insurer.",
+    "prompt": "Someone breaks your window and steals a backpack. Damage to the vehicle itself generally falls under which coverage?",
+    "o": [
+      "Collision",
+      "Comprehensive",
+      "Property damage liability",
+      "Roadside assistance"
+    ],
+    "a": 1,
+    "fb": "Comprehensive normally covers the damaged vehicle window. The stolen backpack may require a separate renters or homeowners claim."
+  },
+  {
+    "n": 8,
+    "t": "After a Crash: Safety Comes First",
+    "lesson": "<strong>Check injuries and immediate hazards first.</strong> Call 911 for injuries, serious crashes, or danger. For a minor crash with no injuries or major damage, move vehicles off the roadway if it is safe. Turn on hazard lights. Never stand in traffic to take photos or move an injured person unless immediate danger requires it. Stay at the scene and cooperate with responders.",
+    "prompt": "Immediately after a collision, what should you prioritize?",
+    "o": [
+      "Photograph both cars before moving either vehicle so the adjuster can reconstruct their exact positions",
+      "Exchange insurance details before checking passengers so the other driver cannot leave without providing information",
+      "Check injuries and immediate hazards; get emergency help when needed",
+      "Call your insurance agent to confirm coverage"
+    ],
+    "a": 2,
+    "fb": "Check people and hazards first. Documentation and insurance details come after immediate safety needs."
+  },
+  {
+    "n": 9,
+    "t": "Exchange the Information You Will Need",
+    "lesson": "Once safe, exchange names, contact details, driver's license information, vehicle/plate information, and insurance company and policy details. Record witnesses' contact information and a police report number if available. Share relevant crash information, but do not hand over account passwords, banking logins, or Social Security numbers.",
+    "prompt": "Which information should you collect from the other driver for an insurance claim?",
+    "o": [
+      "Name and plate, plus detailed repair estimates and receipts before either driver leaves the scene",
+      "Name, contact, license, vehicle/plate, and insurance details",
+      "Name, contact, employer, work address, and income so the insurer can verify how the driver will pay",
+      "Phone number and car color"
+    ],
+    "a": 1,
+    "fb": "Collect identification, contact, vehicle, and insurance information. You do not need their employer or income."
+  },
+  {
+    "n": 10,
+    "t": "Document the Scene Safely",
+    "lesson": "When safe, photograph damage, vehicles, plates, signs, and road conditions. Write down the time, location, weather, and what happened. Get witness contacts and the report number if police respond. Tell the truth and describe facts; avoid arguing about fault. Photos support an investigation but do not automatically establish responsibility.",
+    "prompt": "Why should you photograph a crash scene when it is safe?",
+    "o": [
+      "To document damage and road conditions for the claim",
+      "To replace exchanging driver and insurance details",
+      "To prove fault automatically if the other car is pictured",
+      "To guarantee reimbursement for every repair estimate"
+    ],
+    "a": 0,
+    "fb": "Photos preserve evidence. They do not replace exchanging information or guarantee a claim payment."
+  },
+  {
+    "n": 11,
+    "t": "File a Claim: Report the Loss",
+    "lesson": "A <strong>claim</strong> reports a loss and asks the insurer to evaluate coverage. After addressing safety, use the insurer's official app, website, claims phone number, or agent. Provide your policy, incident date/location, factual description, driver details, damage, photos, and police information. Save the claim number. Do not assume a police report automatically opens an insurance claim.",
+    "prompt": "What is an insurance claim?",
+    "o": [
+      "A request for the insurer to evaluate a loss under your policy",
+      "A final repair invoice that obligates the insurer to pay everything the shop charges, regardless of policy terms",
+      "A monthly payment to keep coverage active",
+      "A police decision that confirms coverage and orders payment before the insurer reviews the incident"
+    ],
+    "a": 0,
+    "fb": "A claim asks the insurer to evaluate a loss. It does not guarantee payment; a premium is the payment to keep coverage active."
+  },
+  {
+    "n": 12,
+    "t": "The Adjuster and the Repair Process",
+    "lesson": "An <strong>adjuster</strong> investigates the loss, reviews evidence and estimates, and evaluates the insurer's payment under the policy. Ask about inspection, repair approval, your deductible, towing/storage, and rental reimbursement before committing to costs. Keep receipts. The insurer may approve repairs or settle a total loss based on the vehicle's covered value and policy terms; it does not promise unlimited repairs.",
+    "prompt": "What does a claims adjuster generally do?",
+    "o": [
+      "Selects a shop and guarantees every requested repair without checking the policy or inspecting the vehicle",
+      "Investigates the loss and evaluates coverage and payment",
+      "Decides whether police must suspend the driver's license after reviewing photos, tickets, and witness statements",
+      "Sets the driver's future premium"
+    ],
+    "a": 1,
+    "fb": "The adjuster investigates and evaluates the claim. Police/license decisions and setting premiums are different responsibilities."
+  },
+  {
+    "n": 13,
+    "t": "Roadside: Dead Battery and Flat Tire",
+    "lesson": "<strong>Roadside assistance is worth considering for a new driver.</strong> It may provide a jump-start or help installing a usable spare. It generally does not pay for a new battery, replacement tire, or mechanical repairs. Compare the price and limits, and check whether your family membership or vehicle warranty already offers the service.",
+    "prompt": "Your car has a dead battery after school. Which optional service would be most directly useful?",
+    "o": [
+      "Bodily injury liability",
+      "Roadside assistance",
+      "Collision coverage",
+      "Comprehensive coverage"
+    ],
+    "a": 1,
+    "fb": "Roadside assistance may arrange a jump-start. Buying a replacement battery is usually a separate expense."
+  },
+  {
+    "n": 14,
+    "t": "Roadside: Lockouts and Running Out of Fuel",
+    "lesson": "Roadside plans may provide lockout help and fuel delivery. Delivery service may be covered while <strong>you still pay for the gasoline</strong>. Replacement keys or key fobs may cost extra. Use the plan's help number/app and provide your location. If a child is trapped inside or there is immediate danger, call 911.",
+    "prompt": "You lock your keys inside your car. What is the most appropriate service to request if your plan includes it?",
+    "o": [
+      "File a collision repair claim",
+      "Request roadside lockout assistance",
+      "File a bodily injury claim",
+      "File a comprehensive claim for replacing the whole car"
+    ],
+    "a": 1,
+    "fb": "Request the included roadside lockout service. Check limits and exclusions for keys or locksmith charges."
+  },
+  {
+    "n": 15,
+    "t": "Roadside: Towing and Plan Limits",
+    "lesson": "For a breakdown, roadside assistance may arrange towing. Check mileage limits, service-call limits, and approved destinations; extra distance and repairs can be your responsibility. Give the dispatcher your road, direction, mile marker/cross street, and vehicle description. In danger or blocking traffic, call 911. Collision/comprehensive do not normally cover ordinary mechanical breakdown.",
+    "prompt": "Your car breaks down 25 miles from home and cannot safely be driven. Which roadside benefit is most directly useful?",
+    "o": [
+      "Rental property coverage",
+      "Towing assistance",
+      "Bodily injury liability",
+      "Collision deductible reimbursement"
+    ],
+    "a": 1,
+    "fb": "Towing helps move the disabled car. Being 25 miles from home does not guarantee the plan will cover a 25-mile tow."
+  },
+  {
+    "n": 16,
+    "t": "Deductible Math: Your Share",
+    "lesson": "A <strong>deductible</strong> is your share of an eligible covered loss. For this repair example, the insurer pays covered repair cost minus the deductible. Your share can be paid to the shop; for some settlements the insurer subtracts it from the payment. It is generally per claim, not a once-a-year fee.<br><br><strong>Hint:</strong> Remember, the deductible is the amount you must pay first out of pocket before insurance starts paying.",
+    "prompt": "Your collision deductible is $500. Covered repairs after hitting a guardrail cost $3,200. How much would you generally pay toward the repair?",
+    "o": [
+      "$2,700",
+      "$500",
+      "$3,200",
+      "$700"
+    ],
+    "a": 1,
+    "fb": "You pay $500. Insurance generally covers $3,200 − $500 = $2,700."
+  },
+  {
+    "n": 17,
+    "t": "Deductible Math: The Insurance Payment",
+    "lesson": "Choose the coverage that matches the event, then use <strong>that coverage's deductible</strong>. Collision and comprehensive deductibles may be different. In these examples, the repair is fully covered and within applicable limits. Insurance payment = covered repair cost minus the applicable deductible, with a minimum payment of $0.",
+    "prompt": "Hail causes $4,600 in covered damage. Your comprehensive deductible is $1,000. How much does the insurer generally pay?",
+    "o": [
+      "$1,000",
+      "$4,600",
+      "$3,600",
+      "$5,600"
+    ],
+    "a": 2,
+    "fb": "Hail uses comprehensive: $4,600 − $1,000 = $3,600 paid by insurance. Your share is $1,000."
+  },
+  {
+    "n": 18,
+    "t": "Deductible Math: Repairs Below the Deductible",
+    "lesson": "When an eligible repair costs less than your deductible, insurance pays <strong>$0</strong> toward that repair. Your repair cost is the actual bill, not the full deductible added to that bill. Continue to follow policy reporting duties; no payment does not automatically mean no reporting obligation.",
+    "prompt": "You scrape your car against a post. Covered repair cost is $720 and your collision deductible is $1,000. How much does your collision insurer generally pay?",
+    "o": [
+      "$720",
+      "$280",
+      "$1,000",
+      "$0"
+    ],
+    "a": 3,
+    "fb": "$720 is below $1,000, so insurance pays $0. You would pay the $720 repair bill, not $1,000 plus $720."
+  },
+  {
+    "n": 19,
+    "t": "Deductible Math: Premium Savings",
+    "lesson": "A higher deductible can lower premiums but increase what you must cover after a loss. Calculate <strong>monthly savings × 12</strong> for annual savings. Then compare the savings with the extra deductible exposure and your available emergency cash. These classroom prices are fictional.",
+    "prompt": "Plan A costs $155/month with a $500 collision deductible. Plan B costs $140/month with a $1,000 deductible. How much does Plan B save in premiums over one year?",
+    "o": [
+      "$15",
+      "$180",
+      "$500",
+      "$1,000"
+    ],
+    "a": 1,
+    "fb": "($155 − $140) × 12 = $180/year. Plan B also exposes you to $500 more deductible cost on a covered collision claim."
+  },
+  {
+    "n": 20,
+    "t": "Deductible Math: Coverage, Payment, and Savings",
+    "lesson": "First identify the event's coverage, then subtract its deductible from the covered damage. Subtract your share from emergency savings to see what remains. The <strong>collision deductible does not apply to a comprehensive loss</strong>. All figures below assume an eligible repair and no additional costs.",
+    "prompt": "A limb falls on Jordan's parked car, causing $3,100 in covered damage. Jordan has a $1,000 collision deductible, a $500 comprehensive deductible, and $1,200 in savings. Which result is correct?",
+    "o": [
+      "Collision; Jordan pays $1,000; insurer pays $2,100; savings left $200",
+      "Comprehensive; Jordan pays $500; insurer pays $2,600; savings left $700",
+      "Comprehensive; Jordan pays $1,000; insurer pays $2,100; savings left $200",
+      "Comprehensive; Jordan pays $0; insurer pays $3,100; savings left $1,200"
+    ],
+    "a": 1,
+    "fb": "Comprehensive applies. Jordan pays $500; $3,100 − $500 = $2,600 from insurance; $1,200 − $500 = $700 savings remain."
+  }
+];
+let started=false,locked=false,score=0,done=0,startTime=null,endTime=null,submitted=false;
+const attempts={},answers={},types=Q.map(()=> 'multiple choice');
+const sid=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(16).slice(2));
+const el=id=>document.getElementById(id);
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function toast(s){const t=el('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function fmt(d){return d?d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):''}
+function render(){el('questions').innerHTML=Q.map(q=>`<section class="question locked" id="q${q.n}"><div class="qhead"><h2>${q.n}. ${q.t}</h2><span class="badge" id="b${q.n}">Locked</span></div><div class="qbody"><div class="lesson"><strong>Mini Lesson</strong><br>${q.lesson}</div><p class="prompt">${esc(q.prompt)}</p><div class="options" id="a${q.n}">${q.o.map((x,i)=>`<button class="option" onclick="pick(this,${q.n},${i})">${esc(x)}</button>`).join('')}</div><div class="feedback" id="f${q.n}"></div></div></section>`).join('')+`<section class="question locked" id="q21"><div class="qhead"><h2>Final Reflection</h2><span class="badge" id="b21">Locked</span></div><div class="qbody"><div class="lesson"><strong>Choose a deductible you could afford.</strong> A lower premium can come with a larger bill after a covered loss. Consider emergency savings and available roadside services.</div><p class="prompt">For your first car, would you choose a $500 or $1,000 deductible, and why? Consider premium savings, emergency cash, vehicle value, and your comfort with risk. Would you purchase roadside assistance or use an existing plan?</p><textarea id="reflection" placeholder="Write your reflection here..."></textarea><div class="actions"><button class="btn primary" onclick="finish()">Finish & Save</button></div></div></section>`}
+function begin(){if(started)return;const f=el('first').value.trim(),l=el('last').value.trim(),p=el('period').value;if(!f||!l||!p)return toast('Enter first name, last name, and block.');started=true;startTime=new Date();unlock(1);update();el('start').scrollIntoView({behavior:'smooth'});setTimeout(()=>el('q1').scrollIntoView({behavior:'smooth',block:'start'}),300)}
+function unlock(n){const q=el('q'+n);if(!q)return;q.classList.remove('locked');el('b'+n).textContent=n===21?'Reflection':'Ready'}
+function award(n,ok,txt){attempts[n]=(attempts[n]||0)+1;const k=attempts[n],q=Q[n-1],f=el('f'+n);if(!answers['Q'+n])answers['Q'+n]={attempts:[],resolved:false,earned:0};answers['Q'+n].attempts.push(txt);if(ok){const pts=k===1?1:.5;score+=pts;answers['Q'+n].resolved=true;answers['Q'+n].earned=pts;answers['Q'+n].correct=q.o[q.a];f.className='feedback show good';f.textContent=(k===1?'Correct. ':'Correct on the second attempt. ')+q.fb;freeze(n);setTimeout(()=>complete(n),450)}else if(k===1){f.className='feedback show bad';f.textContent='Not quite. Re-read the mini lesson and try once more for half credit.'}else{answers['Q'+n].resolved=true;answers['Q'+n].earned=0;answers['Q'+n].correct=q.o[q.a];f.className='feedback show bad';f.textContent='Not quite. '+q.fb;freeze(n);setTimeout(()=>complete(n),650)}}
+function pick(btn,n,choice){if(!started||locked||answers['Q'+n]?.resolved)return;const q=Q[n-1],ok=choice===q.a;btn.classList.add(ok?'good':'bad');award(n,ok,btn.textContent.trim())}
+function freeze(n){const box=el('a'+n);if(box)box.querySelectorAll('button').forEach(x=>x.disabled=true)}
+function complete(n){done=Math.max(done,n);el('b'+n).textContent='Complete';el('b'+n).style.background='#dcfce7';el('b'+n).style.color='#166534';unlock(n<20?n+1:21);update();if(n<20)setTimeout(()=>el('q'+(n+1)).scrollIntoView({behavior:'smooth',block:'start'}),250)}
+function update(){el('score').textContent=`Score: ${score} / 20`;const p=Math.round((done/21)*100);el('prog').textContent=`Progress: ${p}%`;el('bar').style.width=p+'%';el('clock').textContent=startTime?'Started: '+fmt(startTime):'Not started'}
+function finish(){if(locked||!started||done<20)return toast('Complete all 20 questions first.');const r=el('reflection').value.trim();endTime=new Date();done=21;update();el('b21').textContent='Complete';el('b21').style.background='#dcfce7';el('b21').style.color='#166534';const pct=Math.round(score/20*100);el('certHeading').textContent=pct>=90?'Outstanding Work!':pct>=80?'Strong Work!':pct>=70?'Nice Progress!':'Module Complete!';el('certName').textContent=el('first').value.trim()+' '+el('last').value.trim();el('certScore').textContent=score+' / 20';el('certPct').textContent=pct+'%';el('certStart').textContent=fmt(startTime);el('certEnd').textContent=fmt(endTime);el('certRef').textContent=r||'No reflection entered.';el('cert').classList.add('show');submit(r,pct);locked=true;document.body.classList.add('done');el('cert').scrollIntoView({behavior:'smooth'})}
+async function submit(ref,pct){
+ if(submitted)return;submitted=true;const mins=Math.max(1,Math.round((endTime-startTime)/60000));
+ const record={moduleId:META.id,moduleTitle:META.title,category:META.category,topic:META.topic,productType:META.productType,moduleSize:META.moduleSize,score,totalQuestions:20,percent:pct+'%',completed:'Yes',questionTypes:types.join(', '),answers:JSON.stringify(answers),timeStarted:fmt(startTime),timeFinished:fmt(endTime),totalTime:mins+' minutes',reflection:ref,version:META.version,sessionId:sid};
+ const p=new URLSearchParams({action:'moduleSubmit',manualEntry:'1',moduleNumber:'12',bellId:'PFM-MODULE-12-COLLISION-COMPREHENSIVE-CLAIMS',label:'Personal Finance Module 12 - Collision, Comprehensive & Claims',firstName:el('first').value.trim(),lastName:el('last').value.trim(),name:el('first').value.trim()+' '+el('last').value.trim(),answer:JSON.stringify(record),late:'0',duration:String(mins),timestamp:new Date().toISOString(),cls:'Personal Finance',googleName:'Manual entry',schoolEmail:'',block:el('period').value.trim()});
+ try{el('saveStatus').textContent='Saving your score...';el('retrySave').hidden=true;const response=await fetch(ENDPOINT,{method:'POST',body:p});const result=await response.json();if(!result.success&&result.error!=='This completion was already submitted.')throw new Error(result.error||'Save not confirmed');el('saveStatus').textContent='Score saved to Mr. D. Keep your certificate.';toast('Score saved to Mr. D.')}
+ catch(e){submitted=false;el('saveStatus').textContent='Your certificate is ready, but saving could not be confirmed. Keep this page open and retry.';el('retrySave').hidden=false}
+}
+render();
+</script>
+</body>
+</html>
