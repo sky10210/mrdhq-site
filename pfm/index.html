@@ -23,4 +23,19 @@
 <a class="card" href="/opening-bell/?class=Personal%20Finance"><div class="icon">🔔</div><h2>Opening Bell</h2><p>Money decisions, personal finance scenarios, current events, and warm-ups.</p><span class="button">Open Opening Bell →</span></a>
 <a class="card" href="/student-tools.html"><div class="icon">🧰</div><h2>Student Tools</h2><p>Calculators, research, AI, PDF, citation, math, and study tools.</p><span class="button">Open Student Tools →</span></a>
 <a class="card" href="/business-dashboard.html"><div class="icon">📊</div><h2>Business Dashboard</h2><p>Markets, economic indicators, current events, and financial information.</p><span class="button">Open Dashboard →</span></a>
-</section></main><footer>Mr. D's HQ • Chambersburg Area School District</footer></body></html>
+</section></main><footer>Mr. D's HQ • Chambersburg Area School District</footer><script>
+/* Newest numbered lessons first; utility and resource cards keep their relative order. */
+(function () {
+  const grid = document.querySelector('main .grid');
+  if (!grid) return;
+  const cards = Array.from(grid.children);
+  const numbered = cards.map(card => {
+    const match = card.textContent.match(/\b(?:Module|Unit)\s+(\d+)\b/i);
+    const isLesson = card.matches('.module-card, .module, .featured') && !!match;
+    return isLesson ? {card, number: Number(match[1])} : null;
+  }).filter(Boolean).sort((a,b) => b.number-a.number);
+  if (!numbered.length) return;
+  const first = cards.find(card => card === numbered[numbered.length-1].card || numbered.some(m => m.card === card));
+  numbered.forEach(({card}) => grid.insertBefore(card, first));
+})();
+</script></body></html>
