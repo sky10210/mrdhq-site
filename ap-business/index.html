@@ -6,7 +6,7 @@
   const cards = Array.from(grid.children);
   const numbered = cards.map(card => {
     const match = card.textContent.match(/\b(?:Module|Unit)\s+(\d+)\b/i);
-    const isLesson = card.matches('.module-card, .module, .featured') && !!match;
+    const isLesson = (card.matches('.module-card, .module, .featured') || card.matches('a[href^="/ap-business/unit-"]')) && !!match;
     return isLesson ? {card, number: Number(match[1])} : null;
   }).filter(Boolean).sort((a,b) => b.number-a.number);
   if (!numbered.length) return;
