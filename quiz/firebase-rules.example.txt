@@ -1,0 +1,45 @@
+// Quiz Studio Firestore rules. MERGE into your EXISTING deployed rules,
+// never replace Stock Market Lab rules. These are separate match blocks.
+// Requirements: Firebase Authentication Google provider + Anonymous provider enabled.
+// Host creates rooms with verified Google email, guests use anonymous accounts.
+match /quizRooms/{roomId} {
+  allow read: if request.auth != null;
+  allow create: if request.auth != null
+    && request.auth.token.firebase.sign_in_provider == "google.com"
+    && request.auth.token.email_verified == true
+    && request.resource.data.hostUid == request.auth.uid
+    && request.resource.data.keys().hasOnly(["hostUid","title","status","questionIndex","createdAt"])
+    && request.resource.data.status == "lobby"
+    && request.resource.data.questionIndex == -1;
+  allow update, delete: if request.auth != null
+    && resource.data.hostUid == request.auth.uid
+    && request.resource.data.hostUid == resource.data.hostUid;
+  match /players/{playerId} {
+    allow read: if request.auth != null;
+    allow create: if request.auth != null
+      && request.auth.uid == playerId
+      && request.resource.data.keys().hasOnly(["nickname","joinedAt"])
+      && request.resource.data.nickname is string
+      && request.resource.data.nickname.size() > 0
+      && request.resource.data.nickname.size() <= 32;
+    allow update, delete: if false;
+  }
+  match /answers/{answerId} {
+    allow read: if request.auth != null
+      && get(/databases/$(database)/documents/quizRooms/$(roomId)).data.hostUid == request.auth.uid;
+    allow create: if request.auth != null
+      && answerId.matches("^[0-9]+_" + request.auth.uid + "$")
+      && request.resource.data.keys().hasOnly(["uid","questionIndex","choice","submittedAt"])
+      && request.resource.data.uid == request.auth.uid
+      && request.resource.data.questionIndex is int
+      && request.resource.data.questionIndex >= 0
+      && request.resource.data.questionIndex ==
+        get(/databases/$(database)/documents/quizRooms/$(roomId)).data.questionIndex
+      && get(/databases/$(database)/documents/quizRooms/$(roomId)).data.status == "question"
+      && request.resource.data.choice is string
+      && request.resource.data.choice.size() <= 100;
+    allow update, delete: if false;
+  }
+}
+// IMPORTANT: server-side authoritative timing/scoring and room rate limiting
+// should be deployed before public launch. No public release based on this scaffold.
