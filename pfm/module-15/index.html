@@ -16,8 +16,36 @@ body{background:linear-gradient(180deg,var(--cream),#eef5f8 55%,#f8fafc);line-he
 input,textarea,select{border-radius:13px;background:#f8fafc}button{border-radius:14px}.example,.entry{border-radius:16px}
 @media(max-width:640px){.shell{width:calc(100% - 28px);margin:16px auto 60px}.hero{padding:24px 20px}.panel{padding:16px}}
 @media print{.hero{display:none!important}.shell{width:100%;margin:0}.panel{box-shadow:none}}
+
+<style>
+/* Match PFM Module 14 student-facing mobile presentation. Resume paper remains untouched. */
+body{background:linear-gradient(180deg,#f7f1e7 0%,#eef5f8 55%,#f8fafc 100%);}
+.shell{width:min(1080px,92%);margin:24px auto 70px;padding:0}
+.hero{background:linear-gradient(135deg,#102235 0%,#173d58 68%,#1b6e73 100%);border-radius:30px;padding:30px;box-shadow:0 18px 42px rgba(15,23,42,.13)}
+.hero h1{font-size:clamp(2rem,4.7vw,3.7rem);font-weight:800;letter-spacing:-.055em;line-height:1.04;margin:10px 0 14px;overflow-wrap:normal}
+.hero .module-number{color:#fff;white-space:nowrap}.hero .module-title{color:#8ce2db}
+.hero .eyebrow{display:block;font-size:.76rem;font-weight:900;letter-spacing:.14em;line-height:1.5;text-transform:uppercase;color:#b9ece7}
+.hero>p{max-width:900px;line-height:1.58;color:#dce8ef}
+.pills{gap:8px;margin-top:17px}.pill{padding:7px 10px;font-size:.76rem;font-weight:800;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.15)}
+.progressrow{margin-top:20px;color:#c6f0ec;font-size:.86rem;font-weight:800}
+.progress{height:11px;background:rgba(255,255,255,.13);border-radius:999px}
+.panel{background:#fff;border:1px solid #d8e0e7;border-radius:24px;box-shadow:0 10px 28px rgba(15,23,42,.06);padding:22px;margin-bottom:18px}
+.panel h2{font-size:clamp(1.25rem,2.4vw,1.65rem);font-weight:800;letter-spacing:-.035em}
+.panel p.note{line-height:1.7}.layout{gap:18px}
+@media(max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}.side{position:static}}
+@media(max-width:640px){
+.shell{width:92%;margin:24px auto 70px}
+.hero{border-radius:30px;padding:30px}
+.hero h1{font-size:clamp(2rem,8.5vw,3rem);letter-spacing:-.055em}
+.hero .module-number{white-space:normal}
+.hero .pills{gap:8px}
+.panel{border-radius:24px;padding:22px}
+.panel h2{font-size:1.5rem}
+.row{grid-template-columns:1fr}
+}
+@media print{.shell{margin:0;width:100%}.panel{border:0;box-shadow:none;padding:0}}
 </style></head><body>
-<main class="shell"><section class="hero"><span class="eyebrow">Vivid Lessons • Personal Finance</span><h1>Module 15 <span style="color:#8ce2db">Build Your Resume.</span></h1><p>Create a genuine one-page, entry-level resume with examples, a real-time preview, and professional PDF / editable Word exports. Complete the steps, review your resume, download it, and submit a completion confirmation to your teacher. No previous job required.</p><div class="pills"><span class="pill">5 Resume-Building Steps</span><span class="pill">4 Realistic Examples</span><span class="pill">Live One-Page Preview</span><span class="pill">PDF + Word Export</span><span class="pill">Completion Credit</span></div><div class="progressrow"><span id="moduleProgress">Progress: 0%</span><span id="moduleState">Not submitted</span></div><div class="progress"><div class="bar" id="moduleBar"></div></div><p style="margin-top:14px"><a style="color:#dce8ef" href="/pfm/">← Back to PFM</a></p></section>
+<main class="shell"><section class="hero"><span class="eyebrow">Vivid Lessons • Personal Finance</span><h1><span class="module-number">Module 15</span> <span class="module-title">Build Your Resume.</span></h1><p>Create a genuine one-page, entry-level resume with examples, a real-time preview, and professional PDF / editable Word exports. Complete the steps, review your resume, download it, and submit a completion confirmation to your teacher. No previous job required.</p><div class="pills"><span class="pill">5 Resume-Building Steps</span><span class="pill">4 Realistic Examples</span><span class="pill">Live One-Page Preview</span><span class="pill">PDF + Word Export</span><span class="pill">Completion Credit</span></div><div class="progressrow"><span id="moduleProgress">Progress: 0%</span><span id="moduleState">Not submitted</span></div><div class="progress"><div class="bar" id="moduleBar"></div></div><p style="margin-top:14px"><a style="color:#dce8ef" href="/pfm/">← Back to PFM</a></p></section>
 <div class="layout"><div class="editor">
 <section class="panel" id="start"><span class="mini">Student Start · Required</span><h2>Student Start</h2><p class="note">First and last name and block are used to mark completion. Your personal contact details and resume text are <b>not</b> sent to the class Sheet.</p><div class="row"><div><label>First name <span class="required">*</span></label><input id="first" autocomplete="given-name" required></div><div><label>Last name <span class="required">*</span></label><input id="last" autocomplete="family-name" required></div></div><label>Class block <span class="required">*</span></label><select id="block"><option value="">Choose block</option><option>1</option><option>2</option><option>3</option><option>4</option></select></section>
 <section class="panel"><span class="mini">Learn · 3 minutes</span><h2>What makes an effective first resume?</h2><p class="note">Use clear job titles, concrete tasks, active verbs, reverse-chronological experience, and honest, relevant skills. A simple one-column resume reads well in common application systems. Skip headshots, graphics, tables, full street addresses, and references available upon request.</p>
