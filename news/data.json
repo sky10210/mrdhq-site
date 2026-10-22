@@ -1,3 +1,206 @@
 {
-  "editions": []
+  "editions": [
+    {
+      "date": "2026-10-21",
+      "title": "Business, AI & Culture — Wednesday Brief",
+      "summary": "Big earnings, AI shopping, a possible mega-merger and the business behind international football.",
+      "stories": [
+        {
+          "title": "The Stock Market Rallies on AI Company Earnings",
+          "overview": "Strong reports from several technology companies helped send major U.S. stock indexes higher Wednesday. A company's earnings report is like its report card: investors compare actual sales and profits against expectations. When a business performs better than predicted, its share price often rises. But a strong day for a stock index does not mean every company made money.",
+          "points": [
+            "The Nasdaq rose about 1.1% on October 21, according to AP.",
+            "The S&P 500 gained roughly 0.6%; the Dow rose about 0.7%.",
+            "Stock prices reflect expectations of future success, not just today's profit."
+          ],
+          "question": "Why can a company's stock fall even when it reports a profit?",
+          "sources": [
+            {
+              "label": "Associated Press",
+              "url": "https://apnews.com/article/3ec2d8c93a390023ef8104973dea275f"
+            },
+            {
+              "label": "Reuters",
+              "url": "https://www.reuters.com/world/china/global-markets-global-markets-2026-10-21/"
+            }
+          ]
+        },
+        {
+          "title": "What If an AI Bot Did Your Shopping?",
+          "overview": "Walmart is introducing tools meant to let authorized AI assistants interact with its shopping systems. Imagine telling an assistant your budget and preferences, then having it compare products and assemble your order. Walmart's approach contrasts with Amazon's tighter limits on outside shopping bots. For retailers, the real competition may be over who controls the customer's shopping experience.",
+          "points": [
+            "Walmart described controls for AI shopping agents, including spending limits.",
+            "Structured access can reduce mistakes compared with bots clicking a website.",
+            "Consumer permission, pricing consistency and privacy remain important."
+          ],
+          "question": "Would you trust an AI with your debit card to purchase groceries?",
+          "sources": [
+            {
+              "label": "Business Insider",
+              "url": "https://www.businessinsider.com/walmart-adding-ai-agent-shopping-features-while-amazon-blocks-bots-2026-10"
+            }
+          ]
+        },
+        {
+          "title": "Could Tesla and SpaceX Become One Company?",
+          "overview": "Elon Musk's Tesla and SpaceX are exploring a possible combination, according to reporting this week. A merger joins companies into one business, potentially sharing technology, customers and costs. Supporters see possible links between electric vehicles, batteries, satellites and AI computing. Critics may question whether the businesses fit together and whether the combined company would be too complicated. A deal is being discussed, not completed.",
+          "points": [
+            "The reported talks are exploratory; there is no finished merger.",
+            "Tesla shareholders and SpaceX owners have different interests.",
+            "Mergers may create efficiencies but also new management risks."
+          ],
+          "question": "Would combining a carmaker and a rocket company create value—or confusion?",
+          "sources": [
+            {
+              "label": "Axios",
+              "url": "https://www.axios.com/newsletters/axios-pro-rata-c9b5580d-fe42-4bf9-b1e5-1b769c7cf924"
+            },
+            {
+              "label": "AP business summary",
+              "url": "https://southeast.newschannelnebraska.com/story/364601249/ap-business-summarybrief-at-547-am-edt"
+            }
+          ]
+        },
+        {
+          "title": "The NFL Treats Paris Like a New Market",
+          "overview": "The NFL is preparing a Steelers–Saints game in Paris and says security planning is continuing amid unrest in France. Holding games outside the United States is a business decision as well as a sports event: it can attract international fans, merchandise customers, television viewers and new sponsors. But hosting an event abroad also creates travel costs, security requirements and brand risks.",
+          "points": [
+            "International games can introduce the NFL to new audiences.",
+            "Paris preparations involve local and U.S. authorities.",
+            "A successful game is measured in long-term fandom, not only ticket sales."
+          ],
+          "question": "If you ran the NFL, which country would you enter next—and why?",
+          "sources": [
+            {
+              "label": "Associated Press",
+              "url": "https://apnews.com/article/868df763926bff82eea1acad9c3603a2"
+            },
+            {
+              "label": "Axios sports investing",
+              "url": "https://www.axios.com/newsletters/axios-pro-rata-c9b5580d-fe42-4bf9-b1e5-1b769c7cf924"
+            }
+          ]
+        },
+        {
+          "title": "Why Netflix Can Fall When the Market Goes Up",
+          "overview": "Even on a positive day for major indexes, investors sold some companies' shares after disappointing updates. Netflix was one example discussed in AP's October 21 market report. The lesson: 'the market' is a group average, not a score for every company. An index can rise when a few large companies gain enough to offset losses elsewhere.",
+          "points": [
+            "Company-specific news and broad market trends can move in opposite directions.",
+            "Investors compare performance with what they expected beforehand.",
+            "Diversification can reduce dependence on one business."
+          ],
+          "question": "Would you rather own one company you love or a fund holding hundreds?",
+          "sources": [
+            {
+              "label": "Associated Press",
+              "url": "https://www.local10.com/business/2026/10/21/wall-street-drifts-as-spacex-climbs-and-netflix-falls/"
+            },
+            {
+              "label": "AP closing market recap",
+              "url": "https://apnews.com/article/3ec2d8c93a390023ef8104973dea275f"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "title": "Money, Technology & Markets — Tuesday Brief",
+      "summary": "Why investors worry about the AI boom, how interest rates reach consumers, and the business of giant public offerings.",
+      "stories": [
+        {
+          "title": "Is the AI Boom Becoming Too Expensive?",
+          "overview": "Companies are spending huge amounts building data centers, purchasing computer chips and powering AI tools. Investors are asking a basic business question: when will those costs produce enough profit? High growth can be exciting, but borrowed money must eventually be repaid. Some market participants are purchasing financial protection against possible defaults, showing that enthusiasm and caution can exist at the same time.",
+          "points": [
+            "AI infrastructure requires expensive computing and electricity.",
+            "Debt and interest costs can change whether a project is profitable.",
+            "Demand for AI does not automatically guarantee investment returns."
+          ],
+          "question": "If an AI company spent $1 billion on a data center, what proof of demand would you want?",
+          "sources": [
+            {
+              "label": "Financial Times",
+              "url": "https://www.ft.com/content/439eda3a-97e1-4f48-86f4-0f3ae7c0422a"
+            },
+            {
+              "label": "Reuters",
+              "url": "https://www.reuters.com/markets/wealth/fed-sees-ai-boom-adding-inflation-headache-others-may-pay-medicine-2026-10-19/"
+            }
+          ]
+        },
+        {
+          "title": "Why Interest Rates Affect Your Car Payment",
+          "overview": "The Federal Reserve is trying to keep inflation under control while AI-related companies continue to spend heavily. Higher interest rates can reduce borrowing and help cool rising prices, but they also make car loans, credit cards, mortgages and business borrowing more expensive. The challenge is that a large tech company and an ordinary consumer may feel those effects very differently.",
+          "points": [
+            "Higher borrowing costs can slow purchases and business expansion.",
+            "Some well-funded tech companies can invest even as rates remain high.",
+            "Inflation and jobs are both major concerns for the Federal Reserve."
+          ],
+          "question": "Who is hurt more by high interest rates: a student buying a car or a cash-rich tech company?",
+          "sources": [
+            {
+              "label": "Reuters",
+              "url": "https://www.reuters.com/markets/wealth/fed-sees-ai-boom-adding-inflation-headache-others-may-pay-medicine-2026-10-19/"
+            }
+          ]
+        },
+        {
+          "title": "Stocks Rebound After an AI Selloff",
+          "overview": "On Monday, October 19, semiconductor and AI-related stocks bounced after a difficult previous week. Reports on October 20 focused on whether the rebound would last as new earnings arrived. This is a useful reminder that stock prices can swing quickly even when a company's products have not changed. Investors are constantly updating predictions about profits, risk and interest rates.",
+          "points": [
+            "The Nasdaq gained roughly 1.1% on October 19.",
+            "Chip stocks bounced after eight sessions of declines.",
+            "A one-day rise is not proof a longer downturn has ended."
+          ],
+          "question": "Why might investors buy a stock right after its price has dropped?",
+          "sources": [
+            {
+              "label": "Reuters",
+              "url": "https://www.reuters.com/business/wall-st-futures-climb-ai-stocks-rebound-oil-yields-fall-2026-10-19/"
+            },
+            {
+              "label": "Reuters via Business Recorder",
+              "url": "https://www.brecorder.com/news/40445031"
+            }
+          ]
+        },
+        {
+          "title": "A $107 Billion Test for India's Stock Market",
+          "overview": "Indian telecommunications company Jio is preparing a large initial public offering, according to the Financial Times. An IPO is when a company first sells shares to the public on a stock exchange. Doing so can raise money and give existing owners a way to sell some of their stake. But the market must decide whether the price is justified by the company's future business.",
+          "points": [
+            "An IPO changes who can buy shares in a company.",
+            "A company's estimated valuation is not the same as cash in its bank account.",
+            "Large IPOs test investor confidence and expectations."
+          ],
+          "question": "Would you rather invest in a famous new IPO or an established company with years of results?",
+          "sources": [
+            {
+              "label": "Financial Times",
+              "url": "https://www.ft.com/content/439eda3a-97e1-4f48-86f4-0f3ae7c0422a"
+            }
+          ]
+        },
+        {
+          "title": "Why Oil Prices Move Before You Visit a Gas Station",
+          "overview": "International oil prices moved as investors reacted to geopolitical risk and changing energy supply expectations. The price at a pump is not set instantly by an oil headline: crude oil must be refined, transported and sold, and local taxes and competition matter. Nevertheless, higher crude prices can affect transportation costs and household budgets.",
+          "points": [
+            "Oil prices react to both supply threats and expected demand.",
+            "Gasoline prices include refining, distribution, retail and taxes.",
+            "Transportation costs can eventually affect prices for other goods."
+          ],
+          "question": "If gas costs more, which three businesses in Chambersburg feel it first?",
+          "sources": [
+            {
+              "label": "Reuters market report",
+              "url": "https://uk.marketscreener.com/news/asian-shares-tumble-oil-rises-as-markets-await-ai-sector-results-ce785cdbde8af423"
+            },
+            {
+              "label": "Financial Times",
+              "url": "https://www.ft.com/content/439eda3a-97e1-4f48-86f4-0f3ae7c0422a"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
