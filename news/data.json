@@ -27,7 +27,7 @@
         },
         {
           "title": "What If an AI Bot Did Your Shopping?",
-          "overview": "Walmart is introducing tools meant to let authorized AI assistants interact with its shopping systems. Imagine telling an assistant your budget and preferences, then having it compare products and assemble your order. Walmart's approach contrasts with Amazon's tighter limits on outside shopping bots. For retailers, the real competition may be over who controls the customer's shopping experience.",
+          "overview": "Retailers are experimenting with AI assistants that can help people shop. Walmart's reported approach would let approved shopping agents interact with its systems under defined controls. Picture giving an assistant a grocery budget and asking it to compare options before you approve an order. A potential benefit is convenience; potential problems include incorrect purchases, privacy and overspending. This is an emerging feature, not proof that an AI can safely manage everyone's money.",
           "points": [
             "Walmart described controls for AI shopping agents, including spending limits.",
             "Structured access can reduce mistakes compared with bots clicking a website.",
@@ -43,7 +43,7 @@
         },
         {
           "title": "Could Tesla and SpaceX Become One Company?",
-          "overview": "Elon Musk's Tesla and SpaceX are exploring a possible combination, according to reporting this week. A merger joins companies into one business, potentially sharing technology, customers and costs. Supporters see possible links between electric vehicles, batteries, satellites and AI computing. Critics may question whether the businesses fit together and whether the combined company would be too complicated. A deal is being discussed, not completed.",
+          "overview": "Tesla and SpaceX have formed special committees to discuss combining the two companies, Axios reported on October 21. Elon Musk called the idea appealing, but warned that a deal is not certain. This is a potential merger—not a completed one. Tesla makes electric vehicles and batteries, while SpaceX builds rockets and satellites. Bringing them together could allow more technology sharing, but shareholders must consider whether the combined business would be worth the risks and complexity.",
           "points": [
             "The reported talks are exploratory; there is no finished merger.",
             "Tesla shareholders and SpaceX owners have different interests.",
@@ -59,11 +59,13 @@
               "label": "AP business summary",
               "url": "https://southeast.newschannelnebraska.com/story/364601249/ap-business-summarybrief-at-547-am-edt"
             }
-          ]
+          ],
+          "quote": "Musk described the possible combination as “a good idea,” while warning it was not certain.",
+          "quoteSource": "Axios Pro Rata, Oct. 21"
         },
         {
           "title": "The NFL Treats Paris Like a New Market",
-          "overview": "The NFL is preparing a Steelers–Saints game in Paris and says security planning is continuing amid unrest in France. Holding games outside the United States is a business decision as well as a sports event: it can attract international fans, merchandise customers, television viewers and new sponsors. But hosting an event abroad also creates travel costs, security requirements and brand risks.",
+          "overview": "The NFL is planning a Steelers–Saints game in Paris, adding another international market to its football business. Playing outside the United States is about more than ticket revenue: the league wants new fans, sponsors, merchandise sales and television audiences. Expanding overseas also raises costs and logistical challenges. The planned matchup is an opportunity to discuss whether a sports league can build brand loyalty in a country where another sport is already dominant.",
           "points": [
             "International games can introduce the NFL to new audiences.",
             "Paris preparations involve local and U.S. authorities.",
@@ -168,7 +170,7 @@
           "title": "A $107 Billion Test for India's Stock Market",
           "overview": "Indian telecommunications company Jio is preparing a large initial public offering, according to the Financial Times. An IPO is when a company first sells shares to the public on a stock exchange. Doing so can raise money and give existing owners a way to sell some of their stake. But the market must decide whether the price is justified by the company's future business.",
           "points": [
-            "An IPO changes who can buy shares in a company.",
+            "IPO means initial public offering: a company's first sale of shares to public investors.",
             "A company's estimated valuation is not the same as cash in its bank account.",
             "Large IPOs test investor confidence and expectations."
           ],
