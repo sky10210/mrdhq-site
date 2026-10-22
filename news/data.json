@@ -27,7 +27,7 @@
         },
         {
           "title": "What If an AI Bot Did Your Shopping?",
-          "overview": "Retailers are experimenting with AI assistants that can help people shop. Walmart's reported approach would let approved shopping agents interact with its systems under defined controls. Picture giving an assistant a grocery budget and asking it to compare options before you approve an order. A potential benefit is convenience; potential problems include incorrect purchases, privacy and overspending. This is an emerging feature, not proof that an AI can safely manage everyone's money.",
+          "overview": "Walmart is exploring ways for approved AI shopping assistants to connect with its shopping systems. Imagine asking a digital assistant to find groceries within your budget and prepare a cart for your approval. The advantage is convenience; the downside is that an automated assistant might choose the wrong product or mishandle spending and personal information. The technology is still developing, so consumers should remain in control of what gets purchased.",
           "points": [
             "Walmart described controls for AI shopping agents, including spending limits.",
             "Structured access can reduce mistakes compared with bots clicking a website.",
@@ -43,7 +43,7 @@
         },
         {
           "title": "Could Tesla and SpaceX Become One Company?",
-          "overview": "Tesla and SpaceX have formed special committees to discuss combining the two companies, Axios reported on October 21. Elon Musk called the idea appealing, but warned that a deal is not certain. This is a potential merger—not a completed one. Tesla makes electric vehicles and batteries, while SpaceX builds rockets and satellites. Bringing them together could allow more technology sharing, but shareholders must consider whether the combined business would be worth the risks and complexity.",
+          "overview": "Tesla and SpaceX have formed special committees to discuss combining the businesses, according to Axios. Musk welcomed the idea but cautioned that no deal is certain. A merger would bring together electric vehicles, energy storage, rockets, satellites and AI infrastructure. That could help the companies share technology and reduce duplicated costs—but it could also create a very complicated company. A proposed deal is not a completed deal, and shareholders would have important questions.",
           "points": [
             "The reported talks are exploratory; there is no finished merger.",
             "Tesla shareholders and SpaceX owners have different interests.",
@@ -60,8 +60,8 @@
               "url": "https://southeast.newschannelnebraska.com/story/364601249/ap-business-summarybrief-at-547-am-edt"
             }
           ],
-          "quote": "Musk described the possible combination as “a good idea,” while warning it was not certain.",
-          "quoteSource": "Axios Pro Rata, Oct. 21"
+          "quote": "Elon Musk described the idea as “a good idea,” but cautioned that a merger was not certain.",
+          "quoteSource": "Axios, October 21, 2026"
         },
         {
           "title": "The NFL Treats Paris Like a New Market",
