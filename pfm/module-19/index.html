@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>International Travel 101 — PFM Course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sky:#0ea5e9;--sky-bg:#f0f9ff;--sky-dark:#0369a1;
+  --teal:#0d9488;--teal-bg:#f0fdfa;
+  --amber:#d97706;--amber-bg:#fffbeb;--amber-border:#fcd34d;
+  --red:#dc2626;--red-bg:#fef2f2;
+  --green:#16a34a;--green-bg:#f0fdf4;
+  --ink:#111827;--ink2:#374151;--ink3:#9ca3af;
+  --surface:#ffffff;--surface2:#f9fafb;--surface3:#f3f4f6;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.15);
+  --radius:14px;--radius-sm:9px;
+}
+html,body{width:100%;min-height:100vh}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--ink);line-height:1.6}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:290px 1fr;min-height:100vh;max-width:1500px;margin:0 auto}
+
+/* SIDEBAR */
+.sidebar{background:#0c1a2e;color:#e2e8f0;padding:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sb-top{padding:1.5rem 1.5rem 1.25rem;border-bottom:0.5px solid rgba(255,255,255,0.08)}
+.sb-logo{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.sb-logo-icon{width:38px;height:38px;border-radius:10px;background:#0ea5e9;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0}
+.sb-logo-text{font-size:14px;font-weight:600;color:#f1f5f9;line-height:1.25}
+.sb-logo-sub{font-size:11px;color:#64748b;font-family:'JetBrains Mono',monospace}
+.sb-progress-box{background:rgba(255,255,255,0.05);border-radius:var(--radius-sm);padding:.875rem 1rem}
+.sbp-label{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#64748b;font-family:'JetBrains Mono',monospace;margin-bottom:.375rem}
+.sbp-score{font-size:24px;font-weight:600;color:#f1f5f9;font-family:'JetBrains Mono',monospace}
+.sbp-sub{font-size:12px;color:#64748b;margin-bottom:.625rem}
+.sbp-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden}
+.sbp-fill{height:100%;background:#0ea5e9;border-radius:4px;transition:width .5s}
+
+.sb-nav{padding:1rem 1rem 1.5rem;flex:1}
+.sb-nav-label{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#475569;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem;padding:0 .5rem}
+.nav-btn{display:flex;align-items:center;gap:9px;padding:.5rem .625rem;border-radius:8px;cursor:pointer;transition:all .15s;border:none;background:none;text-align:left;width:100%;color:#94a3b8;margin-bottom:2px}
+.nav-btn:hover:not(.nav-locked){background:rgba(255,255,255,0.06);color:#e2e8f0}
+.nav-btn.nav-active{background:rgba(14,165,233,0.15);color:#38bdf8}
+.nav-btn.nav-done{color:#64748b}
+.nav-btn.nav-locked{opacity:.35;cursor:not-allowed}
+.nav-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.nav-btn.nav-done .nav-dot{background:#0ea5e9;border-color:#0ea5e9;color:#fff}
+.nav-title{font-size:12px;font-weight:400;line-height:1.3;flex:1}
+.nav-check{color:#0ea5e9;font-size:14px}
+
+/* MAIN */
+.main{padding:2rem 2.5rem;overflow-y:auto}
+
+/* HERO */
+.hero{background:#0c1a2e;border-radius:var(--radius);padding:2.5rem;margin-bottom:1.75rem;position:relative;overflow:hidden}
+.hero-globe{position:absolute;right:-20px;top:-20px;font-size:160px;opacity:.06;line-height:1;pointer-events:none;color:#fff}
+.hero-course{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#0ea5e9;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem}
+.hero h1{font-size:clamp(24px,3.5vw,40px);font-weight:700;color:#f1f5f9;line-height:1.15;margin-bottom:.625rem}
+.hero p{font-size:15px;color:#94a3b8;max-width:540px;line-height:1.7}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.25rem}
+.hpill{background:rgba(255,255,255,0.07);color:#94a3b8;font-size:11px;padding:4px 12px;border-radius:20px;font-family:'JetBrains Mono',monospace}
+
+/* MODULE CARD */
+.module-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);margin-bottom:1.25rem;overflow:hidden;transition:box-shadow .2s}
+.mc-head{border-bottom:0.5px solid var(--border);padding:1.1rem 1.5rem;display:flex;align-items:center;gap:12px}
+.mc-num{width:36px;height:36px;border-radius:50%;background:#0c1a2e;color:#f1f5f9;font-family:'JetBrains Mono',monospace;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mc-info{flex:1;min-width:0}
+.mc-title{font-size:16px;font-weight:600;color:var(--ink)}
+.mc-sub{font-size:12px;color:var(--ink3);margin-top:1px}
+.mc-badge{font-size:11px;padding:3px 11px;border-radius:20px;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.badge-done{background:#f0fdf4;color:#16a34a}
+.badge-active{background:#f0f9ff;color:#0369a1}
+.badge-locked{background:var(--surface3);color:var(--ink3)}
+.mc-body{padding:1.75rem}
+
+/* LESSON */
+.lesson{font-size:14px;line-height:1.85;color:var(--ink2);margin-bottom:1.5rem;padding:1.25rem 1.5rem;background:linear-gradient(to right,var(--sky-bg),var(--surface));border-radius:var(--radius-sm);border-left:4px solid var(--sky)}
+.lesson strong{color:var(--ink);font-weight:600}
+
+/* CALLOUT */
+.callout{border-radius:var(--radius-sm);padding:1rem 1.25rem;margin-bottom:1.25rem;border-left:3px solid}
+.callout-amber{background:var(--amber-bg);border-color:var(--amber)}
+.callout-red{background:var(--red-bg);border-color:var(--red)}
+.callout-green{background:var(--green-bg);border-color:var(--green)}
+.callout-teal{background:var(--teal-bg);border-color:var(--teal)}
+.callout-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+.callout-amber .callout-label{color:var(--amber)}
+.callout-red .callout-label{color:var(--red)}
+.callout-green .callout-label{color:var(--green)}
+.callout-teal .callout-label{color:var(--teal)}
+.callout p{font-size:13px;line-height:1.7;color:var(--ink2)}
+.callout p strong{color:var(--ink);font-weight:600}
+
+/* STATS */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:1.5rem}
+.stat-card{background:var(--surface2);border-radius:var(--radius-sm);padding:.875rem 1rem;border:0.5px solid var(--border)}
+.sc-v{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:500;color:var(--ink)}
+.sc-l{font-size:11px;color:var(--ink3);margin-top:3px;line-height:1.4}
+
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
+.info-card{background:var(--surface2);border-radius:var(--radius-sm);padding:1rem 1.1rem;border:0.5px solid var(--border)}
+.ic-icon{font-size:22px;color:var(--sky-dark);margin-bottom:.5rem}
+.ic-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px}
+.ic-detail{font-size:12px;color:var(--ink3);line-height:1.6}
+.ic-tag{font-size:10px;padding:2px 8px;border-radius:20px;margin-top:7px;display:inline-block;font-family:'JetBrains Mono',monospace}
+.tag-blue{background:var(--sky-bg);color:var(--sky-dark)}
+.tag-amber{background:var(--amber-bg);color:var(--amber)}
+.tag-red{background:var(--red-bg);color:var(--red)}
+.tag-green{background:var(--green-bg);color:var(--green)}
+.tag-teal{background:var(--teal-bg);color:var(--teal)}
+
+/* COUNTRY TABLE */
+.ctable{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:13px}
+.ctable th{background:var(--surface2);padding:.625rem .875rem;text-align:left;font-weight:600;color:var(--ink2);font-size:11px;text-transform:uppercase;letter-spacing:.4px;border-bottom:1.5px solid var(--border2)}
+.ctable td{padding:.625rem .875rem;border-bottom:0.5px solid var(--border);color:var(--ink2);vertical-align:top}
+.ctable tr:last-child td{border-bottom:none}
+.ctable tr:hover td{background:var(--surface2)}
+
+/* QUIZ */
+.quiz-section{border-top:1px solid var(--border);padding-top:1.5rem;margin-top:.5rem}
+.q-progress-bar{height:3px;background:var(--surface3);border-radius:3px;margin-bottom:1.25rem;overflow:hidden}
+.q-prog-fill{height:100%;background:var(--sky);border-radius:3px;transition:width .3s}
+.q-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.5rem}
+.q-text{font-size:16px;font-weight:600;line-height:1.5;color:var(--ink);margin-bottom:1.1rem}
+.opts{display:grid;gap:8px;margin-bottom:1.1rem}
+.opt{display:flex;align-items:center;gap:12px;padding:.875rem 1.1rem;border-radius:var(--radius-sm);border:1.5px solid var(--border2);cursor:pointer;transition:all .15s;font-size:14px;color:var(--ink);background:var(--surface);text-align:left;width:100%;font-family:'Plus Jakarta Sans',sans-serif}
+.opt:hover{border-color:var(--sky);background:var(--sky-bg)}
+.opt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.opt.wrong{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.opt.reveal{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.opt-letter{width:28px;height:28px;border-radius:7px;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;flex-shrink:0}
+.exp-box{border-radius:var(--radius-sm);padding:1rem 1.25rem;font-size:13px;line-height:1.7;margin-bottom:1.1rem;border-left:3px solid}
+.exp-c{background:var(--green-bg);color:#15803d;border-color:var(--green)}
+.exp-w{background:var(--red-bg);color:#b91c1c;border-color:var(--red)}
+.exp-lbl{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+.q-nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{padding:9px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
+.btn-dark{background:#0c1a2e;color:#f1f5f9;border-color:#0c1a2e}
+.btn-dark:hover{background:#1e3a5f}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--border2)}
+.btn-outline:hover{background:var(--surface2)}
+.btn-sky{background:var(--sky);color:#fff;border-color:var(--sky)}
+.btn-sky:hover{background:var(--sky-dark)}
+.q-counter{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink3);margin-left:auto}
+
+/* LOCKED */
+.locked-msg{padding:2.5rem;text-align:center;color:var(--ink3)}
+.locked-msg i{font-size:36px;margin-bottom:1rem;display:block;opacity:.5}
+.locked-msg p{font-size:14px;max-width:300px;margin:0 auto}
+
+/* CERTIFICATE */
+.cert-wrap{background:#0c1a2e;border-radius:var(--radius);padding:2rem;margin-top:1.5rem}
+.cert-inner{background:#fff;border:2px solid #0ea5e9;border-radius:var(--radius-sm);padding:2.5rem;text-align:center}
+.cert-seal{width:64px;height:64px;border-radius:50%;background:#0c1a2e;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;border:3px solid #0ea5e9}
+.cert-seal i{color:#0ea5e9;font-size:28px}
+.cert-eye{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#0369a1;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem}
+.cert-headline{font-size:24px;font-weight:700;color:#0c1a2e;margin-bottom:.375rem}
+.cert-sub{font-size:13px;color:#64748b;margin-bottom:.25rem}
+.cert-divider{height:1.5px;background:#0ea5e9;max-width:180px;margin:.875rem auto}
+.cert-body{font-size:13px;color:#64748b;line-height:1.7;max-width:420px;margin:0 auto 1rem}
+.cert-score{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:600;color:#0c1a2e;margin:.5rem 0}
+.cert-grade{font-size:14px;color:#0369a1;font-weight:600;margin-bottom:.5rem}
+.cert-meta{font-size:11px;color:#94a3b8;font-family:'JetBrains Mono',monospace}
+.cert-issued{display:flex;justify-content:space-between;margin-top:1.25rem;padding-top:.875rem;border-top:0.5px solid #e2e8f0;font-size:11px;color:#94a3b8;font-family:'JetBrains Mono',monospace;flex-wrap:wrap;gap:6px}
+.cert-breakdown{margin-top:1rem}
+.cb-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid rgba(255,255,255,0.06);font-size:12px}
+.cb-name{color:#94a3b8}
+.cb-sc{font-family:'JetBrains Mono',monospace;color:#38bdf8}
+.cert-name-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#64748b;font-family:'JetBrains Mono',monospace;margin-bottom:.375rem}
+.cert-name-display{font-size:26px;font-weight:700;color:#0c1a2e;letter-spacing:.01em;margin:.25rem 0 .125rem;font-family:'Plus Jakarta Sans',sans-serif;min-height:38px}
+.cert-name-input-wrap{margin:1.25rem auto .5rem;max-width:360px}
+.cert-name-input-wrap label{display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#64748b;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem;text-align:left}
+.cert-name-input{width:100%;padding:.75rem 1rem;border:1.5px solid #0ea5e9;border-radius:var(--radius-sm);font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;color:#0c1a2e;background:#f0f9ff;text-align:center;outline:none;transition:all .2s}
+.cert-name-input:focus{border-color:#0369a1;background:#e0f2fe;box-shadow:0 0 0 3px rgba(14,165,233,.15)}
+.cert-name-input::placeholder{color:#94a3b8;font-size:14px}
+.cert-name-btn{margin-top:.625rem;width:100%;padding:.6875rem 1rem;background:#0c1a2e;color:#f1f5f9;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s}
+.cert-name-btn:hover{background:#1e3a5f}
+/* NAME ENTRY */
+.cert-name-entry{background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.25);border-radius:var(--radius-sm);padding:1.25rem 1.5rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cert-name-entry label{font-size:13px;font-weight:600;color:#38bdf8;white-space:nowrap;font-family:'JetBrains Mono',monospace;letter-spacing:.4px}
+.cert-name-entry input{flex:1;min-width:180px;background:#0c1a2e;border:1.5px solid rgba(14,165,233,0.4);border-radius:8px;padding:9px 14px;font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;color:#f1f5f9;outline:none;transition:border-color .2s}
+.cert-name-entry input::placeholder{color:#475569}
+.cert-name-entry input:focus{border-color:#0ea5e9}
+.cert-name-entry button{background:#0ea5e9;color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s;white-space:nowrap}
+.cert-name-entry button:hover{background:#0369a1}
+/* NAME ON CERT */
+.cert-awardee-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#94a3b8;font-family:'JetBrains Mono',monospace;margin-bottom:.25rem}
+.cert-awardee-name{font-size:28px;font-weight:700;color:#0c1a2e;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:.25rem;letter-spacing:-.3px;word-break:break-word}
+.cert-name-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#64748b;font-family:'JetBrains Mono',monospace;margin-bottom:.375rem}
+.cert-name-display{font-size:30px;font-weight:700;color:#0c1a2e;margin-bottom:.25rem;word-break:break-word;letter-spacing:-.3px}
+.cert-name-input-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;margin:.5rem 0 .25rem;width:100%}
+.cert-name-input-wrap label{font-size:12px;color:#64748b;font-family:'JetBrains Mono',monospace;letter-spacing:.4px}
+.cert-name-input{width:100%;max-width:340px;border:1.5px solid #cbd5e1;border-radius:8px;padding:10px 14px;font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;color:#0c1a2e;outline:none;text-align:center;transition:border-color .2s}
+.cert-name-input:focus{border-color:#0ea5e9;box-shadow:0 0 0 3px rgba(14,165,233,.15)}
+.cert-name-input::placeholder{color:#94a3b8}
+.cert-name-btn{background:#0ea5e9;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s}
+.cert-name-btn:hover{background:#0369a1}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:static;height:auto}
+  .sb-nav{padding:1rem 1rem}
+  .nav-btn{display:inline-flex;width:auto;padding:.375rem .625rem}
+  .nav-title{display:none}
+  .sb-nav{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+  .sb-nav-label{display:none}
+  .main{padding:1.25rem 1rem}
+}
+@media(max-width:600px){
+  .hero{padding:1.5rem}
+  .mc-head{padding:.875rem 1.1rem}
+  .mc-body{padding:1.1rem}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .cards-grid{grid-template-columns:1fr 1fr}
+  .cert-inner{padding:1.5rem}
+  .cert-score{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-top">
+    <div class="sb-logo">
+      <div class="sb-logo-icon"><i class="ti ti-plane" aria-hidden="true"></i></div>
+      <div>
+        <div class="sb-logo-text">International Travel 101</div>
+        <div class="sb-logo-sub">PFM · High School Course</div>
+      </div>
+    </div>
+    <div class="sb-progress-box">
+      <div class="sbp-label">Your progress</div>
+      <div class="sbp-score" id="sbScore">0 / 40</div>
+      <div class="sbp-sub" id="sbPct">0% correct · keep going!</div>
+      <div class="sbp-bar"><div class="sbp-fill" id="sbFill" style="width:0%"></div></div>
+    </div>
+  </div>
+  <div class="sb-nav" id="sideNav">
+    <div class="sb-nav-label">Modules</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="mainContent">
+
+  <div class="hero">
+    <div class="hero-globe"><i class="ti ti-world" aria-hidden="true"></i></div>
+    <div class="hero-course">PFM · International Travel</div>
+    <h1>Your First International<br>Trip Starts Here</h1>
+    <p>Everything a high schooler needs to know before crossing a border — from passports to visas, restricted countries, and the world's top destinations.</p>
+    <div class="hero-pills">
+      <span class="hpill">8 modules</span>
+      <span class="hpill">40 questions</span>
+      <span class="hpill">certificate</span>
+      <span class="hpill">state dept. sourced</span>
+    </div>
+  </div>
+
+  <div id="modulesContainer"></div>
+
+</main>
+</div>
+
+<script>
+const MODULES = [
+{id:0, title:"Why travel internationally?", sub:"The big picture — why it matters",
+lesson:`International travel is one of the most transformative experiences you can have. Seeing how other cultures live, eat, celebrate, and solve problems expands your perspective in ways that no classroom can replicate. <strong>Over 100 million Americans travel internationally every year</strong>, visiting every corner of the globe. But international travel requires preparation that domestic travel does not — different rules, different documents, different rights. This course gives you the foundational knowledge to travel safely, legally, and confidently anywhere in the world. We'll cover everything from passports to restricted countries to the top destinations Americans visit every year.`,
+stats:[{v:"100M+",l:"Americans travel abroad yearly"},{v:"195",l:"Countries in the world"},{v:"186",l:"Countries Americans can visit visa-free or on arrival"},{v:"$1,200",l:"Average first international trip cost (budget travel)"}],
+callouts:[{type:"teal",label:"Why this matters",text:"Knowing the rules before you go means fewer surprises — and no risk of being turned away at a border or stranded abroad without the right documents."}],
+questions:[
+  {q:"Approximately how many Americans travel internationally each year?",opts:["10 million","50 million","Over 100 million","5 million"],ans:2,exp:"The U.S. Travel Association and State Department report that over 100 million Americans travel internationally each year, making the U.S. one of the world's largest sources of international tourists."},
+  {q:"What makes international travel fundamentally different from domestic travel?",opts:["It is always more expensive","You need different documents, follow different laws, and have different rights in each country","You cannot use your phone abroad","Airlines charge more for international flights only"],ans:1,exp:"International travel crosses sovereign borders — each country has its own entry requirements, laws, and rights for visitors. This is why preparation and documentation matter so much."},
+  {q:"How many countries can Americans visit without needing a visa arranged in advance?",opts:["About 50","About 100","About 186","All 195"],ans:2,exp:"The U.S. passport is consistently ranked among the most powerful in the world. Americans can visit approximately 186 countries without a pre-arranged visa — either visa-free or by getting a visa on arrival."},
+  {q:"Which of the following is NOT a typical reason why international travel requires more preparation than domestic travel?",opts:["You need a valid passport","Currency is different","You must follow the destination country's laws","You need a domestic driver's license upgrade"],ans:3,exp:"Your driver's license is a domestic document and doesn't need 'upgrading' for international travel (though an International Driving Permit may be useful). Passports, currency, and local laws are genuine considerations."},
+  {q:"What is one of the most powerful benefits of international travel for young people, according to travel research and educators?",opts:["Learning to use different keyboards","Expanded perspective and cross-cultural understanding","Earning a foreign language degree","Getting discounts on technology"],ans:1,exp:"Research consistently shows that international travel — especially for young people — builds cross-cultural competence, empathy, independence, and global awareness that no classroom can replicate."},
+]},
+
+{id:1, title:"Passports — your most important document", sub:"What it is, how to get one, what it costs",
+lesson:`Your <strong>passport is your primary identity document for international travel</strong>. Issued by the U.S. Department of State, it proves your citizenship and identity and is required to enter virtually every foreign country and re-enter the United States. A U.S. passport book is valid for <strong>10 years</strong> for adults (18+) and <strong>5 years</strong> for minors under 18. As of 2024, the cost is <strong>$130 for the application fee + $35 acceptance fee = $165 total</strong> for a new adult passport. Processing takes 6–8 weeks standard or 2–3 weeks expedited (for an extra $60). You must apply in person at a passport acceptance facility if it is your first passport. Always apply at least <strong>6 months before travel</strong> — many countries require your passport to be valid for 6 months beyond your travel dates.`,
+stats:[{v:"$165",l:"New adult passport total cost (2024)"},{v:"10 yrs",l:"Adult passport validity"},{v:"5 yrs",l:"Minor passport validity"},{v:"6–8 wks",l:"Standard processing time"}],
+callouts:[
+  {type:"amber",label:"Critical rule",text:"Many countries require your passport to be valid for at least 6 months beyond your travel dates. A passport expiring 3 months after your trip could get you denied boarding."},
+  {type:"green",label:"Where to apply",text:"Apply at a USPS post office, federal or state court, public library, or county clerk's office — search travel.state.gov/passportacceptance for your nearest facility."},
+],
+questions:[
+  {q:"Who issues U.S. passports?",opts:["The Department of Homeland Security","The State Department","The Department of Transportation","The federal court system"],ans:1,exp:"U.S. passports are issued by the U.S. Department of State. The State Department's Bureau of Consular Affairs manages all passport applications through its network of acceptance facilities."},
+  {q:"How long is a standard adult U.S. passport valid?",opts:["5 years","10 years","15 years","Until revoked"],ans:1,exp:"Adult passports (for people 18 and older) are valid for 10 years from the date of issue. Passports issued to minors under 18 are only valid for 5 years."},
+  {q:"What is the total cost to get a new adult U.S. passport as of 2024?",opts:["$75","$130","$165","$225"],ans:2,exp:"A new adult passport costs $130 for the application fee plus $35 for the acceptance facility fee, totaling $165. Expedited processing costs an additional $60."},
+  {q:"How far in advance of your travel date should you apply for a passport?",opts:["1 week","1 month","At least 6 months","2 years"],ans:2,exp:"The State Department strongly recommends applying at least 6 months before travel. Standard processing is 6–8 weeks, and many countries require your passport to be valid 6 months beyond your travel dates."},
+  {q:"Which rule about passport validity do many countries enforce that surprises new travelers?",opts:["Passports must be brand new","Your passport must be valid for at least 6 months beyond your travel dates","Your passport must have blank pages equal to your trip length","You must carry two passports when abroad"],ans:1,exp:"Many countries — including EU nations, Mexico, Japan, and others — require your passport to be valid for 6 months beyond your intended travel dates. Airlines will deny boarding if this requirement isn't met."},
+]},
+
+{id:2, title:"Passport cards & other travel documents", sub:"Passport cards, Real ID, and Global Entry",
+lesson:`Beyond the full passport book, there are several other official travel documents worth knowing. A <strong>U.S. Passport Card</strong> costs only $65 (new adult) and is valid for 10 years — but it can <strong>only be used for land and sea border crossings</strong> to Canada, Mexico, the Caribbean, and Bermuda. It cannot be used for international air travel. The <strong>Real ID</strong> (required for U.S. domestic flights since May 2025) is a state-issued enhanced driver's license — it is NOT valid for international travel. <strong>Global Entry</strong> is a trusted traveler program ($100/5 years) that allows expedited re-entry into the U.S. at major airports — it includes TSA PreCheck and is highly recommended for frequent international travelers. An <strong>International Driving Permit (IDP)</strong>, issued by AAA, is a translation of your license recognized in 150+ countries.`,
+cards:[
+  {icon:"ti-id",name:"Passport Book",detail:"Full international travel document. Required for all international air travel.",tag:"Most powerful",tc:"tag-blue"},
+  {icon:"ti-credit-card",name:"Passport Card",detail:"Land/sea borders only: Canada, Mexico, Caribbean, Bermuda. No international flights.",tag:"Limited use",tc:"tag-amber"},
+  {icon:"ti-license",name:"Real ID",detail:"Required for domestic U.S. flights only. Has NO international travel use.",tag:"Domestic only",tc:"tag-red"},
+  {icon:"ti-shield-check",name:"Global Entry",detail:"Expedited U.S. re-entry + TSA PreCheck. $100/5 years. Highly recommended.",tag:"Frequent travelers",tc:"tag-green"},
+  {icon:"ti-car",name:"Int'l Driving Permit",detail:"Translates your license for 150+ countries. Required in some, recommended in most.",tag:"Drivers abroad",tc:"tag-teal"},
+  {icon:"ti-certificate",name:"Nexus / SENTRI",detail:"Trusted traveler programs for expedited crossing at Canadian and Mexican borders.",tag:"Border crossings",tc:"tag-teal"},
+],
+questions:[
+  {q:"What is the primary limitation of a U.S. Passport Card compared to a Passport Book?",opts:["It costs more and lasts fewer years","It cannot be used for international air travel — only land and sea crossings","It is not accepted by any foreign government","It requires renewal every 2 years"],ans:1,exp:"The Passport Card is only valid for land and sea border crossings to Canada, Mexico, the Caribbean, and Bermuda. It cannot be used for international flights. You need a full Passport Book to fly internationally."},
+  {q:"The Real ID Act (May 2025) primarily affects:",opts:["International air travel to all countries","Domestic U.S. air travel and access to federal buildings","Crossing land borders into Canada","Applying for a passport"],ans:1,exp:"Real ID is a domestic security standard for state-issued IDs and driver's licenses. It is required for domestic U.S. flights and federal building access — it has no role in international travel."},
+  {q:"Global Entry is best described as:",opts:["A free airport lounge access program","A trusted traveler program allowing expedited U.S. re-entry after international travel","A visa program for Americans traveling to Europe","A program that replaces the need for a passport"],ans:1,exp:"Global Entry ($100 for 5 years) allows pre-approved, low-risk travelers to bypass standard customs lines when re-entering the U.S. It automatically includes TSA PreCheck for domestic flights."},
+  {q:"An International Driving Permit (IDP) is issued by:",opts:["The DMV","The State Department","AAA (American Automobile Association)","The destination country's embassy"],ans:2,exp:"IDPs are issued in the U.S. by AAA (and AATA). They are a translation of your U.S. driver's license recognized in 150+ countries and are required (or strongly recommended) for driving in many countries."},
+  {q:"If a student is taking a cruise from Miami to the Bahamas, what is the minimum document they need?",opts:["A Real ID","A Passport Card or Passport Book","A Global Entry card","No document — cruises don't require ID"],ans:1,exp:"Sea crossings between the U.S. and the Caribbean can use a Passport Card (or Passport Book). However, if you miss the ship abroad, you'll need a full Passport Book to fly home — so a Passport Book is always the safer choice."},
+]},
+
+{id:3, title:"Visas explained", sub:"What they are, why they exist, how they work",
+lesson:`A <strong>visa</strong> is an official authorization — usually a stamp or sticker in your passport — that allows you to enter a foreign country for a specific purpose and period of time. Visas exist because countries want to control who enters their borders, why, and for how long. There are several types: <strong>Tourist visas</strong> are the most common for travelers; <strong>Student visas</strong> are required for studying abroad; <strong>Work visas</strong> for employment; and <strong>Transit visas</strong> for passing through. Visa requirements vary dramatically by your passport nationality — a U.S. passport holder has different access than a citizen of India or Nigeria. Always check the <strong>U.S. State Department's country information pages</strong> (travel.state.gov) before any international trip.`,
+callouts:[
+  {type:"amber",label:"Visa vs. entry permission",text:"A visa does NOT guarantee entry — it only grants permission to travel to the port of entry. A border official can still deny you entry even with a valid visa if they have concerns."},
+  {type:"teal",label:"How to check",text:"Always check travel.state.gov for the most current visa requirements for any country. Embassy websites of the destination country are also official sources."},
+],
+cards:[
+  {icon:"ti-plane-arrival",name:"Visa on Arrival (VOA)",detail:"You get your visa when you land, at the airport. No advance application needed. Most common for U.S. citizens.",tag:"Common for Americans",tc:"tag-green"},
+  {icon:"ti-world-check",name:"e-Visa",detail:"Applied online before travel, usually within 72 hours of departure. Easier than embassy visits.",tag:"Growing worldwide",tc:"tag-blue"},
+  {icon:"ti-building",name:"Embassy Visa",detail:"Must visit the destination country's embassy or consulate in the U.S. in person. Slower, more complex.",tag:"Restricted countries",tc:"tag-amber"},
+  {icon:"ti-clock",name:"Tourist Visa",detail:"For leisure travel. Usually allows stays of 30–90 days. Most common visa type Americans obtain.",tag:"Most common",tc:"tag-teal"},
+],
+questions:[
+  {q:"What is a visa?",opts:["A type of passport","An official authorization to enter a foreign country for a specific purpose and period","A travel insurance policy","An international driver's license"],ans:1,exp:"A visa is an official endorsement from a foreign government (usually a stamp or sticker in your passport) authorizing you to enter that country for a defined purpose and duration."},
+  {q:"What is a 'Visa on Arrival'?",opts:["A visa you apply for 6 months before travel","A visa obtained at the destination country's port of entry upon arrival","A digital visa sent by email","A visa stamped by your home country"],ans:1,exp:"Visa on Arrival means you receive the visa when you land at the destination airport. You typically fill out a form and pay a fee at the immigration desk upon arrival. No pre-trip embassy visit required."},
+  {q:"Why can a border official deny entry even with a valid visa?",opts:["Border officials don't recognize visas","A visa is permission to travel to the border, not a guaranteed right of entry — officials can still refuse","This only happens in communist countries","It is illegal to deny entry with a valid visa"],ans:1,exp:"Visas grant permission to travel to the port of entry, but the final decision is always made by the border official of the destination country. They can deny entry if they have concerns about your intentions."},
+  {q:"What is the most reliable official source for checking visa requirements for Americans?",opts:["Reddit travel forums","Google search results","travel.state.gov (U.S. State Department)","TripAdvisor"],ans:2,exp:"The U.S. Department of State's official travel website (travel.state.gov) provides country-specific entry requirements, visa information, and travel advisories for every country in the world."},
+  {q:"Which type of visa would a student need to study in France for a full semester?",opts:["Tourist visa","Transit visa","Student visa","Visa on Arrival"],ans:2,exp:"Tourist visas are for short leisure visits. A student planning to study abroad for a semester needs a student visa (or long-stay visa), which typically requires enrollment proof, financial documents, and advance embassy application."},
+]},
+
+{id:4, title:"Visa-free & visa-on-arrival countries", sub:"Where Americans can go without pre-arranging a visa",
+lesson:`One of the great advantages of a U.S. passport is access. Americans can travel to <strong>186+ countries</strong> either completely visa-free or by obtaining a visa on arrival. <strong>Visa-free</strong> means you simply show your passport and enter — no visa needed at all. <strong>Visa on Arrival</strong> means you fill out a form and sometimes pay a small fee at the border/airport. Key destinations in each category are listed below. Important: even visa-free countries have <strong>maximum stay limits</strong> — overstaying is a serious offense that can result in fines, detention, or being banned from returning.`,
+tableData:{
+  headers:["Region / Country","Entry Type","Max Stay","Notes"],
+  rows:[
+    ["🇪🇺 Most of Europe (Schengen Area — 27 countries)","Visa-free","90 days in any 180-day period","Includes France, Italy, Spain, Germany, Greece, Netherlands"],
+    ["🇬🇧 United Kingdom","Visa-free","6 months","Separate from EU/Schengen — own immigration rules"],
+    ["🇯🇵 Japan","Visa-free","90 days","One of the most popular destinations in Asia"],
+    ["🇰🇷 South Korea","Visa-free","90 days","K-ETA electronic travel authorization may be required"],
+    ["🇲🇽 Mexico","Visa-free","180 days","Most visited country by Americans; FMM tourist card required"],
+    ["🇨🇦 Canada","Visa-free","6 months","Requires eTA for air entry; passport card works at land borders"],
+    ["🇧🇷 Brazil","Visa-free (since 2024)","90 days","Mutual visa-free access restored for tourism"],
+    ["🇹🇭 Thailand","Visa-free","30 days","Extended to 60 days in 2024 to boost tourism"],
+    ["🇹🇷 Turkey","e-Visa (online)","90 days","Apply at evisa.gov.tr — $50, instant approval usually"],
+    ["🇮🇳 India","e-Visa (online)","60 days","Apply at indianvisaonline.gov.in before travel"],
+    ["🇮🇩 Indonesia (Bali)","Visa on Arrival","30 days","~$35 fee paid at airport; extendable 30 more days"],
+    ["🇦🇺 Australia","ETA (electronic)","90 days per visit","Apply via AUS ETA app — usually instant, $20"],
+  ]
+},
+callouts:[{type:"amber",label:"Schengen 90-day rule",text:"The Schengen Area operates on a 90-days-in-any-180-days rule across ALL 27 member countries combined. You cannot spend 90 days in France, then move to Spain for another 90 — it counts as one shared quota."}],
+questions:[
+  {q:"What does 'visa-free' entry mean for a U.S. passport holder?",opts:["You can stay indefinitely","You show your passport and enter without needing any visa arrangement","You still need an e-Visa applied online","You need to register with the local police"],ans:1,exp:"Visa-free means no visa is required in any form — you simply present your valid U.S. passport at the border or airport and enter, subject to maximum stay limits."},
+  {q:"The Schengen Area's 90-day rule means Americans can stay:",opts:["90 days in each individual Schengen country","90 days total across all 27 Schengen countries combined in any 180-day period","90 days per calendar year","Indefinitely with a tourist card"],ans:1,exp:"The 90/180 Schengen rule applies across all 27 member countries combined. Days spent in France count against the same quota as days in Germany, Spain, or Italy. Overstaying is a serious violation."},
+  {q:"Which of these destinations requires an e-Visa that must be applied for online before travel?",opts:["Mexico","Canada","Turkey","The United Kingdom"],ans:2,exp:"Turkey requires an e-Visa obtained at evisa.gov.tr before travel. This is a simple online process (usually instant approval, ~$50) — but it must be done before you arrive, unlike a Visa on Arrival."},
+  {q:"Australia's Electronic Travel Authority (ETA) is different from a standard visa because:",opts:["It costs over $500","It is electronically linked to your passport and applied for via app — no stamp or sticker","It requires a medical examination","It is only valid for 30 days"],ans:1,exp:"Australia's ETA is a digital authorization (no stamp in passport) applied for through the AUS ETA app for about $20. It allows multiple 3-month stays over a 12-month period."},
+  {q:"What is the maximum stay for Americans visiting Mexico under the standard tourist entry?",opts:["30 days","90 days","180 days","Unlimited"],ans:2,exp:"Mexico allows Americans up to 180 days as tourists — one of the most generous allowances globally. However, you must fill out an FMM tourist card (now integrated into the passport stamp at most ports)."},
+]},
+
+{id:5, title:"Countries requiring pre-arranged visas", sub:"Where you must apply BEFORE you travel",
+lesson:`While most popular destinations are accessible visa-free or on arrival, some countries require Americans to <strong>apply for a visa in advance</strong> at the country's embassy or consulate in the U.S. — or through an online portal. These tend to be countries with stricter border controls, complex diplomatic relationships, or high immigration concerns. Key examples include China (tourist visa through embassy), Russia (tourist visa, complicated by current travel warnings), Vietnam (e-Visa online), India (e-Visa online), and Saudi Arabia (tourist e-Visa launched 2019). Processing times range from a few days to several weeks, and requirements typically include passport photos, application forms, bank statements, travel itinerary, and fees.`,
+tableData:{
+  headers:["Country","Visa Type","How to Apply","Processing Time","Approx. Fee"],
+  rows:[
+    ["🇨🇳 China","Visa required","Chinese embassy/consulate in U.S.","4–10 business days","$140–185"],
+    ["🇻🇳 Vietnam","e-Visa (online)","evisa.xuatnhapcanh.gov.vn","3 business days","$25"],
+    ["🇮🇳 India","e-Visa (online)","indianvisaonline.gov.in","72 hours","$25–80"],
+    ["🇸🇦 Saudi Arabia","Tourist e-Visa","visitsaudi.com","Instant–24 hours","$127"],
+    ["🇧🇩 Bangladesh","Visa on arrival or embassy","Embassy or port of entry","Varies","$51"],
+    ["🇵🇰 Pakistan","e-Visa (online)","visa.nadra.gov.pk","5–10 business days","$10–75"],
+    ["🇨🇺 Cuba","Tourist visa (Blue Card)","Cuban embassy or via travel agent","1–3 days","~$75–85"],
+    ["🇪🇬 Egypt","Visa on Arrival or e-Visa","evisa.gov.eg or airport","Instant–7 days","$25"],
+  ]
+},
+callouts:[
+  {type:"amber",label:"Always check current requirements",text:"Visa rules change frequently due to diplomacy, security, and policy changes. Always verify on travel.state.gov and the destination country's official embassy website before you book."},
+  {type:"teal",label:"Cuba note",text:"Americans can visit Cuba legally under specific authorized categories (educational, journalistic, support for Cuban people, etc.). Pure tourism by Americans is prohibited under U.S. law — not Cuba's law."},
+],
+questions:[
+  {q:"For which country must Americans typically visit the physical embassy or consulate in the U.S. to obtain a tourist visa?",opts:["Vietnam","India","China","Egypt"],ans:2,exp:"China requires Americans to apply for a tourist visa through the Chinese embassy or consulate with an in-person visit in most cases. This requires forms, photos, passport, itinerary, and bank statements."},
+  {q:"Vietnam's tourist e-Visa is obtained:",opts:["At the airport upon arrival","Through an online application before travel","At the U.S. State Department","Through AAA travel services"],ans:1,exp:"Vietnam's e-Visa is applied for online at evisa.xuatnhapcanh.gov.vn. It typically takes 3 business days to process and costs $25, allowing a 90-day single-entry stay."},
+  {q:"Why is visiting Cuba legally complex for Americans?",opts:["Cuba prohibits American tourists","Americans can visit legally but must qualify under one of 12 authorized travel categories — pure tourism is restricted under U.S. law","Cuba requires a 6-month advance visa","Cuba only accepts cash payment for visas"],ans:1,exp:"Travel to Cuba by Americans is regulated under U.S. law (OFAC regulations), not Cuban law. Americans must travel under one of 12 authorized categories. Pure tourist travel for Americans violates U.S. — not Cuban — regulations."},
+  {q:"What documents are typically required when applying for a visa through a foreign embassy?",opts:["Only a credit card number","Passport, application form, passport photos, bank statements, and travel itinerary","Only your U.S. birth certificate","A letter from your school principal"],ans:1,exp:"Embassy visa applications typically require a valid passport, completed application form, passport-sized photos, proof of financial means (bank statements), a travel itinerary, and the visa fee — plus any country-specific requirements."},
+  {q:"If you want to visit Saudi Arabia as an American tourist today, you should:",opts:["Know it is impossible — Saudi Arabia does not allow tourists","Apply online through visitsaudi.com for an e-Visa before departure","Visit the Saudi embassy in person only","Ask your airline to arrange a visa"],ans:1,exp:"Saudi Arabia launched tourist visas in 2019 — a major policy change. Americans can now apply for a tourist e-Visa online at visitsaudi.com, with approval often coming within 24 hours for about $127."},
+]},
+
+{id:6, title:"Restricted & high-risk countries", sub:"Where Americans face the most barriers or danger",
+lesson:`The U.S. State Department maintains a <strong>travel advisory system</strong> rating every country from Level 1 (Exercise Normal Precaution) to Level 4 (Do Not Travel). Some countries are restricted not because they ban Americans, but because the U.S. government strongly warns against travel due to war, terrorism, crime, or the risk of wrongful detention. A separate category: countries that <strong>genuinely prohibit or severely restrict American entry</strong>. These include North Korea (illegal for most Americans under the 2017 travel ban), and travel to active conflict zones like portions of Syria and Yemen carries extreme risk. Iran is open to American citizens technically but carries extreme risk of wrongful detention. Separately, some countries deny entry to people who have visited Israel (check visa stamps).`,
+tableData:{
+  headers:["Country","Status for Americans","Reason","State Dept. Level"],
+  rows:[
+    ["🇰🇵 North Korea","Travel prohibited by U.S. law","U.S. passports invalid for travel there since 2017; extreme detention risk","Level 4 — Do Not Travel"],
+    ["🇸🇾 Syria","Do Not Travel","Active civil war, terrorism, arbitrary detention","Level 4 — Do Not Travel"],
+    ["🇷🇺 Russia","Do Not Travel","War with Ukraine, wrongful detention of Americans","Level 4 — Do Not Travel"],
+    ["🇮🇷 Iran","Extreme risk — no U.S. embassy","No diplomatic relations; high risk of wrongful detention of Americans","Level 4 — Do Not Travel"],
+    ["🇧🇾 Belarus","Do Not Travel","Authoritarian government, arbitrary enforcement of laws","Level 4 — Do Not Travel"],
+    ["🇻🇪 Venezuela","Do Not Travel","Crime, civil unrest, wrongful detention risk","Level 4 — Do Not Travel"],
+    ["🇱🇾 Libya","Do Not Travel","Active armed conflict, terrorism","Level 4 — Do Not Travel"],
+    ["🇾🇪 Yemen","Do Not Travel","Active civil war, terrorism, famine","Level 4 — Do Not Travel"],
+    ["🇨🇺 Cuba","Travel restricted (U.S. law)","Not banned by Cuba — but U.S. OFAC regulations restrict American tourism","Level 2 — Exercise Increased Caution"],
+  ]
+},
+callouts:[
+  {type:"red",label:"Wrongful detention risk",text:"Several countries — including Russia, Iran, China, and Venezuela — have a documented history of detaining American citizens on dubious charges as diplomatic leverage. This is called 'hostage diplomacy' and is a real risk to be aware of."},
+  {type:"amber",label:"Israel stamp issue",text:"Some countries (historically: Iran, Kuwait, Lebanon, Libya, Syria, Yemen) deny entry to travelers with Israeli stamps in their passport. Israel now offers unstamped entry upon request — ask at the border."},
+],
+questions:[
+  {q:"Why are U.S. passports invalid for travel to North Korea?",opts:["North Korea closed all borders permanently","A 2017 U.S. law (Title 22 CFR) prohibits Americans from using U.S. passports to travel to North Korea due to extreme risk of detention","North Korea only accepts EU passport holders","The U.S. has no diplomatic relations with any country near North Korea"],ans:1,exp:"In 2017, after the death of American student Otto Warmbier, the U.S. State Department designated North Korea as a restricted area. U.S. passports are legally invalid for travel there, and special validation is required in the rare cases a humanitarian exception is granted."},
+  {q:"What is 'wrongful detention' or 'hostage diplomacy' as it relates to travel?",opts:["When hotels hold your passport as a deposit","When foreign governments detain American citizens on dubious charges as diplomatic leverage","When airlines deny boarding to American travelers","When embassies refuse to issue visas"],ans:1,exp:"Several countries — documented by the James W. Foley Legacy Foundation and State Department — have detained American citizens on exaggerated or false charges as diplomatic bargaining chips. Russia, Iran, China, and Venezuela are currently on the State Department's wrongful detention watch list."},
+  {q:"The U.S. State Department's Level 4 travel advisory means:",opts:["Exercise increased caution","Reconsider travel due to serious risks","Do Not Travel — U.S. citizens should leave if already there","Normal precautions apply"],ans:2,exp:"Level 4 (Do Not Travel) is the highest State Department advisory level, indicating that conditions are so dangerous the government recommends Americans not go at all — and if already there, to depart immediately."},
+  {q:"Why might having an Israeli passport stamp cause problems at some borders?",opts:["It takes up space in your passport","Some countries deny entry to travelers with Israeli stamps due to political tensions","Israeli stamps are considered counterfeit by some nations","Israel charges a re-entry fee that other countries object to"],ans:1,exp:"Some countries with hostile relations with Israel have historically denied entry to travelers with Israeli stamps. Israel now offers to not stamp passports upon request — travelers can ask for this at Israeli border crossings."},
+  {q:"Which of these countries technically allows American entry but carries extreme risk of wrongful detention?",opts:["France","Japan","Iran","Mexico"],ans:2,exp:"Iran technically allows American entry (though complicated without a U.S. embassy there), but the State Department gives it a Level 4 'Do Not Travel' advisory primarily due to the extreme risk of wrongful detention of dual-citizens and journalists."},
+]},
+
+{id:7, title:"Top destinations & travel tips", sub:"Where Americans travel most & how to be a smart traveler",
+lesson:`The most visited international destinations by Americans are, in order: <strong>Mexico (#1 by far), Canada, United Kingdom, France, Italy, Dominican Republic, Jamaica, the Bahamas, Germany, and Japan</strong>. These destinations offer a mix of cultural richness, accessibility, affordability, and safety. Before any international trip, smart travelers: <strong>register with STEP</strong> (Smart Traveler Enrollment Program at step.state.gov) so the U.S. embassy knows you're there; get <strong>travel insurance</strong>; notify your bank; get a <strong>no-foreign-transaction-fee card</strong> (Charles Schwab debit, Chase Sapphire); download offline maps; learn 10 basic phrases in the local language; and keep a <strong>digital copy of your passport</strong> in your email. Your U.S. cell plan may charge internationally — consider a local SIM or an eSIM service like Airalo.`,
+cards:[
+  {icon:"ti-map-pin",name:"#1 Mexico",detail:"43M+ American visitors/year. Easy, close, affordable. Cancun, CDMX, Cabo, Oaxaca.",tag:"No visa needed",tc:"tag-green"},
+  {icon:"ti-map-pin",name:"#2 Canada",detail:"Most visited by Americans overall. Easy land crossing. Toronto, Vancouver, Montreal.",tag:"No visa needed",tc:"tag-green"},
+  {icon:"ti-map-pin",name:"#3 United Kingdom",detail:"London is a top bucket-list city. No visa, 6-month stay. English speaking.",tag:"Visa-free 6 months",tc:"tag-blue"},
+  {icon:"ti-map-pin",name:"#4 France",detail:"Paris is the world's most visited city. Schengen rules apply (90 days).",tag:"Schengen 90 days",tc:"tag-teal"},
+  {icon:"ti-map-pin",name:"#5 Italy",detail:"Rome, Florence, Venice, Amalfi. Schengen rules. Best spring/fall.",tag:"Schengen 90 days",tc:"tag-teal"},
+  {icon:"ti-map-pin",name:"#6 Japan",detail:"Safest country for tourists. Tokyo, Kyoto, Osaka. No visa 90 days.",tag:"Visa-free 90 days",tc:"tag-blue"},
+  {icon:"ti-map-pin",name:"#7 Dominican Republic",detail:"Punta Cana is a top resort destination. Requires $10 tourist card on arrival.",tag:"Tourist card req.",tc:"tag-amber"},
+  {icon:"ti-map-pin",name:"#8 Germany",detail:"Berlin, Munich, Oktoberfest. Gateway to Europe. Schengen rules.",tag:"Schengen 90 days",tc:"tag-teal"},
+],
+callouts:[
+  {type:"green",label:"STEP Program",text:"Register every international trip at step.state.gov — it's free and ensures the nearest U.S. Embassy can contact you in an emergency, natural disaster, or if a family member needs to reach you."},
+  {type:"teal",label:"Money smart tip",text:"Never exchange currency at airport kiosks — rates are terrible. Use a no-foreign-transaction-fee debit card (Charles Schwab reimburses all ATM fees globally) or a credit card like Chase Sapphire."},
+],
+questions:[
+  {q:"What is the #1 most visited international destination by Americans?",opts:["Canada","France","Mexico","United Kingdom"],ans:2,exp:"Mexico receives more American visitors than any other country — over 43 million per year. It's close, affordable, visa-free, and offers diverse experiences from resorts to cultural cities."},
+  {q:"What is the STEP program and why should international travelers use it?",opts:["A travel booking discount platform","Smart Traveler Enrollment Program — registers your trip with the U.S. Embassy so they can reach you in emergencies","A TSA screening upgrade","A visa pre-approval system for Americans"],ans:1,exp:"STEP (step.state.gov) is a free State Department service that registers your international travel with the nearest U.S. Embassy. It enables emergency contact, evacuation alerts, and family notifications — one of the most important and overlooked travel safety steps."},
+  {q:"What is the best way to access cash abroad without losing money to fees?",opts:["Exchange currency at the airport kiosk","Use a no-foreign-transaction-fee card like Charles Schwab or withdraw from local ATMs","Only carry USD and exchange at hotels","Use traveler's checks"],ans:1,exp:"Airport currency kiosks and hotel exchanges charge some of the worst rates. A Charles Schwab debit card (reimburses all ATM fees globally) or a no-foreign-transaction-fee credit card gives you the mid-market exchange rate with no surcharges."},
+  {q:"Why should travelers download offline maps before an international trip?",opts:["Online maps are banned in most countries","International data roaming can be very expensive and maps work without internet when downloaded offline","Offline maps have more tourist information","Paper maps are no longer available abroad"],ans:1,exp:"International data roaming can cost several dollars per megabyte on standard plans. Downloading offline maps (Google Maps, Maps.me) lets you navigate without a data connection — essential when your phone lacks an international plan."},
+  {q:"An eSIM service like Airalo is useful for international travelers because:",opts:["It replaces your passport","It allows you to add a local data plan to your phone without swapping physical SIM cards","It provides free international calling","It automatically translates foreign languages"],ans:1,exp:"eSIM services like Airalo let you purchase and install a digital local data plan for your destination before you travel, activating it when you land — no physical SIM swap needed, often far cheaper than carrier international roaming plans."},
+]},
+];
+
+const TOTAL_Q = MODULES.reduce((a,m)=>a+m.questions.length,0);
+let states = MODULES.map((_,i)=>({unlocked:i===0,complete:false,qIdx:0,answers:{},score:0}));
+let totalCorrect = 0;
+let studentName = '';
+
+function updateSidebar(){
+  const pct = Math.round(totalCorrect/TOTAL_Q*100);
+  document.getElementById('sbScore').textContent = totalCorrect+' / '+TOTAL_Q;
+  document.getElementById('sbPct').textContent = pct+'% correct'+(pct>=80?' — excellent!':pct>=60?' — keep going!':' — let\'s go!');
+  document.getElementById('sbFill').style.width = pct+'%';
+  const nav = document.getElementById('sideNav');
+  nav.innerHTML = '<div class="sb-nav-label">Modules</div>' + MODULES.map((m,i)=>{
+    const s = states[i];
+    const cls = s.complete?'nav-done':s.unlocked?'nav-active':'nav-locked';
+    const chk = s.complete?'<i class="ti ti-check nav-check" aria-hidden="true"></i>':'';
+    return `<button class="nav-btn ${cls}" onclick="scrollToMod(${i})" ${s.unlocked?'':'disabled'}>
+      <span class="nav-dot">${i+1}</span>
+      <span class="nav-title">${m.title}</span>${chk}
+    </button>`;
+  }).join('');
+}
+
+function scrollToMod(i){ document.getElementById('mod-'+i)?.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+function renderAll(){
+  document.getElementById('modulesContainer').innerHTML = MODULES.map((m,i)=>renderMod(m,i)).join('');
+  updateSidebar();
+}
+
+function renderMod(m,i){
+  const s = states[i];
+  const bc = s.complete?'badge-done':s.unlocked?'badge-active':'badge-locked';
+  const bt = s.complete?'Complete':s.unlocked?'In Progress':'Locked';
+  let body = '';
+  if(!s.unlocked){
+    body = `<div class="locked-msg"><i class="ti ti-lock-square" aria-hidden="true"></i><p>Complete the previous module to unlock this one and continue your journey.</p></div>`;
+  } else {
+    body += `<div class="lesson">${m.lesson}</div>`;
+    if(m.stats) body += `<div class="stat-row">${m.stats.map(st=>`<div class="stat-card"><div class="sc-v">${st.v}</div><div class="sc-l">${st.l}</div></div>`).join('')}</div>`;
+    if(m.callouts) m.callouts.forEach(c=>{
+      body += `<div class="callout callout-${c.type}"><div class="callout-label">${c.type==='amber'?'⚠ ':c.type==='red'?'⛔ ':c.type==='green'?'✓ ':'ℹ '}${c.label}</div><p>${c.text}</p></div>`;
+    });
+    if(m.cards) body += `<div class="cards-grid">${m.cards.map(c=>`<div class="info-card"><i class="ti ${c.icon} ic-icon" aria-hidden="true"></i><div class="ic-name">${c.name}</div><div class="ic-detail">${c.detail}</div><span class="ic-tag ${c.tc}">${c.tag}</span></div>`).join('')}</div>`;
+    if(m.tableData){
+      const td = m.tableData;
+      body += `<div style="overflow-x:auto;margin-bottom:1.5rem"><table class="ctable"><thead><tr>${td.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${td.rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    }
+    body += renderQuiz(m,i,s);
+    if(s.complete && i===MODULES.length-1) body += renderCert();
+  }
+  return `<div class="module-card" id="mod-${i}">
+    <div class="mc-head">
+      <div class="mc-num">${i+1}</div>
+      <div class="mc-info"><div class="mc-title">${m.title}</div><div class="mc-sub">${m.sub}</div></div>
+      <span class="mc-badge ${bc}">${bt}</span>
+    </div>
+    <div class="mc-body">${body}</div>
+  </div>`;
+}
+
+function renderQuiz(m,i,s){
+  const qi=s.qIdx, q=m.questions[qi], done=s.answers[qi]!==undefined, sel=s.answers[qi];
+  const pct = Math.round(qi/m.questions.length*100);
+  let out = `<div class="quiz-section">`;
+  out += `<div class="q-progress-bar"><div class="q-prog-fill" style="width:${pct}%"></div></div>`;
+  out += `<div class="q-label">Question ${qi+1} of ${m.questions.length}</div>`;
+  out += `<div class="q-text">${q.q}</div><div class="opts">`;
+  q.opts.forEach((o,oi)=>{
+    let cls='opt';
+    if(done){if(oi===q.ans)cls+=' correct';else if(oi===sel&&sel!==q.ans)cls+=' wrong';}
+    out+=`<button class="${cls}" onclick="choose(${i},${qi},${oi},${q.ans})"><span class="opt-letter">${'ABCD'[oi]}</span>${o}</button>`;
+  });
+  out+=`</div>`;
+  if(done) out+=`<div class="exp-box ${sel===q.ans?'exp-c':'exp-w'}"><div class="exp-lbl">${sel===q.ans?'Correct!':'Not quite —'}</div>${q.exp}</div>`;
+  out+=`<div class="q-nav">`;
+  if(qi>0) out+=`<button class="btn btn-outline" onclick="navQ(${i},-1)">← Back</button>`;
+  if(done&&qi<m.questions.length-1) out+=`<button class="btn btn-dark" onclick="navQ(${i},1)">Next question →</button>`;
+  if(done&&qi===m.questions.length-1&&!s.complete) out+=`<button class="btn btn-sky" onclick="completeModule(${i})">Complete module →</button>`;
+  if(s.complete&&i<MODULES.length-1) out+=`<button class="btn btn-dark" onclick="goNext(${i})">Next module →</button>`;
+  out+=`<span class="q-counter">${Object.keys(s.answers).length}/${m.questions.length} answered</span>`;
+  out+=`</div></div>`;
+  return out;
+}
+
+function choose(mi,qi,sel,ans){
+  const s=states[mi];
+  if(s.answers[qi]!==undefined)return;
+  s.answers[qi]=sel;
+  if(sel===ans){s.score++;totalCorrect++;}
+  renderAll();
+}
+function navQ(mi,dir){states[mi].qIdx+=dir;renderAll();}
+function completeModule(mi){
+  states[mi].complete=true;
+  if(mi+1<MODULES.length)states[mi+1].unlocked=true;
+  renderAll();
+  setTimeout(()=>scrollToMod(mi+1<MODULES.length?mi+1:mi),150);
+}
+function goNext(mi){scrollToMod(mi+1);}
+
+let certStudentName = '';
+let certID = 'TRVL-'+Math.random().toString(36).substr(2,8).toUpperCase();
+let completionSubmitted = false;
+let completionSubmitting = false;
+let submissionMessage = '';
+const SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyucfQcDDR9S_4i8_EiI2LAm0k49NNGT0IBiRnXTjZQKgtfuOwM73Wtxxt5fzojGFY/exec";
+const moduleStartedAt = Date.now();
+
+async function submitCompletionToSheet() {
+  if (completionSubmitted || completionSubmitting || !certStudentName.trim()) return;
+  completionSubmitting = true;
+  submissionMessage = 'Submitting to Google Sheets…';
+  renderAll();
+  const nameParts = certStudentName.trim().split(/\\s+/);
+  const firstName = nameParts.shift() || '';
+  const lastName = nameParts.join(' ') || '-';
+  const pct = Math.round(totalCorrect / TOTAL_Q * 100);
+  const mins = Math.max(1, Math.round((Date.now() - moduleStartedAt) / 60000));
+  const record = {
+    moduleId:'pfm-module-19-international-travel',
+    moduleTitle:'Personal Finance Module 19 - International Travel 101',
+    category:'Personal Finance',topic:'International Travel, Passports, Visas and Safety',
+    productType:'Interactive Module',moduleSize:'extended',
+    score:totalCorrect,totalQuestions:TOTAL_Q,percent:pct+'%',completed:'Yes',
+    answers:JSON.stringify({items:MODULES.map((m,i)=>({section:m.title,answers:states[i].answers,score:states[i].score}))}),
+    timeMinutes:mins,reflection:'',sessionId:certID,
+    assessmentType:'scored multiple choice',version:'1.0-pfm-m19'
+  };
+  const form = new URLSearchParams({
+    action:'moduleSubmit',manualEntry:'1',moduleNumber:'19',
+    bellId:'PFM-MODULE-19-INTERNATIONAL-TRAVEL',label:record.moduleTitle,
+    firstName,lastName,name:certStudentName.trim(),answer:JSON.stringify(record),
+    late:'0',duration:String(mins),timestamp:new Date().toISOString(),
+    cls:'Personal Finance',googleName:'Manual entry',schoolEmail:'',block:'PFM'
+  });
+  try {
+    const response = await fetch(SHEET_WEB_APP_URL,{method:'POST',body:form});
+    const data = await response.json();
+    if (!data.success && data.error !== 'This completion was already submitted.') throw Error(data.error || 'Sheet did not confirm');
+    completionSubmitted = true;
+    submissionMessage = 'Google Sheets confirmed your submission.';
+  } catch(error) {
+    submissionMessage = 'Submission was not confirmed. Select Retry submission or tell Mr. D.';
+    console.error('PFM module submission failed:',error);
+  } finally {
+    completionSubmitting = false;
+    renderAll();
+  }
+}
+function setCertName(){
+  const input = document.getElementById('certNameInput');
+  const val = input ? input.value.trim() : certStudentName;
+  if(!val) return;
+  certStudentName = val;
+  submitCompletionToSheet();
+}
+function renderCert(){
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const pct=Math.round(totalCorrect/TOTAL_Q*100);
+  const grade=pct>=90?'Distinction — Expert Traveler':pct>=75?'Merit — Confident Traveler':'Pass — Ready to Travel';
+
+  const nameSection = certStudentName
+    ? `<div class="cert-name-label">This certificate is awarded to</div>
+       <div class="cert-name-display">${certStudentName}</div>`
+    : `<div class="cert-name-input-wrap">
+         <label for="certNameInput">Enter your name for the certificate</label>
+         <input id="certNameInput" class="cert-name-input" type="text" maxlength="60"
+           placeholder="Your full name here…"
+           onkeydown="if(event.key==='Enter')setCertName()"
+           value="${certStudentName}" />
+         <button class="cert-name-btn" onclick="setCertName()">Add my name to the certificate →</button>
+       </div>`;
+
+  return `<div class="cert-wrap" id="cert-anchor">
+    <div class="cert-inner">
+      <div class="cert-seal"><i class="ti ti-plane" aria-hidden="true"></i></div>
+      <div class="cert-eye">Certificate of completion</div>
+      <div class="cert-headline">International Travel 101</div>
+      <div class="cert-sub">PFM High School Course</div>
+      <div class="cert-divider"></div>
+      ${nameSection}
+      <div class="cert-divider" style="margin-top:.875rem"></div>
+      <div class="cert-body">This certifies successful completion of all 8 modules covering international travel documents, passport and passport card differences, visa types, visa-free destinations, pre-arranged visa requirements, restricted and high-risk countries, and top global destinations.</div>
+      <div class="cert-score">${totalCorrect}/${TOTAL_Q} &middot; ${pct}%</div>
+      <div class="cert-grade">${grade}</div>
+      <div class="cert-meta">Issued ${date} &middot; 8 modules &middot; ${TOTAL_Q} questions</div>
+      <div class="cert-issued"><span>Certificate ID: ${certID}</span><span>PFM International Travel 101</span></div>
+    </div>
+    <div style="color:#fff;font-size:13px;padding:12px 0" role="status">${submissionMessage}${certStudentName && !completionSubmitted ? '<button class="cert-name-btn" onclick="submitCompletionToSheet()" '+(completionSubmitting?'disabled':'')+'>Retry submission</button>' : ''}</div>\n    <div class="cert-breakdown">
+      ${MODULES.map((m,i)=>`<div class="cb-row"><span class="cb-name">${i+1}. ${m.title}</span><span class="cb-sc">${states[i].score}/${m.questions.length}</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+
+renderAll();
+</script>
+</body>
+</html>
