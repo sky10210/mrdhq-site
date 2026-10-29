@@ -264,7 +264,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--i
     </div>
   </div>
 
-  <div id="modulesContainer"></div>
+  <section id="startGate" class="module-card" style="padding:1.75rem;max-width:650px"><h2 style="margin-bottom:.5rem">Start your travel course</h2><p style="color:var(--ink2);margin-bottom:1rem">Enter your first and last name before beginning. This name will appear on your certificate and Google Sheets submission.</p><form onsubmit="startCourse(event)"><label for="startName" style="display:block;font-weight:600;margin-bottom:.5rem">Student full name</label><input id="startName" class="cert-name-input" required minlength="3" maxlength="60" autocomplete="name" placeholder="First and last name" style="text-align:left;max-width:100%;margin-bottom:1rem"><button class="btn btn-sky" type="submit">Start Module 19 →</button><p id="startError" role="alert" style="color:var(--red);margin-top:.5rem"></p></form></section><div id="modulesContainer" hidden></div>
 
 </main>
 </div>
@@ -277,10 +277,10 @@ stats:[{v:"100M+",l:"Americans travel abroad yearly"},{v:"195",l:"Countries in t
 callouts:[{type:"teal",label:"Why this matters",text:"Knowing the rules before you go means fewer surprises — and no risk of being turned away at a border or stranded abroad without the right documents."}],
 questions:[
   {q:"Approximately how many Americans travel internationally each year?",opts:["10 million","50 million","Over 100 million","5 million"],ans:2,exp:"The U.S. Travel Association and State Department report that over 100 million Americans travel internationally each year, making the U.S. one of the world's largest sources of international tourists."},
-  {q:"What makes international travel fundamentally different from domestic travel?",opts:["It is always more expensive","You need different documents, follow different laws, and have different rights in each country","You cannot use your phone abroad","Airlines charge more for international flights only"],ans:1,exp:"International travel crosses sovereign borders — each country has its own entry requirements, laws, and rights for visitors. This is why preparation and documentation matter so much."},
+  {q:"What makes international travel fundamentally different from domestic travel?",opts:["Airlines use a separate worldwide pricing system for every international route","Different entry rules, documents, and laws","You cannot use your phone abroad","Airlines charge more for international flights only"],ans:1,exp:"International travel crosses sovereign borders — each country has its own entry requirements, laws, and rights for visitors. This is why preparation and documentation matter so much."},
   {q:"How many countries can Americans visit without needing a visa arranged in advance?",opts:["About 50","About 100","About 186","All 195"],ans:2,exp:"The U.S. passport is consistently ranked among the most powerful in the world. Americans can visit approximately 186 countries without a pre-arranged visa — either visa-free or by getting a visa on arrival."},
   {q:"Which of the following is NOT a typical reason why international travel requires more preparation than domestic travel?",opts:["You need a valid passport","Currency is different","You must follow the destination country's laws","You need a domestic driver's license upgrade"],ans:3,exp:"Your driver's license is a domestic document and doesn't need 'upgrading' for international travel (though an International Driving Permit may be useful). Passports, currency, and local laws are genuine considerations."},
-  {q:"What is one of the most powerful benefits of international travel for young people, according to travel research and educators?",opts:["Learning to use different keyboards","Expanded perspective and cross-cultural understanding","Earning a foreign language degree","Getting discounts on technology"],ans:1,exp:"Research consistently shows that international travel — especially for young people — builds cross-cultural competence, empathy, independence, and global awareness that no classroom can replicate."},
+  {q:"What is one of the most powerful benefits of international travel for young people, according to travel research and educators?",opts:["Automatic eligibility for university language credits after one vacation","Understanding other cultures and perspectives","Earning a foreign language degree","Getting discounts on technology"],ans:1,exp:"Research consistently shows that international travel — especially for young people — builds cross-cultural competence, empathy, independence, and global awareness that no classroom can replicate."},
 ]},
 
 {id:1, title:"Passports — your most important document", sub:"What it is, how to get one, what it costs",
@@ -295,7 +295,7 @@ questions:[
   {q:"How long is a standard adult U.S. passport valid?",opts:["5 years","10 years","15 years","Until revoked"],ans:1,exp:"Adult passports (for people 18 and older) are valid for 10 years from the date of issue. Passports issued to minors under 18 are only valid for 5 years."},
   {q:"What is the total cost to get a new adult U.S. passport as of 2024?",opts:["$75","$130","$165","$225"],ans:2,exp:"A new adult passport costs $130 for the application fee plus $35 for the acceptance facility fee, totaling $165. Expedited processing costs an additional $60."},
   {q:"How far in advance of your travel date should you apply for a passport?",opts:["1 week","1 month","At least 6 months","2 years"],ans:2,exp:"The State Department strongly recommends applying at least 6 months before travel. Standard processing is 6–8 weeks, and many countries require your passport to be valid 6 months beyond your travel dates."},
-  {q:"Which rule about passport validity do many countries enforce that surprises new travelers?",opts:["Passports must be brand new","Your passport must be valid for at least 6 months beyond your travel dates","Your passport must have blank pages equal to your trip length","You must carry two passports when abroad"],ans:1,exp:"Many countries — including EU nations, Mexico, Japan, and others — require your passport to be valid for 6 months beyond your intended travel dates. Airlines will deny boarding if this requirement isn't met."},
+  {q:"Which rule about passport validity do many countries enforce that surprises new travelers?",opts:["Your passport must contain enough unused visa pages for every day abroad","Some destinations require six months of remaining validity","Your passport must have blank pages equal to your trip length","You must carry two passports when abroad"],ans:1,exp:"Many countries — including EU nations, Mexico, Japan, and others — require your passport to be valid for 6 months beyond your intended travel dates. Airlines will deny boarding if this requirement isn't met."},
 ]},
 
 {id:2, title:"Passport cards & other travel documents", sub:"Passport cards, Real ID, and Global Entry",
@@ -309,9 +309,9 @@ cards:[
   {icon:"ti-certificate",name:"Nexus / SENTRI",detail:"Trusted traveler programs for expedited crossing at Canadian and Mexican borders.",tag:"Border crossings",tc:"tag-teal"},
 ],
 questions:[
-  {q:"What is the primary limitation of a U.S. Passport Card compared to a Passport Book?",opts:["It costs more and lasts fewer years","It cannot be used for international air travel — only land and sea crossings","It is not accepted by any foreign government","It requires renewal every 2 years"],ans:1,exp:"The Passport Card is only valid for land and sea border crossings to Canada, Mexico, the Caribbean, and Bermuda. It cannot be used for international flights. You need a full Passport Book to fly internationally."},
-  {q:"The Real ID Act (May 2025) primarily affects:",opts:["International air travel to all countries","Domestic U.S. air travel and access to federal buildings","Crossing land borders into Canada","Applying for a passport"],ans:1,exp:"Real ID is a domestic security standard for state-issued IDs and driver's licenses. It is required for domestic U.S. flights and federal building access — it has no role in international travel."},
-  {q:"Global Entry is best described as:",opts:["A free airport lounge access program","A trusted traveler program allowing expedited U.S. re-entry after international travel","A visa program for Americans traveling to Europe","A program that replaces the need for a passport"],ans:1,exp:"Global Entry ($100 for 5 years) allows pre-approved, low-risk travelers to bypass standard customs lines when re-entering the U.S. It automatically includes TSA PreCheck for domestic flights."},
+  {q:"What is the primary limitation of a U.S. Passport Card compared to a Passport Book?",opts:["It is accepted for overseas air travel only when paired with a REAL ID","Not valid for international flights","It is not accepted by any foreign government","It requires renewal every 2 years"],ans:1,exp:"The Passport Card is only valid for land and sea border crossings to Canada, Mexico, the Caribbean, and Bermuda. It cannot be used for international flights. You need a full Passport Book to fly internationally."},
+  {q:"The Real ID Act (May 2025) primarily affects:",opts:["International boarding procedures and passport control at every foreign airport","Domestic flights and certain federal facilities","Crossing land borders into Canada","Applying for a passport"],ans:1,exp:"Real ID is a domestic security standard for state-issued IDs and driver's licenses. It is required for domestic U.S. flights and federal building access — it has no role in international travel."},
+  {q:"Global Entry is best described as:",opts:["A prepaid travel membership covering airline lounges and airport meal credits","Faster U.S. customs entry for approved travelers","A visa program for Americans traveling to Europe","A program that replaces the need for a passport"],ans:1,exp:"Global Entry ($100 for 5 years) allows pre-approved, low-risk travelers to bypass standard customs lines when re-entering the U.S. It automatically includes TSA PreCheck for domestic flights."},
   {q:"An International Driving Permit (IDP) is issued by:",opts:["The DMV","The State Department","AAA (American Automobile Association)","The destination country's embassy"],ans:2,exp:"IDPs are issued in the U.S. by AAA (and AATA). They are a translation of your U.S. driver's license recognized in 150+ countries and are required (or strongly recommended) for driving in many countries."},
   {q:"If a student is taking a cruise from Miami to the Bahamas, what is the minimum document they need?",opts:["A Real ID","A Passport Card or Passport Book","A Global Entry card","No document — cruises don't require ID"],ans:1,exp:"Sea crossings between the U.S. and the Caribbean can use a Passport Card (or Passport Book). However, if you miss the ship abroad, you'll need a full Passport Book to fly home — so a Passport Book is always the safer choice."},
 ]},
@@ -329,9 +329,9 @@ cards:[
   {icon:"ti-clock",name:"Tourist Visa",detail:"For leisure travel. Usually allows stays of 30–90 days. Most common visa type Americans obtain.",tag:"Most common",tc:"tag-teal"},
 ],
 questions:[
-  {q:"What is a visa?",opts:["A type of passport","An official authorization to enter a foreign country for a specific purpose and period","A travel insurance policy","An international driver's license"],ans:1,exp:"A visa is an official endorsement from a foreign government (usually a stamp or sticker in your passport) authorizing you to enter that country for a defined purpose and duration."},
-  {q:"What is a 'Visa on Arrival'?",opts:["A visa you apply for 6 months before travel","A visa obtained at the destination country's port of entry upon arrival","A digital visa sent by email","A visa stamped by your home country"],ans:1,exp:"Visa on Arrival means you receive the visa when you land at the destination airport. You typically fill out a form and pay a fee at the immigration desk upon arrival. No pre-trip embassy visit required."},
-  {q:"Why can a border official deny entry even with a valid visa?",opts:["Border officials don't recognize visas","A visa is permission to travel to the border, not a guaranteed right of entry — officials can still refuse","This only happens in communist countries","It is illegal to deny entry with a valid visa"],ans:1,exp:"Visas grant permission to travel to the port of entry, but the final decision is always made by the border official of the destination country. They can deny entry if they have concerns about your intentions."},
+  {q:"What is a visa?",opts:["A government-issued replacement for identification when your passport expires abroad","Official permission to seek entry for a stated purpose","A travel insurance policy","An international driver's license"],ans:1,exp:"A visa is an official endorsement from a foreign government (usually a stamp or sticker in your passport) authorizing you to enter that country for a defined purpose and duration."},
+  {q:"What is a 'Visa on Arrival'?",opts:["An electronic permit approved before departure and downloaded on your phone","A visa issued when you arrive at the border","A digital visa sent by email","A visa stamped by your home country"],ans:1,exp:"Visa on Arrival means you receive the visa when you land at the destination airport. You typically fill out a form and pay a fee at the immigration desk upon arrival. No pre-trip embassy visit required."},
+  {q:"Why can a border official deny entry even with a valid visa?",opts:["Every entry refusal must be approved by the airline that transported the traveler","A visa does not guarantee admission","This only happens in communist countries","It is illegal to deny entry with a valid visa"],ans:1,exp:"Visas grant permission to travel to the port of entry, but the final decision is always made by the border official of the destination country. They can deny entry if they have concerns about your intentions."},
   {q:"What is the most reliable official source for checking visa requirements for Americans?",opts:["Reddit travel forums","Google search results","travel.state.gov (U.S. State Department)","TripAdvisor"],ans:2,exp:"The U.S. Department of State's official travel website (travel.state.gov) provides country-specific entry requirements, visa information, and travel advisories for every country in the world."},
   {q:"Which type of visa would a student need to study in France for a full semester?",opts:["Tourist visa","Transit visa","Student visa","Visa on Arrival"],ans:2,exp:"Tourist visas are for short leisure visits. A student planning to study abroad for a semester needs a student visa (or long-stay visa), which typically requires enrollment proof, financial documents, and advance embassy application."},
 ]},
@@ -357,10 +357,10 @@ tableData:{
 },
 callouts:[{type:"amber",label:"Schengen 90-day rule",text:"The Schengen Area operates on a 90-days-in-any-180-days rule across ALL 27 member countries combined. You cannot spend 90 days in France, then move to Spain for another 90 — it counts as one shared quota."}],
 questions:[
-  {q:"What does 'visa-free' entry mean for a U.S. passport holder?",opts:["You can stay indefinitely","You show your passport and enter without needing any visa arrangement","You still need an e-Visa applied online","You need to register with the local police"],ans:1,exp:"Visa-free means no visa is required in any form — you simply present your valid U.S. passport at the border or airport and enter, subject to maximum stay limits."},
-  {q:"The Schengen Area's 90-day rule means Americans can stay:",opts:["90 days in each individual Schengen country","90 days total across all 27 Schengen countries combined in any 180-day period","90 days per calendar year","Indefinitely with a tourist card"],ans:1,exp:"The 90/180 Schengen rule applies across all 27 member countries combined. Days spent in France count against the same quota as days in Germany, Spain, or Italy. Overstaying is a serious violation."},
+  {q:"What does 'visa-free' entry mean for a U.S. passport holder?",opts:["Permission to work indefinitely without a residence permit or local tax registration","No visa required for an eligible short visit","You still need an e-Visa applied online","You need to register with the local police"],ans:1,exp:"Visa-free means no visa is required in any form — you simply present your valid U.S. passport at the border or airport and enter, subject to maximum stay limits."},
+  {q:"The Schengen Area's 90-day rule means Americans can stay:",opts:["90 days in every separate Schengen country before the calendar year resets","90 days total in the area within a rolling 180 days","90 days per calendar year","Indefinitely with a tourist card"],ans:1,exp:"The 90/180 Schengen rule applies across all 27 member countries combined. Days spent in France count against the same quota as days in Germany, Spain, or Italy. Overstaying is a serious violation."},
   {q:"Which of these destinations requires an e-Visa that must be applied for online before travel?",opts:["Mexico","Canada","Turkey","The United Kingdom"],ans:2,exp:"Turkey requires an e-Visa obtained at evisa.gov.tr before travel. This is a simple online process (usually instant approval, ~$50) — but it must be done before you arrive, unlike a Visa on Arrival."},
-  {q:"Australia's Electronic Travel Authority (ETA) is different from a standard visa because:",opts:["It costs over $500","It is electronically linked to your passport and applied for via app — no stamp or sticker","It requires a medical examination","It is only valid for 30 days"],ans:1,exp:"Australia's ETA is a digital authorization (no stamp in passport) applied for through the AUS ETA app for about $20. It allows multiple 3-month stays over a 12-month period."},
+  {q:"Australia's Electronic Travel Authority (ETA) is different from a standard visa because:",opts:["A paper entry document that must be stamped by an embassy before boarding","An online authorization linked to your passport","It requires a medical examination","It is only valid for 30 days"],ans:1,exp:"Australia's ETA is a digital authorization (no stamp in passport) applied for through the AUS ETA app for about $20. It allows multiple 3-month stays over a 12-month period."},
   {q:"What is the maximum stay for Americans visiting Mexico under the standard tourist entry?",opts:["30 days","90 days","180 days","Unlimited"],ans:2,exp:"Mexico allows Americans up to 180 days as tourists — one of the most generous allowances globally. However, you must fill out an FMM tourist card (now integrated into the passport stamp at most ports)."},
 ]},
 
@@ -386,9 +386,9 @@ callouts:[
 questions:[
   {q:"For which country must Americans typically visit the physical embassy or consulate in the U.S. to obtain a tourist visa?",opts:["Vietnam","India","China","Egypt"],ans:2,exp:"China requires Americans to apply for a tourist visa through the Chinese embassy or consulate with an in-person visit in most cases. This requires forms, photos, passport, itinerary, and bank statements."},
   {q:"Vietnam's tourist e-Visa is obtained:",opts:["At the airport upon arrival","Through an online application before travel","At the U.S. State Department","Through AAA travel services"],ans:1,exp:"Vietnam's e-Visa is applied for online at evisa.xuatnhapcanh.gov.vn. It typically takes 3 business days to process and costs $25, allowing a 90-day single-entry stay."},
-  {q:"Why is visiting Cuba legally complex for Americans?",opts:["Cuba prohibits American tourists","Americans can visit legally but must qualify under one of 12 authorized travel categories — pure tourism is restricted under U.S. law","Cuba requires a 6-month advance visa","Cuba only accepts cash payment for visas"],ans:1,exp:"Travel to Cuba by Americans is regulated under U.S. law (OFAC regulations), not Cuban law. Americans must travel under one of 12 authorized categories. Pure tourist travel for Americans violates U.S. — not Cuban — regulations."},
-  {q:"What documents are typically required when applying for a visa through a foreign embassy?",opts:["Only a credit card number","Passport, application form, passport photos, bank statements, and travel itinerary","Only your U.S. birth certificate","A letter from your school principal"],ans:1,exp:"Embassy visa applications typically require a valid passport, completed application form, passport-sized photos, proof of financial means (bank statements), a travel itinerary, and the visa fee — plus any country-specific requirements."},
-  {q:"If you want to visit Saudi Arabia as an American tourist today, you should:",opts:["Know it is impossible — Saudi Arabia does not allow tourists","Apply online through visitsaudi.com for an e-Visa before departure","Visit the Saudi embassy in person only","Ask your airline to arrange a visa"],ans:1,exp:"Saudi Arabia launched tourist visas in 2019 — a major policy change. Americans can now apply for a tourist e-Visa online at visitsaudi.com, with approval often coming within 24 hours for about $127."},
+  {q:"Why is visiting Cuba legally complex for Americans?",opts:["Visitors must receive a personal invitation from a Cuban government ministry","U.S. rules restrict tourism; trips need an authorized category","Cuba requires a 6-month advance visa","Cuba only accepts cash payment for visas"],ans:1,exp:"Travel to Cuba by Americans is regulated under U.S. law (OFAC regulations), not Cuban law. Americans must travel under one of 12 authorized categories. Pure tourist travel for Americans violates U.S. — not Cuban — regulations."},
+  {q:"What documents are typically required when applying for a visa through a foreign embassy?",opts:["Only an airline reservation and a note explaining why you want to visit","Passport, form, photos, financial and itinerary details","Only your U.S. birth certificate","A letter from your school principal"],ans:1,exp:"Embassy visa applications typically require a valid passport, completed application form, passport-sized photos, proof of financial means (bank statements), a travel itinerary, and the visa fee — plus any country-specific requirements."},
+  {q:"If you want to visit Saudi Arabia as an American tourist today, you should:",opts:["Tourist applications must be submitted in person through a regional embassy","Apply online for a Saudi tourist e-Visa","Visit the Saudi embassy in person only","Ask your airline to arrange a visa"],ans:1,exp:"Saudi Arabia launched tourist visas in 2019 — a major policy change. Americans can now apply for a tourist e-Visa online at visitsaudi.com, with approval often coming within 24 hours for about $127."},
 ]},
 
 {id:6, title:"Restricted & high-risk countries", sub:"Where Americans face the most barriers or danger",
@@ -412,10 +412,10 @@ callouts:[
   {type:"amber",label:"Israel stamp issue",text:"Some countries (historically: Iran, Kuwait, Lebanon, Libya, Syria, Yemen) deny entry to travelers with Israeli stamps in their passport. Israel now offers unstamped entry upon request — ask at the border."},
 ],
 questions:[
-  {q:"Why are U.S. passports invalid for travel to North Korea?",opts:["North Korea closed all borders permanently","A 2017 U.S. law (Title 22 CFR) prohibits Americans from using U.S. passports to travel to North Korea due to extreme risk of detention","North Korea only accepts EU passport holders","The U.S. has no diplomatic relations with any country near North Korea"],ans:1,exp:"In 2017, after the death of American student Otto Warmbier, the U.S. State Department designated North Korea as a restricted area. U.S. passports are legally invalid for travel there, and special validation is required in the rare cases a humanitarian exception is granted."},
-  {q:"What is 'wrongful detention' or 'hostage diplomacy' as it relates to travel?",opts:["When hotels hold your passport as a deposit","When foreign governments detain American citizens on dubious charges as diplomatic leverage","When airlines deny boarding to American travelers","When embassies refuse to issue visas"],ans:1,exp:"Several countries — documented by the James W. Foley Legacy Foundation and State Department — have detained American citizens on exaggerated or false charges as diplomatic bargaining chips. Russia, Iran, China, and Venezuela are currently on the State Department's wrongful detention watch list."},
-  {q:"The U.S. State Department's Level 4 travel advisory means:",opts:["Exercise increased caution","Reconsider travel due to serious risks","Do Not Travel — U.S. citizens should leave if already there","Normal precautions apply"],ans:2,exp:"Level 4 (Do Not Travel) is the highest State Department advisory level, indicating that conditions are so dangerous the government recommends Americans not go at all — and if already there, to depart immediately."},
-  {q:"Why might having an Israeli passport stamp cause problems at some borders?",opts:["It takes up space in your passport","Some countries deny entry to travelers with Israeli stamps due to political tensions","Israeli stamps are considered counterfeit by some nations","Israel charges a re-entry fee that other countries object to"],ans:1,exp:"Some countries with hostile relations with Israel have historically denied entry to travelers with Israeli stamps. Israel now offers to not stamp passports upon request — travelers can ask for this at Israeli border crossings."},
+  {q:"Why are U.S. passports invalid for travel to North Korea?",opts:["North Korea requires Americans to hold an additional passport issued by a neighboring country","U.S. passports generally need special validation for North Korea","North Korea only accepts EU passport holders","The U.S. has no diplomatic relations with any country near North Korea"],ans:1,exp:"In 2017, after the death of American student Otto Warmbier, the U.S. State Department designated North Korea as a restricted area. U.S. passports are legally invalid for travel there, and special validation is required in the rare cases a humanitarian exception is granted."},
+  {q:"What is 'wrongful detention' or 'hostage diplomacy' as it relates to travel?",opts:["An airline holding a passenger at the gate until unpaid airport fees are settled","Detention used as political leverage","When airlines deny boarding to American travelers","When embassies refuse to issue visas"],ans:1,exp:"Several countries — documented by the James W. Foley Legacy Foundation and State Department — have detained American citizens on exaggerated or false charges as diplomatic bargaining chips. Russia, Iran, China, and Venezuela are currently on the State Department's wrongful detention watch list."},
+  {q:"The U.S. State Department's Level 4 travel advisory means:",opts:["Reconsider Travel because some regions have elevated crime or unrest","Reconsider travel due to serious risks","Do Not Travel","Normal precautions apply"],ans:2,exp:"Level 4 (Do Not Travel) is the highest State Department advisory level, indicating that conditions are so dangerous the government recommends Americans not go at all — and if already there, to depart immediately."},
+  {q:"Why might having an Israeli passport stamp cause problems at some borders?",opts:["Border officers may reject any passport with stamps from more than ten countries","Some destinations restrict entry based on evidence of Israel travel","Israeli stamps are considered counterfeit by some nations","Israel charges a re-entry fee that other countries object to"],ans:1,exp:"Some countries with hostile relations with Israel have historically denied entry to travelers with Israeli stamps. Israel now offers to not stamp passports upon request — travelers can ask for this at Israeli border crossings."},
   {q:"Which of these countries technically allows American entry but carries extreme risk of wrongful detention?",opts:["France","Japan","Iran","Mexico"],ans:2,exp:"Iran technically allows American entry (though complicated without a U.S. embassy there), but the State Department gives it a Level 4 'Do Not Travel' advisory primarily due to the extreme risk of wrongful detention of dual-citizens and journalists."},
 ]},
 
@@ -437,17 +437,39 @@ callouts:[
 ],
 questions:[
   {q:"What is the #1 most visited international destination by Americans?",opts:["Canada","France","Mexico","United Kingdom"],ans:2,exp:"Mexico receives more American visitors than any other country — over 43 million per year. It's close, affordable, visa-free, and offers diverse experiences from resorts to cultural cities."},
-  {q:"What is the STEP program and why should international travelers use it?",opts:["A travel booking discount platform","Smart Traveler Enrollment Program — registers your trip with the U.S. Embassy so they can reach you in emergencies","A TSA screening upgrade","A visa pre-approval system for Americans"],ans:1,exp:"STEP (step.state.gov) is a free State Department service that registers your international travel with the nearest U.S. Embassy. It enables emergency contact, evacuation alerts, and family notifications — one of the most important and overlooked travel safety steps."},
-  {q:"What is the best way to access cash abroad without losing money to fees?",opts:["Exchange currency at the airport kiosk","Use a no-foreign-transaction-fee card like Charles Schwab or withdraw from local ATMs","Only carry USD and exchange at hotels","Use traveler's checks"],ans:1,exp:"Airport currency kiosks and hotel exchanges charge some of the worst rates. A Charles Schwab debit card (reimburses all ATM fees globally) or a no-foreign-transaction-fee credit card gives you the mid-market exchange rate with no surcharges."},
-  {q:"Why should travelers download offline maps before an international trip?",opts:["Online maps are banned in most countries","International data roaming can be very expensive and maps work without internet when downloaded offline","Offline maps have more tourist information","Paper maps are no longer available abroad"],ans:1,exp:"International data roaming can cost several dollars per megabyte on standard plans. Downloading offline maps (Google Maps, Maps.me) lets you navigate without a data connection — essential when your phone lacks an international plan."},
-  {q:"An eSIM service like Airalo is useful for international travelers because:",opts:["It replaces your passport","It allows you to add a local data plan to your phone without swapping physical SIM cards","It provides free international calling","It automatically translates foreign languages"],ans:1,exp:"eSIM services like Airalo let you purchase and install a digital local data plan for your destination before you travel, activating it when you land — no physical SIM swap needed, often far cheaper than carrier international roaming plans."},
+  {q:"What is the STEP program and why should international travelers use it?",opts:["A paid security screening program that gives travelers faster airport entry","Free U.S. embassy trip enrollment for emergency alerts","A TSA screening upgrade","A visa pre-approval system for Americans"],ans:1,exp:"STEP (step.state.gov) is a free State Department service that registers your international travel with the nearest U.S. Embassy. It enables emergency contact, evacuation alerts, and family notifications — one of the most important and overlooked travel safety steps."},
+  {q:"What is the best way to access cash abroad without losing money to fees?",opts:["Exchange your entire travel budget at the arrival airport for guaranteed official rates","Use a card with no foreign transaction fees","Only carry USD and exchange at hotels","Use traveler's checks"],ans:1,exp:"Airport currency kiosks and hotel exchanges charge some of the worst rates. A Charles Schwab debit card (reimburses all ATM fees globally) or a no-foreign-transaction-fee credit card gives you the mid-market exchange rate with no surcharges."},
+  {q:"Why should travelers download offline maps before an international trip?",opts:["Because online mapping providers routinely remove street names outside the United States","To navigate without mobile data","Offline maps have more tourist information","Paper maps are no longer available abroad"],ans:1,exp:"International data roaming can cost several dollars per megabyte on standard plans. Downloading offline maps (Google Maps, Maps.me) lets you navigate without a data connection — essential when your phone lacks an international plan."},
+  {q:"An eSIM service like Airalo is useful for international travelers because:",opts:["It converts your phone number to a local embassy registration number for emergencies","It adds a digital mobile data plan","It provides free international calling","It automatically translates foreign languages"],ans:1,exp:"eSIM services like Airalo let you purchase and install a digital local data plan for your destination before you travel, activating it when you land — no physical SIM swap needed, often far cheaper than carrier international roaming plans."},
 ]},
 ];
+
+// Shuffle option positions once per page load so correct choices do not cluster at B.
+MODULES.forEach(module => module.questions.forEach(question => {
+  const choices = question.opts.map((label,index)=>({label,correct:index===question.ans}));
+  for(let i=choices.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [choices[i],choices[j]]=[choices[j],choices[i]];
+  }
+  question.opts=choices.map(choice=>choice.label);
+  question.ans=choices.findIndex(choice=>choice.correct);
+}));
 
 const TOTAL_Q = MODULES.reduce((a,m)=>a+m.questions.length,0);
 let states = MODULES.map((_,i)=>({unlocked:i===0,complete:false,qIdx:0,answers:{},score:0}));
 let totalCorrect = 0;
 let studentName = '';
+let courseStarted = false;
+function startCourse(event){
+  event.preventDefault();
+  const name=document.getElementById('startName').value.trim().replace(/\\s+/g,' ');
+  if(name.split(' ').length<2){document.getElementById('startError').textContent='Please enter both your first and last name.';return;}
+  studentName=name;certStudentName=name;moduleStartedAt=Date.now();courseStarted=true;
+  document.getElementById('startGate').hidden=true;
+  document.getElementById('modulesContainer').hidden=false;
+  renderAll();
+}
+
 
 function updateSidebar(){
   const pct = Math.round(totalCorrect/TOTAL_Q*100);
@@ -469,6 +491,7 @@ function updateSidebar(){
 function scrollToMod(i){ document.getElementById('mod-'+i)?.scrollIntoView({behavior:'smooth',block:'start'}); }
 
 function renderAll(){
+  if(!courseStarted){updateSidebar();return;}
   document.getElementById('modulesContainer').innerHTML = MODULES.map((m,i)=>renderMod(m,i)).join('');
   updateSidebar();
 }
@@ -529,6 +552,7 @@ function renderQuiz(m,i,s){
 }
 
 function choose(mi,qi,sel,ans){
+  if(!courseStarted)return;
   const s=states[mi];
   if(s.answers[qi]!==undefined)return;
   s.answers[qi]=sel;
@@ -539,6 +563,7 @@ function navQ(mi,dir){states[mi].qIdx+=dir;renderAll();}
 function completeModule(mi){
   states[mi].complete=true;
   if(mi+1<MODULES.length)states[mi+1].unlocked=true;
+  else submitCompletionToSheet();
   renderAll();
   setTimeout(()=>scrollToMod(mi+1<MODULES.length?mi+1:mi),150);
 }
@@ -550,10 +575,10 @@ let completionSubmitted = false;
 let completionSubmitting = false;
 let submissionMessage = '';
 const SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyucfQcDDR9S_4i8_EiI2LAm0k49NNGT0IBiRnXTjZQKgtfuOwM73Wtxxt5fzojGFY/exec";
-const moduleStartedAt = Date.now();
+let moduleStartedAt = Date.now();
 
 async function submitCompletionToSheet() {
-  if (completionSubmitted || completionSubmitting || !certStudentName.trim()) return;
+  if (completionSubmitted || completionSubmitting || !courseStarted || !certStudentName.trim()) return;
   completionSubmitting = true;
   submissionMessage = 'Submitting to Google Sheets…';
   renderAll();
@@ -570,7 +595,7 @@ async function submitCompletionToSheet() {
     score:totalCorrect,totalQuestions:TOTAL_Q,percent:pct+'%',completed:'Yes',
     answers:JSON.stringify({items:MODULES.map((m,i)=>({section:m.title,answers:states[i].answers,score:states[i].score}))}),
     timeMinutes:mins,reflection:'',sessionId:certID,
-    assessmentType:'scored multiple choice',version:'1.0-pfm-m19'
+    studentName:certStudentName.trim(),firstName,lastName,assessmentType:'scored multiple choice',version:'1.1-pfm-m19-name-answer-audit'
   };
   const form = new URLSearchParams({
     action:'moduleSubmit',manualEntry:'1',moduleNumber:'19',
