@@ -264,7 +264,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--i
     </div>
   </div>
 
-  <section id="startGate" class="module-card" style="padding:1.75rem;max-width:650px"><h2 style="margin-bottom:.5rem">Start your travel course</h2><p style="color:var(--ink2);margin-bottom:1rem">Enter your first and last name before beginning. This name will appear on your certificate and Google Sheets submission.</p><form onsubmit="startCourse(event)"><label for="startName" style="display:block;font-weight:600;margin-bottom:.5rem">Student full name</label><input id="startName" class="cert-name-input" required minlength="3" maxlength="60" autocomplete="name" placeholder="First and last name" style="text-align:left;max-width:100%;margin-bottom:1rem"><button class="btn btn-sky" type="submit">Start Module 19 →</button><p id="startError" role="alert" style="color:var(--red);margin-top:.5rem"></p></form></section><div id="modulesContainer" hidden></div>
+  <section id="startGate" class="module-card" style="padding:1.75rem;max-width:650px"><h2 style="margin-bottom:.5rem">Start your travel course</h2><p style="color:var(--ink2);margin-bottom:1rem">Enter your first and last name before beginning. This name will appear on your certificate and Google Sheets submission.</p><form onsubmit="startCourse(event)"><label for="startName" style="display:block;font-weight:600;margin-bottom:.5rem">Student full name</label><input id="startName" class="cert-name-input" required minlength="3" maxlength="60" autocomplete="name" placeholder="First and last name" style="text-align:left;max-width:100%;margin-bottom:1rem"><label for="startBlock" style="display:block;font-weight:600;margin-bottom:.5rem">Class block</label><select id="startBlock" class="cert-name-input" required style="text-align:left;max-width:100%;margin-bottom:1rem"><option value="">Select your block</option><option value="1">Block 1</option><option value="2">Block 2</option><option value="3">Block 3</option><option value="4">Block 4</option></select><button class="btn btn-sky" type="submit">Start Module 19 →</button><p id="startError" role="alert" style="color:var(--red);margin-top:.5rem"></p></form></section><div id="modulesContainer" hidden></div>
 
 </main>
 </div>
@@ -459,12 +459,13 @@ const TOTAL_Q = MODULES.reduce((a,m)=>a+m.questions.length,0);
 let states = MODULES.map((_,i)=>({unlocked:i===0,complete:false,qIdx:0,answers:{},score:0}));
 let totalCorrect = 0;
 let studentName = '';
+let studentBlock = '';
 let courseStarted = false;
 function startCourse(event){
   event.preventDefault();
   const name=document.getElementById('startName').value.trim().replace(/\\s+/g,' ');
   if(name.split(' ').length<2){document.getElementById('startError').textContent='Please enter both your first and last name.';return;}
-  studentName=name;certStudentName=name;moduleStartedAt=Date.now();courseStarted=true;
+  studentName=name;studentBlock=document.getElementById('startBlock').value;certStudentName=name;moduleStartedAt=Date.now();courseStarted=true;
   document.getElementById('startGate').hidden=true;
   document.getElementById('modulesContainer').hidden=false;
   renderAll();
@@ -595,14 +596,14 @@ async function submitCompletionToSheet() {
     score:totalCorrect,totalQuestions:TOTAL_Q,percent:pct+'%',completed:'Yes',
     answers:JSON.stringify({items:MODULES.map((m,i)=>({section:m.title,answers:states[i].answers,score:states[i].score}))}),
     timeMinutes:mins,reflection:'',sessionId:certID,
-    studentName:certStudentName.trim(),firstName,lastName,assessmentType:'scored multiple choice',version:'1.1-pfm-m19-name-answer-audit'
+    studentName:certStudentName.trim(),firstName,lastName,classPeriod:studentBlock,assessmentType:'scored multiple choice',version:'1.2-pfm-m19-block-submission-fix'
   };
   const form = new URLSearchParams({
     action:'moduleSubmit',manualEntry:'1',moduleNumber:'19',
     bellId:'PFM-MODULE-19-INTERNATIONAL-TRAVEL',label:record.moduleTitle,
     firstName,lastName,name:certStudentName.trim(),answer:JSON.stringify(record),
     late:'0',duration:String(mins),timestamp:new Date().toISOString(),
-    cls:'Personal Finance',googleName:'Manual entry',schoolEmail:'',block:'PFM'
+    cls:'Personal Finance',googleName:'Manual entry',schoolEmail:'',block:studentBlock
   });
   try {
     const response = await fetch(SHEET_WEB_APP_URL,{method:'POST',body:form});
