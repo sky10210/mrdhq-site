@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Cards 101 — PFM Course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sky:#0ea5e9;--sky-bg:#f0f9ff;--sky-dark:#0369a1;
+  --teal:#0d9488;--teal-bg:#f0fdfa;
+  --amber:#d97706;--amber-bg:#fffbeb;--amber-border:#fcd34d;
+  --red:#dc2626;--red-bg:#fef2f2;
+  --green:#16a34a;--green-bg:#f0fdf4;
+  --ink:#111827;--ink2:#374151;--ink3:#9ca3af;
+  --surface:#ffffff;--surface2:#f9fafb;--surface3:#f3f4f6;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.15);
+  --radius:14px;--radius-sm:9px;
+}
+html,body{width:100%;min-height:100vh}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--ink);line-height:1.6}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:290px 1fr;min-height:100vh;max-width:1500px;margin:0 auto}
+
+/* SIDEBAR */
+.sidebar{background:#0c1a2e;color:#e2e8f0;padding:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sb-top{padding:1.5rem 1.5rem 1.25rem;border-bottom:0.5px solid rgba(255,255,255,0.08)}
+.sb-logo{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.sb-logo-icon{width:38px;height:38px;border-radius:10px;background:#0ea5e9;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0}
+.sb-logo-text{font-size:14px;font-weight:600;color:#f1f5f9;line-height:1.25}
+.sb-logo-sub{font-size:11px;color:#64748b;font-family:'JetBrains Mono',monospace}
+.sb-progress-box{background:rgba(255,255,255,0.05);border-radius:var(--radius-sm);padding:.875rem 1rem}
+.sbp-label{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#64748b;font-family:'JetBrains Mono',monospace;margin-bottom:.375rem}
+.sbp-score{font-size:24px;font-weight:600;color:#f1f5f9;font-family:'JetBrains Mono',monospace}
+.sbp-sub{font-size:12px;color:#64748b;margin-bottom:.625rem}
+.sbp-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden}
+.sbp-fill{height:100%;background:#0ea5e9;border-radius:4px;transition:width .5s}
+
+.sb-nav{padding:1rem 1rem 1.5rem;flex:1}
+.sb-nav-label{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#475569;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem;padding:0 .5rem}
+.nav-btn{display:flex;align-items:center;gap:9px;padding:.5rem .625rem;border-radius:8px;cursor:pointer;transition:all .15s;border:none;background:none;text-align:left;width:100%;color:#94a3b8;margin-bottom:2px}
+.nav-btn:hover:not(.nav-locked){background:rgba(255,255,255,0.06);color:#e2e8f0}
+.nav-btn.nav-active{background:rgba(14,165,233,0.15);color:#38bdf8}
+.nav-btn.nav-done{color:#64748b}
+.nav-btn.nav-locked{opacity:.35;cursor:not-allowed}
+.nav-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.nav-btn.nav-done .nav-dot{background:#0ea5e9;border-color:#0ea5e9;color:#fff}
+.nav-title{font-size:12px;font-weight:400;line-height:1.3;flex:1}
+.nav-check{color:#0ea5e9;font-size:14px}
+
+/* MAIN */
+.main{padding:2rem 2.5rem;overflow-y:auto}
+
+/* HERO */
+.hero{background:#0c1a2e;border-radius:var(--radius);padding:2.5rem;margin-bottom:1.75rem;position:relative;overflow:hidden}
+.hero-globe{position:absolute;right:-20px;top:-20px;font-size:160px;opacity:.06;line-height:1;pointer-events:none;color:#fff}
+.hero-course{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#0ea5e9;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem}
+.hero h1{font-size:clamp(24px,3.5vw,40px);font-weight:700;color:#f1f5f9;line-height:1.15;margin-bottom:.625rem}
+.hero p{font-size:15px;color:#94a3b8;max-width:540px;line-height:1.7}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.25rem}
+.hpill{background:rgba(255,255,255,0.07);color:#94a3b8;font-size:11px;padding:4px 12px;border-radius:20px;font-family:'JetBrains Mono',monospace}
+
+/* MODULE CARD */
+.module-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);margin-bottom:1.25rem;overflow:hidden;transition:box-shadow .2s}
+.mc-head{border-bottom:0.5px solid var(--border);padding:1.1rem 1.5rem;display:flex;align-items:center;gap:12px}
+.mc-num{width:36px;height:36px;border-radius:50%;background:#0c1a2e;color:#f1f5f9;font-family:'JetBrains Mono',monospace;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mc-info{flex:1;min-width:0}
+.mc-title{font-size:16px;font-weight:600;color:var(--ink)}
+.mc-sub{font-size:12px;color:var(--ink3);margin-top:1px}
+.mc-badge{font-size:11px;padding:3px 11px;border-radius:20px;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.badge-done{background:#f0fdf4;color:#16a34a}
+.badge-active{background:#f0f9ff;color:#0369a1}
+.badge-locked{background:var(--surface3);color:var(--ink3)}
+.mc-body{padding:1.75rem}
+
+/* LESSON */
+.lesson{font-size:14px;line-height:1.85;color:var(--ink2);margin-bottom:1.5rem;padding:1.25rem 1.5rem;background:linear-gradient(to right,var(--sky-bg),var(--surface));border-radius:var(--radius-sm);border-left:4px solid var(--sky)}
+.lesson strong{color:var(--ink);font-weight:600}
+
+/* CALLOUT */
+.callout{border-radius:var(--radius-sm);padding:1rem 1.25rem;margin-bottom:1.25rem;border-left:3px solid}
+.callout-amber{background:var(--amber-bg);border-color:var(--amber)}
+.callout-red{background:var(--red-bg);border-color:var(--red)}
+.callout-green{background:var(--green-bg);border-color:var(--green)}
+.callout-teal{background:var(--teal-bg);border-color:var(--teal)}
+.callout-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+.callout-amber .callout-label{color:var(--amber)}
+.callout-red .callout-label{color:var(--red)}
+.callout-green .callout-label{color:var(--green)}
+.callout-teal .callout-label{color:var(--teal)}
+.callout p{font-size:13px;line-height:1.7;color:var(--ink2)}
+.callout p strong{color:var(--ink);font-weight:600}
+
+/* STATS */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:1.5rem}
+.stat-card{background:var(--surface2);border-radius:var(--radius-sm);padding:.875rem 1rem;border:0.5px solid var(--border)}
+.sc-v{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:500;color:var(--ink)}
+.sc-l{font-size:11px;color:var(--ink3);margin-top:3px;line-height:1.4}
+
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
+.info-card{background:var(--surface2);border-radius:var(--radius-sm);padding:1rem 1.1rem;border:0.5px solid var(--border)}
+.ic-icon{font-size:22px;color:var(--sky-dark);margin-bottom:.5rem}
+.ic-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px}
+.ic-detail{font-size:12px;color:var(--ink3);line-height:1.6}
+.ic-tag{font-size:10px;padding:2px 8px;border-radius:20px;margin-top:7px;display:inline-block;font-family:'JetBrains Mono',monospace}
+.tag-blue{background:var(--sky-bg);color:var(--sky-dark)}
+.tag-amber{background:var(--amber-bg);color:var(--amber)}
+.tag-red{background:var(--red-bg);color:var(--red)}
+.tag-green{background:var(--green-bg);color:var(--green)}
+.tag-teal{background:var(--teal-bg);color:var(--teal)}
+
+/* COUNTRY TABLE */
+.ctable{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:13px}
+.ctable th{background:var(--surface2);padding:.625rem .875rem;text-align:left;font-weight:600;color:var(--ink2);font-size:11px;text-transform:uppercase;letter-spacing:.4px;border-bottom:1.5px solid var(--border2)}
+.ctable td{padding:.625rem .875rem;border-bottom:0.5px solid var(--border);color:var(--ink2);vertical-align:top}
+.ctable tr:last-child td{border-bottom:none}
+.ctable tr:hover td{background:var(--surface2)}
+
+/* QUIZ */
+.quiz-section{border-top:1px solid var(--border);padding-top:1.5rem;margin-top:.5rem}
+.q-progress-bar{height:3px;background:var(--surface3);border-radius:3px;margin-bottom:1.25rem;overflow:hidden}
+.q-prog-fill{height:100%;background:var(--sky);border-radius:3px;transition:width .3s}
+.q-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.5rem}
+.q-text{font-size:16px;font-weight:600;line-height:1.5;color:var(--ink);margin-bottom:1.1rem}
+.opts{display:grid;gap:8px;margin-bottom:1.1rem}
+.opt{display:flex;align-items:center;gap:12px;padding:.875rem 1.1rem;border-radius:var(--radius-sm);border:1.5px solid var(--border2);cursor:pointer;transition:all .15s;font-size:14px;color:var(--ink);background:var(--surface);text-align:left;width:100%;font-family:'Plus Jakarta Sans',sans-serif}
+.opt:hover{border-color:var(--sky);background:var(--sky-bg)}
+.opt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.opt.wrong{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.opt.reveal{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.opt-letter{width:28px;height:28px;border-radius:7px;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;flex-shrink:0}
+.exp-box{border-radius:var(--radius-sm);padding:1rem 1.25rem;font-size:13px;line-height:1.7;margin-bottom:1.1rem;border-left:3px solid}
+.exp-c{background:var(--green-bg);color:#15803d;border-color:var(--green)}
+.exp-w{background:var(--red-bg);color:#b91c1c;border-color:var(--red)}
+.exp-lbl{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+.q-nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{padding:9px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
+.btn-dark{background:#0c1a2e;color:#f1f5f9;border-color:#0c1a2e}
+.btn-dark:hover{background:#1e3a5f}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--border2)}
+.btn-outline:hover{background:var(--surface2)}
+.btn-sky{background:var(--sky);color:#fff;border-color:var(--sky)}
+.btn-sky:hover{background:var(--sky-dark)}
+.q-counter{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink3);margin-left:auto}
+
+/* LOCKED */
+.locked-msg{padding:2.5rem;text-align:center;color:var(--ink3)}
+.locked-msg i{font-size:36px;margin-bottom:1rem;display:block;opacity:.5}
+.locked-msg p{font-size:14px;max-width:300px;margin:0 auto}
+
+/* CERTIFICATE */
+.cert-wrap{background:#0c1a2e;border-radius:var(--radius);padding:2rem;margin-top:1.5rem}
+.cert-inner{background:#fff;border:2px solid #0ea5e9;border-radius:var(--radius-sm);padding:2.5rem;text-align:center}
+.cert-seal{width:64px;height:64px;border-radius:50%;background:#0c1a2e;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;border:3px solid #0ea5e9}
+.cert-seal i{color:#0ea5e9;font-size:28px}
+.cert-eye{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#0369a1;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem}
+.cert-headline{font-size:24px;font-weight:700;color:#0c1a2e;margin-bottom:.375rem}
+.cert-sub{font-size:13px;color:#64748b;margin-bottom:.25rem}
+.cert-divider{height:1.5px;background:#0ea5e9;max-width:180px;margin:.875rem auto}
+.cert-body{font-size:13px;color:#64748b;line-height:1.7;max-width:420px;margin:0 auto 1rem}
+.cert-score{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:600;color:#0c1a2e;margin:.5rem 0}
+.cert-grade{font-size:14px;color:#0369a1;font-weight:600;margin-bottom:.5rem}
+.cert-meta{font-size:11px;color:#94a3b8;font-family:'JetBrains Mono',monospace}
+.cert-issued{display:flex;justify-content:space-between;margin-top:1.25rem;padding-top:.875rem;border-top:0.5px solid #e2e8f0;font-size:11px;color:#94a3b8;font-family:'JetBrains Mono',monospace;flex-wrap:wrap;gap:6px}
+.cert-breakdown{margin-top:1rem}
+.cb-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid rgba(255,255,255,0.06);font-size:12px}
+.cb-name{color:#94a3b8}
+.cb-sc{font-family:'JetBrains Mono',monospace;color:#38bdf8}
+.cert-name-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#64748b;font-family:'JetBrains Mono',monospace;margin-bottom:.375rem}
+.cert-name-display{font-size:26px;font-weight:700;color:#0c1a2e;letter-spacing:.01em;margin:.25rem 0 .125rem;font-family:'Plus Jakarta Sans',sans-serif;min-height:38px}
+.cert-name-input-wrap{margin:1.25rem auto .5rem;max-width:360px}
+.cert-name-input-wrap label{display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#64748b;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem;text-align:left}
+.cert-name-input{width:100%;padding:.75rem 1rem;border:1.5px solid #0ea5e9;border-radius:var(--radius-sm);font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;color:#0c1a2e;background:#f0f9ff;text-align:center;outline:none;transition:all .2s}
+.cert-name-input:focus{border-color:#0369a1;background:#e0f2fe;box-shadow:0 0 0 3px rgba(14,165,233,.15)}
+.cert-name-input::placeholder{color:#94a3b8;font-size:14px}
+.cert-name-btn{margin-top:.625rem;width:100%;padding:.6875rem 1rem;background:#0c1a2e;color:#f1f5f9;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s}
+.cert-name-btn:hover{background:#1e3a5f}
+/* NAME ENTRY */
+.cert-name-entry{background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.25);border-radius:var(--radius-sm);padding:1.25rem 1.5rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cert-name-entry label{font-size:13px;font-weight:600;color:#38bdf8;white-space:nowrap;font-family:'JetBrains Mono',monospace;letter-spacing:.4px}
+.cert-name-entry input{flex:1;min-width:180px;background:#0c1a2e;border:1.5px solid rgba(14,165,233,0.4);border-radius:8px;padding:9px 14px;font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;color:#f1f5f9;outline:none;transition:border-color .2s}
+.cert-name-entry input::placeholder{color:#475569}
+.cert-name-entry input:focus{border-color:#0ea5e9}
+.cert-name-entry button{background:#0ea5e9;color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s;white-space:nowrap}
+.cert-name-entry button:hover{background:#0369a1}
+/* NAME ON CERT */
+.cert-awardee-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#94a3b8;font-family:'JetBrains Mono',monospace;margin-bottom:.25rem}
+.cert-awardee-name{font-size:28px;font-weight:700;color:#0c1a2e;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:.25rem;letter-spacing:-.3px;word-break:break-word}
+.cert-name-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#64748b;font-family:'JetBrains Mono',monospace;margin-bottom:.375rem}
+.cert-name-display{font-size:30px;font-weight:700;color:#0c1a2e;margin-bottom:.25rem;word-break:break-word;letter-spacing:-.3px}
+.cert-name-input-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;margin:.5rem 0 .25rem;width:100%}
+.cert-name-input-wrap label{font-size:12px;color:#64748b;font-family:'JetBrains Mono',monospace;letter-spacing:.4px}
+.cert-name-input{width:100%;max-width:340px;border:1.5px solid #cbd5e1;border-radius:8px;padding:10px 14px;font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;color:#0c1a2e;outline:none;text-align:center;transition:border-color .2s}
+.cert-name-input:focus{border-color:#0ea5e9;box-shadow:0 0 0 3px rgba(14,165,233,.15)}
+.cert-name-input::placeholder{color:#94a3b8}
+.cert-name-btn{background:#0ea5e9;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s}
+.cert-name-btn:hover{background:#0369a1}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:static;height:auto}
+  .sb-nav{padding:1rem 1rem}
+  .nav-btn{display:inline-flex;width:auto;padding:.375rem .625rem}
+  .nav-title{display:none}
+  .sb-nav{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+  .sb-nav-label{display:none}
+  .main{padding:1.25rem 1rem}
+}
+@media(max-width:600px){
+  .hero{padding:1.5rem}
+  .mc-head{padding:.875rem 1.1rem}
+  .mc-body{padding:1.1rem}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .cards-grid{grid-template-columns:1fr 1fr}
+  .cert-inner{padding:1.5rem}
+  .cert-score{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-top">
+    <div class="sb-logo">
+      <div class="sb-logo-icon"><i class="ti ti-credit-card" aria-hidden="true"></i></div>
+      <div>
+        <div class="sb-logo-text">Credit Cards 101</div>
+        <div class="sb-logo-sub">PFM · High School Course</div>
+      </div>
+    </div>
+    <div class="sb-progress-box">
+      <div class="sbp-label">Your progress</div>
+      <div class="sbp-score" id="sbScore">0 / 40</div>
+      <div class="sbp-sub" id="sbPct">0% correct · keep going!</div>
+      <div class="sbp-bar"><div class="sbp-fill" id="sbFill" style="width:0%"></div></div>
+    </div>
+  </div>
+  <div class="sb-nav" id="sideNav">
+    <div class="sb-nav-label">Modules</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="mainContent">
+
+  <div class="hero">
+    <div class="hero-globe"><i class="ti ti-wallet" aria-hidden="true"></i></div>
+    <div class="hero-course">PFM · Credit Cards</div>
+    <h1>Credit Cards:<br>Know Before You Owe</h1>
+    <p>Start from zero and learn to compare issuers, read statements, calculate interest, spot reward traps, and understand the beginnings of credit history.</p>
+    <div class="hero-pills">
+      <span class="hpill">8 modules</span>
+      <span class="hpill">40 questions</span>
+      <span class="hpill">certificate</span>
+      <span class="hpill">CFPB sourced</span>
+    </div>
+  </div>
+
+  <section id="startGate" class="module-card" style="padding:1.75rem;max-width:650px"><h2 style="margin-bottom:.5rem">Start your credit course</h2><p style="color:var(--ink2);margin-bottom:1rem">Enter your first and last name before beginning. This name will appear on your certificate and Google Sheets submission.</p><form onsubmit="startCourse(event)"><label for="startName" style="display:block;font-weight:600;margin-bottom:.5rem">Student full name</label><input id="startName" class="cert-name-input" required minlength="3" maxlength="60" autocomplete="name" placeholder="First and last name" style="text-align:left;max-width:100%;margin-bottom:1rem"><label for="startBlock" style="display:block;font-weight:600;margin-bottom:.5rem">Class block</label><select id="startBlock" class="cert-name-input" required style="text-align:left;max-width:100%;margin-bottom:1rem"><option value="">Select your block</option><option value="1">Block 1</option><option value="2">Block 2</option><option value="3">Block 3</option><option value="4">Block 4</option></select><button class="btn btn-sky" type="submit">Start Module 20 →</button><p id="startError" role="alert" style="color:var(--red);margin-top:.5rem"></p></form></section><div id="modulesContainer" hidden></div>
+
+</main>
+</div>
+
+<script>
+const MODULES = [
+ {
+  "id": 0,
+  "title": "Credit cards: the starting line",
+  "sub": "Debit, credit, limits and paying back",
+  "lesson": "A <strong>debit card</strong> spends money already in your bank account. A <strong>credit card</strong> lets you borrow from a card issuer and repay later. A $1,000 credit limit is a borrowing ceiling, not income. Your <strong>available credit</strong> shrinks when you make purchases and usually grows when payments post. A credit card purchase is still a real expense.",
+  "cards": [
+   {
+    "icon": "ti-wallet",
+    "name": "Debit card",
+    "detail": "Uses money you already have.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-credit-card",
+    "name": "Credit card",
+    "detail": "Borrows from the issuer, then you repay.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-gauge",
+    "name": "Credit limit",
+    "detail": "Maximum revolving borrowing allowed.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-calendar",
+    "name": "Due date",
+    "detail": "The date your required payment must arrive.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   }
+  ],
+  "questions": [
+   {
+    "q": "Which is the clearest difference between debit and credit?",
+    "opts": [
+     "Debit spends your deposits; credit borrows",
+     "Both spend money already deposited",
+     "Credit removes debt; debit creates it",
+     "Debit cards always earn interest"
+    ],
+    "ans": 0,
+    "exp": "Credit borrowing creates an obligation to repay the issuer. Debit generally spends funds in your account."
+   },
+   {
+    "q": "Jordan has a $900 limit and a $275 balance. What is available?",
+    "opts": [
+     "$1,175",
+     "$725",
+     "$625",
+     "$275"
+    ],
+    "ans": 2,
+    "exp": "$900 - $275 = $625 of available credit, assuming no other pending transactions or holds."
+   },
+   {
+    "q": "A student buys $80 of shoes on credit. What happened?",
+    "opts": [
+     "The store lent $80 cash",
+     "The issuer financed the purchase",
+     "The $80 became income",
+     "The debt disappears at month-end"
+    ],
+    "ans": 1,
+    "exp": "The card issuer pays the merchant through the card network. The student then owes the issuer."
+   },
+   {
+    "q": "Which is the most accurate description of a credit limit?",
+    "opts": [
+     "A monthly income estimate",
+     "The issuer's approved borrowing ceiling",
+     "A minimum required spending level",
+     "The balance of a savings account"
+    ],
+    "ans": 1,
+    "exp": "A credit limit is a ceiling for revolving credit, not a suggested amount to spend."
+   },
+   {
+    "q": "Why should you check your available credit before a purchase?",
+    "opts": [
+     "It tells you your bank balance",
+     "It guarantees rewards",
+     "The purchase may exceed the limit",
+     "It determines your hourly wage"
+    ],
+    "ans": 2,
+    "exp": "Exceeding available credit can cause the transaction to be declined."
+   }
+  ]
+ },
+ {
+  "id": 1,
+  "title": "Meet the card companies",
+  "sub": "Banks, networks and reputations",
+  "lesson": "There are different jobs in the card industry. <strong>Chase, Citi, Capital One, Bank of America and Discover</strong> are examples of well-known card issuers or banking brands; <strong>Visa and Mastercard</strong> are payment networks used by many issuing banks. American Express and Discover also operate networks. Don't assume a company is 'best' because of a logo. Judge an offer on fees, APR, service access, fraud handling, rewards restrictions, and whether it fits your spending. Reputation is not a substitute for reading terms.",
+  "cards": [
+   {
+    "icon": "ti-building-bank",
+    "name": "Chase / Citi",
+    "detail": "Examples of major bank card issuers.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-network",
+    "name": "Visa / Mastercard",
+    "detail": "Networks connecting card payments; not normally your lender.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-shield-check",
+    "name": "Fraud protections",
+    "detail": "Compare dispute process, alerts and support channels.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-stars",
+    "name": "Reputation",
+    "detail": "Consider verified complaints, service experience and terms.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   }
+  ],
+  "questions": [
+   {
+    "q": "A card reads 'Chase Visa.' Who generally lends the money?",
+    "opts": [
+     "Visa network",
+     "Chase, the issuer",
+     "Your school bank",
+     "The retailer"
+    ],
+    "ans": 1,
+    "exp": "Chase is the card issuer/lender; Visa is the network that routes payments."
+   },
+   {
+    "q": "Which evidence best helps compare two issuers fairly?",
+    "opts": [
+     "Only a celebrity advertisement",
+     "APR, fees, support and card terms",
+     "Card color and metal weight",
+     "Which logo appears more often"
+    ],
+    "ans": 1,
+    "exp": "Terms and service features matter more than branding."
+   },
+   {
+    "q": "A bank advertises excellent rewards but charges $95 a year. What matters?",
+    "opts": [
+     "Whether rewards value exceeds the fee for your use",
+     "That annual fees always improve scores",
+     "That its logo is well known",
+     "That every purchase is free"
+    ],
+    "ans": 0,
+    "exp": "Estimate actual rewards you'll earn, subtract the annual fee, and check APR if you may carry a balance."
+   },
+   {
+    "q": "What is Mastercard's usual role on a bank-issued card?",
+    "opts": [
+     "It sets your school GPA",
+     "It acts as a payment network",
+     "It decides your rent",
+     "It is always the card lender"
+    ],
+    "ans": 1,
+    "exp": "Mastercard typically operates the network, while an issuer extends the credit."
+   },
+   {
+    "q": "A friend says one bank is 'the safest' because of its size. Best response?",
+    "opts": [
+     "Size proves zero risk",
+     "Check protections and terms across issuers",
+     "Ignore all fraud alerts",
+     "Only rewards matter"
+    ],
+    "ans": 1,
+    "exp": "Size alone cannot establish a card's suitability or safety."
+   }
+  ]
+ },
+ {
+  "id": 2,
+  "title": "Read a real-looking statement",
+  "sub": "What the bill actually says",
+  "lesson": "A card statement lists the <strong>statement balance</strong> from the last billing cycle, the <strong>payment due date</strong>, the <strong>minimum payment</strong>, purchases, fees, and interest. Paying only the minimum can keep the account current, but often leaves debt generating interest. Paying the <strong>full statement balance by the due date</strong> usually avoids interest on purchases if the card has a grace period and you have retained it. The current balance may include newer charges not yet on the statement.",
+  "cards": [
+   {
+    "icon": "ti-file-invoice",
+    "name": "Statement balance",
+    "detail": "Amount billed at end of cycle.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-calendar-due",
+    "name": "Due date",
+    "detail": "Pay by this deadline.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-currency-dollar",
+    "name": "Minimum payment",
+    "detail": "Least needed to meet payment requirement.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-receipt",
+    "name": "Current balance",
+    "detail": "May include purchases after statement close.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   }
+  ],
+  "questions": [
+   {
+    "q": "Statement: $420; minimum: $30; due Dec 12. Best to avoid purchase interest under a grace period?",
+    "opts": [
+     "Pay $30 on Dec 12",
+     "Pay $420 by Dec 12",
+     "Pay $420 after Dec 12",
+     "Wait for another statement"
+    ],
+    "ans": 1,
+    "exp": "Paying the full statement balance on time generally preserves the purchase grace period."
+   },
+   {
+    "q": "What happens if you pay only the $30 minimum on a $420 bill?",
+    "opts": [
+     "Remaining balance usually carries forward",
+     "The entire bill is forgiven",
+     "Your credit limit becomes $30",
+     "APR changes to zero"
+    ],
+    "ans": 0,
+    "exp": "The unpaid balance remains and usually accrues interest."
+   },
+   {
+    "q": "Your statement balance is $200, but current balance is $260. Why?",
+    "opts": [
+     "An extra $60 may be newer purchases",
+     "The bank secretly doubled APR",
+     "All cards charge $60 monthly",
+     "The statement is automatically invalid"
+    ],
+    "ans": 0,
+    "exp": "Newer purchases can appear in current balance after the statement closes."
+   },
+   {
+    "q": "Which number is the deadline for making payment?",
+    "opts": [
+     "Card expiration date",
+     "Account opening date",
+     "Payment due date",
+     "Statement cycle length"
+    ],
+    "ans": 2,
+    "exp": "The due date controls when the payment must reach the issuer."
+   },
+   {
+    "q": "Which action is most reliable when you can afford it?",
+    "opts": [
+     "Pay full statement on time",
+     "Pay minimum and invest the rest without checking APR",
+     "Ignore a low balance",
+     "Wait for a reminder after due date"
+    ],
+    "ans": 0,
+    "exp": "Paying on time and in full is a strong habit that can prevent purchase interest."
+   }
+  ]
+ },
+ {
+  "id": 3,
+  "title": "Rewards: free money or expensive bait?",
+  "sub": "Cash back, points and fine print",
+  "lesson": "Rewards may be <strong>cash back</strong>, miles or points. A 2% cash-back card returns about $2 per $100 of eligible purchases; that is not a reason to spend more. Some cards have annual fees, category caps, activation rules or points that vary in redemption value. A sign-up bonus may require a spending threshold. Compare the <strong>net value</strong> of rewards after costs. Interest can erase rewards quickly.",
+  "cards": [
+   {
+    "icon": "ti-coins",
+    "name": "Flat cash back",
+    "detail": "Example: 2% on eligible purchases.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-credit-card",
+    "name": "Travel points",
+    "detail": "Value depends on redemption and rules.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-gift",
+    "name": "Welcome bonus",
+    "detail": "Often requires eligible spending.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-alert-triangle",
+    "name": "Reward trap",
+    "detail": "Overspending or interest can outweigh perks.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   }
+  ],
+  "questions": [
+   {
+    "q": "You spend $600 on eligible purchases at 2% cash back. Earned?",
+    "opts": [
+     "$12",
+     "$120",
+     "$6",
+     "$30"
+    ],
+    "ans": 0,
+    "exp": "$600 × .02 = $12, before any fees or exclusions."
+   },
+   {
+    "q": "Card A: no annual fee, $70 rewards. Card B: $95 fee, $140 rewards. Which has more net value?",
+    "opts": [
+     "Card A by $25",
+     "Card B by $70",
+     "Card B by $45",
+     "They are equal"
+    ],
+    "ans": 0,
+    "exp": "Card A nets $70; Card B nets $45. Card A wins by $25."
+   },
+   {
+    "q": "A bonus requires $3,000 spending in 3 months. You planned only $1,500. Best response?",
+    "opts": [
+     "Buy unnecessary items to qualify",
+     "Consider skipping the bonus",
+     "Carry a balance to qualify",
+     "Assume the rest is refunded"
+    ],
+    "ans": 1,
+    "exp": "Overspending can outweigh a bonus."
+   },
+   {
+    "q": "Why is '5x points' not automatically better than 2% cash back?",
+    "opts": [
+     "Points may have different redemption values and limits",
+     "Points always equal $5",
+     "Cash back expires daily",
+     "Points eliminate APR"
+    ],
+    "ans": 0,
+    "exp": "Compare real dollar value and restrictions."
+   },
+   {
+    "q": "You earn $18 cash back but pay $38 interest. Net result?",
+    "opts": [
+     "$56 gained",
+     "$20 loss",
+     "$18 profit",
+     "$38 profit"
+    ],
+    "ans": 1,
+    "exp": "$18 - $38 = negative $20. Rewards did not make the borrowing profitable."
+   }
+  ]
+ },
+ {
+  "id": 4,
+  "title": "APR and the one-month cost",
+  "sub": "Annual rates, monthly estimates, daily interest",
+  "lesson": "<strong>APR</strong> means annual percentage rate. It is not usually the rate charged for one month. To estimate <strong>one month's interest</strong> on an unchanged balance, divide APR by 12, then multiply by the balance. At 24% APR, a $500 interest-bearing balance costs roughly <strong>$10 for one month</strong> (24% / 12 = 2%). Actual issuers typically calculate interest using daily balances and a daily periodic rate, so exact charges vary. Purchase interest can be $0 when you pay your statement in full under an applicable grace period.",
+  "cards": [
+   {
+    "icon": "ti-percentage",
+    "name": "24% APR",
+    "detail": "Annualized rate, not 24% each month.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-calendar-month",
+    "name": "Approx. 2% monthly",
+    "detail": "24% ÷ 12, estimate only.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-calculator",
+    "name": "$500 × 2%",
+    "detail": "About $10 in one month.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-clock",
+    "name": "Actual interest",
+    "detail": "Often daily balance × daily rate.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   }
+  ],
+  "questions": [
+   {
+    "q": "At 24% APR, what is the rough monthly rate?",
+    "opts": [
+     "24%",
+     "12%",
+     "2%",
+     "0.24%"
+    ],
+    "ans": 2,
+    "exp": "24% ÷ 12 = approximately 2% per month."
+   },
+   {
+    "q": "Estimate one month's interest on $800 at 18% APR, unchanged interest-bearing balance.",
+    "opts": [
+     "$144",
+     "$12",
+     "$18",
+     "$1.20"
+    ],
+    "ans": 1,
+    "exp": "18% / 12 = 1.5%; $800 × .015 = approximately $12."
+   },
+   {
+    "q": "A card says 29.99% APR. What does that number describe?",
+    "opts": [
+     "The stated annualized rate",
+     "The cash-back percentage",
+     "A one-month rate of 29.99%",
+     "A guaranteed monthly late fee"
+    ],
+    "ans": 0,
+    "exp": "APR expresses the borrowing rate on an annualized basis."
+   },
+   {
+    "q": "Why might actual interest differ from APR/12 math?",
+    "opts": [
+     "Issuers may use daily balances and daily periodic rates",
+     "APR never changes",
+     "Cash back changes the calendar",
+     "A billing cycle is always 30 days"
+    ],
+    "ans": 0,
+    "exp": "Actual interest typically accounts for daily balances, payment dates and cycle length."
+   },
+   {
+    "q": "You pay the full statement on time and have an applicable purchase grace period. Purchase interest is generally:",
+    "opts": [
+     "About 2% anyway",
+     "Zero",
+     "Always $25",
+     "Equal to your credit limit"
+    ],
+    "ans": 1,
+    "exp": "A retained grace period generally allows zero interest on new purchases paid in full by due date."
+   }
+  ]
+ },
+ {
+  "id": 5,
+  "title": "The minimum-payment trap",
+  "sub": "Why a small bill can last for years",
+  "lesson": "Minimum payments protect you from missing the required payment, but they are a poor payoff strategy. Suppose a fictional card has a <strong>$1,000 balance at 24% APR</strong> and you pay only $30 this month: roughly $20 of that first month's payment could go toward interest, leaving only about $10 reducing principal (simplified illustration). If you keep borrowing, payoff can stretch even longer. Credit statements normally include a <strong>minimum-payment warning</strong> with an estimated payoff timeline and cost. Paying more than the minimum reduces interest and time.",
+  "cards": [
+   {
+    "icon": "ti-file-invoice",
+    "name": "$1,000 balance",
+    "detail": "Fictional example at 24% APR.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-chart-bar",
+    "name": "About $20 interest",
+    "detail": "Approximate first month's cost.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-arrow-down",
+    "name": "Only ~$10 principal",
+    "detail": "If you pay $30 in this simplified month.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-clock-hour-4",
+    "name": "Years, not weeks",
+    "detail": "Minimums may keep debt around a long time.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   }
+  ],
+  "questions": [
+   {
+    "q": "At about $20 monthly interest, what does a $30 payment reduce principal by?",
+    "opts": [
+     "About $30",
+     "About $10",
+     "About $50",
+     "Nothing, always"
+    ],
+    "ans": 1,
+    "exp": "About $20 covers interest and only $10 reduces principal in this simplified example."
+   },
+   {
+    "q": "What usually happens if you make only the minimum for many months?",
+    "opts": [
+     "You pay more interest overall",
+     "Your balance vanishes in two months",
+     "Your APR becomes 0%",
+     "The issuer returns your interest"
+    ],
+    "ans": 0,
+    "exp": "Small payments can extend payoff and increase total interest."
+   },
+   {
+    "q": "You can afford $100 instead of a $30 minimum. Generally what changes?",
+    "opts": [
+     "Faster payoff, less future interest",
+     "No effect on the balance",
+     "Automatic credit-score penalty",
+     "Higher APR for paying extra"
+    ],
+    "ans": 0,
+    "exp": "More principal repaid sooner usually lowers future interest."
+   },
+   {
+    "q": "Where can you find an estimate of minimum-only payoff time?",
+    "opts": [
+     "Credit card statement warning box",
+     "The card's expiration date",
+     "The Visa logo",
+     "Your school transcript"
+    ],
+    "ans": 0,
+    "exp": "U.S. statements commonly show a minimum-payment warning and payoff comparison."
+   },
+   {
+    "q": "Which strategy is safest for a planned $350 laptop purchase?",
+    "opts": [
+     "Know how the full statement will be paid",
+     "Only check rewards",
+     "Always use the full limit",
+     "Assume the minimum is total cost"
+    ],
+    "ans": 0,
+    "exp": "Plan for repayment before charging; rewards never remove the debt."
+   }
+  ]
+ },
+ {
+  "id": 6,
+  "title": "Shop a card like a skeptic",
+  "sub": "Compare offers, fees and real needs",
+  "lesson": "No single card is best for everyone. Compare purchase APR, annual fee, grace-period terms, rewards conditions, penalties, and whether the issuer reports to credit bureaus. Some <strong>secured cards</strong> require a refundable deposit to establish a limit and can help build credit if reported and managed well. A <strong>student card</strong> is still borrowed money. Never apply because a celebrity, influencer or friend says it's easy money. For people under 21, U.S. rules impose additional ability-to-pay or cosigner requirements.",
+  "cards": [
+   {
+    "icon": "ti-credit-card",
+    "name": "Starter card",
+    "detail": "May have no annual fee; compare actual terms.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-lock",
+    "name": "Secured card",
+    "detail": "Usually requires a refundable security deposit.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-receipt-tax",
+    "name": "Annual fee",
+    "detail": "Subtract from realistic reward value.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-shield",
+    "name": "Fair comparison",
+    "detail": "APR + fees + terms + support + fit.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   }
+  ],
+  "questions": [
+   {
+    "q": "Card X: 0 fee, 28% APR. Card Y: $95 fee, 19% APR. Student always pays in full. Most relevant?",
+    "opts": [
+     "Fees and useful benefits, since they avoid purchase interest",
+     "APR alone decides",
+     "Higher APR always gives better rewards",
+     "Always choose the $95 card"
+    ],
+    "ans": 0,
+    "exp": "If purchase interest is avoided, fees and benefits may matter more, though terms still deserve attention."
+   },
+   {
+    "q": "What usually makes a secured credit card 'secured'?",
+    "opts": [
+     "A refundable deposit backs the credit line",
+     "An unlimited credit limit",
+     "A guarantee of zero interest",
+     "A government scholarship"
+    ],
+    "ans": 0,
+    "exp": "A deposit generally backs the secured card account."
+   },
+   {
+    "q": "Why should an advertised 0% introductory APR be read carefully?",
+    "opts": [
+     "It may expire, after which regular APR applies",
+     "It always lasts forever",
+     "It cancels minimum payments",
+     "It means all fees disappear"
+    ],
+    "ans": 0,
+    "exp": "Check promo duration, covered transactions and post-intro APR."
+   },
+   {
+    "q": "Which question should come before 'How many points can I earn?'",
+    "opts": [
+     "Can I repay planned purchases on time?",
+     "Is the card shiny?",
+     "Does a celebrity use it?",
+     "Can I max it out each month?"
+    ],
+    "ans": 0,
+    "exp": "Repayment capacity matters more than reward marketing."
+   },
+   {
+    "q": "A student has no established credit history. Which statement is most accurate?",
+    "opts": [
+     "A secured card is one possible path, not a guarantee",
+     "They automatically have a 300 FICO score",
+     "They must pay interest to establish a score",
+     "They are forbidden from ever using credit"
+    ],
+    "ans": 0,
+    "exp": "Building credit takes reported account activity over time; options depend on eligibility."
+   }
+  ]
+ },
+ {
+  "id": 7,
+  "title": "Your credit reputation: next unit",
+  "sub": "Three bureaus, credit mix, and GPA analogy",
+  "lesson": "The three major nationwide credit reporting companies are <strong>Equifax, Experian and TransUnion</strong>. They collect credit information in reports; scoring models such as FICO and VantageScore analyze report data to produce scores. Your <strong>credit report</strong> is like a course transcript with details; a <strong>credit score</strong> is more like a GPA summary. The analogy is imperfect: scores differ by model and bureau, and borrowing records are not school grades. Typical FICO scores run 300–850. <strong>Credit mix</strong> refers to different kinds of credit, such as revolving cards and installment loans; do not borrow unnecessarily just to change your mix. The next module explores score factors in depth.",
+  "cards": [
+   {
+    "icon": "ti-file-text",
+    "name": "Credit report",
+    "detail": "Detailed account history (like a transcript).",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-chart-dots",
+    "name": "Credit score",
+    "detail": "Numerical risk summary (loosely like a GPA).",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-building",
+    "name": "3 credit bureaus",
+    "detail": "Equifax · Experian · TransUnion.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   },
+   {
+    "icon": "ti-arrows-shuffle",
+    "name": "Credit mix",
+    "detail": "Revolving accounts vs. installment loans.",
+    "tag": "Key idea",
+    "tc": "tag-blue"
+   }
+  ],
+  "questions": [
+   {
+    "q": "Which are the three nationwide credit bureaus?",
+    "opts": [
+     "Visa, Chase, Citi",
+     "Equifax, Experian, TransUnion",
+     "FICO, Mastercard, Discover",
+     "IRS, FDIC, CFPB"
+    ],
+    "ans": 1,
+    "exp": "Equifax, Experian and TransUnion maintain consumer credit reports."
+   },
+   {
+    "q": "In the school analogy, a credit report is most like:",
+    "opts": [
+     "A detailed transcript",
+     "A mascot logo",
+     "A lunch balance",
+     "A class schedule only"
+    ],
+    "ans": 0,
+    "exp": "The report holds account details, while a score summarizes modeled credit risk."
+   },
+   {
+    "q": "A 3.8 GPA and an 810 credit score are:",
+    "opts": [
+     "Two different systems, not convertible",
+     "The same percentile",
+     "Always equal after multiplying by 200",
+     "Proof that income is high"
+    ],
+    "ans": 0,
+    "exp": "There is no legitimate GPA-to-credit-score conversion; the analogy only explains summary versus record."
+   },
+   {
+    "q": "Which pair illustrates different types of credit?",
+    "opts": [
+     "Credit card and installment auto loan",
+     "Two debit cards",
+     "Cash and gift cards",
+     "Two streaming subscriptions"
+    ],
+    "ans": 0,
+    "exp": "A card is revolving credit; an auto loan usually repays a fixed installment balance."
+   },
+   {
+    "q": "Why should you avoid opening a loan only for 'credit mix'?",
+    "opts": [
+     "Debt has costs and risks; mix is only one factor",
+     "Mix is always 90% of FICO",
+     "Loans cannot appear in reports",
+     "A loan guarantees 850 immediately"
+    ],
+    "ans": 0,
+    "exp": "Don't take unnecessary debt for the sake of optimizing one score factor."
+   }
+  ]
+ }
+];
+
+// Shuffle option positions once per page load so correct choices do not cluster at B.
+MODULES.forEach(module => module.questions.forEach(question => {
+  const choices = question.opts.map((label,index)=>({label,correct:index===question.ans}));
+  for(let i=choices.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [choices[i],choices[j]]=[choices[j],choices[i]];
+  }
+  question.opts=choices.map(choice=>choice.label);
+  question.ans=choices.findIndex(choice=>choice.correct);
+}));
+
+const TOTAL_Q = MODULES.reduce((a,m)=>a+m.questions.length,0);
+let states = MODULES.map((_,i)=>({unlocked:i===0,complete:false,qIdx:0,answers:{},score:0}));
+let totalCorrect = 0;
+let studentName = '';
+let studentBlock = '';
+let courseStarted = false;
+function startCourse(event){
+  event.preventDefault();
+  const name=document.getElementById('startName').value.trim().replace(/\\s+/g,' ');
+  if(name.split(' ').length<2){document.getElementById('startError').textContent='Please enter both your first and last name.';return;}
+  studentName=name;studentBlock=document.getElementById('startBlock').value;certStudentName=name;moduleStartedAt=Date.now();courseStarted=true;
+  document.getElementById('startGate').hidden=true;
+  document.getElementById('modulesContainer').hidden=false;
+  renderAll();
+}
+
+
+function updateSidebar(){
+  const pct = Math.round(totalCorrect/TOTAL_Q*100);
+  document.getElementById('sbScore').textContent = totalCorrect+' / '+TOTAL_Q;
+  document.getElementById('sbPct').textContent = pct+'% correct'+(pct>=80?' — excellent!':pct>=60?' — keep going!':' — let\'s go!');
+  document.getElementById('sbFill').style.width = pct+'%';
+  const nav = document.getElementById('sideNav');
+  nav.innerHTML = '<div class="sb-nav-label">Modules</div>' + MODULES.map((m,i)=>{
+    const s = states[i];
+    const cls = s.complete?'nav-done':s.unlocked?'nav-active':'nav-locked';
+    const chk = s.complete?'<i class="ti ti-check nav-check" aria-hidden="true"></i>':'';
+    return `<button class="nav-btn ${cls}" onclick="scrollToMod(${i})" ${s.unlocked?'':'disabled'}>
+      <span class="nav-dot">${i+1}</span>
+      <span class="nav-title">${m.title}</span>${chk}
+    </button>`;
+  }).join('');
+}
+
+function scrollToMod(i){ document.getElementById('mod-'+i)?.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+function renderAll(){
+  if(!courseStarted){updateSidebar();return;}
+  document.getElementById('modulesContainer').innerHTML = MODULES.map((m,i)=>renderMod(m,i)).join('');
+  updateSidebar();
+}
+
+function renderMod(m,i){
+  const s = states[i];
+  const bc = s.complete?'badge-done':s.unlocked?'badge-active':'badge-locked';
+  const bt = s.complete?'Complete':s.unlocked?'In Progress':'Locked';
+  let body = '';
+  if(!s.unlocked){
+    body = `<div class="locked-msg"><i class="ti ti-lock-square" aria-hidden="true"></i><p>Complete the previous module to unlock this one and continue your journey.</p></div>`;
+  } else {
+    body += `<div class="lesson">${m.lesson}</div>`;
+    if(m.stats) body += `<div class="stat-row">${m.stats.map(st=>`<div class="stat-card"><div class="sc-v">${st.v}</div><div class="sc-l">${st.l}</div></div>`).join('')}</div>`;
+    if(m.callouts) m.callouts.forEach(c=>{
+      body += `<div class="callout callout-${c.type}"><div class="callout-label">${c.type==='amber'?'⚠ ':c.type==='red'?'⛔ ':c.type==='green'?'✓ ':'ℹ '}${c.label}</div><p>${c.text}</p></div>`;
+    });
+    if(m.cards) body += `<div class="cards-grid">${m.cards.map(c=>`<div class="info-card"><i class="ti ${c.icon} ic-icon" aria-hidden="true"></i><div class="ic-name">${c.name}</div><div class="ic-detail">${c.detail}</div><span class="ic-tag ${c.tc}">${c.tag}</span></div>`).join('')}</div>`;
+    if(m.tableData){
+      const td = m.tableData;
+      body += `<div style="overflow-x:auto;margin-bottom:1.5rem"><table class="ctable"><thead><tr>${td.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${td.rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    }
+    body += renderQuiz(m,i,s);
+    if(s.complete && i===MODULES.length-1) body += renderCert();
+  }
+  return `<div class="module-card" id="mod-${i}">
+    <div class="mc-head">
+      <div class="mc-num">${i+1}</div>
+      <div class="mc-info"><div class="mc-title">${m.title}</div><div class="mc-sub">${m.sub}</div></div>
+      <span class="mc-badge ${bc}">${bt}</span>
+    </div>
+    <div class="mc-body">${body}</div>
+  </div>`;
+}
+
+function renderQuiz(m,i,s){
+  const qi=s.qIdx, q=m.questions[qi], done=s.answers[qi]!==undefined, sel=s.answers[qi];
+  const pct = Math.round(qi/m.questions.length*100);
+  let out = `<div class="quiz-section">`;
+  out += `<div class="q-progress-bar"><div class="q-prog-fill" style="width:${pct}%"></div></div>`;
+  out += `<div class="q-label">Question ${qi+1} of ${m.questions.length}</div>`;
+  out += `<div class="q-text">${q.q}</div><div class="opts">`;
+  q.opts.forEach((o,oi)=>{
+    let cls='opt';
+    if(done){if(oi===q.ans)cls+=' correct';else if(oi===sel&&sel!==q.ans)cls+=' wrong';}
+    out+=`<button class="${cls}" onclick="choose(${i},${qi},${oi},${q.ans})"><span class="opt-letter">${'ABCD'[oi]}</span>${o}</button>`;
+  });
+  out+=`</div>`;
+  if(done) out+=`<div class="exp-box ${sel===q.ans?'exp-c':'exp-w'}"><div class="exp-lbl">${sel===q.ans?'Correct!':'Not quite —'}</div>${q.exp}</div>`;
+  out+=`<div class="q-nav">`;
+  if(qi>0) out+=`<button class="btn btn-outline" onclick="navQ(${i},-1)">← Back</button>`;
+  if(done&&qi<m.questions.length-1) out+=`<button class="btn btn-dark" onclick="navQ(${i},1)">Next question →</button>`;
+  if(done&&qi===m.questions.length-1&&!s.complete) out+=`<button class="btn btn-sky" onclick="completeModule(${i})">Complete module →</button>`;
+  if(s.complete&&i<MODULES.length-1) out+=`<button class="btn btn-dark" onclick="goNext(${i})">Next module →</button>`;
+  out+=`<span class="q-counter">${Object.keys(s.answers).length}/${m.questions.length} answered</span>`;
+  out+=`</div></div>`;
+  return out;
+}
+
+function choose(mi,qi,sel,ans){
+  if(!courseStarted)return;
+  const s=states[mi];
+  if(s.answers[qi]!==undefined)return;
+  s.answers[qi]=sel;
+  if(sel===ans){s.score++;totalCorrect++;}
+  renderAll();
+}
+function navQ(mi,dir){states[mi].qIdx+=dir;renderAll();}
+function completeModule(mi){
+  states[mi].complete=true;
+  if(mi+1<MODULES.length)states[mi+1].unlocked=true;
+  else submitCompletionToSheet();
+  renderAll();
+  setTimeout(()=>scrollToMod(mi+1<MODULES.length?mi+1:mi),150);
+}
+function goNext(mi){scrollToMod(mi+1);}
+
+let certStudentName = '';
+let certID = 'CRDT-'+Math.random().toString(36).substr(2,8).toUpperCase();
+let completionSubmitted = false;
+let completionSubmitting = false;
+let submissionMessage = '';
+const SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyucfQcDDR9S_4i8_EiI2LAm0k49NNGT0IBiRnXTjZQKgtfuOwM73Wtxxt5fzojGFY/exec";
+let moduleStartedAt = Date.now();
+
+async function submitCompletionToSheet() {
+  if (completionSubmitted || completionSubmitting || !courseStarted || !certStudentName.trim()) return;
+  completionSubmitting = true;
+  submissionMessage = 'Submitting to Google Sheets…';
+  renderAll();
+  const nameParts = certStudentName.trim().split(/\\s+/);
+  const firstName = nameParts.shift() || '';
+  const lastName = nameParts.join(' ') || '-';
+  const pct = Math.round(totalCorrect / TOTAL_Q * 100);
+  const mins = Math.max(1, Math.round((Date.now() - moduleStartedAt) / 60000));
+  const record = {
+    moduleId:'pfm-module-20-credit-cards',
+    moduleTitle:'Personal Finance Module 20 - Credit Cards 101',
+    category:'Personal Finance',topic:'Credit Cards, APR, Rewards and Credit Reports',
+    productType:'Interactive Module',moduleSize:'extended',
+    score:totalCorrect,totalQuestions:TOTAL_Q,percent:pct+'%',completed:'Yes',
+    answers:JSON.stringify({items:MODULES.map((m,i)=>({section:m.title,answers:states[i].answers,score:states[i].score}))}),
+    timeMinutes:mins,reflection:'',sessionId:certID,
+    studentName:certStudentName.trim(),firstName,lastName,classPeriod:studentBlock,assessmentType:'scored multiple choice',version:'1.0-pfm-m20-credit-cards'
+  };
+  const form = new URLSearchParams({
+    action:'moduleSubmit',manualEntry:'1',moduleNumber:'20',
+    bellId:'PFM-MODULE-20-CREDIT-CARDS',label:record.moduleTitle,
+    firstName,lastName,name:certStudentName.trim(),answer:JSON.stringify(record),
+    late:'0',duration:String(mins),timestamp:new Date().toISOString(),
+    cls:'Personal Finance',googleName:'Manual entry',schoolEmail:'',block:studentBlock
+  });
+  try {
+    const response = await fetch(SHEET_WEB_APP_URL,{method:'POST',body:form});
+    const data = await response.json();
+    if (!data.success && data.error !== 'This completion was already submitted.') throw Error(data.error || 'Sheet did not confirm');
+    completionSubmitted = true;
+    submissionMessage = 'Google Sheets confirmed your submission.';
+  } catch(error) {
+    submissionMessage = 'Submission was not confirmed. Select Retry submission or tell Mr. D.';
+    console.error('PFM module submission failed:',error);
+  } finally {
+    completionSubmitting = false;
+    renderAll();
+  }
+}
+function setCertName(){
+  const input = document.getElementById('certNameInput');
+  const val = input ? input.value.trim() : certStudentName;
+  if(!val) return;
+  certStudentName = val;
+  submitCompletionToSheet();
+}
+function renderCert(){
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const pct=Math.round(totalCorrect/TOTAL_Q*100);
+  const grade=pct>=90?'Distinction — Credit Pro':pct>=75?'Merit — Credit Ready':'Pass — Credit Learner';
+
+  const nameSection = certStudentName
+    ? `<div class="cert-name-label">This certificate is awarded to</div>
+       <div class="cert-name-display">${certStudentName}</div>`
+    : `<div class="cert-name-input-wrap">
+         <label for="certNameInput">Enter your name for the certificate</label>
+         <input id="certNameInput" class="cert-name-input" type="text" maxlength="60"
+           placeholder="Your full name here…"
+           onkeydown="if(event.key==='Enter')setCertName()"
+           value="${certStudentName}" />
+         <button class="cert-name-btn" onclick="setCertName()">Add my name to the certificate →</button>
+       </div>`;
+
+  return `<div class="cert-wrap" id="cert-anchor">
+    <div class="cert-inner">
+      <div class="cert-seal"><i class="ti ti-credit-card" aria-hidden="true"></i></div>
+      <div class="cert-eye">Certificate of completion</div>
+      <div class="cert-headline">Credit Cards 101</div>
+      <div class="cert-sub">PFM High School Course</div>
+      <div class="cert-divider"></div>
+      ${nameSection}
+      <div class="cert-divider" style="margin-top:.875rem"></div>
+      <div class="cert-body">This certifies completion of eight lessons on card basics, issuers, statements, rewards, APR, minimum payments, card comparisons, and an introduction to credit reports.</div>
+      <div class="cert-score">${totalCorrect}/${TOTAL_Q} &middot; ${pct}%</div>
+      <div class="cert-grade">${grade}</div>
+      <div class="cert-meta">Issued ${date} &middot; 8 modules &middot; ${TOTAL_Q} questions</div>
+      <div class="cert-issued"><span>Certificate ID: ${certID}</span><span>PFM Credit Cards 101</span></div>
+    </div>
+    <div style="color:#fff;font-size:13px;padding:12px 0" role="status">${submissionMessage}${certStudentName && !completionSubmitted ? '<button class="cert-name-btn" onclick="submitCompletionToSheet()" '+(completionSubmitting?'disabled':'')+'>Retry submission</button>' : ''}</div>\n    <div class="cert-breakdown">
+      ${MODULES.map((m,i)=>`<div class="cb-row"><span class="cb-name">${i+1}. ${m.title}</span><span class="cb-sc">${states[i].score}/${m.questions.length}</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+
+renderAll();
+</script>
+</body>
+</html>
