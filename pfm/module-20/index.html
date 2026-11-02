@@ -5,32 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Credit Cards 101 — PFM Course</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --sky:#0ea5e9;--sky-bg:#f0f9ff;--sky-dark:#0369a1;
-  --teal:#0d9488;--teal-bg:#f0fdfa;
-  --amber:#d97706;--amber-bg:#fffbeb;--amber-border:#fcd34d;
+  --sky:#7c5ce8;--sky-bg:#f3f0ff;--sky-dark:#5b3bb5;
+  --teal:#008f83;--teal-bg:#e9faf5;
+  --amber:#bd751f;--amber-bg:#fff5e3;--amber-border:#efcf92;
   --red:#dc2626;--red-bg:#fef2f2;
   --green:#16a34a;--green-bg:#f0fdf4;
-  --ink:#111827;--ink2:#374151;--ink3:#9ca3af;
-  --surface:#ffffff;--surface2:#f9fafb;--surface3:#f3f4f6;
+  --ink:#1a1b35;--ink2:#43465b;--ink3:#6d7188;
+  --surface:#ffffff;--surface2:#faf9f5;--surface3:#efedf7;
   --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.15);
   --radius:14px;--radius-sm:9px;
 }
 html,body{width:100%;min-height:100vh}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--ink);line-height:1.6}
+body{font-family:'Poppins',sans-serif;background:#f7f5f0;color:var(--ink);line-height:1.6}
 
 /* LAYOUT */
 .layout{display:grid;grid-template-columns:290px 1fr;min-height:100vh;max-width:1500px;margin:0 auto}
 
 /* SIDEBAR */
-.sidebar{background:#0c1a2e;color:#e2e8f0;padding:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sidebar{background:#16162e;color:#e2e8f0;padding:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
 .sb-top{padding:1.5rem 1.5rem 1.25rem;border-bottom:0.5px solid rgba(255,255,255,0.08)}
 .sb-logo{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
-.sb-logo-icon{width:38px;height:38px;border-radius:10px;background:#0ea5e9;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0}
+.sb-logo-icon{width:38px;height:38px;border-radius:10px;background:#7c5ce8;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0}
 .sb-logo-text{font-size:14px;font-weight:600;color:#f1f5f9;line-height:1.25}
 .sb-logo-sub{font-size:11px;color:#64748b;font-family:'JetBrains Mono',monospace}
 .sb-progress-box{background:rgba(255,255,255,0.05);border-radius:var(--radius-sm);padding:.875rem 1rem}
@@ -38,7 +38,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--i
 .sbp-score{font-size:24px;font-weight:600;color:#f1f5f9;font-family:'JetBrains Mono',monospace}
 .sbp-sub{font-size:12px;color:#64748b;margin-bottom:.625rem}
 .sbp-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden}
-.sbp-fill{height:100%;background:#0ea5e9;border-radius:4px;transition:width .5s}
+.sbp-fill{height:100%;background:#7c5ce8;border-radius:4px;transition:width .5s}
 
 .sb-nav{padding:1rem 1rem 1.5rem;flex:1}
 .sb-nav-label{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#475569;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem;padding:0 .5rem}
@@ -48,17 +48,17 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--i
 .nav-btn.nav-done{color:#64748b}
 .nav-btn.nav-locked{opacity:.35;cursor:not-allowed}
 .nav-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:'JetBrains Mono',monospace;flex-shrink:0}
-.nav-btn.nav-done .nav-dot{background:#0ea5e9;border-color:#0ea5e9;color:#fff}
+.nav-btn.nav-done .nav-dot{background:#7c5ce8;border-color:#7c5ce8;color:#fff}
 .nav-title{font-size:12px;font-weight:400;line-height:1.3;flex:1}
-.nav-check{color:#0ea5e9;font-size:14px}
+.nav-check{color:#7c5ce8;font-size:14px}
 
 /* MAIN */
 .main{padding:2rem 2.5rem;overflow-y:auto}
 
 /* HERO */
-.hero{background:#0c1a2e;border-radius:var(--radius);padding:2.5rem;margin-bottom:1.75rem;position:relative;overflow:hidden}
+.hero{background:#16162e;border-radius:var(--radius);padding:2.5rem;margin-bottom:1.75rem;position:relative;overflow:hidden}
 .hero-globe{position:absolute;right:-20px;top:-20px;font-size:160px;opacity:.06;line-height:1;pointer-events:none;color:#fff}
-.hero-course{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#0ea5e9;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem}
+.hero-course{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#7c5ce8;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem}
 .hero h1{font-size:clamp(24px,3.5vw,40px);font-weight:700;color:#f1f5f9;line-height:1.15;margin-bottom:.625rem}
 .hero p{font-size:15px;color:#94a3b8;max-width:540px;line-height:1.7}
 .hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.25rem}
@@ -67,13 +67,13 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--i
 /* MODULE CARD */
 .module-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);margin-bottom:1.25rem;overflow:hidden;transition:box-shadow .2s}
 .mc-head{border-bottom:0.5px solid var(--border);padding:1.1rem 1.5rem;display:flex;align-items:center;gap:12px}
-.mc-num{width:36px;height:36px;border-radius:50%;background:#0c1a2e;color:#f1f5f9;font-family:'JetBrains Mono',monospace;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mc-num{width:36px;height:36px;border-radius:50%;background:#16162e;color:#f1f5f9;font-family:'JetBrains Mono',monospace;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .mc-info{flex:1;min-width:0}
 .mc-title{font-size:16px;font-weight:600;color:var(--ink)}
 .mc-sub{font-size:12px;color:var(--ink3);margin-top:1px}
 .mc-badge{font-size:11px;padding:3px 11px;border-radius:20px;font-family:'JetBrains Mono',monospace;white-space:nowrap}
 .badge-done{background:#f0fdf4;color:#16a34a}
-.badge-active{background:#f0f9ff;color:#0369a1}
+.badge-active{background:#f3f0ff;color:#5b3bb5}
 .badge-locked{background:var(--surface3);color:var(--ink3)}
 .mc-body{padding:1.75rem}
 
@@ -128,7 +128,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--i
 .q-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.5rem}
 .q-text{font-size:16px;font-weight:600;line-height:1.5;color:var(--ink);margin-bottom:1.1rem}
 .opts{display:grid;gap:8px;margin-bottom:1.1rem}
-.opt{display:flex;align-items:center;gap:12px;padding:.875rem 1.1rem;border-radius:var(--radius-sm);border:1.5px solid var(--border2);cursor:pointer;transition:all .15s;font-size:14px;color:var(--ink);background:var(--surface);text-align:left;width:100%;font-family:'Plus Jakarta Sans',sans-serif}
+.opt{display:flex;align-items:center;gap:12px;padding:.875rem 1.1rem;border-radius:var(--radius-sm);border:1.5px solid var(--border2);cursor:pointer;transition:all .15s;font-size:14px;color:var(--ink);background:var(--surface);text-align:left;width:100%;font-family:'Poppins',sans-serif}
 .opt:hover{border-color:var(--sky);background:var(--sky-bg)}
 .opt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green)}
 .opt.wrong{border-color:var(--red);background:var(--red-bg);color:var(--red)}
@@ -139,8 +139,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--i
 .exp-w{background:var(--red-bg);color:#b91c1c;border-color:var(--red)}
 .exp-lbl{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
 .q-nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.btn{padding:9px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
-.btn-dark{background:#0c1a2e;color:#f1f5f9;border-color:#0c1a2e}
+.btn{padding:9px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:all .15s;font-family:'Poppins',sans-serif}
+.btn-dark{background:#16162e;color:#f1f5f9;border-color:#16162e}
 .btn-dark:hover{background:#1e3a5f}
 .btn-outline{background:transparent;color:var(--ink);border-color:var(--border2)}
 .btn-outline:hover{background:var(--surface2)}
@@ -154,17 +154,17 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--i
 .locked-msg p{font-size:14px;max-width:300px;margin:0 auto}
 
 /* CERTIFICATE */
-.cert-wrap{background:#0c1a2e;border-radius:var(--radius);padding:2rem;margin-top:1.5rem}
-.cert-inner{background:#fff;border:2px solid #0ea5e9;border-radius:var(--radius-sm);padding:2.5rem;text-align:center}
-.cert-seal{width:64px;height:64px;border-radius:50%;background:#0c1a2e;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;border:3px solid #0ea5e9}
-.cert-seal i{color:#0ea5e9;font-size:28px}
-.cert-eye{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#0369a1;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem}
-.cert-headline{font-size:24px;font-weight:700;color:#0c1a2e;margin-bottom:.375rem}
+.cert-wrap{background:#16162e;border-radius:var(--radius);padding:2rem;margin-top:1.5rem}
+.cert-inner{background:#fff;border:2px solid #7c5ce8;border-radius:var(--radius-sm);padding:2.5rem;text-align:center}
+.cert-seal{width:64px;height:64px;border-radius:50%;background:#16162e;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;border:3px solid #7c5ce8}
+.cert-seal i{color:#7c5ce8;font-size:28px}
+.cert-eye{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#5b3bb5;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem}
+.cert-headline{font-size:24px;font-weight:700;color:#16162e;margin-bottom:.375rem}
 .cert-sub{font-size:13px;color:#64748b;margin-bottom:.25rem}
-.cert-divider{height:1.5px;background:#0ea5e9;max-width:180px;margin:.875rem auto}
+.cert-divider{height:1.5px;background:#7c5ce8;max-width:180px;margin:.875rem auto}
 .cert-body{font-size:13px;color:#64748b;line-height:1.7;max-width:420px;margin:0 auto 1rem}
-.cert-score{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:600;color:#0c1a2e;margin:.5rem 0}
-.cert-grade{font-size:14px;color:#0369a1;font-weight:600;margin-bottom:.5rem}
+.cert-score{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:600;color:#16162e;margin:.5rem 0}
+.cert-grade{font-size:14px;color:#5b3bb5;font-weight:600;margin-bottom:.5rem}
 .cert-meta{font-size:11px;color:#94a3b8;font-family:'JetBrains Mono',monospace}
 .cert-issued{display:flex;justify-content:space-between;margin-top:1.25rem;padding-top:.875rem;border-top:0.5px solid #e2e8f0;font-size:11px;color:#94a3b8;font-family:'JetBrains Mono',monospace;flex-wrap:wrap;gap:6px}
 .cert-breakdown{margin-top:1rem}
@@ -172,34 +172,34 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--i
 .cb-name{color:#94a3b8}
 .cb-sc{font-family:'JetBrains Mono',monospace;color:#38bdf8}
 .cert-name-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#64748b;font-family:'JetBrains Mono',monospace;margin-bottom:.375rem}
-.cert-name-display{font-size:26px;font-weight:700;color:#0c1a2e;letter-spacing:.01em;margin:.25rem 0 .125rem;font-family:'Plus Jakarta Sans',sans-serif;min-height:38px}
+.cert-name-display{font-size:26px;font-weight:700;color:#16162e;letter-spacing:.01em;margin:.25rem 0 .125rem;font-family:'Poppins',sans-serif;min-height:38px}
 .cert-name-input-wrap{margin:1.25rem auto .5rem;max-width:360px}
 .cert-name-input-wrap label{display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#64748b;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem;text-align:left}
-.cert-name-input{width:100%;padding:.75rem 1rem;border:1.5px solid #0ea5e9;border-radius:var(--radius-sm);font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;color:#0c1a2e;background:#f0f9ff;text-align:center;outline:none;transition:all .2s}
-.cert-name-input:focus{border-color:#0369a1;background:#e0f2fe;box-shadow:0 0 0 3px rgba(14,165,233,.15)}
+.cert-name-input{width:100%;padding:.75rem 1rem;border:1.5px solid #7c5ce8;border-radius:var(--radius-sm);font-size:16px;font-family:'Poppins',sans-serif;color:#16162e;background:#f3f0ff;text-align:center;outline:none;transition:all .2s}
+.cert-name-input:focus{border-color:#5b3bb5;background:#e0f2fe;box-shadow:0 0 0 3px rgba(14,165,233,.15)}
 .cert-name-input::placeholder{color:#94a3b8;font-size:14px}
-.cert-name-btn{margin-top:.625rem;width:100%;padding:.6875rem 1rem;background:#0c1a2e;color:#f1f5f9;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s}
+.cert-name-btn{margin-top:.625rem;width:100%;padding:.6875rem 1rem;background:#16162e;color:#f1f5f9;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:background .15s}
 .cert-name-btn:hover{background:#1e3a5f}
 /* NAME ENTRY */
 .cert-name-entry{background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.25);border-radius:var(--radius-sm);padding:1.25rem 1.5rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .cert-name-entry label{font-size:13px;font-weight:600;color:#38bdf8;white-space:nowrap;font-family:'JetBrains Mono',monospace;letter-spacing:.4px}
-.cert-name-entry input{flex:1;min-width:180px;background:#0c1a2e;border:1.5px solid rgba(14,165,233,0.4);border-radius:8px;padding:9px 14px;font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;color:#f1f5f9;outline:none;transition:border-color .2s}
+.cert-name-entry input{flex:1;min-width:180px;background:#16162e;border:1.5px solid rgba(14,165,233,0.4);border-radius:8px;padding:9px 14px;font-size:15px;font-family:'Poppins',sans-serif;color:#f1f5f9;outline:none;transition:border-color .2s}
 .cert-name-entry input::placeholder{color:#475569}
-.cert-name-entry input:focus{border-color:#0ea5e9}
-.cert-name-entry button{background:#0ea5e9;color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s;white-space:nowrap}
-.cert-name-entry button:hover{background:#0369a1}
+.cert-name-entry input:focus{border-color:#7c5ce8}
+.cert-name-entry button{background:#7c5ce8;color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:background .15s;white-space:nowrap}
+.cert-name-entry button:hover{background:#5b3bb5}
 /* NAME ON CERT */
 .cert-awardee-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#94a3b8;font-family:'JetBrains Mono',monospace;margin-bottom:.25rem}
-.cert-awardee-name{font-size:28px;font-weight:700;color:#0c1a2e;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:.25rem;letter-spacing:-.3px;word-break:break-word}
+.cert-awardee-name{font-size:28px;font-weight:700;color:#16162e;font-family:'Poppins',sans-serif;margin-bottom:.25rem;letter-spacing:-.3px;word-break:break-word}
 .cert-name-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#64748b;font-family:'JetBrains Mono',monospace;margin-bottom:.375rem}
-.cert-name-display{font-size:30px;font-weight:700;color:#0c1a2e;margin-bottom:.25rem;word-break:break-word;letter-spacing:-.3px}
+.cert-name-display{font-size:30px;font-weight:700;color:#16162e;margin-bottom:.25rem;word-break:break-word;letter-spacing:-.3px}
 .cert-name-input-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;margin:.5rem 0 .25rem;width:100%}
 .cert-name-input-wrap label{font-size:12px;color:#64748b;font-family:'JetBrains Mono',monospace;letter-spacing:.4px}
-.cert-name-input{width:100%;max-width:340px;border:1.5px solid #cbd5e1;border-radius:8px;padding:10px 14px;font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;color:#0c1a2e;outline:none;text-align:center;transition:border-color .2s}
-.cert-name-input:focus{border-color:#0ea5e9;box-shadow:0 0 0 3px rgba(14,165,233,.15)}
+.cert-name-input{width:100%;max-width:340px;border:1.5px solid #cbd5e1;border-radius:8px;padding:10px 14px;font-size:15px;font-family:'Poppins',sans-serif;color:#16162e;outline:none;text-align:center;transition:border-color .2s}
+.cert-name-input:focus{border-color:#7c5ce8;box-shadow:0 0 0 3px rgba(14,165,233,.15)}
 .cert-name-input::placeholder{color:#94a3b8}
-.cert-name-btn{background:#0ea5e9;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s}
-.cert-name-btn:hover{background:#0369a1}
+.cert-name-btn{background:#7c5ce8;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:background .15s}
+.cert-name-btn:hover{background:#5b3bb5}
 
 /* RESPONSIVE */
 @media(max-width:960px){
@@ -221,6 +221,30 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef2f7;color:var(--i
   .cert-inner{padding:1.5rem}
   .cert-score{font-size:28px}
 }
+
+/* Module 20 | Velvet Indigo × Iris × Champagne */
+body{background:radial-gradient(circle at 90% -12%,#ddd3ff 0,transparent 38%),linear-gradient(135deg,#faf8f2 0%,#f2f0fa 55%,#f7f5f0 100%)}
+.sidebar{background:linear-gradient(180deg,#17152e 0%,#252048 60%,#171a32 100%);border-right:1px solid #383153}
+.hero{background:radial-gradient(circle at 92% 14%,rgba(176,152,255,.26),transparent 33%),linear-gradient(125deg,#1b1938,#342b66);box-shadow:0 18px 38px rgba(31,23,66,.15)}
+.sb-logo-icon,.nav-btn.nav-done .nav-dot{background:#8f73f3;border-color:#8f73f3}
+.hero-course,.nav-btn.nav-active,.nav-check{color:#beaaff}
+.sbp-fill,.q-prog-fill{background:linear-gradient(90deg,#8f73f3,#58d0b7)}
+.module-card{border:1px solid rgba(45,35,85,.1);box-shadow:0 7px 23px rgba(40,30,77,.055);border-radius:18px}
+.module-card:hover{box-shadow:0 11px 34px rgba(40,30,77,.09)}
+.mc-num{background:#292349}
+.lesson{background:linear-gradient(105deg,#f3f0ff,#fff);border-left-color:#8061e7}
+.card-item,.stat-card{border-color:rgba(88,62,153,.13)}
+.btn-sky{background:#6c4dd7;color:#fff}
+.btn-sky:hover{background:#5338b5}
+.btn-dark{background:#252044}
+.btn-outline{border-color:#c8bfe4;color:#3b325e}
+.opt{border-color:#d8d3e7;transition:border-color .15s,background .15s,transform .15s}
+.opt:hover:not(:disabled){border-color:#927ee0;background:#f6f2ff;transform:translateY(-1px)}
+.opt:focus-visible,.btn:focus-visible{outline:3px solid #a68cfa;outline-offset:3px}
+.opt.correct{border-color:#118a71;background:#e7f8f2}
+.opt.wrong{border-color:#bd4e57;background:#fff0f0}
+.retry-note{margin-top:10px;padding:11px 14px;border-radius:10px;background:#fff5e3;border-left:3px solid #bd751f;color:#74501c;font-size:13px}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
@@ -310,10 +334,10 @@ const MODULES = [
    {
     "q": "Which is the clearest difference between debit and credit?",
     "opts": [
-     "Debit spends your deposits; credit borrows",
-     "Both spend money already deposited",
-     "Credit removes debt; debit creates it",
-     "Debit cards always earn interest"
+     "Debit uses your account funds; credit is borrowed",
+     "Debit and credit both withdraw deposited funds",
+     "Credit uses your savings; debit is a lender's loan",
+     "Debit allows repayment later; credit settles today"
     ],
     "ans": 0,
     "exp": "Credit borrowing creates an obligation to repay the issuer. Debit generally spends funds in your account."
@@ -332,10 +356,10 @@ const MODULES = [
    {
     "q": "A student buys $80 of shoes on credit. What happened?",
     "opts": [
-     "The store lent $80 cash",
+     "The merchant becomes the student's lender",
      "The issuer financed the purchase",
-     "The $80 became income",
-     "The debt disappears at month-end"
+     "The network forgives the balance until next year",
+     "The student's checking account was charged instead"
     ],
     "ans": 1,
     "exp": "The card issuer pays the merchant through the card network. The student then owes the issuer."
@@ -343,10 +367,10 @@ const MODULES = [
    {
     "q": "Which is the most accurate description of a credit limit?",
     "opts": [
-     "A monthly income estimate",
+     "The most you can spend without a penalty each month",
      "The issuer's approved borrowing ceiling",
-     "A minimum required spending level",
-     "The balance of a savings account"
+     "A target for spending to earn the maximum rewards",
+     "The amount you must pay on every statement"
     ],
     "ans": 1,
     "exp": "A credit limit is a ceiling for revolving credit, not a suggested amount to spend."
@@ -354,10 +378,10 @@ const MODULES = [
    {
     "q": "Why should you check your available credit before a purchase?",
     "opts": [
-     "It tells you your bank balance",
-     "It guarantees rewards",
+     "To confirm the purchase will earn the top bonus rate",
+     "To see if a large payment has already posted",
      "The purchase may exceed the limit",
-     "It determines your hourly wage"
+     "To check whether the due date was extended automatically"
     ],
     "ans": 2,
     "exp": "Exceeding available credit can cause the transaction to be declined."
@@ -403,10 +427,10 @@ const MODULES = [
    {
     "q": "A card reads 'Chase Visa.' Who generally lends the money?",
     "opts": [
-     "Visa network",
+     "The Visa payment network handles the loan",
      "Chase, the issuer",
-     "Your school bank",
-     "The retailer"
+     "The store where the purchase occurs",
+     "The credit reporting bureau that tracks the account"
     ],
     "ans": 1,
     "exp": "Chase is the card issuer/lender; Visa is the network that routes payments."
@@ -414,10 +438,10 @@ const MODULES = [
    {
     "q": "Which evidence best helps compare two issuers fairly?",
     "opts": [
-     "Only a celebrity advertisement",
+     "Average card color and estimated brand recognition",
      "APR, fees, support and card terms",
-     "Card color and metal weight",
-     "Which logo appears more often"
+     "How many social media followers the company has",
+     "Whether the card features a premium metal finish"
     ],
     "ans": 1,
     "exp": "Terms and service features matter more than branding."
@@ -426,9 +450,9 @@ const MODULES = [
     "q": "A bank advertises excellent rewards but charges $95 a year. What matters?",
     "opts": [
      "Whether rewards value exceeds the fee for your use",
-     "That annual fees always improve scores",
-     "That its logo is well known",
-     "That every purchase is free"
+     "Whether all reward points can pay off future interest automatically",
+     "Whether the card offers bonus points on purchases you rarely make",
+     "Whether a popular influencer uses the same card"
     ],
     "ans": 0,
     "exp": "Estimate actual rewards you'll earn, subtract the annual fee, and check APR if you may carry a balance."
@@ -436,10 +460,10 @@ const MODULES = [
    {
     "q": "What is Mastercard's usual role on a bank-issued card?",
     "opts": [
-     "It sets your school GPA",
+     "It determines the cardholder's annual interest rate",
      "It acts as a payment network",
-     "It decides your rent",
-     "It is always the card lender"
+     "It decides the minimum amount owed each month",
+     "It runs the customer's savings and checking accounts"
     ],
     "ans": 1,
     "exp": "Mastercard typically operates the network, while an issuer extends the credit."
@@ -447,10 +471,10 @@ const MODULES = [
    {
     "q": "A friend says one bank is 'the safest' because of its size. Best response?",
     "opts": [
-     "Size proves zero risk",
+     "Choose the largest bank because its size guarantees no fees",
      "Check protections and terms across issuers",
-     "Ignore all fraud alerts",
-     "Only rewards matter"
+     "Assume the bank with the most ads has the best support",
+     "Trust the bank with the most generous welcome bonus"
     ],
     "ans": 1,
     "exp": "Size alone cannot establish a card's suitability or safety."
@@ -508,9 +532,9 @@ const MODULES = [
     "q": "What happens if you pay only the $30 minimum on a $420 bill?",
     "opts": [
      "Remaining balance usually carries forward",
-     "The entire bill is forgiven",
-     "Your credit limit becomes $30",
-     "APR changes to zero"
+     "The issuer reports the entire $420 as paid in full",
+     "The minimum becomes the new credit limit",
+     "The remaining balance automatically becomes a savings deposit"
     ],
     "ans": 0,
     "exp": "The unpaid balance remains and usually accrues interest."
@@ -623,9 +647,9 @@ const MODULES = [
     "q": "Why is '5x points' not automatically better than 2% cash back?",
     "opts": [
      "Points may have different redemption values and limits",
-     "Points always equal $5",
-     "Cash back expires daily",
-     "Points eliminate APR"
+     "Five points always redeem for five dollars of cash",
+     "All points expire after one billing cycle",
+     "A higher points multiplier removes interest charges"
     ],
     "ans": 0,
     "exp": "Compare real dollar value and restrictions."
@@ -716,9 +740,9 @@ const MODULES = [
     "q": "Why might actual interest differ from APR/12 math?",
     "opts": [
      "Issuers may use daily balances and daily periodic rates",
-     "APR never changes",
-     "Cash back changes the calendar",
-     "A billing cycle is always 30 days"
+     "APR is always charged once on the same calendar date",
+     "Every issuer uses exactly 30 days in every billing cycle",
+     "The interest rate is reset randomly after each purchase"
     ],
     "ans": 0,
     "exp": "Actual interest typically accounts for daily balances, payment dates and cycle length."
@@ -798,9 +822,9 @@ const MODULES = [
     "q": "You can afford $100 instead of a $30 minimum. Generally what changes?",
     "opts": [
      "Faster payoff, less future interest",
-     "No effect on the balance",
-     "Automatic credit-score penalty",
-     "Higher APR for paying extra"
+     "Paying extra always creates a formal prepayment penalty",
+     "The card increases its APR because the balance shrank",
+     "Both payments lead to the same long-term interest cost"
     ],
     "ans": 0,
     "exp": "More principal repaid sooner usually lowers future interest."
@@ -809,9 +833,9 @@ const MODULES = [
     "q": "Where can you find an estimate of minimum-only payoff time?",
     "opts": [
      "Credit card statement warning box",
-     "The card's expiration date",
-     "The Visa logo",
-     "Your school transcript"
+     "A promotional email listing available card designs",
+     "The account-opening welcome letter's logo section",
+     "A payment-network's list of accepted retailers"
     ],
     "ans": 0,
     "exp": "U.S. statements commonly show a minimum-payment warning and payoff comparison."
@@ -820,9 +844,9 @@ const MODULES = [
     "q": "Which strategy is safest for a planned $350 laptop purchase?",
     "opts": [
      "Know how the full statement will be paid",
-     "Only check rewards",
-     "Always use the full limit",
-     "Assume the minimum is total cost"
+     "Use the largest available credit limit regardless of income",
+     "Compare only the points earned from the laptop purchase",
+     "Ignore whether the purchase will fit next month's budget"
     ],
     "ans": 0,
     "exp": "Plan for repayment before charging; rewards never remove the debt."
@@ -869,9 +893,9 @@ const MODULES = [
     "q": "Card X: 0 fee, 28% APR. Card Y: $95 fee, 19% APR. Student always pays in full. Most relevant?",
     "opts": [
      "Fees and useful benefits, since they avoid purchase interest",
-     "APR alone decides",
-     "Higher APR always gives better rewards",
-     "Always choose the $95 card"
+     "Pick the lower APR regardless of any yearly fee or benefits",
+     "Pick the higher APR because it guarantees faster credit growth",
+     "Ignore both annual fees and benefits because all cards are equal"
     ],
     "ans": 0,
     "exp": "If purchase interest is avoided, fees and benefits may matter more, though terms still deserve attention."
@@ -880,9 +904,9 @@ const MODULES = [
     "q": "What usually makes a secured credit card 'secured'?",
     "opts": [
      "A refundable deposit backs the credit line",
-     "An unlimited credit limit",
-     "A guarantee of zero interest",
-     "A government scholarship"
+     "It is protected by a second permanent income source",
+     "The bank promises the user can never be charged interest",
+     "The card can only be used at retailers with secure websites"
     ],
     "ans": 0,
     "exp": "A deposit generally backs the secured card account."
@@ -891,9 +915,9 @@ const MODULES = [
     "q": "Why should an advertised 0% introductory APR be read carefully?",
     "opts": [
      "It may expire, after which regular APR applies",
-     "It always lasts forever",
-     "It cancels minimum payments",
-     "It means all fees disappear"
+     "It automatically means the card has zero annual fees forever",
+     "The promotion applies equally to all balances and cash advances",
+     "A zero rate means no payment is ever required during the offer"
     ],
     "ans": 0,
     "exp": "Check promo duration, covered transactions and post-intro APR."
@@ -902,9 +926,9 @@ const MODULES = [
     "q": "Which question should come before 'How many points can I earn?'",
     "opts": [
      "Can I repay planned purchases on time?",
-     "Is the card shiny?",
-     "Does a celebrity use it?",
-     "Can I max it out each month?"
+     "Is the largest bonus worth changing my monthly spending habits?",
+     "Does the issuer advertise an impressive-looking card design?",
+     "Can I earn extra points by carrying a larger unpaid balance?"
     ],
     "ans": 0,
     "exp": "Repayment capacity matters more than reward marketing."
@@ -913,9 +937,9 @@ const MODULES = [
     "q": "A student has no established credit history. Which statement is most accurate?",
     "opts": [
      "A secured card is one possible path, not a guarantee",
-     "They automatically have a 300 FICO score",
-     "They must pay interest to establish a score",
-     "They are forbidden from ever using credit"
+     "Every person with no credit history starts at exactly 300 points",
+     "Anyone can qualify for unlimited credit without income or checks",
+     "One on-time payment is guaranteed to create an 850 FICO score"
     ],
     "ans": 0,
     "exp": "Building credit takes reported account activity over time; options depend on eligibility."
@@ -961,10 +985,10 @@ const MODULES = [
    {
     "q": "Which are the three nationwide credit bureaus?",
     "opts": [
-     "Visa, Chase, Citi",
+     "Visa, Chase, Citi and major store cards",
      "Equifax, Experian, TransUnion",
-     "FICO, Mastercard, Discover",
-     "IRS, FDIC, CFPB"
+     "FICO, VantageScore and the Federal Reserve",
+     "Mastercard, American Express and Discover"
     ],
     "ans": 1,
     "exp": "Equifax, Experian and TransUnion maintain consumer credit reports."
@@ -973,9 +997,9 @@ const MODULES = [
     "q": "In the school analogy, a credit report is most like:",
     "opts": [
      "A detailed transcript",
-     "A mascot logo",
-     "A lunch balance",
-     "A class schedule only"
+     "A single final grade calculated without any course details",
+     "A list of the student's current class assignments only",
+     "A single GPA number without a course-by-course record"
     ],
     "ans": 0,
     "exp": "The report holds account details, while a score summarizes modeled credit risk."
@@ -984,9 +1008,9 @@ const MODULES = [
     "q": "A 3.8 GPA and an 810 credit score are:",
     "opts": [
      "Two different systems, not convertible",
-     "The same percentile",
-     "Always equal after multiplying by 200",
-     "Proof that income is high"
+     "Two numbers that use an identical percentage scale",
+     "Different scores that lenders calculate from a GPA transcript",
+     "A mathematically exact match between academic and credit rank"
     ],
     "ans": 0,
     "exp": "There is no legitimate GPA-to-credit-score conversion; the analogy only explains summary versus record."
@@ -995,9 +1019,9 @@ const MODULES = [
     "q": "Which pair illustrates different types of credit?",
     "opts": [
      "Credit card and installment auto loan",
-     "Two debit cards",
-     "Cash and gift cards",
-     "Two streaming subscriptions"
+     "Two debit accounts at different local banks",
+     "Two credit cards from different issuing banks",
+     "Savings accounts and prepaid gift cards"
     ],
     "ans": 0,
     "exp": "A card is revolving credit; an auto loan usually repays a fixed installment balance."
@@ -1006,9 +1030,9 @@ const MODULES = [
     "q": "Why should you avoid opening a loan only for 'credit mix'?",
     "opts": [
      "Debt has costs and risks; mix is only one factor",
-     "Mix is always 90% of FICO",
-     "Loans cannot appear in reports",
-     "A loan guarantees 850 immediately"
+     "Credit mix accounts for nearly the entire FICO scoring formula",
+     "Any additional loan automatically removes previous payment history",
+     "Every lender requires a car loan before considering a credit card"
     ],
     "ans": 0,
     "exp": "Don't take unnecessary debt for the sake of optimizing one score factor."
@@ -1029,7 +1053,7 @@ MODULES.forEach(module => module.questions.forEach(question => {
 }));
 
 const TOTAL_Q = MODULES.reduce((a,m)=>a+m.questions.length,0);
-let states = MODULES.map((_,i)=>({unlocked:i===0,complete:false,qIdx:0,answers:{},score:0}));
+let states = MODULES.map((_,i)=>({unlocked:i===0,complete:false,qIdx:0,answers:{},tries:{},score:0}));
 let totalCorrect = 0;
 let studentName = '';
 let studentBlock = '';
@@ -1102,7 +1126,7 @@ function renderMod(m,i){
 }
 
 function renderQuiz(m,i,s){
-  const qi=s.qIdx, q=m.questions[qi], done=s.answers[qi]!==undefined, sel=s.answers[qi];
+  const qi=s.qIdx, q=m.questions[qi], done=s.answers[qi]!==undefined, sel=s.answers[qi], tried=s.tries[qi];
   const pct = Math.round(qi/m.questions.length*100);
   let out = `<div class="quiz-section">`;
   out += `<div class="q-progress-bar"><div class="q-prog-fill" style="width:${pct}%"></div></div>`;
@@ -1110,10 +1134,11 @@ function renderQuiz(m,i,s){
   out += `<div class="q-text">${q.q}</div><div class="opts">`;
   q.opts.forEach((o,oi)=>{
     let cls='opt';
-    if(done){if(oi===q.ans)cls+=' correct';else if(oi===sel&&sel!==q.ans)cls+=' wrong';}
+    if(done){if(oi===q.ans)cls+=' correct';else if(oi===sel&&sel!==q.ans)cls+=' wrong';}else if(tried===oi){cls+=' wrong';}
     out+=`<button class="${cls}" onclick="choose(${i},${qi},${oi},${q.ans})"><span class="opt-letter">${'ABCD'[oi]}</span>${o}</button>`;
   });
   out+=`</div>`;
+  if(!done && tried!==undefined) out+=`<div class="retry-note">Not quite. Re-read the lesson and try one more answer. Your second correct answer earns half credit.</div>`;
   if(done) out+=`<div class="exp-box ${sel===q.ans?'exp-c':'exp-w'}"><div class="exp-lbl">${sel===q.ans?'Correct!':'Not quite —'}</div>${q.exp}</div>`;
   out+=`<div class="q-nav">`;
   if(qi>0) out+=`<button class="btn btn-outline" onclick="navQ(${i},-1)">← Back</button>`;
@@ -1128,9 +1153,15 @@ function renderQuiz(m,i,s){
 function choose(mi,qi,sel,ans){
   if(!courseStarted)return;
   const s=states[mi];
-  if(s.answers[qi]!==undefined)return;
-  s.answers[qi]=sel;
-  if(sel===ans){s.score++;totalCorrect++;}
+  if(s.answers[qi]!==undefined || s.tries[qi]===sel)return;
+  if(sel===ans){
+    const points=s.tries[qi]===undefined?1:0.5;
+    s.answers[qi]=sel;s.score+=points;totalCorrect+=points;
+  } else if(s.tries[qi]===undefined) {
+    s.tries[qi]=sel;
+  } else {
+    s.answers[qi]=sel;
+  }
   renderAll();
 }
 function navQ(mi,dir){states[mi].qIdx+=dir;renderAll();}
@@ -1169,7 +1200,7 @@ async function submitCompletionToSheet() {
     score:totalCorrect,totalQuestions:TOTAL_Q,percent:pct+'%',completed:'Yes',
     answers:JSON.stringify({items:MODULES.map((m,i)=>({section:m.title,answers:states[i].answers,score:states[i].score}))}),
     timeMinutes:mins,reflection:'',sessionId:certID,
-    studentName:certStudentName.trim(),firstName,lastName,classPeriod:studentBlock,assessmentType:'scored multiple choice',version:'1.0-pfm-m20-credit-cards'
+    studentName:certStudentName.trim(),firstName,lastName,classPeriod:studentBlock,assessmentType:'scored multiple choice',version:'1.1-pfm-m20-credit-cards-audit'
   };
   const form = new URLSearchParams({
     action:'moduleSubmit',manualEntry:'1',moduleNumber:'20',
