@@ -245,6 +245,7 @@ body{background:radial-gradient(circle at 90% -12%,#ddd3ff 0,transparent 38%),li
 .opt.wrong{border-color:#bd4e57;background:#fff0f0}
 .retry-note{margin-top:10px;padding:11px 14px;border-radius:10px;background:#fff5e3;border-left:3px solid #bd751f;color:#74501c;font-size:13px}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+.student-name-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:16px}.student-name-grid label{display:block;font-weight:600;margin-bottom:6px}.student-name-grid input{max-width:100%;width:100%;text-align:left}@media(max-width:560px){.student-name-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -288,7 +289,7 @@ body{background:radial-gradient(circle at 90% -12%,#ddd3ff 0,transparent 38%),li
     </div>
   </div>
 
-  <section id="startGate" class="module-card" style="padding:1.75rem;max-width:650px"><h2 style="margin-bottom:.5rem">Start your credit course</h2><p style="color:var(--ink2);margin-bottom:1rem">Enter your first and last name before beginning. This name will appear on your certificate and Google Sheets submission.</p><form onsubmit="startCourse(event)"><label for="startName" style="display:block;font-weight:600;margin-bottom:.5rem">Student full name</label><input id="startName" class="cert-name-input" required minlength="3" maxlength="60" autocomplete="name" placeholder="First and last name" style="text-align:left;max-width:100%;margin-bottom:1rem"><label for="startBlock" style="display:block;font-weight:600;margin-bottom:.5rem">Class block</label><select id="startBlock" class="cert-name-input" required style="text-align:left;max-width:100%;margin-bottom:1rem"><option value="">Select your block</option><option value="1">Block 1</option><option value="2">Block 2</option><option value="3">Block 3</option><option value="4">Block 4</option></select><button class="btn btn-sky" type="submit">Start Module 20 →</button><p id="startError" role="alert" style="color:var(--red);margin-top:.5rem"></p></form></section><div id="modulesContainer" hidden></div>
+  <section id="startGate" class="module-card" style="padding:1.75rem;max-width:650px"><h2 style="margin-bottom:.5rem">Start your credit course</h2><p style="color:var(--ink2);margin-bottom:1rem">Enter your first and last name in separate boxes. Both are required for your certificate and class submission.</p><form onsubmit="startCourse(event)"><div class="student-name-grid"><div><label for="startFirstName">First name</label><input id="startFirstName" class="cert-name-input" required minlength="1" maxlength="40" autocomplete="given-name" placeholder="First name"></div><div><label for="startLastName">Last name</label><input id="startLastName" class="cert-name-input" required minlength="1" maxlength="50" autocomplete="family-name" placeholder="Last name"></div></div><label for="startBlock" style="display:block;font-weight:600;margin-bottom:.5rem">Class block</label><select id="startBlock" class="cert-name-input" required style="text-align:left;max-width:100%;margin-bottom:1rem"><option value="">Select your block</option><option value="1">Block 1</option><option value="2">Block 2</option><option value="3">Block 3</option><option value="4">Block 4</option></select><button class="btn btn-sky" type="submit">Start Module 20 →</button><p id="startError" role="alert" style="color:var(--red);margin-top:.5rem"></p></form></section><div id="modulesContainer" hidden></div>
 
 </main>
 </div>
@@ -1056,18 +1057,22 @@ const TOTAL_Q = MODULES.reduce((a,m)=>a+m.questions.length,0);
 let states = MODULES.map((_,i)=>({unlocked:i===0,complete:false,qIdx:0,answers:{},tries:{},score:0}));
 let totalCorrect = 0;
 let studentName = '';
+let studentFirstName = '';
+let studentLastName = '';
 let studentBlock = '';
 let courseStarted = false;
 function startCourse(event){
   event.preventDefault();
-  const name=document.getElementById('startName').value.trim().replace(/\\s+/g,' ');
-  if(name.split(' ').length<2){document.getElementById('startError').textContent='Please enter both your first and last name.';return;}
-  studentName=name;studentBlock=document.getElementById('startBlock').value;certStudentName=name;moduleStartedAt=Date.now();courseStarted=true;
+  const first=document.getElementById('startFirstName').value.trim().replace(/\s+/g,' ');
+  const last=document.getElementById('startLastName').value.trim().replace(/\s+/g,' ');
+  const block=document.getElementById('startBlock').value;
+  if(!first || !last || !block){document.getElementById('startError').textContent='Enter your first name, last name, and class block.';return;}
+  studentFirstName=first;studentLastName=last;
+  studentName=first+' '+last;studentBlock=block;certStudentName=studentName;moduleStartedAt=Date.now();courseStarted=true;
   document.getElementById('startGate').hidden=true;
   document.getElementById('modulesContainer').hidden=false;
   renderAll();
 }
-
 
 function updateSidebar(){
   const pct = Math.round(totalCorrect/TOTAL_Q*100);
@@ -1187,9 +1192,8 @@ async function submitCompletionToSheet() {
   completionSubmitting = true;
   submissionMessage = 'Submitting to Google Sheets…';
   renderAll();
-  const nameParts = certStudentName.trim().split(/\\s+/);
-  const firstName = nameParts.shift() || '';
-  const lastName = nameParts.join(' ') || '-';
+  const firstName = studentFirstName;
+  const lastName = studentLastName;
   const pct = Math.round(totalCorrect / TOTAL_Q * 100);
   const mins = Math.max(1, Math.round((Date.now() - moduleStartedAt) / 60000));
   const record = {
@@ -1200,7 +1204,7 @@ async function submitCompletionToSheet() {
     score:totalCorrect,totalQuestions:TOTAL_Q,percent:pct+'%',completed:'Yes',
     answers:JSON.stringify({items:MODULES.map((m,i)=>({section:m.title,answers:states[i].answers,score:states[i].score}))}),
     timeMinutes:mins,reflection:'',sessionId:certID,
-    studentName:certStudentName.trim(),firstName,lastName,classPeriod:studentBlock,assessmentType:'scored multiple choice',version:'1.1-pfm-m20-credit-cards-audit'
+    studentName:certStudentName.trim(),firstName,lastName,classPeriod:studentBlock,assessmentType:'scored multiple choice',version:'1.2-pfm-m20-separate-names'
   };
   const form = new URLSearchParams({
     action:'moduleSubmit',manualEntry:'1',moduleNumber:'20',
